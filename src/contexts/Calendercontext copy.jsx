@@ -10,7 +10,7 @@ import koLocale from '@fullcalendar/core/locales/ko';
 import './Calender.css';
 
 export default function MultiMonthRentalCalendar() {
-  const [selectedDate, setSelectedDate] = useState("12.31(수)");
+  const [selectedDate, setSelectedDate] = useState("12");
   const [startTime, setStartTime] = useState("11:00");
   const [endTime, setEndTime] = useState("15:00");
 
@@ -46,7 +46,7 @@ export default function MultiMonthRentalCalendar() {
 
   return (
     <div style={{ width: "700px", margin: "0 auto" }}>
-      <h3>언제 필요하신가요?</h3>
+      {/* <h3>언제 필요하신가요?</h3> */}
 
       <FullCalendar
         plugins={[multiMonthPlugin, interactionPlugin]}
