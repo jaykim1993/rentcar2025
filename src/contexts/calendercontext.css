@@ -1,0 +1,62 @@
+/* 달력 전체 */
+.fc {
+  font-family: 'Pretendard', sans-serif;
+  background-color: #48dd4f;
+  /* border-radius: 10px; */
+  /* padding: 10px; */
+}
+.fc a{
+    text-decoration: none;
+    color: #000;
+}
+
+.fc-day{
+    width: 42px;
+}
+.fc .fc-daygrid-day-frame{
+    height: 40px;
+}
+.fc-day-sun a{
+    color: red;
+}
+.fc-day-sat a{
+    color: blue;
+}
+/* 요일 헤더 */
+.fc-col-header-cell {
+  background-color: #fff;
+  font-weight: 600;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+/* 날짜 칸 */
+.fc-daygrid-day {
+  background-color: #fff;
+  transition: background 0.2s;
+}
+
+/* 날짜 hover */
+.fc-daygrid-day:hover {
+  background-color: #e9e9e9;
+}
+
+/* 날짜 숫자 */
+.fc-daygrid-day-number {
+  color: #000;
+  /* font-weight: 500; */
+}
+
+/* 오늘 날짜 */
+.fc-day-today {
+  background-color: #fff !important;
+  border: 1px solid #c8c8c8 !important;
+  border-radius: 50%;
+}
+
+/* 선택된 날짜 (네가 만든 selected-day 클래스) */
+.selected-day {
+  background-color: #e9e9e9 !important;
+  border: 2px solid #c8c8c8 !important;
+  /* border-radius: 6px; */
+}
