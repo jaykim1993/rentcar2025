@@ -2,7 +2,6 @@
 import './App.css'
 // import RentalCalendar from './pages/Calender'
 import ReservationCalendar from './pages/Calender02'
-import RentalCalendar from './contexts/Calendercontext'
 import Home from './pages/Home'
 import TwoMonthCalendar from './contexts/Calendercontext copy'
 import Recentcar from './pages/Recentcar'
