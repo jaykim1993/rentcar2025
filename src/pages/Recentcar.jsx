@@ -11,7 +11,7 @@ export default function Recentcar(){
     const {rentOk} = useContext(Calendarcontext);
 
 
-// True, False 박는 용도
+// True, False 박는 용도!
 
     const carlistCopy = [...cars];
     console.log(carlistCopy);
