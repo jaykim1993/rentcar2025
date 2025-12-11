@@ -2,11 +2,12 @@ import {createContext } from "react";
 import { useContext } from "react";
 import { DataContext } from "./Datacontext";
 import { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const Calendercontext=createContext();
+// import './bootstrap/dist/css/bootstrap.min.css';
 
-export default function CalenderProvider({children}) {
+export const CalendarContext = createContext();
+
+export default function CalendarProvider({children}) {
 
   const {cars} = useContext(DataContext);
   const [rentOk, setRentOk]=useState();
