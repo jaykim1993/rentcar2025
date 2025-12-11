@@ -7,7 +7,6 @@ import TwoMonthCalendar from './contexts/Calendercontext copy'
 import Recentcar from './pages/Recentcar'
 import DataProvider from './contexts/Datacontext'
 
-import Home from './pages/Home'
 // import RentalCalendar from './contexts/calendercontext'
 import Footer from './common/Footer'
 
