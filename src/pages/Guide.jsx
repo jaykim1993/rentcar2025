@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 import { useContext } from "react"
 import { DataContext } from "../contexts/Datacontext"
 import './Guide.css'
+import { Link } from "react-router-dom"
 
 export default function GuidePage(){
 
@@ -125,7 +126,7 @@ const getFilteredCars = () => {
             <div className="guideWrap">
                 <div className="guideTop">
                     {/* 수정 필요 */}
-                    <div>홈</div>
+                    <div><Link to={'/home'}>홈</Link></div>
                     <span><i class="bi bi-caret-left-fill"></i></span>
                     <div>이용가이드</div>
                 </div>

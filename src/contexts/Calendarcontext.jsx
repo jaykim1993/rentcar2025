@@ -75,9 +75,9 @@ export default function CalendarProvider({children}) {
 
   return (
     <>
-      <Calendercontext.Provider value={{timeInfoArrHandler,rentOk}}>
+      <CalendarContext.Provider value={{timeInfoArrHandler,rentOk}}>
         {children}
-      </Calendercontext.Provider>
+      </CalendarContext.Provider>
     </>
   );
 }
