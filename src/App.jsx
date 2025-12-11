@@ -1,12 +1,12 @@
 // import { useState } from 'react'
 import './App.css'
 // import RentalCalendar from './pages/Calender'
-import ReservationCalendar from './pages/Calender02'
-import RentalCalendar from './contexts/Calendercontext'
+// import ReservationCalendar from './pages/Calender02'
 import Home from './pages/Home'
-import TwoMonthCalendar from './contexts/Calendercontext copy'
+import CalenderProvider from './contexts/Calendercontext'
 import Recentcar from './pages/Recentcar'
 import DataProvider from './contexts/Datacontext'
+import RentalCalendar from './pages/Calender'
 
 function App() {
 
@@ -15,11 +15,15 @@ function App() {
       {/* <RentalCalendar/> */}
       {/* <ReservationCalendar/> */}
       {/* <RentalCalendar/> */}
-      <DataProvider>
-        <TwoMonthCalendar/>
-        <Home/>
-        <Recentcar/>
-      </DataProvider>
+      
+        <DataProvider>
+          <CalenderProvider>
+            <RentalCalendar/>
+            <Home/>
+            <Recentcar/>
+          </CalenderProvider>
+        </DataProvider>
+      
     </>
   )
 }
