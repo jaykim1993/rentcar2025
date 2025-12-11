@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../contexts/Datacontext";
-import { Calendarcontext } from "../contexts/Calendarcontext";
+import { CalendarContext } from "../contexts/calendarcontext";
 
-import './Recentcar.css'
+import './Searchcarlist.css'
 
 export default function Recentcar(){
 
     const {cars} = useContext(DataContext);
-    const {rentOk} = useContext(Calendarcontext);
+    const {rentOk} = useContext(CalendarContext);
 
 
 // True, False 박는 용도!
