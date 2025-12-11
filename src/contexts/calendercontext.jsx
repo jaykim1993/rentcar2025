@@ -1,127 +1,78 @@
-// MultiMonthRentalCalendar.jsx
-
-import React, { useState } from "react";
-import FullCalendar from "@fullcalendar/react";
-import multiMonthPlugin from "@fullcalendar/multimonth";
-import interactionPlugin from "@fullcalendar/interaction";
+import {createContext } from "react";
+import { useContext } from "react";
+import { DataContext } from "./Datacontext";
+import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import koLocale from '@fullcalendar/core/locales/ko';
 
-import './Calender.css';
-export default function MultiMonthRentalCalendar() {
-  const [selectedDate, setSelectedDate] = useState("12.31(수)");
-  const [startTime, setStartTime] = useState("11:00");
-  const [endTime, setEndTime] = useState("15:00");
+export const Calendercontext=createContext();
 
-  const generateTimes = () => {
-    const times = [];
-    for (let hour = 0; hour < 24; hour++) {
-      times.push(`${String(hour).padStart(2, "0")}:00`);
-      times.push(`${String(hour).padStart(2, "0")}:30`);
+export default function CalenderProvider({children}) {
+
+  const {cars} = useContext(DataContext);
+  const [rentOk, setRentOk]=useState();
+    // 시작일, 끝나는 일, 기간 담는 용도
+    const [timeInfo, setTimeInfo] = useState([]);
+  
+// user가 로그인 한 후 이용날짜와 차량을 선택하면 Booking배열에 추가됨
+ const Booking = [
+    {
+    id:1,
+    user:'김ㅇㅇ',
+    car_id:19,
+    date:'2025-12-15',
+    term:5
+    },
+    {
+    id:2,
+    user:'홍ㅇㅇ',
+    car_id:37,
+    date:'2025-12-15',
+    term:2
+    },
+    {
+    id:3,
+    user:'이ㅇㅇ',
+    car_id:55,
+    date:'2025-12-19',
+    term:2
     }
-    return times;
-  };
-  const timeOptions = generateTimes();
+    ]
 
-  const handleDateClick = (info) => {
-    const clicked = info.dateStr;
-    if (!selectedDate) {
-      setSelectedDate({ start: clicked, end: null });
-      return;
-    }
-    if (selectedDate && !selectedDate.end) {
-      let start = selectedDate.start;
-      let end = clicked;
-      if (end < start) [start, end] = [end, start];
-      setSelectedDate({ start, end });
-      return;
-    }
-    setSelectedDate({ start: clicked, end: null });
-  };
+  
+  // < 날짜 선택 후 '적용하기' 버튼 누르면 작동하는 핸들러 >
+  const timeInfoArrHandler = (time) => {
 
-  const handelDay = (arg) => {
-    return arg.dayNumberText.replace("일", "");
+    // 날짜 (문자열 -> 날짜형식으로 )
+    const start = new Date(time.start);
+    const end = new Date(time.end);
+    const term = (end - start) / (1000 * 60 * 60 * 24);
+
+    const timeInfoCopy= [...timeInfo];
+    timeInfoCopy.push({start: time.start, end: time.end, term});
+    setTimeInfo(timeInfoCopy);
+    console.log(timeInfo);
+
+    // 선택한 해당 날짜에 이미 예약된 차량 id 배열 출력
+    const rentNo=[];
+    for(let i=0; i<Booking.length; i++){
+        if(timeInfo[0] && timeInfo[0].start == Booking[i].date){
+            rentNo.push(Booking[i].car_id);
+            console.log('시작일: ',timeInfo[0].start,'차 id: ',rentNo);
+        }
+    }
+
+    // 선택한 날짜에 예약되지 않은(예약 가능) 차량 배열 출력
+    const rentOkOk = cars.filter(item => !rentNo.includes(item.id));
+    setRentOk(rentOkOk);
+    console.log('예약 가능 차량: ',rentOk);
+    console.log('전체 차량: ',cars);
   };
 
   return (
-    <div style={{ width: "700px", margin: "0 auto" }}>
-      <h3>언제 필요하신가요?</h3>
-
-      <FullCalendar
-        plugins={[multiMonthPlugin, interactionPlugin]}
-        initialView="twoMonth"        // multi-month 뷰 설정
-        locale={koLocale}
-        dateClick={handleDateClick}
-        dayCellContent={handelDay}
-        headerToolbar={{
-          left: 'prev',
-          center: 'title',
-          right: 'next'
-        }}
-        // height, width 등 스타일은 CSS로 관리
-        views={{
-          twoMonth: {
-            type: 'multiMonth',
-            duration: { months: 2 }
-          }
-        }}
-        height="auto"
-        contentHeight="auto"
-        expandRows={false}
-        handleWindowResize={false}
-      />
-
-      {selectedDate && (
-        <div style={{ marginTop: "20px" }}>
-          <p>
-            선택한 날짜: <br />
-            <strong>{selectedDate.start}</strong>
-            {selectedDate.end && (
-              <>
-                &nbsp;부터 <strong>{selectedDate.end}</strong> 까지
-              </>
-            )}
-          </p>
-
-          {selectedDate.end && (
-            <div style={{ display: "flex", gap: "20px" }}>
-              <div>
-                <label>대여 시간</label>
-                <select
-                  value={startTime}
-                  onChange={(e) => setStartTime(e.target.value)}
-                >
-                  {timeOptions.map(time => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label>반납 시간</label>
-                <select
-                  value={endTime}
-                  onChange={(e) => setEndTime(e.target.value)}
-                >
-                  {timeOptions.map(time => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          )}
-
-          {selectedDate.end && (
-            <button style={{ marginTop: "20px" }}>
-              적용하기
-            </button>
-          )}
-        </div>
-      )}
-    </div>
+    <>
+      <Calendercontext.Provider value={{timeInfoArrHandler,rentOk}}>
+        {children}
+      </Calendercontext.Provider>
+    </>
   );
 }
