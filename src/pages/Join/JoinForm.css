@@ -1,0 +1,374 @@
+/* 전체 공통 CSS */
+li{
+    list-style: none;
+}
+input:checked + .checkmark {
+    background: rgb(15, 117, 189);
+    border-color: rgb(15, 117, 189);
+}
+*{
+    color: #555;
+    text-decoration: none;
+}
+
+
+/* 회원가입 - 로그인 CSS 통일 */
+/* 회원가입 오버레이 */
+.joinOverlay {
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 110;
+}
+
+
+/* 회원가입 페이지 공통 CSS */
+.joinWrap {
+    position: relative;
+    width: 600px;
+    height: 700px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    list-style: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    max-height: 710px;
+    overflow-y: auto;
+}
+.joinWrap::-webkit-scrollbar {
+  width: 3px;
+}
+.joinWrap::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 3px;
+}
+.joinBtnX {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: inherit;
+    font-size: 30px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.joinBtnX:hover{
+    transform: scale(1.1);  
+}
+.joinColorText {
+    color: rgb(15, 117, 189);
+    font-weight: 900;
+}
+.joinContent {
+    display: flex;
+    width: 550px;
+    flex-direction: column;
+    padding-top: 30px;
+    margin-left: 30px;
+}
+.joinContent li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+.joinLabel {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.joinLabel:hover, .joinLabelAll:hover{
+    font-weight: bold;
+}
+.joinCheck {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.joinFormNext {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    background: rgb(15, 117, 189);
+    color: white;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.joinFormNext:hover {
+    background: rgb(0, 48, 119);
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+.joinInput{
+    display: block;
+    width: 80%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* 회원가입 A페이지 CSS */
+.joinAContentWrap {
+    min-height: 443px;
+}
+.joinContentA {
+    display: flex;
+    width: 550px;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.joinAListbtn {
+    color: rgb(15, 117, 189);
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s;
+}
+.joinAListbtn:hover{
+    transform: scale(1.1);
+}
+.joinTosH3 {
+    display: inline-block;
+    width: 510px;
+}
+.joinTosH {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+.joinTos {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-8px);
+    transition:
+        max-height 0.5s ease,
+        transform 0.5s ease;
+}
+.joinTos.open {
+    max-height: 500px;    
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 10px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 12px;
+}
+.joinTos::-webkit-scrollbar {
+  width: 3px;
+}
+.joinTos::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 3px;
+}
+.joinAllAgree {
+    margin-top: 70px;
+}
+.joinLabelAll {
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    gap: 5px;
+    margin: 30px 0;
+    margin-left: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.joinCheckAll {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+/* 회원가입 페이지 B CSS */
+.joinUlB{
+    padding: 0;
+    list-style: none;
+    margin-top: 100px;
+    margin-bottom: 260px;
+}
+.joinLabelB{
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+.joinTextB{
+    display: inline-block;
+    width: 138px;
+    transform: translateY(12px);
+}
+.joinContentB {
+    margin-bottom: 30px;
+}
+.joinInputB{
+    width: 255px;
+    padding: 15px;
+    margin-left: 30px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinBtnB{
+    width: 100px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: inherit;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    box-sizing: border-box;
+    transition: 0.2s;
+}
+.joinBtnB:hover {
+    background-color: #999;
+    color: white;
+}
+
+/* 회원가입 페이지 C CSS */
+.joinContentC {
+    width: 380px;
+    border-bottom: 1px solid #ddd;
+}
+.joinUlC{
+    padding: 0;
+    list-style: none;
+    margin-top: 92px;
+    margin-bottom: 67px;
+}
+.joinTextC {
+    display: inline-block;
+    width: 170px;
+    transform: translateY(12px);
+}
+.joinTextCC {
+    display: inline-block;
+    margin-left: 10px;
+    width: 160px;
+    transform: translateY(12px);
+}
+.joinInputName {
+    width: 360px;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinInputEmail {
+    width: 205px;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinSelectEmail {
+    width: 140px;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinInputResi {
+    width: 178px;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinInput4 {
+    width: 116.5px;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinInputAdd {
+    width: 240px;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinInputLong {
+    width: 95%;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinInputC {
+    width: 20%;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinInputCC {
+    width: 118px;
+    padding: 15px;
+    margin: 0;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+.joinbtnC {
+    width: 100px;
+    border: none;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin-left: 40px;
+    color: white;
+    background: rgb(15, 117, 189);
+    border-radius: 6px;
+}
+.joinCheckC {
+    transform: scale(1.2);
+    margin: 20px 0;
+    cursor: pointer;
+}
+.joinLabelC{
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+.joinFormSubmit {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    background: rgb(15, 117, 189);
+    color: white;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.joinFormSubmit:hover {
+    background: rgb(0, 48, 119);
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
