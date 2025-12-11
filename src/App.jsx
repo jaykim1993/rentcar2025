@@ -9,22 +9,34 @@ import JoinFormC from './pages/Join/JoinFormC'
 import AuthProvider from './contexts/Authcontext'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+// import ReservationCalendar from './pages/Calender02'
+import TwoMonthCalendar from './contexts/Calendercontext copy'
+import Recentcar from './pages/Recentcar'
+import DataProvider from './contexts/Datacontext'
+
+import Footer from './common/Footer'
 
 function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Header/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/login" element={<LoginForm/>}/>
-          <Route path="/joinA" element={<JoinFormA/>}/>
-          <Route path="/joinB" element={<JoinFormB/>}/>
-          <Route path="/joinC" element={<JoinFormC/>}/>
-        </Routes>
-      </BrowserRouter>
+      <DataProvider>
+        <BrowserRouter>
+          <Header/>
+          <Routes>
+            <TwoMonthCalendar/>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/login" element={<LoginForm/>}/>
+            <Route path="/joinA" element={<JoinFormA/>}/>
+            <Route path="/joinB" element={<JoinFormB/>}/>
+            <Route path="/joinC" element={<JoinFormC/>}/>
+            <Recentcar/>
+          </Routes>
+        </BrowserRouter>
+      </DataProvider>
     </AuthProvider>
+    
+    
   )
 }
 

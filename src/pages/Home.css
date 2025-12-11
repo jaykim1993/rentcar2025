@@ -1,4 +1,106 @@
-.homeBody{
-    width: 1330px;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+#root .Home{
+    width: 1200px;
     margin: 0 auto;
+}
+
+/* 예약섹션 */
+#root .Home .H_reservation{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 80px;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+    background-color: #f2f2f2;
+    margin: 50px auto;
+    /* width: 1000px; */
+}
+/* 날짜/시간선택 */
+/* #root .Home .H_reservation .H_dateTable{
+    width: 300px;
+} */
+/* 지점선택 */
+#root .Home .H_reservation .H_spotTable{
+    display: flex;
+    align-items: center;
+}
+#root .Home .H_reservation .H_spotTable .spot_choice{
+    width: 350px;
+}
+/* 찾기버튼 */
+#root .Home .H_reservation .H_spotTable .searchButton button{
+    width: 170px;
+    padding: 15px 0px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #293dd8;
+    border: none;
+}
+
+/* ---------------------------------- */
+
+/* sec01 - 배너1 */
+#root .Home .H_sec01{
+    width: 100%;
+    height: 300px;
+    margin: 50px 0;
+}
+
+/* ---------------------------------- */
+
+/* sec02 - 인기순 */
+#root .Home .H_sec02{
+    margin-bottom: 50px;
+}
+#root .Home .H_sec02 button{
+    width: 150px;
+    height: 45px;
+    border-radius: 100px;
+    border: none;
+    background-color: #293dd8;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+#root .Home .H_sec02 ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 25px;
+}
+#root .Home .H_sec02 ul li{
+    width: 220px;
+    height: 270px;
+    background-color: #293dd8;
+    border-radius: 10px;
+}
+
+/* ---------------------------------- */
+
+/* 최근 본 차량 */
+#root .Home .H_sec03{
+    margin-bottom: 50px;
+}
+#root .Home .H_sec03 ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 25px;
+}
+#root .Home .H_sec03 ul li{
+    width: 220px;
+    height: 270px;
+    background-color: #293dd8;
+    border-radius: 10px;
 }
