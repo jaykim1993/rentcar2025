@@ -12,8 +12,7 @@ import TwoMonthCalendar from './contexts/Calendercontext'
 import Recentcar from './pages/Recentcar'
 import DataProvider from './contexts/Datacontext'
 import Footer from './common/Footer'
-// di
-
+// diㅇㄹㅇ
 function App() {
 
   return (
