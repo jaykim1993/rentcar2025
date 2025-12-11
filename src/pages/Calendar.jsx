@@ -1,17 +1,17 @@
 // MultiMonthRentalCalendar.jsx
 import { useContext } from "react";
-import { Calendercontext } from "../contexts/Calendercontext";
+import { Calendarcontext } from "../contexts/Calendarcontext";
 import { useState, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import interactionPlugin from "@fullcalendar/interaction";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import koLocale from '@fullcalendar/core/locales/ko';
-import './Calender.css';
+import './Calendar.css';
 
 export default function RentalCalendar() {
 
-  const {timeInfoArrHandler} = useContext(Calendercontext);
+  const {timeInfoArrHandler} = useContext(Calendarcontext);
   const calendarRef = useRef(null);
 
   const [selectedDate, setSelectedDate] = useState("12");
