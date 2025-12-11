@@ -94,7 +94,7 @@ export default function Header() {
                         <p className='headerNavH'>고객 가이드</p>
                         <li className='headerNavLi'><div>고객센터</div> <div className='headerNavpointer'>→</div></li><br />
                         <li className='headerNavLi'><div>지점안내</div> <div className='headerNavpointer'>→</div></li><br />
-                        <li className='headerNavLi'><div>이용가이드</div> <div className='headerNavpointer'>→</div></li><br />
+                        <li className='headerNavLi'><div><Link to={'/guide'}>이용가이드</Link></div> <div className='headerNavpointer'>→</div></li><br />
                         <p className='headerNavH'>회원 맞춤</p>
                         <li className='headerNavLi'><div>최근 본 차량</div> <div className='headerNavpointer'>→</div></li><br />
                         <li className='headerNavLi'><div>마이페이지</div> <div className='headerNavpointer'>→</div></li><br />
