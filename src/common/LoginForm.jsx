@@ -1,0 +1,120 @@
+import './LoginForm.css';
+import axios from 'axios';
+import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/Authcontext';
+import { Link, useNavigate } from 'react-router-dom';
+
+export default function LoginForm() {
+    const [userid, setUserid] = useState('');
+    const [userpw, setUserpw] = useState('');
+
+    const navigate = useNavigate();
+    const {loginsave} = useContext(AuthContext);
+
+    // 로그인 핸들러
+    const login = async (e) => {
+        e.preventDefault();
+
+        if (!userid || !userpw) {
+            alert('아이디와 비밀번호를 모두 입력하세요.');
+            return;
+        }
+
+        try {
+            const res = await axios.post(
+                'http://localhost/rentcar2025/backend/api/login.php',
+                { userid, userpw }
+            );
+
+            console.log("login 입력", res.data);
+
+            if (res.data.status === 'success') {
+                loginsave({ userid: res.data.userid });
+                alert(`${res.data.userid}님, 환영합니다.`);
+                navigate('/');
+                setUserid('');
+                setUserpw('');
+            } else {
+                alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+            }
+
+        } catch (error) {
+            console.error("에러", error);
+            alert('서버 연결 오류');
+        }
+    };
+
+    // 아이디 찾기 함수
+    // 이름(필수)
+    // 이메일 혹은
+    // 전화번호
+        // -> 입력하신 이메일로 확인 문자가 발송되었습니다. 
+        // or 존재하지 않는 회원입니다. 회원가입을 원하시나요? (yes or no)
+//     const findId = async () => {
+//     if (!user) return alert("아이디를 입력하세요.");
+
+//     try {
+//       const res = await axios.post("http://localhost/rentcar2025/backend/api/join.php", { userid });
+
+//       if (res.data.exists) {
+//         alert(`입력하신 ${res.data}`);
+//       } else {
+//         alert("사용가능한 아이디입니다.");
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       alert("오류 발생");
+//     }
+//   };
+
+    return (
+        <div className='loginOverlay'>
+            <div className="loginWrap">
+                <button className="loginBtnX">
+                    <Link to={'/'}><i className="bi bi-x"></i></Link>
+                </button>
+                <h2 className='loginH'><div className='loginColor'>차랑차랑</div>에<br></br> 오신것을 환영합니다!</h2>
+                <form onSubmit={login}>
+                    <div className='loginContent'>
+                        <ul className='loginUl'>
+                            <li className='loginLiB'>
+                                <label className='loginLabel'>
+                                    아이디
+                                    <input
+                                        className='loginInput'
+                                        type="text"
+                                        placeholder="아이디"
+                                        value={userid}
+                                        onChange={(e) => setUserid(e.target.value)}
+                                    />
+                                </label>
+                            </li>
+
+                            <li className='loginLiB'>
+                                <label className='loginLabel'>
+                                    비밀번호
+                                    <input
+                                        className='loginInput'
+                                        type="password"
+                                        placeholder="비밀번호"
+                                        value={userpw}
+                                        onChange={(e) => setUserpw(e.target.value)}
+                                    />
+                                </label>
+                            </li>
+                        </ul>
+                        <div className='loginAccount'>
+                                <button className='loginBtnSamll'>아이디 찾기</button> | 
+                                <button className='loginBtnSamll'>비밀번호 찾기</button> | 
+                                <Link to={'/joinA'}><button className='loginBtnSamll'>회원가입</button></Link>
+                        </div>
+                    </div>
+                    <div className="loginBtnWrap">
+                        <button className='loginBtn' type="submit">로그인</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
