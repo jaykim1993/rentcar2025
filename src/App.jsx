@@ -1,5 +1,6 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
+import GuidePage from './pages/Guide'
 import Header from './common/Header'
 import Home from './pages/Home'
 import LoginForm from './common/LoginForm'
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <TwoMonthCalendar/>
             <Route path="/" element={<Home/>}/>
+            <Route path="/guide" element={<GuidePage/>}/>
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/joinA" element={<JoinFormA/>}/>
             <Route path="/joinB" element={<JoinFormB/>}/>
@@ -36,5 +38,4 @@ function App() {
     </AuthProvider>
   )
 }
-
 export default App
