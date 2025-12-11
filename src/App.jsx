@@ -8,32 +8,40 @@ import JoinFormA from './pages/Join/JoinFormA'
 import JoinFormB from './pages/Join/JoinFormB'
 import JoinFormC from './pages/Join/JoinFormC'
 import AuthProvider from './contexts/Authcontext'
+import CalendarProvider from './contexts/Calendarcontext'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import TwoMonthCalendar from './contexts/Calendercontext'
+import TwoMonthCalendar from './contexts/Calendarcontext'
 import Recentcar from './pages/Recentcar'
 import DataProvider from './contexts/Datacontext'
 import Footer from './common/Footer'
+<<<<<<< HEAD
 // 
+=======
+import RentalCalendar from './pages/Calendar'
+
+>>>>>>> 4e6acddf89a793ab0f41d1ef4993dbe60423dd10
 function App() {
 
   return (
     <AuthProvider>
       <DataProvider>
-        <CalenderProvider>
+        <CalendarProvider>
         <BrowserRouter>
           <Header/>
+          <TwoMonthCalendar/>
+          <RentalCalendar/>
           <Routes>
-            <TwoMonthCalendar/>
             <Route path="/" element={<Home/>}/>
             <Route path="/guide" element={<GuidePage/>}/>
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/joinA" element={<JoinFormA/>}/>
             <Route path="/joinB" element={<JoinFormB/>}/>
             <Route path="/joinC" element={<JoinFormC/>}/>
-            <Recentcar/>
+            
           </Routes>
+          <Recentcar/>
         </BrowserRouter>
-        </CalenderProvider>
+        </CalendarProvider>
       </DataProvider>
     </AuthProvider>
   )

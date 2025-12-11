@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../contexts/Datacontext";
-import { Calendercontext } from "../contexts/Calendercontext";
+import { Calendarcontext } from "../contexts/Calendarcontext";
 
 import './Recentcar.css'
 
 export default function Recentcar(){
 
     const {cars} = useContext(DataContext);
-    const {rentOk} = useContext(Calendercontext);
+    const {rentOk} = useContext(Calendarcontext);
 
 
-// True, False 박는 용도
+// True, False 박는 용도!
 
     const carlistCopy = [...cars];
     console.log(carlistCopy);
