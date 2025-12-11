@@ -1,0 +1,75 @@
+#root .Recentcar{
+    width: 1300px;
+    margin: 50px auto;
+    display: flex;
+    gap: 50px
+}
+/* ul 공통 */
+#root .Recentcar ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 카테고리 */
+#root .Recentcar .R_category{
+    width: 350px;
+}
+
+
+#root .Recentcar .R_category ul li{
+    margin-bottom: 30px;
+}
+
+#root .Recentcar .R_category ul li h3{
+    font-size: 17px;
+    color: #272727;
+    margin-bottom: 10px;
+}
+
+#root .Recentcar .R_category ul li .cateBtn{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+#root .Recentcar .R_category ul li button{
+    padding: 7px 15px;
+    border-radius: 50px;
+    border: 1px solid #0b79b7;
+    background-color: #fff;
+    color: #272727;
+    cursor: pointer;
+}
+#root .Recentcar .R_category ul li button:hover{
+    background-color: #f0f0f0;
+    border: 1px solid #272727;
+}
+#root .Recentcar .R_category ul li h4{
+    color: #5c5c5c;
+    font-size: 15px;
+    margin: 10px 0;
+}
+#root .Recentcar .R_category ul li img{
+    height: 20px;
+}
+
+/* ----------------------------------------- */
+
+/* 목록 */
+#root .Recentcar .R_carlist{
+    width: 900px;
+}
+
+#root .Recentcar .R_carlist ul li{
+    width: 900px;
+    height: 350px;
+}
+
+#root .Recentcar .R_carlist ul li .R_listInfo .R_brands{
+    width: 30px;
+}
+
+#root .Recentcar .R_carlist ul li .R_listInfo .R_cars{
+    width: 300px;
+    /* height: 170px; */
+}
