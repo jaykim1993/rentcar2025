@@ -65,12 +65,13 @@ export default function Home(){
                     <p>어디?</p>
                     <h2>지점선택</h2>
                 </div>
-                <div className="searchButton">
-                    <button type="submit">
-                        예약할 차량 찾기
-                        <i className="bi bi-arrow-right"></i>
-                    </button>
-                 </div>
+                {/* Searchcarlist.jsx Link 해야됨!! */}
+                <Link to={'/Searchcarlist'}>
+                  <button type="submit" className="searchButton">
+                      예약할 차량 찾기 &nbsp;
+                      <i className="bi bi-arrow-right"></i>
+                  </button>
+                </Link>
             </div>
         </div>
 

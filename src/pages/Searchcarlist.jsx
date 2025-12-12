@@ -6,83 +6,25 @@ import { CalendarContext } from "../contexts/calendarcontext";
 import './Searchcarlist.css'
 
 export default function Recentcar(){
-
-    const {cars} = useContext(DataContext);
-    const {rentOk} = useContext(CalendarContext);
-
-
-// True, False 박는 용도!
-
-    const carlistCopy = [...cars];
-    console.log(carlistCopy);
-
-    // 렌트 가능/불가능 옵션을 t/f로 추가
-    // const rentOk=()=>{
-    //     const newRentOk=carlistCopy.map(item=>({
-    //         carlistCopy,
-    //         canRent: true
-    //     }));
-    //     setCarlist(newRentOk);
-    // }
-
-    const newCar = cars.map(item=>({...item, carRent:true}));
-
-    for(let i=1; i<newCar.length; i++){
-        if(i%18 === 0){
-            newCar[i].carRent=false;
-            // console.log('false인 차',newCar[i]);
-        }
-        
-    };
-    // const rentNo=[];
-
-    // 선택한 날짜 = 해당 날짜에 이미 예약된 차량 출력
-    // for(let i=0; i<Booking.length; i++){
-    //     if(timeInfo[0] && timeInfo[0].start == Booking[i].date){
-    //         rentNo.push(Booking[i].car_id);
-    //         console.log(timeInfo[0].start,rentNo);
-            
-    //     }
-        
-    // }
-
-    
-
-    // 옵션
-    // const optionsName = {
-    //     navigation: '내비게이션',
-    //     rear_camera: '후방카메라',
-    //     heated_seat: '열선시트',
-    //     heated_handle: '핸들열선',
-    //     bluetooth: '블루투스',
-    //     smart_key: '스마트키',
-    //     sun_loof: '썬루프'
-    // }
-
-    // 차종별 옵션 나누기
-    const groups = {};
-
-    newCar.forEach(item => {
-        const key = `${item.car_img}_${item.model}`;
-        if (!groups[key]) {
-            groups[key] = {
-            car_img: item.car_img,
-            model: item.model,
-            options: []
-        };
-    }
-
-    groups[key].options.push({
-    color: item.color,
-    fuel_type: item.fuel_type,
-    navigation: item.navigation,
-    rear_camera: item.rear_camera
-    });
-    });
+    // 원본배열
+    const { cars } = useContext(DataContext);
+    // 얕은복사
+    const carsCopy = [...cars];
 
 
-    const groupedCars = Object.keys(groups).map(key => groups[key]);
+    // [BookedlistAll] 모든 회원의 과거 포함 모든 예약정보를 담고 있는 배열(실시간 추가도 가능)
+    // 적용하기버튼핸들러에 들어가야할 기능=> 필터(17-19일)함수로 예약가능한 결과값을 추출  const dateFiltered -> 예약가능한 리스트 맵으로 뿌리기(령경 - 차량id를 공유받아서 carsCopy배열로 차량리스트 뽑기)
+    // dateFiltered = [{userId, carId, filterStartDate, filterEndDate, filterStartTime, filterEndTime}]
 
+
+        // 날짜 (문자열 -> 날짜형식으로 )
+        // const start = new Date(time.start);
+        // const end = new Date(time.end);
+        // const term = (end - start) / (1000 * 60 * 60 * 24); //일수
+
+
+    // 예약하기버튼핸들러 => 
+    // BookedlistAll = [{bookDate, userId, carId, startDate, returnDate, rentalTerm, startTime, returnTime}]
 
     return(
         <div className="Recentcar">
@@ -92,8 +34,7 @@ export default function Recentcar(){
                     <li>
                         <h3>차종/차량등급</h3>
                         <div className="cateBtn">
-                            <button>경소형</button>
-                            <button>소형</button>
+                            <button>경/소형</button>
                             <button>중형</button>
                             <button>대형</button>
                         </div>
@@ -107,49 +48,38 @@ export default function Recentcar(){
                         </div>
                     </li>
                     <li>
-                        <h3>운전자 조건</h3>
-                        <h4>나이</h4>
-                        <div className="cateBtn">
-                            <button>만 21세 이상</button>
-                            <button>만 23세 이상</button>
-                        </div>
-                    </li>
-                    <li>
                         <h3>제조사</h3>
                         {/* 국산 */}
                         <h4>국산차</h4>
                         <div className="cateBtn">
-                            {/* <div className="kr_cars"> */}
                             <button>
                                 <img src="images/brands/CHEVROLET.png" alt="쉐레보" />
-                                쉐레보
+                                &nbsp;쉐레보
                             </button>
                             <button>
                                 <img src="images/brands/GENESIS.png" alt="제네러스" />
-                                제네러스
+                                &nbsp;제네러스
                             </button>
                             <button>
                                 <img src="images/brands/HYUNDAI.png" alt="한대" />
-                                한대
+                                &nbsp;한대
                             </button>
                             <button>
                                 <img src="images/brands/KGM.png" alt="KGB" />
-                                KGB
+                                &nbsp;KGB
                             </button>
                             <button>
                                 <img src="images/brands/KIA.png" alt="크아" />
-                                크아
+                                &nbsp;크아
                             </button>
                             <button>
                                 <img src="images/brands/RENAULT-KOREA.png" alt="라노" />
-                                라노
+                                &nbsp;라노
                             </button>
-                            {/* </div> */}
                         </div>
                         {/* 수입 */}
                         <h4>수입차</h4>
                         <div className="cateBtn">
-                            {/* <div className="int_cars"> */}
                             <button>
                                 <img src="images/brands/AUDI.png" alt="아우디즈" />
                                 아우디즈
@@ -190,7 +120,6 @@ export default function Recentcar(){
                                 <img src="images/brands/VOLVO.png" alt="볼바즈" />
                                 볼바즈
                             </button>
-                            {/* </div> */}
                         </div>
                     </li>
                     <li>
@@ -207,55 +136,19 @@ export default function Recentcar(){
                     </li>
                 </ul>
             </div>
-{/* sp! */}
+
             {/* 목록 */}
             <div className="R_carlist">
+                {/* <h2>총 {}대</h2> */}
+                {/* 카테고리 선택 후 표시부분 */}
+                <div className="cate_choice">
+                    <button>
+                        <i className="bi bi-x-lg"></i>
+                    </button>
+                </div>
                 <ul>
-                    {/* {newCar.map((item)=>(
-                        <li key={item.id}>
-                            <div className="R_listInfo">
-                                <img src={`/images/brands/${item.brand_logo}`} alt={item.brand} className="R_brands" />
-                                <img src={`/images/cars/${item.car_img}`} alt={item.model} className="R_cars" />
-                                <p>{item.model_year}년식</p>
-                                <h2>{item.model}</h2>
-                            </div>
-                            <div className="R_listOptions">
-                                <h4>옵션</h4>
-                                {item.navigation && <span>내비게이션 </span>}
-                                {item.rear_camera && <span>후방카메라 </span>}
-                                {item.heated_seat && <span>열선시트 </span>}
-                                {item.heated_handle && <span>열선핸들 </span>}
-                                {item.bluetooth && <span>블루투스 </span>}
-                                {item.smart_key && <span>스마트키 </span>}
-                                {item.sun_loof && <span>썬루프</span>}
-                            </div>
-                        </li>
-                    ))} */}
-                    {groupedCars.map((car, idx) => (
-                        <div className="car_group" key={idx}>
-                            <div className="car_left">
-                                <img src={`./images/cars/${car.car_img}`} alt={car.model} />
-                                <h3>{car.model}</h3>
-                            </div>
-                            <div className="car_right">
-                                {car.options.map((opt, index) => (
-                                <div className="option_block" key={index}>
-                                <p>color: {opt.color}</p>
-                                <p>fuel_type: {opt.fuel_type}</p>
-                                <p>navigation: {String(opt.navigation)}</p>
-                                <p>rear_camera: {String(opt.rear_camera)}</p>
-                                <hr />
-                            </div>
-                            ))}
-                            </div>
-                        </div>
-                        ))}
                 </ul>
             </div>
         </div>
     )
 }
-
-
-
-
