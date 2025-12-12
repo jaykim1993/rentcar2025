@@ -16,12 +16,10 @@ export default function Recentcar(){
     // 적용하기버튼핸들러에 들어가야할 기능=> 필터(17-19일)함수로 예약가능한 결과값을 추출  const dateFiltered -> 예약가능한 리스트 맵으로 뿌리기(령경 - 차량id를 공유받아서 carsCopy배열로 차량리스트 뽑기)
     // dateFiltered = [{userId, carId, filterStartDate, filterEndDate, filterStartTime, filterEndTime}]
 
-
-        // 날짜 (문자열 -> 날짜형식으로 )
-        // const start = new Date(time.start);
-        // const end = new Date(time.end);
-        // const term = (end - start) / (1000 * 60 * 60 * 24); //일수
-
+    // 날짜 (문자열 -> 날짜형식으로 )
+    // const start = new Date(time.start);
+    // const end = new Date(time.end);
+    // const term = (end - start) / (1000 * 60 * 60 * 24); //일수
 
     // 예약하기버튼핸들러 => 
     // BookedlistAll = [{bookDate, userId, carId, startDate, returnDate, rentalTerm, startTime, returnTime}]
