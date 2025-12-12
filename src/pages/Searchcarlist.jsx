@@ -1,88 +1,13 @@
 import { useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../contexts/Datacontext";
-import { CalendarContext } from "../contexts/calendarcontext";
+// import { CalendarContext } from "../contexts/calendarcontext";
 
 import './Searchcarlist.css'
 
 export default function Recentcar(){
 
-    const {cars} = useContext(DataContext);
-    const {rentOk} = useContext(CalendarContext);
-
-
-// True, False 박는 용도!
-
-    const carlistCopy = [...cars];
-    console.log(carlistCopy);
-
-    // 렌트 가능/불가능 옵션을 t/f로 추가
-    // const rentOk=()=>{
-    //     const newRentOk=carlistCopy.map(item=>({
-    //         carlistCopy,
-    //         canRent: true
-    //     }));
-    //     setCarlist(newRentOk);
-    // }
-
-    const newCar = cars.map(item=>({...item, carRent:true}));
-
-    for(let i=1; i<newCar.length; i++){
-        if(i%18 === 0){
-            newCar[i].carRent=false;
-            // console.log('false인 차',newCar[i]);
-        }
-        
-    };
-    // const rentNo=[];
-
-    // 선택한 날짜 = 해당 날짜에 이미 예약된 차량 출력
-    // for(let i=0; i<Booking.length; i++){
-    //     if(timeInfo[0] && timeInfo[0].start == Booking[i].date){
-    //         rentNo.push(Booking[i].car_id);
-    //         console.log(timeInfo[0].start,rentNo);
-            
-    //     }
-        
-    // }
-
     
-
-    // 옵션
-    // const optionsName = {
-    //     navigation: '내비게이션',
-    //     rear_camera: '후방카메라',
-    //     heated_seat: '열선시트',
-    //     heated_handle: '핸들열선',
-    //     bluetooth: '블루투스',
-    //     smart_key: '스마트키',
-    //     sun_loof: '썬루프'
-    // }
-
-    // 차종별 옵션 나누기
-    const groups = {};
-
-    newCar.forEach(item => {
-        const key = `${item.car_img}_${item.model}`;
-        if (!groups[key]) {
-            groups[key] = {
-            car_img: item.car_img,
-            model: item.model,
-            options: []
-        };
-    }
-
-    groups[key].options.push({
-    color: item.color,
-    fuel_type: item.fuel_type,
-    navigation: item.navigation,
-    rear_camera: item.rear_camera
-    });
-    });
-
-
-    const groupedCars = Object.keys(groups).map(key => groups[key]);
-
 
     return(
         <div className="Recentcar">
