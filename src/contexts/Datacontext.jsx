@@ -8494,12 +8494,17 @@ export default function DataProvider({children}){
     sun_loof:false
   },
   ]
-
-  
+ const positions = [
+    {id:1, lat: 37.446842, lng: 126.454047, name: "차랑차랑 인천공항점",tel:'02-512-3489',location:'인천공항',location_detail:'인천광역시 중구 공항로 271'},
+    {id:2, lat: 37.56517, lng: 126.803013, name: "차랑차랑 김포공항점" ,tel:'02-777-9124',location:'김포공항',location_detail:'서울특별시 강서구 하늘길 38'},
+    {id:3, lat: 37.570097, lng: 127.064886, name: "차랑차랑 서울동부점",tel:'02-334-5821',location:'서울동부',location_detail:'서울 동대문구 한천로 100 1-2층'},
+    {id:4, lat: 37.493788, lng: 127.012596, name: "차랑차랑 서울남부점",tel:'02-409-7365',location:'서울남부',location_detail:'서울특별시 서초구 서초대로 283'},
+    {id:5, lat: 37.653579, lng: 127.058793, name: "차랑차랑 서울북부점",tel:'02-783-1042',location:'서울북부',location_detail:'서울 노원구 노해로 456 동방빌딩 1층'},
+  ];
 
   return(
     <>
-      <DataContext.Provider value={{cars}}>
+      <DataContext.Provider value={{cars,positions}}>
         {children}
       </DataContext.Provider>
     </>

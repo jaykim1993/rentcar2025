@@ -126,8 +126,8 @@ const getFilteredCars = () => {
             <div className="guideWrap">
                 <div className="guideTop">
                     {/* 수정 필요 */}
-                    <div><Link to={'/home'}>홈</Link></div>
-                    <span><i class="bi bi-caret-left-fill"></i></span>
+                    <div><Link className="guideGoToHome" to={'/'}>홈</Link></div>
+                    <span><i class="bi bi-caret-right-fill"></i></span>
                     <div>이용가이드</div>
                 </div>
                 <div className="guideFlex">
@@ -228,7 +228,7 @@ const getFilteredCars = () => {
                                  ))
                                 ) : (
                                     <tr>
-                                        <td colSpan="4">조회 가능한 차량이 없습니다. 다시 선택해주세요.</td>
+                                        <td>조회 가능한 차량이 없습니다. 다시 선택해주세요.</td>
                                     </tr>
                                  )}
                                 </tbody>

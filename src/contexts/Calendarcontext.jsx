@@ -2,10 +2,8 @@ import {createContext } from "react";
 import { useContext } from "react";
 import { DataContext } from "./Datacontext";
 import { useState } from "react";
-<<<<<<< HEAD:src/contexts/calendercontext.jsx
 import 'bootstrap/dist/css/bootstrap.min.css';
-=======
->>>>>>> 4e6acddf89a793ab0f41d1ef4993dbe60423dd10:src/contexts/Calendarcontext.jsx
+
 
 // import './bootstrap/dist/css/bootstrap.min.css';
 

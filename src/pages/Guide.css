@@ -239,4 +239,8 @@
 .guideGoToBook:hover{
     background-color: rgb(56, 56, 56);
 }
+.guideGoToHome{
+    color: rgb(160, 160, 160);
+    text-decoration: none;
+}
 
