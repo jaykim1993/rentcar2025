@@ -1,146 +1,195 @@
-// MultiMonthRentalCalendar.jsx
-import { useContext } from "react";
-import { CalendarContext } from "../contexts/calendarcontext";
-import { useState, useRef } from "react";
+import { useContext, useRef, useMemo } from "react";
+import { CalendarContext } from "../contexts/CalendarContext";
 import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import interactionPlugin from "@fullcalendar/interaction";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import koLocale from '@fullcalendar/core/locales/ko';
-import './Calendar.css';
+import koLocale from "@fullcalendar/core/locales/ko";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Calendar.css";
 
 export default function RentalCalendar() {
+  /* =====================
+     Context
+  ====================== */
+  const {
+    selectedDate,
+    setSelectedDate,
+    startTime,
+    setStartTime,
+    endTime,
+    setEndTime,
+    timeInfoArrHandler,
+  } = useContext(CalendarContext);
 
-  const {timeInfoArrHandler} = useContext(CalendarContext);
   const calendarRef = useRef(null);
 
-  const [selectedDate, setSelectedDate] = useState("12");
-  const [startTime, setStartTime] = useState("11:00");
-  const [endTime, setEndTime] = useState("15:00");
+  /* =====================
+     Handlers
+  ====================== */
+  // 이전달 이동
+    const handlePrev = () => {
+      const api = calendarRef.current?.getApi();
+      if (!api) return;
 
-  // custom next 버튼 핸들러
+      const current = api.getDate();
+      const prevMonth = new Date(current.getFullYear(), current.getMonth() - 1, 1);
+
+      const today = new Date();
+      const thisMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+      if (prevMonth < thisMonthStart) return alert("이전달은 조회할 수 없습니다.") ;
+
+      api.gotoDate(prevMonth);
+    };
+  // 다음달 이동
   const handleNext = () => {
     const api = calendarRef.current?.getApi();
     if (!api) return;
-    const current = api.getDate();             // 현재 뷰의 기준 날짜
-    const year = current.getFullYear();
-    const month = current.getMonth();          // 0부터 시작 (0 = 1월)
-    api.gotoDate(new Date(year, month + 1, 1)); // 다음달 1일로 이동
+
+    const current = api.getDate();
+    api.gotoDate(
+      new Date(current.getFullYear(), current.getMonth() + 1, 1)
+    );
   };
 
-
-  // - 30분 단위 시간 리스트 생성
-  const generateTimes = () => {
-    const times = []; // 시간 리스트가 들어갈 빈 배열
-    for (let hour = 0; hour < 24; hour++) {
-      // 문자열로 시간("00" ~ "24") 두자리씩,한자리수일 경우 "0"추가  ex) 1:20 -> 01:20
-      times.push(`${String(hour).padStart(2, "0")}:00`); 
-      times.push(`${String(hour).padStart(2, "0")}:30`);
-    }
-    return times;
-  };
-  const timeOptions = generateTimes();
-
-  const handleDateClick = (info) => {
-    const clicked = info.dateStr;
+  // 날짜 클릭 (범위 선택)
+  const handleDateClick = ({ dateStr }) => {
     if (!selectedDate) {
-      setSelectedDate({ start: clicked, end: null });
+      setSelectedDate({ start: dateStr, end: null });
       return;
     }
-    if (selectedDate && !selectedDate.end) {
+
+    if (!selectedDate.end) {
       let start = selectedDate.start;
-      let end = clicked;
+      let end = dateStr;
       if (end < start) [start, end] = [end, start];
       setSelectedDate({ start, end });
       return;
     }
-    setSelectedDate({ start: clicked, end: null });
+
+    setSelectedDate({ start: dateStr, end: null });
   };
 
-  // - 10일 -> 10 으로 변경하는 css 함수
-  const handelDay = (arg) => {
-    return arg.dayNumberText.replace("일", "");
+  // 적용 버튼
+  const handleApply = () => {
+    timeInfoArrHandler({
+      startDate: selectedDate.start,
+      endDate: selectedDate.end,
+      startTime,
+      endTime,
+    });
   };
+
+  /* =====================
+     Utils
+  ====================== */
+
+  // 날짜 숫자만 표시
+  const renderDay = (arg) => arg.dayNumberText.replace("일", "");
+
+  // 30분 단위 시간 목록
+  const timeOptions = useMemo(() => {
+    const times = [];
+    for (let h = 0; h < 24; h++) {
+      times.push(`${String(h).padStart(2, "0")}:00`);
+      times.push(`${String(h).padStart(2, "0")}:30`);
+    }
+    return times;
+  }, []);
+
+  // 선택 날짜 → background event
+  const backgroundEvents = useMemo(() => {
+    if (!selectedDate?.start || !selectedDate?.end) return [];
+
+    const events = [];
+    let current = new Date(selectedDate.start);
+    const end = new Date(selectedDate.end);
+
+    while (current <= end) {
+      const dateStr = current.toISOString().split("T")[0];
+
+      events.push({
+        start: dateStr,
+        display: "background",
+        className: "selected-range-bg",
+      });
+
+      current.setDate(current.getDate() + 1);
+    }
+
+    return events;
+  }, [selectedDate]);
+
+  /* =====================
+     Render
+  ====================== */
 
   return (
     <div style={{ width: "700px", margin: "0 auto" }}>
-      {/* <h3>언제 필요하신가요?</h3> */}
-
       <FullCalendar
+        ref={calendarRef}
         plugins={[multiMonthPlugin, interactionPlugin]}
-        initialView="twoMonth"        // multi-month 뷰 설정
+        initialView="twoMonth"
         locale={koLocale}
         dateClick={handleDateClick}
-        dayCellContent={handelDay}
+        dayCellContent={renderDay}
+        events={backgroundEvents}
         headerToolbar={{
-          left: '',            // 기본 prev,next 대신
-          center: 'title',
-          right: 'myNext'      // 커스텀 next 버튼 이름
+          left: "myPrev",
+          center: "title",
+          right: "myNext",
         }}
         customButtons={{
-          myNext: { text: '다음', click: handleNext }
+          myPrev: { text: "이전", click: handlePrev },
+          myNext: { text: "다음", click: handleNext },
         }}
-        // height, width 등 스타일은 CSS로 관리
         views={{
           twoMonth: {
-            type: 'multiMonth',
-            duration: { months: 2 }
-          }
+            type: "multiMonth",
+            duration: { months: 2 },
+          },
         }}
         height="auto"
-        contentHeight="auto"
         expandRows={false}
-        handleWindowResize={false}
       />
 
-      {selectedDate && (
+
+      {selectedDate?.start && (
         <div style={{ marginTop: "20px" }}>
           <p>
-            선택한 날짜: <br />
             <strong>{selectedDate.start}</strong>
             {selectedDate.end && (
               <>
-                &nbsp;부터 <strong>{selectedDate.end}</strong> 까지
+                &nbsp;~ <strong>{selectedDate.end}</strong>
               </>
             )}
           </p>
 
           {selectedDate.end && (
-            <div style={{ display: "flex", gap: "20px" }}>
-              <div>
-                <label>대여 시간</label>
+            <>
+              <div style={{ display: "flex", gap: "20px" }}>
                 <select
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
                 >
-                  {timeOptions.map(time => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
+                  {timeOptions.map((time) => (
+                    <option key={time}>{time}</option>
                   ))}
                 </select>
-              </div>
 
-              <div>
-                <label>반납 시간</label>
                 <select
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
                 >
-                  {timeOptions.map(time => (
-                    <option key={time} value={time}>
-                      {time}
-                    </option>
+                  {timeOptions.map((time) => (
+                    <option key={time}>{time}</option>
                   ))}
                 </select>
               </div>
-            </div>
-          )}
 
-          {selectedDate.end && (
-            <button style={{ marginTop: "20px" }} onClick={()=>timeInfoArrHandler(selectedDate)}> 
-              적용하기
-            </button>
+              <button style={{ marginTop: "20px" }} onClick={handleApply}>
+                적용하기
+              </button>
+            </>
           )}
         </div>
       )}

@@ -23,7 +23,6 @@ function App() {
         <CalendarProvider>
         <BrowserRouter>
           <Header/>
-          <RentalCalendar/>
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/guide" element={<GuidePage/>}/>

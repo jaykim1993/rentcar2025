@@ -1,18 +1,17 @@
-import {createContext, useEffect } from "react";
-import { useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { DataContext } from "./Datacontext";
 import { AuthContext } from "./Authcontext";
-import { useState } from "react";
 
 export const CalendarContext = createContext();
 
-export default function CalendarProvider({children}) {
+export default function CalendarProvider({ children }) {
+  const { userid } = useContext(AuthContext);
+  // 원본 배열 불러오기
+  const { cars } = useContext(DataContext);
 
-  
-// 테스트용 예약정보 배열 (임시)
-// dateFiltered = [{id, userId, carId, filterStartDate, filterEndDate, filterStartTime, filterEndTime}]
- const dateFilteredTemp = [
-    {
+  // bookedlistAll 배열
+  // 모든 회원의 과거 포함 모든 예약정보를 담고 있는 배열
+  const [bookedlistAll, setBookedlistAll] = useState([{
     id:'user01',
     userId:1,
     carId:19,
@@ -191,27 +190,125 @@ export default function CalendarProvider({children}) {
     filterEndDate:'2025-12-18',
     filterStartTime:'13:30',
     filterEndTime:'17:30'
-    }
-    
-    ]
+    }]);
 
+  // Calendar.jsx 에 공유될 변수
+  const [selectedDate, setSelectedDate] = useState(null);
+  console.log(selectedDate);
+  const [startTime, setStartTime] = useState("09:00");
+  const [endTime, setEndTime] = useState("09:00");
+
+  // 필터 적용된 상태 변수
+    // availableCars: 
+    // 원본 cars 형식 그대로 필터 => 령경씨가 사용할 배열
+    const [availableCars, setAvailableCars] = useState([]); 
+    // dateFiltered: 
+    // 원본에서 필요 내용 + 사용자 필터 적용값 정리된 배열 
+    // [{id, userId, carId, filterStartDate, filterEndDate, filterStartTime, filterEndTime, location(차량 위치 필터링 기능 편의를 위해 추가)}]
+    const [dateFiltered, setDateFiltered] = useState([]);
+
+  const toDateTime = (date, time) =>
+    new Date(`${date}T${time}:00`);
+
+  // 지점명 가져오는 변수
+  const [location,setLocation] = useState(null);
+  console.log('지점: ', location);
   
-  // < 날짜 선택 후 '적용하기' 버튼 누르면 작동하는 핸들러 >
-    const timeInfoArrHandler = (time) => {
 
-    // 날짜 (문자열 -> 날짜형식으로 )
-    const start = new Date(time.start);
-    const end = new Date(time.end);
-    const term = (end - start) / (1000 * 60 * 60 * 24);
+  // 필터 적용하기 버튼 함수
+    // 예시) 필터(17일 13:00 -19일 20:30)조건에 부합하는 예약가능한 결과값을 추출 const dateFiltered -> 예약가능한 리스트 맵으로 뿌리기
+  const timeInfoArrHandler = ({
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+  }) => {
+    console.log("사용자가 정의한 필터 값", {
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+  });
+    const filterStart = toDateTime(startDate, startTime);
+    const filterEnd = toDateTime(endDate, endTime);
 
-   
-};
+    // 예약 겹치는 carId 추출
+    const blockedCarIds = bookedlistAll
+      .filter((book) => {
+        const bookStart = toDateTime(
+          book.filterStartDate,
+          book.filterStartTime
+        );
+        const bookEnd = toDateTime(
+          book.filterEndDate,
+          book.filterEndTime
+        );
+
+        return !(filterEnd <= bookStart || filterStart >= bookEnd);
+      })
+      .map((book) => book.carId);
+
+    // 예약 가능한 차량 (지역 변수 선언, 상태변수와 별개!)
+    const availableCars = cars.filter(
+      (car) => !blockedCarIds.includes(car.id)
+    );
+
+    // 예약 버튼용 정제 데이터 (지역 변수 선언, 상태변수와 별개!)
+    const dateFiltered = availableCars.map((car, index) => ({
+      id: index + 1,            
+      userId: userid,
+      carId: car.id,
+      filterStartDate: startDate,
+      filterEndDate: endDate,
+      filterStartTime: startTime,
+      filterEndTime: endTime,
+      location: car.location,
+      carName: car.name,
+    }));
+
+    // 상태 변수 값 입력
+    setAvailableCars(availableCars);
+    console.log("예약 가능한 차량", availableCars);
+    setDateFiltered(dateFiltered);
+    console.log("정제된 예약 데이터", dateFiltered);
+  };
+
+
+  // 지점 선택 필터링
+
+
+
+  // 더 만들어야 할 함수 목록
+
+    // 예약하기 버튼 함수 (+ bookedListAll 에 추가된 예약 담기)
+    // addBook
+
+
+
+    // 예약 취소 버튼 함수
+    // removeBook
+
+
+
+
 
   return (
-    <>
-      <CalendarContext.Provider value={{timeInfoArrHandler,rentOk}}>
-        {children}
-      </CalendarContext.Provider>
-    </>
+    <CalendarContext.Provider
+      value={{
+        bookedlistAll,
+        selectedDate,
+        setSelectedDate,
+        startTime,
+        setStartTime,
+        endTime,
+        setEndTime,
+        timeInfoArrHandler,
+        availableCars, 
+        dateFiltered,
+        setLocation
+      }}
+    >
+      {children}
+    </CalendarContext.Provider>
   );
 }

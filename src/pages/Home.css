@@ -41,6 +41,9 @@ input:checked + .checkmark {
 #root .Home .H_reservation .H_spotTable .spot_choice{
     width: 350px;
 }
+#root .Home .H_reservation .H_spotTable .spot_choice h2{
+    cursor: pointer;
+}
 /* 찾기버튼 */
 #root .Home .H_reservation .H_spotTable .searchButton button{
     width: 170px;
@@ -112,4 +115,23 @@ input:checked + .checkmark {
     height: 270px;
     background-color: #293dd8;
     border-radius: 10px;
+}
+/* ---------------------------------- */
+
+/* 지점 선택 모달 */
+#root .Home .H_location{
+    width: 444px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+}
+
+.calendar-slide {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.calendar-slide.open {
+  max-height: 800px; /* 캘린더 높이 예상값 */
 }
