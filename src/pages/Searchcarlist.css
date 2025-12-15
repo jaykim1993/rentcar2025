@@ -32,17 +32,26 @@
     flex-wrap: wrap;
     gap: 10px;
 }
-#root .Recentcar .R_category ul li .cateBtn .activeBtn{
+#root .Recentcar .R_category ul li .cateBtn .active{
     color: #0b79b7;
     border: 1px solid #0b79b7;
 }
 #root .Recentcar .R_category ul li button{
-    padding: 7px 15px;
+    height: 40px;
+    padding: 0 15px;
     border-radius: 50px;
     border: 1px solid #8d8d8d;
     background-color: #fff;
     color: #464646 ;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#root .Recentcar .R_category ul li button > img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
 }
 #root .Recentcar .R_category ul li button:hover{
     /* background-color: #f7f7f7; */
@@ -66,6 +75,7 @@
 /* 카테고리 표시 */
 #root .Recentcar .R_carlist .cate_choice{
     margin-bottom: 20px;
+    /* display: flex; */
 }
 #root .Recentcar .R_carlist .cate_choice .cate_choiceDel{
     padding: 7px 15px;
@@ -82,22 +92,98 @@
     width: 900px;
     /* height: 400px; */
     display: flex;
-    gap: 50px;
+    gap: 70px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
     padding: 30px;
-    background-color: #ccc;
+    background-color: #fff;
+    /* border: 1px solid #ccc; */
+    box-shadow: 0 0 7px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+.car_variant_info.Line_active{
+    position: relative;
+    /* margin-bottom: 50px; */
+    padding-bottom: 30px;
+}
+.car_variant_info.Line_active::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+#root .Recentcar .R_carlist .car_list_ul .car_variant_info{
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
 }
 
-#root .Recentcar .R_carlist .R_car_group .car_img{
-    width: 300px;
-    /* height: 170px; */
+#root .Recentcar .R_carlist .car_list_ul .car_variant_info .bi-chevron-right{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    font-size: 20px;
 }
-#root .Recentcar .R_carlist .R_car_group .brand_logo{
+
+.grouped_car_item .car_variant_info > p{
+    margin-top: 10px;
+    margin-bottom: 0;
+    white-space: break-word;
+}
+
+.R_carlist .grouped_car_item{
+    width: 300px;
+    position: relative;
+}
+
+.R_carlist .grouped_car_item img.cars{
+    width: 300px;
+}
+
+.R_carlist .grouped_car_item img.brands{
+    position: absolute;
+    top: 50px;
+    left: 40px;
     width: 50px;
 }
-
-#root .Recentcar .R_carlist .R_car_group .R_car_opt{
+#root .Recentcar .R_carlist .car_list_ul{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.grouped_car_item .car_list_ul .car_variant_info > h4{
+    font-size: 20px;
+}
+
+/* ------------------------------------------ */
+
+/* 카테고리 선택 취소버튼 */
+#root .Recentcar .R_carlist .cate_choice > button{
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 50px;
+    border: 1px solid #8d8d8d;
+    background-color: #fff;
+    color: #464646 ;
+    cursor: pointer;
+    margin-right: 10px;
+}
+#root .Recentcar .R_carlist .cate_choice .delBtn{
+    text-align: right;
+}
+#root .Recentcar .R_carlist .cate_choice .delBtn > button{
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 50px;
+    border: 1px solid #8d8d8d;
+    background-color: #fff;
+    color: #464646 ;
+    cursor: pointer;
+    margin-right: 10px;
 }

@@ -1,28 +1,166 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../contexts/Datacontext";
-import { CalendarContext } from "../contexts/calendarcontext";
-
+import { CalendarContext } from "../contexts/calendarcontext"; 
 import './Searchcarlist.css'
 
 export default function Recentcar(){
-    // 원본배열
+
     const { cars } = useContext(DataContext);
-    // 얕은복사
-    const carsCopy = [...cars];
+    const { availableCars } = useContext(CalendarContext);
 
+    /* ================= 옵션 문자열 ================= */
+    const getActiveOptionsString = (car) => {
+        const activeOptions = [];
+        if (car.navigation) activeOptions.push('내비게이션');
+        if (car.rear_camera) activeOptions.push('후방카메라');
+        if (car.heated_seat) activeOptions.push('열선시트');
+        if (car.heated_handle) activeOptions.push('핸들열선');
+        if (car.bluetooth) activeOptions.push('블루투스');
+        if (car.smart_key) activeOptions.push('스마트키');
+        if (car.sun_loof) activeOptions.push('썬루프');
+        return activeOptions.join(', ');
+    };
 
-    // [BookedlistAll] 모든 회원의 과거 포함 모든 예약정보를 담고 있는 배열(실시간 추가도 가능)
-    // 적용하기버튼핸들러에 들어가야할 기능=> 필터(17-19일)함수로 예약가능한 결과값을 추출  const dateFiltered -> 예약가능한 리스트 맵으로 뿌리기(령경 - 차량id를 공유받아서 carsCopy배열로 차량리스트 뽑기)
-    // dateFiltered = [{userId, carId, filterStartDate, filterEndDate, filterStartTime, filterEndTime}]
+    /* ================= 필터 판별 ================= */
+    const filterCar = (car, filters) => {
 
-    // 날짜 (문자열 -> 날짜형식으로 )
-    // const start = new Date(time.start);
-    // const end = new Date(time.end);
-    // const term = (end - start) / (1000 * 60 * 60 * 24); //일수
+        for (const category in filters) {
+            const selectedValues = filters[category];
+            if (selectedValues.length === 0) continue;
 
-    // 예약하기버튼핸들러 => 
-    // BookedlistAll = [{bookDate, userId, carId, startDate, returnDate, rentalTerm, startTime, returnTime}]
+            // 차종 / 연료 / 제조사
+            if (category === 'carSize' && !selectedValues.includes(car.car_size)) return false;
+            if (category === 'fuelType' && !selectedValues.includes(car.fuel_type)) return false;
+            if (category === 'brand' && !selectedValues.includes(car.brand)) return false;
+
+            // 옵션 (AND 조건)
+            if (category === 'option') {
+                for (let i = 0; i < selectedValues.length; i++) {
+                    const opt = selectedValues[i];
+
+                    if (opt === '내비게이션' && !car.navigation) return false;
+                    if (opt === '후방카메라' && !car.rear_camera) return false;
+                    if (opt === '열선시트' && !car.heated_seat) return false;
+                    if (opt === '핸들열선' && !car.heated_handle) return false;
+                    if (opt === '블루투스' && !car.bluetooth) return false;
+                    if (opt === '스마트키' && !car.smart_key) return false;
+                    if (opt === '썬루프' && !car.sun_loof) return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
+    /* ================= 상태 ================= */
+    const [selectedFilters, setSelectedFilters] = useState({
+        carSize: [],
+        fuelType: [],
+        brand: [],
+        option: []
+    });
+
+    const [displayedCars, setDisplayedCars] = useState(availableCars);
+
+    /* 달력 조건 바뀌면 목록 초기화 */
+    useEffect(() => {
+        setDisplayedCars(availableCars);
+    }, [availableCars]);
+
+    /* ================= 필터 적용 ================= */
+    const updateDisplayedCars = (filters) => {
+        const filtered = availableCars.filter(car => filterCar(car, filters));
+        setDisplayedCars(filtered);
+    };
+
+    const toggleFilter = (category, value) => {
+        const current = selectedFilters[category];
+        const next = current.includes(value)
+            ? current.filter(v => v !== value)
+            : [...current, value];
+
+        const newFilters = {
+            ...selectedFilters,
+            [category]: next
+        };
+
+        setSelectedFilters(newFilters);
+        updateDisplayedCars(newFilters);
+    };
+
+    const removeSingleValueFilter = (category, value) => {
+        const next = selectedFilters[category].filter(v => v !== value);
+        const newFilters = { ...selectedFilters, [category]: next };
+        setSelectedFilters(newFilters);
+        updateDisplayedCars(newFilters);
+    };
+
+    const resetFilters = () => {
+        const empty = { carSize: [], fuelType: [], brand: [], option: [] };
+        setSelectedFilters(empty);
+        setDisplayedCars(availableCars);
+    };
+
+    /* ================= 그룹화 ================= */
+    const groupedCars = {};
+    for(const car of displayedCars){
+        if (!groupedCars[car.model]) groupedCars[car.model] = [];
+        groupedCars[car.model].push(car);
+    }
+
+    /* ================= 선택 태그 ================= */
+    const renderSelectedFilters = () => {
+        const result = [];
+        for (const category in selectedFilters) {
+            for (const value of selectedFilters[category]) {
+                result.push(
+                    <button key={`${category}-${value}`} onClick={() => removeSingleValueFilter(category, value)}>
+                        {value} ×
+                    </button>
+                );
+            }
+        }
+        return result;
+    };
+
+    const shouldShowResetButton = () => {
+        for(const key in selectedFilters) {
+            if(selectedFilters[key].length > 0) return true;
+        }
+        return false;
+    };
+
+    /* ================= 출력 ================= */
+    const renderGroupedCars = () => {
+        const result = [];
+
+        for(const modelName in groupedCars){
+            const group = groupedCars[modelName];
+            const first = group[0];
+
+            result.push(
+                <li key={modelName} className="grouped_car_item">
+                    <div>
+                        <img className="brands" src={`images/brands/${first.brand_logo}`} />
+                        <img className="cars" src={`images/cars/${first.car_img}`} />
+                    </div>
+
+                    <div className="car_list_ul">
+                        {group.map((car, index) => (
+                            <div key={index} className={`car_variant_info ${index !== group.length - 1 ? 'Line_active' : ''}`}>
+                                <h4>{modelName} {car.fuel_type}</h4>
+                                <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
+                                {/* <p>{getActiveOptionsString(car)}</p> */}
+                                <i className="bi bi-chevron-right"></i>
+                            </div>
+                        ))}
+                    </div>
+                </li>
+            );
+        }
+
+        return result;
+    };
 
     return(
         <div className="Recentcar">
@@ -31,90 +169,147 @@ export default function Recentcar(){
                 <ul>
                     <li>
                         <h3>차종/차량등급</h3>
+                        {/* 다중 선택 토글 기능 적용 */}
                         <div className="cateBtn">
-                            <button>경/소형</button>
-                            <button>중형</button>
-                            <button>대형</button>
+                            <button 
+                                onClick={() => toggleFilter('carSize', '소형')} 
+                                className={selectedFilters.carSize.includes('소형') ? 'active' : ''}>
+                                경소형
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('carSize', '중형')} 
+                                className={selectedFilters.carSize.includes('중형') ? 'active' : ''}>
+                                중형
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('carSize', '대형')} 
+                                className={selectedFilters.carSize.includes('대형') ? 'active' : ''}>
+                                대형
+                            </button>
                         </div>
                     </li>
                     <li>
                         <h3>연료</h3>
+                         {/* 다중 선택 토글 기능 적용 */}
                         <div className="cateBtn">
-                            <button>하이브리드</button>
-                            <button>경유</button>
-                            <button>휘발유</button>
+                            <button 
+                                onClick={() => toggleFilter('fuelType', '하이브리드')}
+                                className={selectedFilters.fuelType.includes('하이브리드') ? 'active' : ''}>
+                                하이브리드
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('fuelType', '경유')}
+                                className={selectedFilters.fuelType.includes('경유') ? 'active' : ''}>
+                                경유
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('fuelType', '휘발유')}
+                                className={selectedFilters.fuelType.includes('휘발유') ? 'active' : ''}>
+                                휘발유
+                            </button>
                         </div>
                     </li>
                     <li>
                         <h3>제조사</h3>
-                        {/* 국산 */}
                         <h4>국산차</h4>
+                         {/* 다중 선택 토글 기능 적용 */}
                         <div className="cateBtn">
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '쉐레보')}
+                                className={selectedFilters.brand.includes('쉐레보') ? 'active' : ''}>
                                 <img src="images/brands/CHEVROLET.png" alt="쉐레보" />
                                 &nbsp;쉐레보
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '제네러스')}
+                                className={selectedFilters.brand.includes('제네러스') ? 'active' : ''}>
                                 <img src="images/brands/GENESIS.png" alt="제네러스" />
                                 &nbsp;제네러스
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '한대')}
+                                className={selectedFilters.brand.includes('한대') ? 'active' : ''}>
                                 <img src="images/brands/HYUNDAI.png" alt="한대" />
                                 &nbsp;한대
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', 'KGB')}
+                                className={selectedFilters.brand.includes('KGB') ? 'active' : ''}>
                                 <img src="images/brands/KGM.png" alt="KGB" />
                                 &nbsp;KGB
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '크아')}
+                                className={selectedFilters.brand.includes('크아') ? 'active' : ''}>
                                 <img src="images/brands/KIA.png" alt="크아" />
                                 &nbsp;크아
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '라노')}
+                                className={selectedFilters.brand.includes('라노') ? 'active' : ''}>
                                 <img src="images/brands/RENAULT-KOREA.png" alt="라노" />
                                 &nbsp;라노
                             </button>
                         </div>
-                        {/* 수입 */}
                         <h4>수입차</h4>
                         <div className="cateBtn">
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '아우디즈')}
+                                className={selectedFilters.brand.includes('아우디즈') ? 'active' : ''}>
                                 <img src="images/brands/AUDI.png" alt="아우디즈" />
                                 아우디즈
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '빈츠')}
+                                className={selectedFilters.brand.includes('빈츠') ? 'active' : ''}>
                                 <img src="images/brands/BENZ.png" alt="빈츠" />
                                 빈츠
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', 'BMW')}
+                                className={selectedFilters.brand.includes('BMW') ? 'active' : ''}>
                                 <img src="images/brands/BMW.png" alt="dmw" />
                                 dmw
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', 'BYD')}
+                                className={selectedFilters.brand.includes('BYD') ? 'active' : ''}>
                                 <img src="images/brands/BYD.png" alt="BYD" />
                                 BYD
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '푸도')}
+                                className={selectedFilters.brand.includes('푸도') ? 'active' : ''}>
                                 <img src="images/brands/FORD.png" alt="푸도" />
                                 푸도
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '렉사드')}
+                                className={selectedFilters.brand.includes('렉사드') ? 'active' : ''}>
                                 <img src="images/brands/LEXUS.png" alt="렉사드" />
                                 렉사드
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '테셀라')}
+                                className={selectedFilters.brand.includes('테셀라') ? 'active' : ''}>
                                 <img src="images/brands/TESLA.png" alt="테셀라" />
                                 테셀라
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '토유')}
+                                className={selectedFilters.brand.includes('토유') ? 'active' : ''}>
                                 <img src="images/brands/TOYATA.png" alt="토유" />
                                 토유
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '복스바그')}
+                                className={selectedFilters.brand.includes('복스바그') ? 'active' : ''}>
                                 <img src="images/brands/VOLKSWAGEN.png" alt="복스바그" />
                                 복스바그
                             </button>
-                            <button>
+                            <button 
+                                onClick={() => toggleFilter('brand', '볼바즈')}
+                                className={selectedFilters.brand.includes('볼바즈') ? 'active' : ''}>
                                 <img src="images/brands/VOLVO.png" alt="볼바즈" />
                                 볼바즈
                             </button>
@@ -123,30 +318,64 @@ export default function Recentcar(){
                     <li>
                         <h3>옵션</h3>
                         <div className="cateBtn">
-                            <button>내비게이션</button>
-                            <button>후방카메라</button>
-                            <button>열선시트</button>
-                            <button>핸들열선</button>
-                            <button>블루투스</button>
-                            <button>스마트키</button>
-                            <button>썬루프</button>
+                            <button 
+                                onClick={() => toggleFilter('option', '내비게이션')}
+                                className={selectedFilters.option.includes('내비게이션') ? 'active' : ''}>
+                                내비게이션
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('option', '후방카메라')}
+                                className={selectedFilters.option.includes('후방카메라') ? 'active' : ''}>
+                                후방카메라
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('option', '열선시트')}
+                                className={selectedFilters.option.includes('열선시트') ? 'active' : ''}>
+                                열선시트
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('option', '핸들열선')}
+                                className={selectedFilters.option.includes('핸들열선') ? 'active' : ''}>
+                                핸들열선
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('option', '블루투스')}
+                                className={selectedFilters.option.includes('블루투스') ? 'active' : ''}>
+                                블루투스
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('option', '스마트키')}
+                                className={selectedFilters.option.includes('스마트키') ? 'active' : ''}>
+                                스마트키
+                            </button>
+                            <button 
+                                onClick={() => toggleFilter('option', '썬루프')}
+                                className={selectedFilters.option.includes('썬루프') ? 'active' : ''}>
+                                썬루프
+                            </button>
                         </div>
                     </li>
                 </ul>
             </div>
-
             {/* 목록 */}
             <div className="R_carlist">
-                {/* <h2>총 {}대</h2> */}
-                {/* 카테고리 선택 후 표시부분 */}
+                <h4>총 {displayedCars.length}대</h4>
+
                 <div className="cate_choice">
-                    <button>
-                        <i className="bi bi-x-lg"></i>
-                    </button>
+                    {renderSelectedFilters()}
+                    {shouldShowResetButton() && (
+                        <div className="delBtn">
+                            <button onClick={resetFilters}>
+                                <i className="bi bi-arrow-clockwise"></i>
+                            </button>
+                        </div>
+                    )}
                 </div>
+
                 <ul>
+                    {renderGroupedCars()}
                 </ul>
             </div>
         </div>
-    )
+    );
 }
