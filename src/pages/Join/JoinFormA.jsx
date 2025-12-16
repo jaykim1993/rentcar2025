@@ -52,12 +52,12 @@ export default function JoinFormA() {
                 <button className="joinBtnX">
                     <Link to={'/'}><i className="bi bi-x"></i></Link>
                 </button>
-                <h2 className='joinH'><span className='joinColorText'>이용약관</span>과 <span className='joinColorText'>고객정보수집</span>에 동의합니다.</h2>
+                <h3 className='joinH'><span className='joinColorText'>이용약관</span>과 <span className='joinColorText'>고객정보수집</span>에 동의합니다.</h3>
                     <div className='joinAContentWrap'>
                         {/* 이용약관 동의 창 */}
                         <div className="joinContent">
                             <div>
-                                <h3 className="joinTosH3">이용약관</h3>
+                                <h4 className="joinTosH3">이용약관</h4>
                                 <button className="joinAListbtn" onClick={() => setOpenA(!openA)}>
                                     {openA ? <i className="bi bi-caret-up"></i> : <i className="bi bi-caret-down"></i>}
                                 </button>
@@ -123,7 +123,7 @@ export default function JoinFormA() {
                         {/* 개인정보 수집 창 */}
                         <div className="joinContent">
                             <div>
-                                <h3 className="joinTosH3">고객 정보 수집 및 이용 동의</h3>
+                                <h4 className="joinTosH3">고객 정보 수집 및 이용 동의</h4>
                                 <button className="joinAListbtn" onClick={() => setOpenB(!openB)}>
                                     {openB ? <i className="bi bi-caret-up"></i> : <i className="bi bi-caret-down"></i>}
                                 </button>

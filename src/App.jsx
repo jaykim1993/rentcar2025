@@ -8,24 +8,24 @@ import JoinFormA from './pages/Join/JoinFormA'
 import JoinFormB from './pages/Join/JoinFormB'
 import JoinFormC from './pages/Join/JoinFormC'
 import AuthProvider from './contexts/Authcontext'
-import CalendarProvider from './contexts/calendarcontext'
+import CalendarProvider from './contexts/Calendarcontext'
+import Searchcarlist  from './pages/Searchcarlist'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Searchcarlist from './pages/Searchcarlist'
 import DataProvider from './contexts/Datacontext'
 import Footer from './common/Footer'
-import RentalCalendar from './pages/Calendar'
 
+// s
 function App() {
-
+// s
   return (
     <AuthProvider>
       <DataProvider>
         <CalendarProvider>
         <BrowserRouter>
           <Header/>
-          <RentalCalendar/>
           <Routes>
             <Route path="/" element={<Home/>}/>
+            <Route path="/searchcarlist" element={<Searchcarlist/>}/>
             <Route path="/guide" element={<GuidePage/>}/>
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/joinA" element={<JoinFormA/>}/>
