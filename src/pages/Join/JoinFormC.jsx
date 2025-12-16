@@ -188,7 +188,7 @@ export default function JoinFormC() {
                                 <input className='joinInputResi'
                                     type="password"
                                     maxLength="7"
-                                    placeholder="0000000"
+                                    placeholder="*******"
                                     value={resistBack}
                                     onChange={(e) => setResistBack(e.target.value)}
                                 />
@@ -227,6 +227,12 @@ export default function JoinFormC() {
                         <label className='joinLabelB'>
                             <div className='joinTextCC'>주소</div>
                             <div className='joinContentC'>
+                                <button className='joinbtnC'
+                                    type='button' 
+                                    id='userAddSearch' 
+                                    onClick={addressToggle}>
+                                        우편번호 검색
+                                </button>
                                 <input  className='joinInputAdd'
                                     type='text' 
                                     value={zipcode} 
@@ -234,12 +240,6 @@ export default function JoinFormC() {
                                     readOnly 
                                     name='post' 
                                     id='post'/>
-                                <button className='joinbtnC'
-                                    type='button' 
-                                    id='userAddSearch' 
-                                    onClick={addressToggle}>
-                                        우편번호 검색
-                                </button>
                                 <div className="joinContentC">
                                     <input  className='joinInputLong'
                                     type='text' 
@@ -259,9 +259,11 @@ export default function JoinFormC() {
                                 />
                                 {isOpen && 
                                 <div className='joinCOverlay' onClick={addressToggle}>
-                                    <button className='joinBtnX' onClick={addressToggle}>X</button>
-                                    <h2 className='joinH'>주소 검색</h2>
-                                    <DaumPostCode  onComplete={addresstHandler} height="100%"/>
+                                    <div className='addressWrap'>
+                                        <button className='joinBtnX' onComplete={addresstHandler}><i className="bi bi-x"></i></button>
+                                        <h2 className='joinH'>주소 검색</h2>
+                                        <DaumPostCode  onComplete={addresstHandler} height="100%"/>
+                                    </div>
                                 </div>
                                 }
                             </div>
@@ -285,7 +287,7 @@ export default function JoinFormC() {
                                 <input className='joinInputC'
                                     type="text"
                                     maxLength="2"
-                                    placeholder="00"
+                                    placeholder=""
                                     value={licenseFront}
                                     onChange={(e) => setLicenseFront(e.target.value)}
                                 />
@@ -293,7 +295,7 @@ export default function JoinFormC() {
                                 <input className='joinInputC'
                                     type="text"
                                     maxLength="2"
-                                    placeholder="00"
+                                    placeholder=""
                                     value={licenseSecond}
                                     onChange={(e) => setLicenseSecond(e.target.value)}
                                 />
@@ -301,7 +303,7 @@ export default function JoinFormC() {
                                 <input className='joinInputCC'
                                     type="text"
                                     maxLength="6"
-                                    placeholder="000000"
+                                    placeholder=""
                                     value={licenseThird}
                                     onChange={(e) => setLicenseThird(e.target.value)}
                                 />
@@ -309,7 +311,7 @@ export default function JoinFormC() {
                                 <input className='joinInputC'
                                     type="text"
                                     maxLength="2"
-                                    placeholder="00"
+                                    placeholder=""
                                     value={licenseBack}
                                     onChange={(e) => setLicenseBack(e.target.value)}
                                 />

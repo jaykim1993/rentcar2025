@@ -189,7 +189,7 @@ const getFilteredCars = () => {
                         <div className="guideSelectCarSize">
                             {selectWhereCar?(
                             <div className="guideSelectKorCar">
-                                <button className={`guideSelectCarSizeBtn ${selectKoreanSize===1?'active':''}`} onClick={selectKoreanSmall}>소형</button>
+                                <button className={`guideSelectCarSizeBtn ${selectKoreanSize===1?'active':''}`} onClick={selectKoreanSmall}>경소형</button>
                                 <button className={`guideSelectCarSizeBtn ${selectKoreanSize===2?'active':''}`} onClick={selectKoreanMiddle}>중형</button>
                                 <button className={`guideSelectCarSizeBtn ${selectKoreanSize===3?'active':''}`} onClick={selectKoreanLarge}>대형</button>
                                 <button className={`guideSelectCarSizeBtn ${selectKoreanSize===4?'active':''}`} onClick={selectKoreanRV}>승합/RV</button>
