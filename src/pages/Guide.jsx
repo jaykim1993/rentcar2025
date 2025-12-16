@@ -203,7 +203,8 @@ const getFilteredCars = () => {
                             </div>
                         )}
                     </div>
-                        <p>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 계산됩니다. </p>
+                        <span>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 가치를 가지며, </span>
+                        <p>차량의 연식, 차량 크기, 연료, 옵션 유무에 따라 가격이 계산됩니다.   </p>
                             <table className="guideTable">
                                 <thead className="guideThead">
                                     <tr className="guideTr">

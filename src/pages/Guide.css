@@ -211,6 +211,9 @@
     background-color: dodgerblue;
     height: 70px;
     font-size: 20px;
+    text-align: center;
+}
+.guideTr th{
     color: white;
 }
 .guideTh{

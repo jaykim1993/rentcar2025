@@ -160,3 +160,37 @@
   opacity: 1;
   pointer-events: auto;
 }
+.Locationdropdown i{
+    color: white;
+}
+.LocationPage3H3{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #333;
+}
+.LocationPage3Ol{
+    border: 1px solid #7a7a7a;
+    border-radius: 15px;
+}
+.LocationPage3Li{
+    font-size: 20px;
+    margin: 60px 0;
+    margin-left: 20px;
+    font-weight: 600;
+    color: #333;
+}
+.LocationPage3BottomDiv{
+    width: 300px;
+    margin: 50px auto;
+}
+.LocationPage3Btn{
+
+    font-size: 20px;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-weight: 500;
+}
