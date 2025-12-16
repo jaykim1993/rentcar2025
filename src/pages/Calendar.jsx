@@ -1,5 +1,5 @@
 import { useContext, useRef, useMemo } from "react";
-import { CalendarContext } from "../contexts/CalendarContext";
+import { CalendarContext } from "../contexts/Calendarcontext";
 import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import interactionPlugin from "@fullcalendar/interaction";

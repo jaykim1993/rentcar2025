@@ -1,0 +1,61 @@
+#root .Footer{
+    width: 1300px;
+    margin: 0 auto;
+    /* overflow-x: hidden; */
+}
+
+/* 공지사항 */
+#root .Footer_Top .notice{
+    position: relative;
+    padding: 30px 0;
+}
+#root .Footer_Top .notice::before{
+    width: 100%;
+    content: '';
+    position: absolute;
+    border: 1px solid #ccc;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#root .Footer_Top .notice::after{
+    width: 100%;
+    content: '';
+    position: absolute;
+    border: 1px solid #ccc;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* -------------------------------------- */
+
+/* 로고 */
+#root .Footer_Top > img{
+    width: 80px;
+    margin-top: 150px;
+    margin-bottom: 40px;
+}
+
+/* 푸터 섹션 */
+#root .Footer_Top .Footer_sec{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 좌측 회사정보 */
+#root .Footer_Top .Footer_sec .F_info{
+    width:  900px;
+}
+#root .Footer_Top .Footer_sec .F_info .F_infoUl .F_infoLi01{
+    display: flex;
+    margin-bottom: 40px;
+}
+#root .Footer_Top .Footer_sec .F_info .F_infoUl .F_infoLi02{
+    
+}
+
+/* 우측 고객센터 */
+#root .Footer_Top .Footer_sec .F_support{
+    width: 400px;
+}

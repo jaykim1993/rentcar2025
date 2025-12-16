@@ -211,7 +211,7 @@ export default function Recentcar(){
                                     <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
                                     {/* <p>{getActiveOptionsString(car)}</p> */}
                                     <i className="bi bi-chevron-right"></i>
-                                    <p className="carPrice">시간당 <strong>{car_price.toLocaleString()}</strong>원</p>
+                                    <p className="carPrice">시간당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
                                 </div>
                             )
                         })}
