@@ -17,6 +17,8 @@ export default function RentalCalendar() {
     setStartTime,
     endTime,
     setEndTime,
+    timeInfoArrHandler,
+    setApply,
     HandleDateFilter,
   } = useContext(CalendarContext);
 
