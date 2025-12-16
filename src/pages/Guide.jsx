@@ -127,7 +127,7 @@ const getFilteredCars = () => {
                 <div className="guideTop">
                     {/* 수정 필요 */}
                     <div><Link to={'/home'}>홈</Link></div>
-                    <span><i class="bi bi-caret-left-fill"></i></span>
+                    <span><i className="bi bi-caret-left-fill"></i></span>
                     <div>이용가이드</div>
                 </div>
                 <div className="guideFlex">
