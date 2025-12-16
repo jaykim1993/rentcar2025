@@ -31,9 +31,9 @@ function App() {
             <Route path="/joinA" element={<JoinFormA/>}/>
             <Route path="/joinB" element={<JoinFormB/>}/>
             <Route path="/joinC" element={<JoinFormC/>}/>
-            <Route path='/Searchcarlist' element={<Searchcarlist />} />
+            <Route path='/searchcarlist' element={<Searchcarlist />} />
           </Routes>
-          {/* <Searchcarlist/> */}
+          <Footer />
         </BrowserRouter>
         </CalendarProvider>
       </DataProvider>

@@ -2,13 +2,14 @@ import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../contexts/Datacontext";
 import { CalendarContext } from "../contexts/calendarcontext"; 
 import './Searchcarlist.css'
+import { Link } from "react-router-dom";
 
 export default function Recentcar(){
 
-    const { cars } = useContext(DataContext);
+    // const { cars } = useContext(DataContext);
     const { availableCars } = useContext(CalendarContext);
 
-    /* ================= 옵션 문자열 ================= */
+    // ================= 옵션 문자열 =================
     const getActiveOptionsString = (car) => {
         const activeOptions = [];
         if (car.navigation) activeOptions.push('내비게이션');
@@ -21,7 +22,7 @@ export default function Recentcar(){
         return activeOptions.join(', ');
     };
 
-    /* ================= 필터 판별 ================= */
+    // ================= 필터 판별 =================
     const filterCar = (car, filters) => {
 
         for (const category in filters) {
@@ -52,7 +53,7 @@ export default function Recentcar(){
         return true;
     };
 
-    /* ================= 상태 ================= */
+    // ================= 상태 =================
     const [selectedFilters, setSelectedFilters] = useState({
         carSize: [],
         fuelType: [],
@@ -67,7 +68,7 @@ export default function Recentcar(){
         setDisplayedCars(availableCars);
     }, [availableCars]);
 
-    /* ================= 필터 적용 ================= */
+    // ================= 필터 적용 =================
     const updateDisplayedCars = (filters) => {
         const filtered = availableCars.filter(car => filterCar(car, filters));
         setDisplayedCars(filtered);
@@ -101,14 +102,14 @@ export default function Recentcar(){
         setDisplayedCars(availableCars);
     };
 
-    /* ================= 그룹화 ================= */
+    // ================= 그룹화 =================
     const groupedCars = {};
     for(const car of displayedCars){
         if (!groupedCars[car.model]) groupedCars[car.model] = [];
         groupedCars[car.model].push(car);
     }
 
-    /* ================= 선택 태그 ================= */
+    // ================= 선택 태그 =================
     const renderSelectedFilters = () => {
         const result = [];
         for (const category in selectedFilters) {
@@ -130,7 +131,62 @@ export default function Recentcar(){
         return false;
     };
 
-    /* ================= 출력 ================= */
+    // ================= 금액 =================
+    const calculatePrice = (car) => {
+        const basePrice = 3000;  // 기본요금
+        let totalPrice = basePrice;  // 값이 담길 변수
+    
+        // 연식
+        const baseModelYear = car.model_year;
+    
+        if(baseModelYear === 2022){
+            totalPrice -= 200;
+        }else if(baseModelYear === 2023){
+            totalPrice -= 100;
+        }else if(baseModelYear === 2025){
+            totalPrice += 200;
+        }else{
+            totalPrice += 0;
+        }
+    
+        // 크기
+        const baseVehicleSize = car.car_size;
+    
+        if(baseVehicleSize === '중형'){
+            totalPrice += 100;
+        }else if(baseVehicleSize === '대형'){
+            totalPrice += 200;
+        }else{
+            totalPrice += 0;
+        }
+    
+        // 연료
+        const baseFuelType = car.fuel_type;
+    
+        if(baseFuelType === '휘발유'){
+            totalPrice += 100;
+        }else if(baseFuelType === '하이브리드'){
+            totalPrice += 200;
+        }else{
+            totalPrice += 0;
+        }
+    
+        // 옵션
+        if(car.heated_seat){ totalPrice += 100; }
+        if(car.heated_handle){ totalPrice += 100; }
+        if(car.sun_loof){ totalPrice += 200; }
+        else{ null }
+    
+        // 브랜드별 값
+        const priceValue = car.price_value;
+    
+        // 최종 산출금액
+        const finalPrice = Math.round(totalPrice * priceValue);
+
+        return finalPrice;
+    }
+
+    // ================= 출력 =================
     const renderGroupedCars = () => {
         const result = [];
 
@@ -139,6 +195,7 @@ export default function Recentcar(){
             const first = group[0];
 
             result.push(
+                <Link to={'/Rentinfo'} style={{textDecoration:'none'}}>
                 <li key={modelName} className="grouped_car_item">
                     <div>
                         <img className="brands" src={`images/brands/${first.brand_logo}`} />
@@ -146,16 +203,21 @@ export default function Recentcar(){
                     </div>
 
                     <div className="car_list_ul">
-                        {group.map((car, index) => (
-                            <div key={index} className={`car_variant_info ${index !== group.length - 1 ? 'Line_active' : ''}`}>
-                                <h4>{modelName} {car.fuel_type}</h4>
-                                <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
-                                {/* <p>{getActiveOptionsString(car)}</p> */}
-                                <i className="bi bi-chevron-right"></i>
-                            </div>
-                        ))}
+                        {group.map((car, index) => {
+                            const car_price = calculatePrice(car)
+                            return(
+                                <div key={index} className={`car_variant_info ${index !== group.length - 1 ? 'Line_active' : ''}`}>
+                                    <h4>{modelName} {car.fuel_type}</h4>
+                                    <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
+                                    {/* <p>{getActiveOptionsString(car)}</p> */}
+                                    <i className="bi bi-chevron-right"></i>
+                                    <p className="carPrice">시간당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
+                                </div>
+                            )
+                        })}
                     </div>
                 </li>
+                </Link>
             );
         }
 
@@ -172,8 +234,8 @@ export default function Recentcar(){
                         {/* 다중 선택 토글 기능 적용 */}
                         <div className="cateBtn">
                             <button 
-                                onClick={() => toggleFilter('carSize', '소형')} 
-                                className={selectedFilters.carSize.includes('소형') ? 'active' : ''}>
+                                onClick={() => toggleFilter('carSize', '경소형')} 
+                                className={selectedFilters.carSize.includes('경소형') ? 'active' : ''}>
                                 경소형
                             </button>
                             <button 
@@ -362,7 +424,9 @@ export default function Recentcar(){
                 <h4>총 {displayedCars.length}대</h4>
 
                 <div className="cate_choice">
-                    {renderSelectedFilters()}
+                    <div className="cate_Btn">
+                        {renderSelectedFilters()}
+                    </div>
                     {shouldShowResetButton() && (
                         <div className="delBtn">
                             <button onClick={resetFilters}>
