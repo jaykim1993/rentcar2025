@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { DataContext } from "./Datacontext";
 import { AuthContext } from "./Authcontext";
 
@@ -193,85 +193,127 @@ export default function CalendarProvider({ children }) {
     }]);
 
   // Calendar.jsx 에 공유될 변수
-  const [selectedDate, setSelectedDate] = useState(null);
-  console.log(selectedDate);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [startTime, setStartTime] = useState("09:00");
   const [endTime, setEndTime] = useState("09:00");
-
+  // 사용자 입력 차량 위치 정보, 홈에서 공유받아야 하며 지금은 임시
+    // 지점명 가져오는 변수
+    const [location, setLocation] = useState(""); 
+    console.log('지점: ', location);
   // 필터 적용된 상태 변수
+    const [timeFilteredCars, setTimeFilteredCars] = useState([]);
     // availableCars: 
     // 원본 cars 형식 그대로 필터 => 령경씨가 사용할 배열
     const [availableCars, setAvailableCars] = useState([]); 
-    // dateFiltered: 
+    // filteredInfoUser: 
     // 원본에서 필요 내용 + 사용자 필터 적용값 정리된 배열 
     // [{id, userId, carId, filterStartDate, filterEndDate, filterStartTime, filterEndTime, location(차량 위치 필터링 기능 편의를 위해 추가)}]
-    const [dateFiltered, setDateFiltered] = useState([]);
+    const [filteredInfoUser, setFilteredInfoUser] = useState([]);
 
-  const toDateTime = (date, time) =>
-    new Date(`${date}T${time}:00`);
-
-  // 지점명 가져오는 변수
-  const [location,setLocation] = useState(null);
-  console.log('지점: ', location);
+  
   
 
-  // 필터 적용하기 버튼 함수
+    
+  // A 필터 - 시간 필터
     // 예시) 필터(17일 13:00 -19일 20:30)조건에 부합하는 예약가능한 결과값을 추출 const dateFiltered -> 예약가능한 리스트 맵으로 뿌리기
-  const timeInfoArrHandler = ({
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-  }) => {
-    console.log("사용자가 정의한 필터 값", {
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-  });
-    const filterStart = toDateTime(startDate, startTime);
-    const filterEnd = toDateTime(endDate, endTime);
+    const HandleDateFilter = ({
+        startDate,
+        startTime,
+        endDate,
+        endTime,
+      }) => {
+        const toDateTime = (date, time) =>
+          new Date(`${date}T${time}:00`);
+        // 사용자 지정한 날짜 & 시간 값 형식 추출하기
+        const filterStart = toDateTime(startDate, startTime);
+        const filterEnd = toDateTime(endDate, endTime);
 
-    // 예약 겹치는 carId 추출
-    const blockedCarIds = bookedlistAll
-      .filter((book) => {
-        const bookStart = toDateTime(
-          book.filterStartDate,
-          book.filterStartTime
+        const blockedCarIds = bookedlistAll
+          .filter((book) => {
+            const bookStart = toDateTime(
+              book.filterStartDate,
+              book.filterStartTime
+            );
+            const bookEnd = toDateTime(
+              book.filterEndDate,
+              book.filterEndTime
+            );
+
+            // 시간 겹침 판단
+            return !(filterEnd <= bookStart || filterStart >= bookEnd);
+          })
+          .map((book) => book.carId);
+
+        const dateFilteredResult = cars.filter(
+          (car) => !blockedCarIds.includes(car.id)
         );
-        const bookEnd = toDateTime(
-          book.filterEndDate,
-          book.filterEndTime
+
+        setTimeFilteredCars(dateFilteredResult);
+        console.log("날짜 필터 결과(버튼 클릭 시 변동)", dateFilteredResult);
+
+        // 위치 선정 이후 날짜 값을 바꿀 경우 꼬임 방지
+        if (location) {
+        setAvailableCars(
+          dateFilteredResult.filter(car => car.location === location)
         );
+  }
+      };
 
-        return !(filterEnd <= bookStart || filterStart >= bookEnd);
-      })
-      .map((book) => book.carId);
+    // B 위치 필터
+       // A 필터 적용 후 사용자가 선택한 지점 필터 함수
+    useEffect(() => {
+      // 날짜 필터가 아직 적용되지 않은 상태에서 값 변동 방어 코드
+      if (!timeFilteredCars.length) return;
 
-    // 예약 가능한 차량 (지역 변수 선언, 상태변수와 별개!)
-    const availableCars = cars.filter(
-      (car) => !blockedCarIds.includes(car.id)
-    );
+      // 지점 선택 안 될 시 방어 코드
+      if (!location) return;
 
-    // 예약 버튼용 정제 데이터 (지역 변수 선언, 상태변수와 별개!)
-    const dateFiltered = availableCars.map((car, index) => ({
-      id: index + 1,            
-      userId: userid,
-      carId: car.id,
-      filterStartDate: startDate,
-      filterEndDate: endDate,
-      filterStartTime: startTime,
-      filterEndTime: endTime,
-      location: car.location,
-      carName: car.name,
-    }));
+      const locationFilteredResult = timeFilteredCars.filter(
+        car => car.location === location
+      );
 
-    // 상태 변수 값 입력
-    setAvailableCars(availableCars);
-    console.log("예약 가능한 차량", availableCars);
-    setDateFiltered(dateFiltered);
-    console.log("정제된 예약 데이터", dateFiltered);
-  };
+      setAvailableCars(locationFilteredResult);
+      console.log("해당 지점 필터 결과(실시간 변동): ", locationFilteredResult);
+    }, [location, timeFilteredCars]);
+
+
+
+    // 검색하기 버튼 클릭 시 최근 본 차량 업데이트(예약 가능 데이터 후보 생성)
+    const HandleSearchResult = () => {
+      if (!availableCars.length) {
+        alert("예약 가능한 차량이 없습니다.");
+        return;
+      }
+      const recentViewResult = availableCars.map((car) => ({
+        userId: userid,
+        carId: car.id,
+        filterStartDate: startDate,
+        filterEndDate: endDate,
+        filterStartTime: startTime,
+        filterEndTime: endTime,
+        location: car.location,
+        carName: car.name,
+        // 연료타입 추가 필요 
+      }));
+
+      setFilteredInfoUser(recentViewResult);
+      console.log("검색 결과 리스트: ", recentViewResult)
+    };
+
+
+  // 더 만들어야 할 함수 목록
+
+    // 예약하기 버튼 함수 (+ bookedListAll 에 추가된 예약 담기)
+    // addBook
+
+
+
+
+    // 예약 취소 버튼 함수
+    // removeBook
+
+
 
 
   // 적용하기 상태 변수값
@@ -296,23 +338,36 @@ export default function CalendarProvider({ children }) {
   return (
     <CalendarContext.Provider
       value={{
-        bookedlistAll,
-        selectedDate,
-        setSelectedDate,
+        // 날짜 / 시간
+        startDate,
+        setStartDate,
+        endDate,
+        setEndDate,
         startTime,
         setStartTime,
         endTime,
         setEndTime,
-        timeInfoArrHandler,
-        availableCars, 
-        dateFiltered,
         setLocation,
-        location,
         setApply,
-        apply
+        apply,
+
+        // 위치
+        location,
+        setLocation,
+
+        // 데이터
+        bookedlistAll,
+        availableCars,
+        filteredInfoUser,
+
+        // 함수
+        HandleDateFilter,
+        HandleSearchResult,
       }}
     >
       {children}
     </CalendarContext.Provider>
   );
 }
+
+

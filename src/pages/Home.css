@@ -1,9 +1,9 @@
 *{
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    color: #555;
+    color: #333;
     text-decoration: none;
 }
 
@@ -11,10 +11,8 @@ input:checked + .checkmark {
     background: #0b79b7;
     border-color: #065d8f;
 }
-
-
 #root .Home{
-    width: 1200px;
+    width: 1300px;
     margin: 0 auto;
 }
 
@@ -45,15 +43,19 @@ input:checked + .checkmark {
     cursor: pointer;
 }
 /* 찾기버튼 */
-#root .Home .H_reservation .H_spotTable .searchButton button{
+#root .Home .H_reservation .H_spotTable .searchButton{
     width: 170px;
     padding: 15px 0px;
     border-radius: 50px;
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     border: none;
+}
+#root .Home .H_reservation .H_spotTable .searchButton i{
+    color: #fff;
+    /* font-weight: bold; */
 }
 
 /* ---------------------------------- */
@@ -76,7 +78,7 @@ input:checked + .checkmark {
     height: 45px;
     border-radius: 100px;
     border: none;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     color: #fff;
     margin-bottom: 20px;
     font-size: 16px;
@@ -92,7 +94,7 @@ input:checked + .checkmark {
 #root .Home .H_sec02 ul li{
     width: 220px;
     height: 270px;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     border-radius: 10px;
 }
 
@@ -113,7 +115,7 @@ input:checked + .checkmark {
 #root .Home .H_sec03 ul li{
     width: 220px;
     height: 270px;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     border-radius: 10px;
 }
 /* ---------------------------------- */

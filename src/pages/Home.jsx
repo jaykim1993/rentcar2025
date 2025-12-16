@@ -7,7 +7,7 @@ import Calendar from './Calendar';
 
 export default function Home(){
 
-  const {setLocation, location, selectedDate, startTime, endTime, apply} = useContext(CalendarContext);
+  const {setLocation, location, startDate, endDate ,startTime, endTime, apply, HandleSearchResult} = useContext(CalendarContext);
 
     const images = [
       "https://picsum.photos/1200/430?random=1",
@@ -62,6 +62,7 @@ export default function Home(){
     // 달력 모달 toggle
     const [iscalendar, setIscalendar] = useState(false);
 
+    console.log(startDate, endDate);
 
     const calendarHandler=()=>{
       setIscalendar(!iscalendar);
@@ -77,9 +78,7 @@ export default function Home(){
       const hours=Number(time.slice(0,2));
       const minutes=time.slice(3);
       const ampm= hours<12 ?'오전':'오후';
-      // const hoursNum=(hours.slice(0,1)) == 0? hoursNum.replace('0',''):hours; 
-      // 위에서 문자열이엇던 숫자를 Number로 숫자로 바꿨기때문에 replace는 사용안됨
-      return ` ${ampm} ${hours}:${minutes}`; // 자바스크립트는 만든 함수 return안하면 사용안됨
+      return ` ${ampm} ${hours}:${minutes}`;
     }
 
 
@@ -90,7 +89,7 @@ export default function Home(){
             <div className="H_dateTable">
                   <p>언제?</p>
                   {apply?<span>
-                     {selectedDate &&`${selectedDate.start}${timeAMPM(startTime)}`} ~ {selectedDate &&`${selectedDate.end}${timeAMPM(endTime)}`}
+                     {startDate &&`${startDate}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate}${timeAMPM(endTime)}`}
                   </span>:
                  <h2 onClick={calendarHandler}>날짜선택</h2>
                   
@@ -104,10 +103,12 @@ export default function Home(){
                     {location? <h3>{location}</h3> :<h2 onClick={locationHandler}>지점선택</h2>}
                 </div>
                 <div className="searchButton">
-                    <button type="submit">
-                        예약할 차량 찾기
-                        <i className="bi bi-arrow-right"></i>
-                    </button>
+                    <Link to={'/searchcarlist'}>
+                      <button type="submit" onClick={HandleSearchResult}>
+                          예약할 차량 찾기
+                          <i className="bi bi-arrow-right"></i>
+                      </button>
+                    </Link>
                  </div>
             </div>
         </div>

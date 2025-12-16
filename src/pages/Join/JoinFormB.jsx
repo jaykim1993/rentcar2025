@@ -46,6 +46,8 @@ export default function JoinFormB() {
   const goNext = () => {
     if (!userid || !userpw)
       return alert("아이디와 비밀번호를 모두 입력하세요.");
+    if (userpw != userpwCheck)
+      return alert("비밀번호 확인을 진행해주세요")
     // 페이지 이동 + userid, userpw 전달
     navigate("/joinC", {
       state: {
@@ -60,7 +62,7 @@ export default function JoinFormB() {
             <button className="joinBtnX">
               <Link to={'/'}><i className="bi bi-x"></i></Link>
             </button>
-            <h2 className='joinH'><span className='joinColorText'>아이디</span>와 <span className='joinColorText'>비밀번호</span>를 설정해주세요.</h2>
+            <h3 className='joinH'><span className='joinColorText'>아이디</span>와 <span className='joinColorText'>비밀번호</span>를 설정해주세요.</h3>
             <ul className='joinUlB'>
                 <li className='joinLiB'>
                     <label className='joinLabelB'>
@@ -78,7 +80,7 @@ export default function JoinFormB() {
                         className='joinBtnB'
                         type='button' 
                         onClick={checkId}>
-                          확인
+                          중복 확인
                         </button>
                     </label>
                 </li>
