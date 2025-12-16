@@ -195,11 +195,11 @@ export default function Recentcar(){
             const first = group[0];
 
             result.push(
-                <Link to={'/Rentinfo'} style={{textDecoration:'none'}}>
+                <Link to={'/detailPage'} style={{textDecoration:'none'}}>
                 <li key={modelName} className="grouped_car_item">
                     <div>
                         <img className="brands" src={`images/brands/${first.brand_logo}`} />
-                        <img className="cars" src={`images/cars/${first.car_img}`} />
+                        <img className="cars" src={`images/cars/${first.car_img}`} alt={`${first.brand} ${first.model}`} />
                     </div>
 
                     <div className="car_list_ul">

@@ -14,6 +14,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import DataProvider from './contexts/Datacontext'
 import Footer from './common/Footer'
 import LocationPage from './pages/Location'
+import DetailPage from './pages/DetailPage'
 
 // s
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/joinB" element={<JoinFormB/>}/>
             <Route path="/joinC" element={<JoinFormC/>}/>
             <Route path='/searchcarlist' element={<Searchcarlist />} />
+            <Route path='/detailPage' element={<DetailPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>
