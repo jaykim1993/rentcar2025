@@ -1,5 +1,5 @@
 import { useContext, useRef, useMemo } from "react";
-import { CalendarContext } from "../contexts/calendarcontext";
+import { CalendarContext } from "../contexts/Calendarcontext";
 import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -8,39 +8,42 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Calendar.css";
 
 export default function RentalCalendar() {
-  /* =====================
-     Context
-  ====================== */
   const {
-    selectedDate,
-    setSelectedDate,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
     startTime,
     setStartTime,
     endTime,
     setEndTime,
-    timeInfoArrHandler,
+    HandleDateFilter,
   } = useContext(CalendarContext);
 
   const calendarRef = useRef(null);
 
-  /* =====================
-     Handlers
-  ====================== */
-  // 이전달 이동
-    const handlePrev = () => {
-      const api = calendarRef.current?.getApi();
-      if (!api) return;
+  const handlePrev = () => {
+    const api = calendarRef.current?.getApi();
+    if (!api) return;
 
-      const current = api.getDate();
-      const prevMonth = new Date(current.getFullYear(), current.getMonth() - 1, 1);
+    const current = api.getDate();
+    const prevMonth = new Date(
+      current.getFullYear(),
+      current.getMonth() - 1,
+      1
+    );
 
-      const today = new Date();
-      const thisMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
-      if (prevMonth < thisMonthStart) return alert("이전달은 조회할 수 없습니다.") ;
+    const today = new Date();
+    const thisMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
 
-      api.gotoDate(prevMonth);
-    };
-  // 다음달 이동
+    if (prevMonth < thisMonthStart) {
+      alert("이전달은 조회할 수 없습니다.");
+      return;
+    }
+
+    api.gotoDate(prevMonth);
+  };
+
   const handleNext = () => {
     const api = calendarRef.current?.getApi();
     if (!api) return;
@@ -51,42 +54,47 @@ export default function RentalCalendar() {
     );
   };
 
-  // 날짜 클릭 (범위 선택)
   const handleDateClick = ({ dateStr }) => {
-    if (!selectedDate) {
-      setSelectedDate({ start: dateStr, end: null });
+    // 시작일이 없으면 시작
+    if (!startDate) {
+      setStartDate(dateStr);
+      setEndDate(null);
       return;
     }
 
-    if (!selectedDate.end) {
-      let start = selectedDate.start;
-      let end = dateStr;
-      if (end < start) [start, end] = [end, start];
-      setSelectedDate({ start, end });
+    // 종료일 설정
+    if (!endDate) {
+      if (dateStr < startDate) {
+        setEndDate(startDate);
+        setStartDate(dateStr);
+      } else {
+        setEndDate(dateStr);
+      }
       return;
     }
 
-    setSelectedDate({ start: dateStr, end: null });
+    // 다시 선택 시 초기화
+    setStartDate(dateStr);
+    setEndDate(null);
   };
 
-  // 적용 버튼
   const handleApply = () => {
-    timeInfoArrHandler({
-      startDate: selectedDate.start,
-      endDate: selectedDate.end,
+    if (!startDate || !endDate) {
+      alert("날짜를 선택해주세요.");
+      return;
+    }
+
+    HandleDateFilter({
+      startDate,
+      endDate,
       startTime,
       endTime,
     });
   };
 
-  /* =====================
-     Utils
-  ====================== */
+  const renderDay = (arg) =>
+    arg.dayNumberText.replace("일", "");
 
-  // 날짜 숫자만 표시
-  const renderDay = (arg) => arg.dayNumberText.replace("일", "");
-
-  // 30분 단위 시간 목록
   const timeOptions = useMemo(() => {
     const times = [];
     for (let h = 0; h < 24; h++) {
@@ -96,35 +104,27 @@ export default function RentalCalendar() {
     return times;
   }, []);
 
-  // 선택 날짜 → background event
   const backgroundEvents = useMemo(() => {
-    if (!selectedDate?.start || !selectedDate?.end) return [];
+    if (!startDate || !endDate) return [];
 
     const events = [];
-    let current = new Date(selectedDate.start);
-    const end = new Date(selectedDate.end);
+    let current = new Date(startDate);
+    const end = new Date(endDate);
 
     while (current <= end) {
-      const dateStr = current.toISOString().split("T")[0];
-
       events.push({
-        start: dateStr,
+        start: current.toISOString().split("T")[0],
         display: "background",
         className: "selected-range-bg",
       });
-
       current.setDate(current.getDate() + 1);
     }
 
     return events;
-  }, [selectedDate]);
-
-  /* =====================
-     Render
-  ====================== */
+  }, [startDate, endDate]);
 
   return (
-    <div style={{ width: "700px", margin: "0 auto" }}>
+    <div className="calendarWrap">
       <FullCalendar
         ref={calendarRef}
         plugins={[multiMonthPlugin, interactionPlugin]}
@@ -152,19 +152,18 @@ export default function RentalCalendar() {
         expandRows={false}
       />
 
-
-      {selectedDate?.start && (
+      {startDate && (
         <div style={{ marginTop: "20px" }}>
           <p>
-            <strong>{selectedDate.start}</strong>
-            {selectedDate.end && (
+            <strong>{startDate}</strong>
+            {endDate && (
               <>
-                &nbsp;~ <strong>{selectedDate.end}</strong>
+                {" "}~ <strong>{endDate}</strong>
               </>
             )}
           </p>
 
-          {selectedDate.end && (
+          {endDate && (
             <>
               <div style={{ display: "flex", gap: "20px" }}>
                 <select

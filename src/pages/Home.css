@@ -11,8 +11,6 @@ input:checked + .checkmark {
     background: #0b79b7;
     border-color: #065d8f;
 }
-
-
 #root .Home{
     width: 1300px;
     margin: 0 auto;
@@ -116,4 +114,14 @@ input:checked + .checkmark {
     height: 270px;
     background-color: #0b79b7 ;
     border-radius: 10px;
+}
+
+.calendar-slide {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.calendar-slide.open {
+  max-height: 800px; /* 캘린더 높이 예상값 */
 }

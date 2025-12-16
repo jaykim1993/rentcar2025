@@ -1,8 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useActionState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CalendarContext } from "../contexts/Calendarcontext";
+import Calendar from './Calendar';
 
 export default function Home(){
+
+  const {setLocation, selectedDate, HandleSearchResult} = useContext(CalendarContext);
+
     const images = [
       "https://picsum.photos/1200/430?random=1",
       "https://picsum.photos/1200/430?random=2",
@@ -50,6 +56,23 @@ export default function Home(){
   
       currentX.current = 0;
     };
+
+    // 지점 모달 toggle
+    const [isLocation, setIsLocation] = useState(false);
+    // 달력 모달 toggle
+    const [iscalendar, setIscalendar] = useState(false);
+
+    // 지점 검색내역담는 변수
+    // const locateSearch=setLocation(e.target.value);
+
+    const calendarHandler=()=>{
+      setIscalendar(!iscalendar);
+      setIsLocation(false);
+    };
+    const locationHandler=()=>{
+      setIscalendar(false);
+      setIsLocation(!isLocation);
+    };
     
     return(
     <div className="Home">
@@ -57,23 +80,44 @@ export default function Home(){
         <div className="H_reservation">
             <div className="H_dateTable">
                   <p>언제?</p>
-                  <h2>날짜선택</h2>
+                  <h2 onClick={calendarHandler}>날짜선택</h2>
+                 {selectedDate?.start && selectedDate?.end && (
+            <p>
+              {selectedDate.start.slice(5).replace('-', '.')} 부터 
+              {selectedDate.end.slice(5).replace('-', '.')}
+            </p>
+          )}
             </div>
     
+
             <div className="H_spotTable">
                 <div className="spot_choice">
                     <p>어디?</p>
-                    <h2>지점선택</h2>
+                    <h2 onClick={locationHandler}>지점선택</h2>
                 </div>
-                {/* Searchcarlist.jsx Link 해야됨!! */}
-                <Link to={'/Searchcarlist'}>
-                  <button type="submit" className="searchButton">
-                      예약할 차량 찾기 &nbsp;
-                      <i className="bi bi-arrow-right"></i>
-                  </button>
-                </Link>
+                <div className="searchButton">
+                    <Link to={'/searchcarlist'}>
+                      <button type="submit" onClick={HandleSearchResult}>
+                          예약할 차량 찾기
+                          <i className="bi bi-arrow-right"></i>
+                      </button>
+                    </Link>
+                 </div>
             </div>
         </div>
+        {isLocation && <div className="H_location">
+          <h3>지점을 선택하세요</h3>
+          <input type="text" defaultValue={location} name="location" placeholder="지역,지점을 검색해보세요. "></input>
+          <button type="button">검색</button>
+          <p onClick={()=>setLocation("서울북부")}>서울 북부</p>
+          <p onClick={()=>setLocation("서울남부")}>서울 남부</p>
+          <p onClick={()=>setLocation("서울동부")}>서울 동부</p>
+          <p onClick={()=>setLocation("김포공항")}>김포공항</p>
+          <p onClick={()=>setLocation("인천공항")}>인천공항</p>
+        </div>}
+        <div className={`calendar-slide ${iscalendar ? "open" : ""}`}>
+	              <Calendar />
+	            </div>
 
         {/* sec01 - 배너 슬라이드 */}
         <div className="H_sec01"
