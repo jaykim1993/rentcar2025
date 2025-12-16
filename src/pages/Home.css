@@ -1,9 +1,9 @@
 *{
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    color: #555;
+    color: #333;
     text-decoration: none;
 }
 
@@ -12,7 +12,7 @@ input:checked + .checkmark {
     border-color: #065d8f;
 }
 #root .Home{
-    width: 1200px;
+    width: 1300px;
     margin: 0 auto;
 }
 
@@ -39,16 +39,23 @@ input:checked + .checkmark {
 #root .Home .H_reservation .H_spotTable .spot_choice{
     width: 350px;
 }
+#root .Home .H_reservation .H_spotTable .spot_choice h2{
+    cursor: pointer;
+}
 /* 찾기버튼 */
-#root .Home .H_reservation .H_spotTable .searchButton button{
+#root .Home .H_reservation .H_spotTable .searchButton{
     width: 170px;
     padding: 15px 0px;
     border-radius: 50px;
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     border: none;
+}
+#root .Home .H_reservation .H_spotTable .searchButton i{
+    color: #fff;
+    /* font-weight: bold; */
 }
 
 /* ---------------------------------- */
@@ -71,7 +78,7 @@ input:checked + .checkmark {
     height: 45px;
     border-radius: 100px;
     border: none;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     color: #fff;
     margin-bottom: 20px;
     font-size: 16px;
@@ -87,7 +94,7 @@ input:checked + .checkmark {
 #root .Home .H_sec02 ul li{
     width: 220px;
     height: 270px;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     border-radius: 10px;
 }
 
@@ -108,8 +115,19 @@ input:checked + .checkmark {
 #root .Home .H_sec03 ul li{
     width: 220px;
     height: 270px;
-    background-color: #293dd8;
+    background-color: #0b79b7 ;
     border-radius: 10px;
+}
+/* ---------------------------------- */
+
+/* 지점 선택 모달 */
+#root .Home .H_location{
+    width: 444px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
 }
 
 .calendar-slide {
@@ -120,4 +138,43 @@ input:checked + .checkmark {
 
 .calendar-slide.open {
   max-height: 800px; /* 캘린더 높이 예상값 */
+}
+
+#root .Home .H_location .H_selectLocation{
+    border: 1px solid red;
+    position: relative;
+    padding-top: 20px;
+}
+#root .Home .H_location .H_selectLocation > span{
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+#root .Home .H_location .H_selectLocation p{
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+#root .Home .H_location .H_selectLocation p > span{
+    font-size: 12px;
+    color: rgb(157, 156, 156);
+    margin-left: 10px;
+}
+#root .Home .H_location .H_selectLocation p .H_detail{
+    margin-left: 264px;
+}
+#root .Home .H_location .H_selectLocation .H_seoul::before{
+    content: '';
+    width: 100%;
+    border: 0.5px solid lightgray;
+    position: absolute;
+    top:180px;
+}
+#root .Home .H_location .H_selectLocation .H_gimpo::before{
+    content: '';
+    width: 100%;
+    border: 0.7px solid lightgray;
+    position: absolute;
+    top:240px;
 }

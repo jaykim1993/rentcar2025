@@ -126,8 +126,8 @@ const getFilteredCars = () => {
             <div className="guideWrap">
                 <div className="guideTop">
                     {/* 수정 필요 */}
-                    <div><Link to={'/home'}>홈</Link></div>
-                    <span><i className="bi bi-caret-left-fill"></i></span>
+                    <div><Link className="guideGoToHome" to={'/'}>홈</Link></div>
+                    <span><i class="bi bi-caret-right-fill"></i></span>
                     <div>이용가이드</div>
                 </div>
                 <div className="guideFlex">
@@ -189,7 +189,7 @@ const getFilteredCars = () => {
                         <div className="guideSelectCarSize">
                             {selectWhereCar?(
                             <div className="guideSelectKorCar">
-                                <button className={`guideSelectCarSizeBtn ${selectKoreanSize===1?'active':''}`} onClick={selectKoreanSmall}>소형</button>
+                                <button className={`guideSelectCarSizeBtn ${selectKoreanSize===1?'active':''}`} onClick={selectKoreanSmall}>경소형</button>
                                 <button className={`guideSelectCarSizeBtn ${selectKoreanSize===2?'active':''}`} onClick={selectKoreanMiddle}>중형</button>
                                 <button className={`guideSelectCarSizeBtn ${selectKoreanSize===3?'active':''}`} onClick={selectKoreanLarge}>대형</button>
                                 <button className={`guideSelectCarSizeBtn ${selectKoreanSize===4?'active':''}`} onClick={selectKoreanRV}>승합/RV</button>
@@ -203,7 +203,8 @@ const getFilteredCars = () => {
                             </div>
                         )}
                     </div>
-                        <p>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 계산됩니다. </p>
+                        <span>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 가치를 가지며, </span>
+                        <p>차량의 연식, 차량 크기, 연료, 옵션 유무에 따라 가격이 계산됩니다.   </p>
                             <table className="guideTable">
                                 <thead className="guideThead">
                                     <tr className="guideTr">
@@ -228,7 +229,7 @@ const getFilteredCars = () => {
                                  ))
                                 ) : (
                                     <tr>
-                                        <td colSpan="4">조회 가능한 차량이 없습니다. 다시 선택해주세요.</td>
+                                        <td>조회 가능한 차량이 없습니다. 다시 선택해주세요.</td>
                                     </tr>
                                  )}
                                 </tbody>
