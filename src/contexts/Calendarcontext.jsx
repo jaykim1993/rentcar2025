@@ -274,7 +274,8 @@ export default function CalendarProvider({ children }) {
   };
 
 
-  // 지점 선택 필터링
+  // 적용하기 상태 변수값
+ const [apply,setApply]=useState(false);
 
 
 
@@ -305,7 +306,10 @@ export default function CalendarProvider({ children }) {
         timeInfoArrHandler,
         availableCars, 
         dateFiltered,
-        setLocation
+        setLocation,
+        location,
+        setApply,
+        apply
       }}
     >
       {children}

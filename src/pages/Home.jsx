@@ -7,7 +7,7 @@ import Calendar from './Calendar';
 
 export default function Home(){
 
-  const {setLocation, selectedDate} = useContext(CalendarContext);
+  const {setLocation, location, selectedDate, startTime, endTime, apply} = useContext(CalendarContext);
 
     const images = [
       "https://picsum.photos/1200/430?random=1",
@@ -62,8 +62,6 @@ export default function Home(){
     // 달력 모달 toggle
     const [iscalendar, setIscalendar] = useState(false);
 
-    // 지점 검색내역담는 변수
-    // const locateSearch=setLocation(e.target.value);
 
     const calendarHandler=()=>{
       setIscalendar(!iscalendar);
@@ -74,21 +72,36 @@ export default function Home(){
       setIsLocation(!isLocation);
     };
     
+    // 오전 오후
+    const timeAMPM= (time)=>{
+      const hours=Number(time.slice(0,2));
+      const minutes=time.slice(3);
+      const ampm= hours<12 ?'오전':'오후';
+      // const hoursNum=(hours.slice(0,1)) == 0? hoursNum.replace('0',''):hours; 
+      // 위에서 문자열이엇던 숫자를 Number로 숫자로 바꿨기때문에 replace는 사용안됨
+      return ` ${ampm} ${hours}:${minutes}`; // 자바스크립트는 만든 함수 return안하면 사용안됨
+    }
+
+
     return(
     <div className="Home">
         {/* 예약 섹션 */}
         <div className="H_reservation">
             <div className="H_dateTable">
                   <p>언제?</p>
-                  <h2 onClick={calendarHandler}>날짜선택</h2>
-                  <p>{selectedDate && selectedDate.start.toLocaleString()}-{selectedDate &&selectedDate.end}</p>
+                  {apply?<span>
+                     {selectedDate &&`${selectedDate.start}${timeAMPM(startTime)}`} ~ {selectedDate &&`${selectedDate.end}${timeAMPM(endTime)}`}
+                  </span>:
+                 <h2 onClick={calendarHandler}>날짜선택</h2>
+                  
+                }
             </div>
     
 
             <div className="H_spotTable">
                 <div className="spot_choice">
                     <p>어디?</p>
-                    <h2 onClick={locationHandler}>지점선택</h2>
+                    {location? <h3>{location}</h3> :<h2 onClick={locationHandler}>지점선택</h2>}
                 </div>
                 <div className="searchButton">
                     <button type="submit">
@@ -99,14 +112,23 @@ export default function Home(){
             </div>
         </div>
         {isLocation && <div className="H_location">
-          <h3>지점을 선택하세요</h3>
+          <h3>지점을 선택하세요</h3> 
           <input type="text" value={location} name="location" placeholder="지역,지점을 검색해보세요. "></input>
           <button type="button">검색</button>
-          <p onClick={()=>setLocation("서울북부")}>서울 북부</p>
-          <p onClick={()=>setLocation("서울남부")}>서울 남부</p>
-          <p onClick={()=>setLocation("서울동부")}>서울 동부</p>
-          <p onClick={()=>setLocation("김포공항")}>김포공항</p>
-          <p onClick={()=>setLocation("인천공항")}>인천공항</p>
+          <div className="H_selectLocation">
+            <span>서울</span>
+            <div className="H_seoul">
+              <p onClick={()=>setLocation("서울북부")}>서울 북부 <span> 노원구</span><span className="H_detail">상세</span></p>
+              <p onClick={()=>setLocation("서울남부")}>서울 남부 <span> 노원구</span><span className="H_detail">상세</span></p>
+              <p onClick={()=>setLocation("서울동부")}>서울 동부 <span> 노원구</span><span className="H_detail">상세</span></p>
+            </div>
+            <span>김포</span>
+            <div className="H_gimpo">
+              <p onClick={()=>setLocation("김포공항")}>김포공항</p>
+            </div>
+            <span>인천</span>
+            <p onClick={()=>setLocation("인천공항")}>인천공항</p>
+          </div>
         </div>}
         <div className={`calendar-slide ${iscalendar ? "open" : ""}`}>
 	              <Calendar />

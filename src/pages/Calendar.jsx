@@ -19,6 +19,7 @@ export default function RentalCalendar() {
     endTime,
     setEndTime,
     timeInfoArrHandler,
+    setApply
   } = useContext(CalendarContext);
 
   const calendarRef = useRef(null);
@@ -69,6 +70,8 @@ export default function RentalCalendar() {
     setSelectedDate({ start: dateStr, end: null });
   };
 
+  
+
   // 적용 버튼
   const handleApply = () => {
     timeInfoArrHandler({
@@ -77,7 +80,9 @@ export default function RentalCalendar() {
       startTime,
       endTime,
     });
+    setApply(true);
   };
+  console.log()
 
   /* =====================
      Utils
