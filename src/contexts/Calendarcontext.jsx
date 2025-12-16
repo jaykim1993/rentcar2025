@@ -212,6 +212,7 @@ export default function CalendarProvider({ children }) {
     const [filteredInfoUser, setFilteredInfoUser] = useState([]);
 
   
+  
 
     
   // A 필터 - 시간 필터
@@ -314,6 +315,26 @@ export default function CalendarProvider({ children }) {
 
 
 
+
+  // 적용하기 상태 변수값
+ const [apply,setApply]=useState(false);
+
+
+
+  // 더 만들어야 할 함수 목록
+
+    // 예약하기 버튼 함수 (+ bookedListAll 에 추가된 예약 담기)
+    // addBook
+
+
+
+    // 예약 취소 버튼 함수
+    // removeBook
+
+
+
+
+
   return (
     <CalendarContext.Provider
       value={{
@@ -326,6 +347,9 @@ export default function CalendarProvider({ children }) {
         setStartTime,
         endTime,
         setEndTime,
+        setLocation,
+        setApply,
+        apply,
 
         // 위치
         location,
