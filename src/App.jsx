@@ -12,8 +12,10 @@ import CalendarProvider from './contexts/Calendarcontext'
 import Searchcarlist  from './pages/Searchcarlist'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import DataProvider from './contexts/Datacontext'
+import BookingProvider from './contexts/Bookingcontext'
 import Footer from './common/Footer'
 import LocationPage from './pages/Location'
+import DetailPage from './pages/DetailPage'
 
 // s
 function App() {
@@ -22,21 +24,23 @@ function App() {
     <AuthProvider>
       <DataProvider>
         <CalendarProvider>
-        <BrowserRouter>
-          <Header/>
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/searchcarlist" element={<Searchcarlist/>}/>
-            <Route path="/guide" element={<GuidePage/>}/>
-            <Route path="/location" element={<LocationPage/>}/>
-            <Route path="/login" element={<LoginForm/>}/>
-            <Route path="/joinA" element={<JoinFormA/>}/>
-            <Route path="/joinB" element={<JoinFormB/>}/>
-            <Route path="/joinC" element={<JoinFormC/>}/>
-            <Route path='/searchcarlist' element={<Searchcarlist />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
+          <BookingProvider>
+            <BrowserRouter>
+              <Header/>
+              <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/searchcarlist" element={<Searchcarlist/>}/>
+                <Route path="/detailpage/:id" element={<DetailPage/>}/>
+                <Route path="/guide" element={<GuidePage/>}/>
+                <Route path="/location" element={<LocationPage/>}/>
+                <Route path="/login" element={<LoginForm/>}/>
+                <Route path="/joinA" element={<JoinFormA/>}/>
+                <Route path="/joinB" element={<JoinFormB/>}/>
+                <Route path="/joinC" element={<JoinFormC/>}/>
+              </Routes>
+              <Footer />
+            </BrowserRouter>
+            </BookingProvider>
         </CalendarProvider>
       </DataProvider>
     </AuthProvider>
