@@ -1,3 +1,7 @@
+a{
+    text-decoration: none;
+    color: #333;
+}
 #root .DetailPage{
     width: 1300px;
     margin: 0 auto;
@@ -15,6 +19,19 @@
     display: flex;
     gap: 10px;
 }
+
+#root .DetailPage .detailContent .D_imgInfo{
+    margin-bottom: 30px;
+}
+#root .DetailPage .detailContent .D_imgInfo > img{
+    width: 550px;
+}
+#root .DetailPage .detailContent .D_imgInfo > p >img{
+    width: 45px;
+}
+
+
+/* ----------------------------------- */
 
 /* 우측 요약 및 예약하기 버튼 */
 #root .DetailPage .detailSummary{
