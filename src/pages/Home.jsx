@@ -89,7 +89,7 @@ export default function Home(){
 
     // 지점 상세보기 모달
     const [isDetail,setIsDetail]=useState(null);
-    console.log('번호: ',isDetail);
+    // console.log('번호: ',isDetail);
 
     // 여러 좌표를 배열로 관리  각 데이터에있는 주소 위도,경도 검색 후 삽입
   const positions = [
@@ -111,9 +111,9 @@ export default function Home(){
   // }
 
   const detail=positions.find(item => item.id === isDetail);
-  console.log(detail);
-  let detail_lat=detail.lat;
-  let detail_lng=detail.lng;
+  
+  let detail_lat=detail?.lat;
+  let detail_lng=detail?.lng;
   
 
     
@@ -156,9 +156,10 @@ export default function Home(){
   <div className="H_location">
     {isDetail ? (
       <>
-        <h3>지점</h3>
+        <h3>{detail.name}</h3>
         <div className="H_selectLocation">
-          {isDetail && <MapContainer center={[detail_lat, detail_lng]} zoom={10} style={{ height: "300px", width: "300px" }}> 
+
+          <MapContainer center={[detail_lat, detail_lng]} zoom={20} style={{ height: "300px", width: "300px" }}> 
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
@@ -169,7 +170,7 @@ export default function Home(){
                 <Popup>{spot.name}</Popup>
               </Marker>
             ))}
-          </MapContainer>}
+          </MapContainer>
         </div>
       </>
     ) : (
@@ -189,14 +190,14 @@ export default function Home(){
               <p onClick={()=>setLocation("서울남부")}>
                 서울 남부 <span>서초구</span>
               </p>
-              <button className="H_detail">상세</button>
+              <button className="H_detail" onClick={()=>setIsDetail(4)}>상세</button>
             </div>
 
             <div className="H_gu">
               <p onClick={()=>setLocation("서울동부")}>
                 서울 동부 <span>동대문구</span>
               </p>
-              <button className="H_detail">상세</button>
+              <button className="H_detail" onClick={()=>setIsDetail(3)}>상세</button>
             </div>
           </div>
 
@@ -206,7 +207,7 @@ export default function Home(){
               <p onClick={()=>setLocation("김포공항")}>
                 김포공항 <span>강서구</span>
               </p>
-              <button className="H_detail">상세</button>
+              <button className="H_detail" onClick={()=>setIsDetail(2)}>상세</button>
             </div>
           </div>
 
@@ -215,7 +216,7 @@ export default function Home(){
             <p onClick={()=>setLocation("인천공항")}>
               인천공항 <span>서초구</span>
             </p>
-            <button className="H_detail">상세</button>
+            <button className="H_detail" onClick={()=>setIsDetail(1)}>상세</button>
           </div>
         </div>
       </>
