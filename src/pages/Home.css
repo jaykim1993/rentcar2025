@@ -25,7 +25,7 @@ input:checked + .checkmark {
     border-radius: 100px;
     background-color: #f2f2f2;
     margin: 50px auto;
-    /* width: 1000px; */
+    position: relative;
 }
 /* 날짜/시간선택 */
 /* #root .Home .H_reservation .H_dateTable{
@@ -130,7 +130,10 @@ input:checked + .checkmark {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
 }
-
+.calendarWrap{
+  position: absolute;
+  top: 300px;
+}
 .calendar-slide {
     max-height: 0;
     overflow: hidden;
@@ -141,6 +144,16 @@ input:checked + .checkmark {
   max-height: 800px; /* 캘린더 높이 예상값 */
 }
 
+/* 지점 선택 목록 */
+#root .Home .H_location .H_close > i{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: #999;
+}
+#root .Home .H_location .H_close:hover > i{
+    color: #333;
+}
 #root .Home .H_location .H_selectLocation{
     /* border: 1px solid red; */
     position: relative;
@@ -169,9 +182,15 @@ input:checked + .checkmark {
     font-size: 14px;
     border-radius: 3px;
 }
+#root .Home .H_location .H_selectLocation .H_detail:hover{
+   background-color: rgb(225, 225, 225);
+}
 #root .Home .H_location .H_selectLocation .H_gu{
     display: flex;
     justify-content: space-between;
+}
+#root .Home .H_location .H_selectLocation .H_gu > p{
+    cursor: pointer;
 }
 #root .Home .H_location .H_selectLocation .H_seoul::before{
     content: '';
@@ -186,4 +205,28 @@ input:checked + .checkmark {
     border-bottom: 1px solid rgb(227, 227, 227);
     position: absolute;
     top:310px;
+}
+
+/* 지점 위치 상세보기 (지도) */
+#root .Home .H_location .H_selectLocation_detail{
+    padding: 25px 0 25px 0;
+    width: 444px;
+}
+#root .Home .H_location .H_selectLocation_detail > h5{
+    padding: 20px 0;
+}
+#root .Home .H_location .H_selectLocation_detail > h5::before{
+    content: '';
+    width: 394px;
+    border-bottom: 1px solid rgb(227, 227, 227);
+    position: absolute;
+    top:710px;
+}
+#root .Home .H_location .H_selectLocation_detail .H_detial_address_title{
+    color: rgb(190, 190, 190) ;
+    font-size: 15px;
+    padding: 10px 0;
+}
+#root .Home .H_location .H_selectLocation_detail .H_detail_address{
+
 }
