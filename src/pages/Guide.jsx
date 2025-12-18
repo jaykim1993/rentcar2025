@@ -127,7 +127,7 @@ const getFilteredCars = () => {
                 <div className="guideTop">
                     {/* 수정 필요 */}
                     <div><Link className="guideGoToHome" to={'/'}>홈</Link></div>
-                    <span><i class="bi bi-caret-right-fill"></i></span>
+                    <span><i className="bi bi-caret-right-fill"></i></span>
                     <div>이용가이드</div>
                 </div>
                 <div className="guideFlex">
@@ -145,7 +145,7 @@ const getFilteredCars = () => {
                         {showPage ? (
                         <div>
                             <h2 className="guideExplain">대여방법 및 절차</h2>
-                            <p className="guideExplainDetail">SK렌터카 사용예약을 위해 고객님께서는 아래 절차대로 진행해 주세요.</p>
+                            <p className="guideExplainDetail">차랑차랑렌터카 사용예약을 위해 고객님께서는 아래 절차대로 진행해 주세요.</p>
                             <div className="guideRentalProcessImg">
                                 <img src="./images/guideimgs/guide_1_1.jpg"/>
                             </div>

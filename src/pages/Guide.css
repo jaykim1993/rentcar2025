@@ -27,9 +27,12 @@
 .guideRight{
     width: 900px;
     margin-left: 50px;
+    flex: 1;
+    min-width: 0;
 }
 .guideMainText{
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 .guideSelectButns{
     background-color: transparent;

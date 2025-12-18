@@ -15,6 +15,7 @@ import DataProvider from './contexts/Datacontext'
 import BookingProvider from './contexts/Bookingcontext'
 import Footer from './common/Footer'
 import LocationPage from './pages/Location'
+import CustomerService from './pages/CustomerService'
 import DetailPage from './pages/DetailPage'
 
 // s
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/searchcarlist" element={<Searchcarlist/>}/>
                 <Route path="/detailpage/:id" element={<DetailPage/>}/>
                 <Route path="/guide" element={<GuidePage/>}/>
+                <Route path="/customerservice" element={<CustomerService/>}/>
                 <Route path="/location" element={<LocationPage/>}/>
                 <Route path="/login" element={<LoginForm/>}/>
                 <Route path="/joinA" element={<JoinFormA/>}/>
