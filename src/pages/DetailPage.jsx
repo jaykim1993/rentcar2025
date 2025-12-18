@@ -58,7 +58,7 @@ export default function DetailPage(){
                         <span>최종 결제 금액</span>
                         <strong>{/* car_price */} 원</strong>
                     </div>
-                    <button className="reserve_btn" 
+                    <button 
                     >예약하기</button>
                 </div>
             </div>
