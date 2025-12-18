@@ -17,9 +17,9 @@ export default function RentalCalendar() {
     setStartTime,
     endTime,
     setEndTime,
-    timeInfoArrHandler,
+    apply,
     setApply,
-    HandleDateFilter,
+    handleDateFilter,
   } = useContext(CalendarContext);
 
   const calendarRef = useRef(null);
@@ -84,9 +84,11 @@ export default function RentalCalendar() {
     if (!startDate || !endDate) {
       alert("날짜를 선택해주세요.");
       return;
+    }else{
+      setApply(!apply);
     }
 
-    HandleDateFilter({
+    handleDateFilter({
       startDate,
       endDate,
       startTime,

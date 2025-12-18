@@ -193,12 +193,6 @@ export default function Recentcar(){
         for(const modelName in groupedCars){
             const group = groupedCars[modelName];
             const first = group[0];
-            console.log('여기 group')
-            console.log(group)
-                console.log('여기 first')
-            console.log(first.id)
-                console.log('여기 modelName')
-            console.log(modelName)
             result.push(
                 <li key={modelName} className="grouped_car_item">
                     <Link to={`/detailpage/${first.id}`} style={{textDecoration:'none'}}>

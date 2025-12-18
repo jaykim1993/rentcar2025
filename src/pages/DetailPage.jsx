@@ -3,6 +3,7 @@ import { DataContext } from "../contexts/Datacontext";
 import { CalendarContext } from "../contexts/Calendarcontext";
 import './DetailPage.css'
 import { Link, useParams } from "react-router-dom";
+import { BookingContext } from "../contexts/Bookingcontext";
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // MapContainer = 맵을 불러오는 상자 
@@ -15,12 +16,14 @@ export default function DetailPage(){
     // console.log('여기왔어');
     const { availableCars, filteredInfoUser } = useContext(CalendarContext);
 
+    const { addBookInfo } = useContext(BookingContext);
+
     // 차 id 가져오기
     const { id } = useParams();
 
     const selectedCar = availableCars.find(car => car.id === Number(id)) || availableCars[0];
  
-    if(!selectedCar) return <div>차량정보를 불러올 수 없습니다.</div>;
+    
     console.log('selectedCar');
     console.log(selectedCar)
 
@@ -59,6 +62,8 @@ export default function DetailPage(){
     console.log(detail_lat);
     console.log(detail_lng);
     console.log(detail);
+
+    if(!selectedCar) return <div>차량정보를 불러올 수 없습니다.</div>;
 
     return(
         <div className="DetailPage">
@@ -133,6 +138,7 @@ export default function DetailPage(){
                         </Marker>
                         ))}
                     </MapContainer>
+                    <h4>{selectedCar.brand} {selectedCar.model} {selectedCar.fuel_type}</h4>
                 </div>
             </div>
             {/* 우측 - 요약 및 예약하기 버튼 */}
