@@ -10,17 +10,17 @@ export default function Recentcar(){
     const { availableCars } = useContext(CalendarContext);
 
     // ================= 옵션 문자열 =================
-    const getActiveOptionsString = (car) => {
-        const activeOptions = [];
-        if (car.navigation) activeOptions.push('내비게이션');
-        if (car.rear_camera) activeOptions.push('후방카메라');
-        if (car.heated_seat) activeOptions.push('열선시트');
-        if (car.heated_handle) activeOptions.push('핸들열선');
-        if (car.bluetooth) activeOptions.push('블루투스');
-        if (car.smart_key) activeOptions.push('스마트키');
-        if (car.sun_loof) activeOptions.push('썬루프');
-        return activeOptions.join(', ');
-    };
+    // const getActiveOptionsString = (car) => {
+    //     const activeOptions = [];
+    //     if (car.navigation) activeOptions.push('내비게이션');
+    //     if (car.rear_camera) activeOptions.push('후방카메라');
+    //     if (car.heated_seat) activeOptions.push('열선시트');
+    //     if (car.heated_handle) activeOptions.push('핸들열선');
+    //     if (car.bluetooth) activeOptions.push('블루투스');
+    //     if (car.smart_key) activeOptions.push('스마트키');
+    //     if (car.sun_loof) activeOptions.push('썬루프');
+    //     return activeOptions.join(', ');
+    // };
 
     // ================= 필터 판별 =================
     const filterCar = (car, filters) => {
@@ -193,12 +193,6 @@ export default function Recentcar(){
         for(const modelName in groupedCars){
             const group = groupedCars[modelName];
             const first = group[0];
-            // console.log('여기 group')
-            // console.log(group)
-            //     console.log('여기 first')
-            // console.log(first.id)
-            //     console.log('여기 modelName')
-            // console.log(modelName)
             result.push(
                 <li key={modelName} className="grouped_car_item">
                     <Link to={`/detailpage/${first.id}`} style={{textDecoration:'none'}}>

@@ -18,9 +18,8 @@ import LocationPage from './pages/Location'
 import CustomerService from './pages/CustomerService'
 import DetailPage from './pages/DetailPage'
 
-// s
 function App() {
-// s
+
   return (
     <AuthProvider>
       <DataProvider>
