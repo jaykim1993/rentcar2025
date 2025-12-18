@@ -92,29 +92,22 @@ export default function Home(){
 
     // 여러 좌표를 배열로 관리  각 데이터에있는 주소 위도,경도 검색 후 삽입
   const positions = [
-    {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항점" },
-    {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항점" },
-    {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부점" },
-    {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부점" },
-    {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부점" },
+    {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항점" , address: "인천광역시 중구 공항로 271" },
+    {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항점" , address: "서울특별시 강서구 하늘길 38"},
+    {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부점", address: "서울 동대문구 한천로 100 1-2층" },
+    {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부점", address: "서울특별시 서초구 서초대로 283" },
+    {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부점", address: "서울 노원구 노해로 456 동방빌딩 1층"},
   ];
-
-
-  // let detail_lat=null;
-  // let detail_lng=null;
-  // for(let i=0; i<positions.length; i++){
-  //   if(isDetail === positions[i].id){
-  //     detail_lat=positions[i].lat;
-  //     detail_lng=positions[i].lng;
-  //   }
-  // }
-
+  
   const detail=positions.find(item => item.id === isDetail);
   
   let detail_lat=detail?.lat;
   let detail_lng=detail?.lng;
   
 
+  useEffect(()=>{
+    setIsDetail(null);
+  },[isLocation]);
     
 
 
@@ -125,9 +118,9 @@ export default function Home(){
             <div className="H_dateTable">
                   <p>언제?</p>
                   <div className="H_dateTitle" onClick={calendarHandler}>
-                    {apply?<span>
+                    {apply?<p>
                      {startDate &&`${startDate}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate}${timeAMPM(endTime)}`}
-                    </span>:
+                    </p>:
                     <h2>날짜선택</h2>}
                   </div>
                   
@@ -138,7 +131,7 @@ export default function Home(){
             <div className="H_spotTable">
                 <div className="spot_choice">
                     <p>어디?</p>
-                    <div className="H_spotTitle" onClick={locationHandler}>{location? <h3>{location}</h3> :<h2>지점선택</h2>}</div>
+                    <div className="H_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
                 </div>
                 <div className="searchButton">
                     
@@ -151,80 +144,87 @@ export default function Home(){
             </div>
         </div>
        {/* 지점 모달 파트 */}
-        {isLocation && (
-          <div className="H_location">
-            {isDetail ? (
-              <>
-                <h3>{detail.name}</h3>
-                <div className="H_selectLocation">
+{isLocation && (
+  <div className="H_location">
+    <span className="H_close01" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
+    {/* 상세 위치 (지도) */}
+    {isDetail ? (
+      <>
+        <div className="H_selectLocation_detail">
 
-                  <MapContainer center={[detail_lat, detail_lng]} zoom={20} style={{ height: "300px", width: "300px" }}> 
-                    <TileLayer
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                    />
-                    {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
-                    {positions.map((spot) => (
-                      <Marker key={spot.id} position={[spot.lat, spot.lng]}>
-                        <Popup>{spot.name}</Popup>
-                      </Marker>
-                    ))}
-                  </MapContainer>
-                </div>
-              </>
-            ) : (
-              <>
-                <h3>지점을 선택하세요</h3>
-                <div className="H_selectLocation">
-                  <span>서울</span>
-                  <div className="H_seoul">
-                    <div className="H_gu">
-                      <p onClick={()=>setLocation("서울북부")}>
-                        서울 북부 <span>노원구</span>
-                      </p>
-                      <button className="H_detail" onClick={()=>setIsDetail(5)}>상세</button>
-                    </div>
+          <MapContainer center={[detail_lat, detail_lng]} zoom={20} style={{ height: "300px", width: "394px"}}> 
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+            />
+            {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
+            {positions.map((spot) => (
+              <Marker key={spot.id} position={[spot.lat, spot.lng]}>
+                <Popup>{spot.name}</Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+          <h5>{detail.name}</h5>
+          <p className="H_detial_address_title">주소</p>
+          <span className="H_detial_address">{detail.address}</span>
+        </div>
+        
+      </>
+    ) : (
+    // 지점 목록 
+      <>
+        <h3>지점을 선택하세요</h3>
+        <div className="H_selectLocation">
+          <span>서울</span>
+          <div className="H_seoul">
+            <div className="H_gu">
+              <p onClick={()=>setLocation("서울북부")}>
+                서울 북부 <span>노원구</span>
+              </p>
+              <button className="H_detail" onClick={()=>setIsDetail(5)}>상세</button>
+            </div>
 
-                    <div className="H_gu">
-                      <p onClick={()=>setLocation("서울남부")}>
-                        서울 남부 <span>서초구</span>
-                      </p>
-                      <button className="H_detail" onClick={()=>setIsDetail(4)}>상세</button>
-                    </div>
+            <div className="H_gu">
+              <p onClick={()=>setLocation("서울남부")}>
+                서울 남부 <span>서초구</span>
+              </p>
+              <button className="H_detail" onClick={()=>setIsDetail(4)}>상세</button>
+            </div>
 
-                    <div className="H_gu">
-                      <p onClick={()=>setLocation("서울동부")}>
-                        서울 동부 <span>동대문구</span>
-                      </p>
-                      <button className="H_detail" onClick={()=>setIsDetail(3)}>상세</button>
-                    </div>
-                  </div>
-
-                  <span>김포</span>
-                  <div className="H_gimpo">
-                    <div className="H_gu">
-                      <p onClick={()=>setLocation("김포공항")}>
-                        김포공항 <span>강서구</span>
-                      </p>
-                      <button className="H_detail" onClick={()=>setIsDetail(2)}>상세</button>
-                    </div>
-                  </div>
-
-                  <span>인천</span>
-                  <div className="H_gu">
-                    <p onClick={()=>setLocation("인천공항")}>
-                      인천공항 <span>서초구</span>
-                    </p>
-                    <button className="H_detail" onClick={()=>setIsDetail(1)}>상세</button>
-                  </div>
-                </div>
-              </>
-            )}
+            <div className="H_gu">
+              <p onClick={()=>setLocation("서울동부")}>
+                서울 동부 <span>동대문구</span>
+              </p>
+              <button className="H_detail" onClick={()=>setIsDetail(3)}>상세</button>
+            </div>
           </div>
-        )}
+
+          <span>김포</span>
+          <div className="H_gimpo">
+            <div className="H_gu">
+              <p onClick={()=>setLocation("김포공항")}>
+                김포공항 <span>강서구</span>
+              </p>
+              <button className="H_detail" onClick={()=>setIsDetail(2)}>상세</button>
+            </div>
+          </div>
+
+          <span>인천</span>
+          <div className="H_gu">
+            <p onClick={()=>setLocation("인천공항")}>
+              인천공항 <span>서초구</span>
+            </p>
+            <button className="H_detail" onClick={()=>setIsDetail(1)}>상세</button>
+          </div>
+        </div>
+      </>
+    )}
+  </div>
+)}
 
         <div className={`calendar-slide ${iscalendar ? "open" : ""}`}>
-	         <Calendar />
+          <span className="H_close02" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
+	        <Calendar />
 	      </div>
 
         {/* sec01 - 배너 슬라이드 */}

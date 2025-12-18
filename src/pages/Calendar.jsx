@@ -17,6 +17,7 @@ export default function RentalCalendar() {
     setStartTime,
     endTime,
     setEndTime,
+    timeInfoArrHandler,
     apply,
     setApply,
     handleDateFilter,
