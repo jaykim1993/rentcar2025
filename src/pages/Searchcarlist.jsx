@@ -10,17 +10,17 @@ export default function Recentcar(){
     const { availableCars } = useContext(CalendarContext);
 
     // ================= 옵션 문자열 =================
-    const getActiveOptionsString = (car) => {
-        const activeOptions = [];
-        if (car.navigation) activeOptions.push('내비게이션');
-        if (car.rear_camera) activeOptions.push('후방카메라');
-        if (car.heated_seat) activeOptions.push('열선시트');
-        if (car.heated_handle) activeOptions.push('핸들열선');
-        if (car.bluetooth) activeOptions.push('블루투스');
-        if (car.smart_key) activeOptions.push('스마트키');
-        if (car.sun_loof) activeOptions.push('썬루프');
-        return activeOptions.join(', ');
-    };
+    // const getActiveOptionsString = (car) => {
+    //     const activeOptions = [];
+    //     if (car.navigation) activeOptions.push('내비게이션');
+    //     if (car.rear_camera) activeOptions.push('후방카메라');
+    //     if (car.heated_seat) activeOptions.push('열선시트');
+    //     if (car.heated_handle) activeOptions.push('핸들열선');
+    //     if (car.bluetooth) activeOptions.push('블루투스');
+    //     if (car.smart_key) activeOptions.push('스마트키');
+    //     if (car.sun_loof) activeOptions.push('썬루프');
+    //     return activeOptions.join(', ');
+    // };
 
     // ================= 필터 판별 =================
     const filterCar = (car, filters) => {
@@ -189,35 +189,34 @@ export default function Recentcar(){
     // ================= 출력 =================
     const renderGroupedCars = () => {
         const result = [];
-
+        
         for(const modelName in groupedCars){
             const group = groupedCars[modelName];
             const first = group[0];
-
             result.push(
-                <Link to={'/Rentinfo'} style={{textDecoration:'none'}}>
                 <li key={modelName} className="grouped_car_item">
-                    <div>
-                        <img className="brands" src={`images/brands/${first.brand_logo}`} />
-                        <img className="cars" src={`images/cars/${first.car_img}`} />
-                    </div>
+                    <Link to={`/detailpage/${first.id}`} style={{textDecoration:'none'}}>
+                        <div>
+                            <img className="brands" src={`images/brands/${first.brand_logo}`} />
+                            <img className="cars" src={`images/cars/${first.car_img}`} alt={`${first.brand} ${first.model}`} />
+                        </div>
 
-                    <div className="car_list_ul">
-                        {group.map((car, index) => {
-                            const car_price = calculatePrice(car)
-                            return(
-                                <div key={index} className={`car_variant_info ${index !== group.length - 1 ? 'Line_active' : ''}`}>
-                                    <h4>{modelName} {car.fuel_type}</h4>
-                                    <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
-                                    {/* <p>{getActiveOptionsString(car)}</p> */}
-                                    <i className="bi bi-chevron-right"></i>
-                                    <p className="carPrice">시간당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
-                                </div>
-                            )
-                        })}
-                    </div>
+                        <div className="car_list_ul">
+                            {group.map((car, index) => {
+                                const car_price = calculatePrice(car)
+                                return(
+                                    <div key={car.id} className={`car_variant_info ${index !== group.length - 1 ? 'Line_active' : ''}`}>
+                                        <h4>{modelName} {car.fuel_type}</h4>
+                                        <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
+                                        {/* <p>{getActiveOptionsString(car)}</p> */}
+                                        <i className="bi bi-chevron-right"></i>
+                                        <p className="carPrice">시간당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </Link>
                 </li>
-                </Link>
             );
         }
 

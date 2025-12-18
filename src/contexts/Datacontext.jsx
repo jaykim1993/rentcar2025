@@ -6234,7 +6234,7 @@ export default function DataProvider({children}){
     },
     {
     id:214, 
-    car_img:"르노_1.webp",  
+    car_img:"rena_1.webp",  
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Alkany",  
@@ -6263,7 +6263,7 @@ export default function DataProvider({children}){
   },
   {
     id:215, 
-    car_img:"르노_1.webp",  
+    car_img:"rena_1.webp",  
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Alkany",  
@@ -6292,7 +6292,7 @@ export default function DataProvider({children}){
   },
   {
     id:216, 
-    car_img:"르노_1.webp",  
+    car_img:"rena_1.webp",  
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Alkany",  
@@ -6320,7 +6320,7 @@ export default function DataProvider({children}){
     sun_loof:false
   },{
     id:217,  
-    car_img:"르노_2.webp",  
+    car_img:"rena_2.webp",  
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Grand Colleo",   
@@ -6349,7 +6349,7 @@ export default function DataProvider({children}){
   },
   {
     id:218,  
-    car_img:"르노_2.webp",  
+    car_img:"rena_2.webp",  
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Grand Colleo",   
@@ -6378,7 +6378,7 @@ export default function DataProvider({children}){
   },
   {
     id:219,  
-    car_img:"르노_2.webp",  
+    car_img:"rena_2.webp",  
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Grand Colleo",   
@@ -6407,7 +6407,7 @@ export default function DataProvider({children}){
   },
   {
     id:220,   
-    car_img:"르노_3.webp",   
+    car_img:"rena_3.webp",   
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Semic",    
@@ -6436,7 +6436,7 @@ export default function DataProvider({children}){
   },
   {
     id:221,   
-    car_img:"르노_3.webp",   
+    car_img:"rena_3.webp",   
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Semic",    
@@ -6465,7 +6465,7 @@ export default function DataProvider({children}){
   },
   {
     id:222,   
-    car_img:"르노_3.webp",   
+    car_img:"rena_3.webp",   
     brand_logo: "RENAULT-KOREA.png", 
     brand: "라노",  
     model: "Semic",    
@@ -6493,7 +6493,7 @@ export default function DataProvider({children}){
     sun_loof:false
   },{
     id:223,    
-    car_img:"볼보_1.webp",    
+    car_img:"VOL_1.webp",    
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "SV90",     
@@ -6522,7 +6522,7 @@ export default function DataProvider({children}){
   },
   {
     id:224,    
-    car_img:"볼보_1.webp",    
+    car_img:"VOL_1.webp",    
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "SV90",     
@@ -6551,7 +6551,7 @@ export default function DataProvider({children}){
   },
   {
     id:225,    
-    car_img:"볼보_1.webp",    
+    car_img:"VOL_1.webp",    
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "SV90",     
@@ -6580,7 +6580,7 @@ export default function DataProvider({children}){
   },
   {
     id:226,     
-    car_img:"볼보_2.webp",     
+    car_img:"VOL_2.webp",     
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "CX60",      
@@ -6609,7 +6609,7 @@ export default function DataProvider({children}){
   },
   {
     id:227,     
-    car_img:"볼보_2.webp",     
+    car_img:"VOL_2.webp",     
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "CX60",      
@@ -6638,7 +6638,7 @@ export default function DataProvider({children}){
   },
   {
     id:228,     
-    car_img:"볼보_2.webp",     
+    car_img:"VOL_2.webp",     
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "CX60",      
@@ -6667,7 +6667,7 @@ export default function DataProvider({children}){
   },
   {
     id:229,      
-    car_img:"볼보_3.webp",      
+    car_img:"VOL_3.webp",      
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VV60",       
@@ -6696,7 +6696,7 @@ export default function DataProvider({children}){
   },
   {
     id:230,      
-    car_img:"볼보_3.webp",      
+    car_img:"VOL_3.webp",      
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VV60",       
@@ -6725,7 +6725,7 @@ export default function DataProvider({children}){
   },
   {
     id:231,      
-    car_img:"볼보_3.webp",      
+    car_img:"VOL_3.webp",      
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VV60",       
@@ -6753,7 +6753,7 @@ export default function DataProvider({children}){
     sun_loof:false
   },{
     id:232,       
-    car_img:"볼보_4.webp",       
+    car_img:"VOL_4.webp",       
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VVC66",        
@@ -6782,7 +6782,7 @@ export default function DataProvider({children}){
   },
   {
     id:233,       
-    car_img:"볼보_4.webp",       
+    car_img:"VOL_4.webp",       
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VVC66",        
@@ -6811,7 +6811,7 @@ export default function DataProvider({children}){
   },
   {
     id:234,       
-    car_img:"볼보_4.webp",       
+    car_img:"VOL_4.webp",       
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VVC66",        
@@ -6839,7 +6839,7 @@ export default function DataProvider({children}){
     sun_loof:false
   },{
     id:235,        
-    car_img:"볼보_5.webp",        
+    car_img:"VOL_5.webp",        
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VE70",         
@@ -6868,7 +6868,7 @@ export default function DataProvider({children}){
   },
   {
     id:236,        
-    car_img:"볼보_5.webp",        
+    car_img:"VOL_5.webp",        
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VE70",         
@@ -6897,7 +6897,7 @@ export default function DataProvider({children}){
   },
   {
     id:237,        
-    car_img:"볼보_5.webp",        
+    car_img:"VOL_5.webp",        
     brand_logo: "VOLVO.png",  
     brand: "볼바즈",   
     model: "VE70",         
@@ -6926,7 +6926,7 @@ export default function DataProvider({children}){
   },
   {
     id:238,         
-    car_img:"쉐_1.webp",         
+    car_img:"CHE_1.webp",         
     brand_logo: "CHEVROLET.png",  
     brand: "쉐레보",    
     model: "트레일블레라",          
@@ -6955,7 +6955,7 @@ export default function DataProvider({children}){
   },
   {
     id:239,         
-    car_img:"쉐_1.webp",         
+    car_img:"CHE_1.webp",         
     brand_logo: "CHEVROLET.png",  
     brand: "쉐레보",    
     model: "트레일블레라",          
@@ -6984,7 +6984,7 @@ export default function DataProvider({children}){
   },
   {
     id:240,         
-    car_img:"쉐_1.webp",         
+    car_img:"CHE_1.webp",         
     brand_logo: "CHEVROLET.png",  
     brand: "쉐레보",    
     model: "트레일블레라",          
@@ -7013,7 +7013,7 @@ export default function DataProvider({children}){
   },
   {
     id:241,          
-    car_img:"쉐_2.webp",          
+    car_img:"CHE_2.webp",          
     brand_logo: "CHEVROLET.png",  
     brand: "쉐레보",    
     model: "콜라로도",           
@@ -7042,7 +7042,7 @@ export default function DataProvider({children}){
   },
   {
     id:242,          
-    car_img:"쉐_2.webp",          
+    car_img:"CHE_2.webp",          
     brand_logo: "CHEVROLET.png",  
     brand: "쉐레보",    
     model: "콜라로도",           
@@ -7071,7 +7071,7 @@ export default function DataProvider({children}){
   },
   {
     id:243,          
-    car_img:"쉐_2.webp",          
+    car_img:"CHE_2.webp",          
     brand_logo: "CHEVROLET.png",  
     brand: "쉐레보",    
     model: "콜라로도",           
@@ -7800,7 +7800,7 @@ export default function DataProvider({children}){
       },
       {
     id:269,
-    car_img:"제네_1.webp",
+    car_img:"ZENE_1.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GG80",
@@ -7829,7 +7829,7 @@ export default function DataProvider({children}){
   },
   {
     id:270,
-    car_img:"제네_1.webp",
+    car_img:"ZENE_1.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GG80",
@@ -7858,7 +7858,7 @@ export default function DataProvider({children}){
   },
   {
     id:271,
-    car_img:"제네_1.webp",
+    car_img:"ZENE_1.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GG80",
@@ -7887,7 +7887,7 @@ export default function DataProvider({children}){
   },
   {
     id:272,
-    car_img:"제네_2.webp",
+    car_img:"ZENE_2.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGE80",
@@ -7916,7 +7916,7 @@ export default function DataProvider({children}){
   },
   {
     id:273,
-    car_img:"제네_2.webp",
+    car_img:"ZENE_2.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGE80",
@@ -7945,7 +7945,7 @@ export default function DataProvider({children}){
   },
   {
     id:274,
-    car_img:"제네_2.webp",
+    car_img:"ZENE_2.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGE80",
@@ -7974,7 +7974,7 @@ export default function DataProvider({children}){
   },
   {
     id:275,
-    car_img:"제네_3.webp",
+    car_img:"ZENE_3.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GG90",
@@ -8003,7 +8003,7 @@ export default function DataProvider({children}){
   },
   {
     id:276,
-    car_img:"제네_3.webp",
+    car_img:"ZENE_3.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GG90",
@@ -8032,7 +8032,7 @@ export default function DataProvider({children}){
   },
   {
     id:277,
-    car_img:"제네_3.webp",
+    car_img:"ZENE_3.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GG90",
@@ -8061,7 +8061,7 @@ export default function DataProvider({children}){
   },
   {
     id:278,
-    car_img:"제네_4.webp",
+    car_img:"ZENE_4.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV60",
@@ -8090,7 +8090,7 @@ export default function DataProvider({children}){
   },
   {
     id:279,
-    car_img:"제네_4.webp",
+    car_img:"ZENE_4.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV60",
@@ -8119,7 +8119,7 @@ export default function DataProvider({children}){
   },
   {
     id:280,
-    car_img:"제네_4.webp",
+    car_img:"ZENE_4.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV60",
@@ -8148,7 +8148,7 @@ export default function DataProvider({children}){
   },
   {
     id:281,
-    car_img:"제네_5.webp",
+    car_img:"ZENE_5.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV70",
@@ -8177,7 +8177,7 @@ export default function DataProvider({children}){
   },
   {
     id:282,
-    car_img:"제네_5.webp",
+    car_img:"ZENE_5.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV70",
@@ -8206,7 +8206,7 @@ export default function DataProvider({children}){
   },
   {
     id:283,
-    car_img:"제네_5.webp",
+    car_img:"ZENE_5.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV70",
@@ -8235,7 +8235,7 @@ export default function DataProvider({children}){
   },
   {
     id:284,
-    car_img:"제네_6.webp",
+    car_img:"ZENE_6.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV80",
@@ -8264,7 +8264,7 @@ export default function DataProvider({children}){
   },
   {
     id:285,
-    car_img:"제네_6.webp",
+    car_img:"ZENE_6.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV80",
@@ -8293,7 +8293,7 @@ export default function DataProvider({children}){
   },
   {
     id:286,
-    car_img:"제네_6.webp",
+    car_img:"ZENE_6.webp",
     brand_logo:"GENESIS.png",
     brand:"제네러스",
     model:"GGV80",
@@ -8322,7 +8322,7 @@ export default function DataProvider({children}){
   },
   {
     id:287,
-    car_img:"폭_1.webp",
+    car_img:"boks_1.webp",
     brand_logo:"VOLKSWAGEN.png",
     brand:"복스바그",
     model:"ZOLF",
@@ -8351,7 +8351,7 @@ export default function DataProvider({children}){
   },
   {
     id:288,
-    car_img:"폭_1.webp",
+    car_img:"boks_1.webp",
     brand_logo:"VOLKSWAGEN.png",
     brand:"복스바그",
     model:"ZOLF",
@@ -8380,7 +8380,7 @@ export default function DataProvider({children}){
   },
   {
     id:289,
-    car_img:"폭_1.webp",
+    car_img:"boks_1.webp",
     brand_logo:"VOLKSWAGEN.png",
     brand:"복스바그",
     model:"ZOLF",
@@ -8408,7 +8408,7 @@ export default function DataProvider({children}){
     sun_loof:true
   },{
     id:290,
-    car_img:"폭_2.webp",
+    car_img:"boks_2.webp",
     brand_logo:"VOLKSWAGEN.png",
     brand:"복스바그",
     model:"ATLLOS",
@@ -8437,7 +8437,7 @@ export default function DataProvider({children}){
   },
   {
     id:291,
-    car_img:"폭_2.webp",
+    car_img:"boks_2.webp",
     brand_logo:"VOLKSWAGEN.png",
     brand:"복스바그",
     model:"ATLLOS",
@@ -8466,7 +8466,7 @@ export default function DataProvider({children}){
   },
   {
     id:292,
-    car_img:"폭_2.webp",
+    car_img:"boks_2.webp",
     brand_logo:"VOLKSWAGEN.png",
     brand:"복스바그",
     model:"ATLLOS",

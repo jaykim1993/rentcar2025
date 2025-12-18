@@ -10,18 +10,21 @@
     border: none;
     color: white;
 }
+.findNearestBtn:hover{
+    background-color: dodgerblue;
+}
 .locationDetailBox{
     border: 1px solid rgb(179, 179, 179);
     margin-top: 30px;
     padding: 30px;
     border-radius: 15px;
+    margin-bottom: 50px;
 
 }
 .LocationSpotName{
     color: #333;
     font-weight: 600;
     font-size: 25px;
-
 }
 .LocationSpotArea{
     color: #333;
@@ -44,23 +47,29 @@
     color: #333;
     font-size: 24px;
     margin-left: 5px;
+    margin-bottom: 20px;
 }
 .LocationHowComeBox{
     border: 1px solid rgb(179, 179, 179);
     padding: 40px;
     border-radius: 15px;
     list-style: none;
+    margin-bottom: 100px !important;
 }
 .LocationRideType{
     font-size: 20px;
     color: #333;
     font-weight: 600;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .LocationRideType ul{
     font-weight: 500;
     margin-top: 10px;
     list-style: none;
     font-size: 18px;
+
 }
 .LocationClickMarker{
     font-size: 20px;
@@ -185,7 +194,6 @@
     margin: 50px auto;
 }
 .LocationPage3Btn{
-
     font-size: 20px;
     padding: 20px 40px;
     border: none;
@@ -193,4 +201,33 @@
     background-color: black;
     color: white;
     font-weight: 500;
+}
+.LocationupBtnBox{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.LocationupBtn{
+    width: 160px;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 17px;
+    font-weight: 500;
+    color: dodgerblue;
+    background-color: white;
+    border: 1px solid dodgerblue;
+    transition: 
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+.LocationupBtn.active{
+    background-color: dodgerblue;
+    color: white;
+}
+.LocationupBtn:hover{
+    color: white;
+    background-color: dodgerblue;
+    transition: 0.3s;
 }

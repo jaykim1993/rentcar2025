@@ -40,6 +40,14 @@ const [locationDetail,setLocationDetail]=useState(null);
 const seeloca =(spotId)=>{
     setLocationDetail(spotId)
 }
+const handleSelectSpot = (spot) => {
+  setSelectedId(spot.id);
+  setLocationDetail(spot.id);
+  setMapAction({
+    position: [spot.lat, spot.lng],
+    zoom: defaultZoom + 5,
+  });
+};
 
 
 const makeMap =  <MapContainer
@@ -51,23 +59,16 @@ const makeMap =  <MapContainer
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
             {positions.map((spot) => (
-                <Marker
+               <Marker
                     key={spot.id}
                     position={[spot.lat, spot.lng]}
                     icon={selectedId === spot.id ? SelectedIcon : NoneSelectIcon}
                     eventHandlers={{
-                        click: () => {
-                        setSelectedId(spot.id);
-                        setMapAction({ position: [spot.lat, spot.lng], zoom: defaultZoom + 5 });
-                        seeloca(spot.id)
-                        console.log(spot.name)
-                        console.log(locationDetail)
-                        console.log(positions.name)
-                        },
-                        
-                    }}>
+                        click: () => handleSelectSpot(spot),
+                    }}
+                    >
                     <Popup offset={[0, -40]}>{spot.name}</Popup>
-                </Marker>
+                    </Marker>
             ))}
             {/* 클릭 이벤트가 발생하면 지도 이동 + 줌 적용 */}
             {mapAction && <MoveMapOnClick position={mapAction.position} zoom={mapAction.zoom} />}
@@ -168,7 +169,7 @@ return(
             <div className="guideWrap">
                 <div className="guideTop">
                     {/* 수정 필요 */}
-                    <div><Link to={'/home'}>홈</Link></div>
+                    <div><Link to={'/'} className="guideGoToHome">홈</Link></div>
                     <span><i className="bi bi-caret-right-fill"></i></span>
                     <div>지점안내/정비</div>
                 </div>
@@ -188,10 +189,24 @@ return(
                         </div>
                         {pageShow===1?
                         <div>
-                        <button onClick={findMyNearest} className="findNearestBtn">
-                            내 위치에서 가장 가까운 지점 찾기
-                        </button>
-                        <div className="maprenderbox">{makeMap}</div> 
+                            <div>
+                                <button onClick={findMyNearest} className="findNearestBtn">
+                                내 위치에서 가장 가까운 지점 찾기
+                                </button>
+                            </div>
+                           <div className="LocationupBtnBox">
+                            {positions.map((spot) => (
+                                <button
+                                    key={spot.id}
+                                    onClick={() => handleSelectSpot(spot)}
+                                    className={`LocationupBtn ${selectedId === spot.id ? 'active' : ''}`}
+                                    >
+                                    {spot.name}
+                                    </button>
+                            ))}
+                            </div>
+                            
+                        <div className="maprenderbox">{makeMap}</div>  
                         {selectedSpot && (
                         <div className="locationDetailBox">
                             <h2 className="LocationSpotName">{selectedSpot.name}</h2>

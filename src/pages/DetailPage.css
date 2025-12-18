@@ -1,0 +1,40 @@
+a{
+    text-decoration: none;
+    color: #333;
+}
+#root .DetailPage{
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 좌측 상세 전체 */
+#root .DetailPage .detailContent{
+    border: 1px solid red;
+    width: 900px;
+}
+
+#root .DetailPage .detailContent .D_Head{
+    display: flex;
+    gap: 10px;
+}
+
+#root .DetailPage .detailContent .D_imgInfo{
+    margin-bottom: 30px;
+}
+#root .DetailPage .detailContent .D_imgInfo > img{
+    width: 550px;
+}
+#root .DetailPage .detailContent .D_imgInfo > p >img{
+    width: 45px;
+}
+
+
+/* ----------------------------------- */
+
+/* 우측 요약 및 예약하기 버튼 */
+#root .DetailPage .detailSummary{
+    width: 330px;
+    border: 1px solid blue;
+}

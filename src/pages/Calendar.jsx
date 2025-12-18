@@ -20,7 +20,7 @@ export default function RentalCalendar() {
     timeInfoArrHandler,
     apply,
     setApply,
-    HandleDateFilter,
+    handleDateFilter,
   } = useContext(CalendarContext);
 
   const calendarRef = useRef(null);
@@ -89,7 +89,7 @@ export default function RentalCalendar() {
       setApply(!apply);
     }
 
-    HandleDateFilter({
+    handleDateFilter({
       startDate,
       endDate,
       startTime,

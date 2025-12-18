@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef, useActionState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CalendarContext } from "../contexts/Calendarcontext";
 import Calendar from './Calendar';
+import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // MapContainer = 맵을 불러오는 상자 
 // TileLayer 하단 설명 참고
@@ -12,8 +13,8 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 export default function Home(){
-
-  const {setLocation, location, startDate, endDate ,startTime, endTime, apply, HandleSearchResult} = useContext(CalendarContext);
+  const navigate = useNavigate();
+  const {setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn} = useContext(CalendarContext);
 
     const images = [
       "https://picsum.photos/1200/430?random=1",
@@ -67,8 +68,6 @@ export default function Home(){
     const [isLocation, setIsLocation] = useState(false);
     // 달력 모달 toggle
     const [iscalendar, setIscalendar] = useState(false);
-
-    console.log(startDate, endDate);
 
     const calendarHandler=()=>{
       setIscalendar(!iscalendar);
@@ -135,12 +134,12 @@ export default function Home(){
                     <div className="H_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
                 </div>
                 <div className="searchButton">
-                    <Link to={'/searchcarlist'}>
-                      <button type="submit" onClick={HandleSearchResult}>
+                    
+                      <button type="submit" onClick={()=>handleSearchBtn(navigate)} onMouseOver={()=>console.log('오버확인')}>
                           예약할 차량 찾기
                           <i className="bi bi-arrow-right"></i>
                       </button>
-                    </Link>
+                    
                  </div>
             </div>
         </div>

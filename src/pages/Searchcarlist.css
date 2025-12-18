@@ -134,7 +134,7 @@ a, p, h4, h3, h2, h1{
 }
 
 /* 목록 */
-#root .Recentcar .R_carlist ul li{
+#root .Recentcar .R_carlist ul li a{
     width: 900px;
     /* height: 400px; */
     display: flex;
@@ -142,7 +142,7 @@ a, p, h4, h3, h2, h1{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
-    padding: 30px;
+    padding: 40px 30px;
     background-color: #fff;
     /* border: 1px solid #ccc; */
     box-shadow: 0 0 7px rgba(0,0,0,0.3);
@@ -199,7 +199,7 @@ a, p, h4, h3, h2, h1{
 
 .R_carlist .grouped_car_item img.brands{
     position: absolute;
-    top: 50px;
+    top: 30px;
     left: 40px;
     width: 50px;
 }
