@@ -3,20 +3,17 @@
     justify-content: space-between;
 }
 .CusAssistanceBox1{
-    width: 420px;
+    width: 800px;
     height: 160px;
     padding: 20px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     background-image: url('./images/customer/mantoman.jpg');
+    transition: 0.3s;
 }
-.CusAssistanceBox2{
-    width: 420px;
-    height: 160px;
-    padding: 20px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    background-image: url('./images/customer/chatbot.jpg');
+.CusAssistanceBox1:hover{
+    transition: 0.3s;
+    transform: translateY(-5px);    
+    box-shadow: 0px 0px 5px rgba(1, 130, 216, 0.5);
 }
 .CusAssH2{
     margin-top: 50px;
@@ -141,4 +138,95 @@
 }
 .togglediv{
     user-select: none;
+}
+.modalOpen{
+    width: 600px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 30px;
+    z-index: 100;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.modalOpen .bi-x{
+    position: absolute;
+    top:0px;
+    right: 10px;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+.modal1title{
+    width: 535px;
+    margin-bottom: 10px;
+}
+.modal1content{
+    width: 535px;
+    height: 300px;
+}
+.modal1Content input{
+    margin: 10px 0;
+    border: 1px solid rgb(194, 194, 194);
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    outline-color: dodgerblue;
+    font-weight: 500;
+}
+.modal1Content textarea{
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(194, 194, 194);
+    outline-color: dodgerblue;
+}
+.modal1Content p, .modal1Content span{
+    font-weight: 500;
+    font-size: 18px;
+}
+.modalOpen h3{
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: rgb(31, 123, 214);
+}
+.cusOverlay{
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+.submitinqu{
+    width: 535px;
+    margin: 20px auto;
+    text-align: center;
+}
+.submitinqu button{
+    width: 535px;
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    background-color: dodgerblue;
+    border-radius: 10px;
+    color: white;
+}
+.submitinqu button:hover{
+    background-color: rgb(25, 99, 172);
+}
+.modalOpen .bi-x:hover{
+    color: dodgerblue;
+}
+.havetologin{
+    text-align: center;
+    margin: 70px 0;
+    font-size: 22px;
+    font-weight: 500;
 }
