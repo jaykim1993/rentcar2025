@@ -15,8 +15,12 @@ hr{
 
 /* 좌측 상세 전체 */
 #root .DetailPage .detailContent{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 900px;
+    margin: 50px 0;
+}
+#root .DetailPage .detailContent h4{
+    margin-bottom: 20px;
 }
 
 #root .DetailPage .detailContent .D_Head{
@@ -34,13 +38,14 @@ hr{
     width: 45px;
 }
 
-#root .DetailPage .D_carInfo > ul{
+/* 차량정보 */
+#root .DetailPage .detailContent .D_carInfo > ul{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 30px;
 }
-#root .DetailPage .D_carInfo > ul li{
+#root .DetailPage .detailContent .D_carInfo > ul li{
     font-size: 19px;
     word-break: keep-all;
     border: 1px solid #ccc;
@@ -50,18 +55,67 @@ hr{
     padding: 30px;
     position: relative;
 }
-#root .DetailPage .D_carInfo > ul li i{
+#root .DetailPage .detailContent .D_carInfo > ul li i{
     font-size: 30px;
     color: #a1a1a1;
     display: block;
     position: absolute;
     bottom: 30px;
 }
-#root .DetailPage div.D_carInfo ul.option_list{
-    display: flex;
-    justify-content: space-between;
+/* 옵션 */
+#root .DetailPage .detailContent div.D_carInfo div.option_list{
+    margin-top: 30px;
 }
+#root .DetailPage .detailContent div.D_carInfo div.option_list ul.option_list{
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    gap: 50px;
+    background-color: #f7f8fa;
+    padding: 30px;
+    border-radius: 7px;
+}
+#root .DetailPage .detailContent div.D_carInfo div.option_list > p{
+    font-size: 20px;
+    font-weight: 500;
+}
+#root .DetailPage .detailContent div.D_carInfo div.option_list ul.option_list > li i{
+    margin-right: 10px;
+    font-size: 20px;
+}
+/* 지도 */
+/* #root .DetailPage .detailContent .D_location{
 
+} */
+#root .DetailPage .detailContent .D_location > h5{
+    padding: 20px 0;
+}
+#root .DetailPage .detailContent .D_location .D_detial_address_title{
+    color: #ccc;
+    font-size: 15px;
+    padding: 10px 0;
+}
+/* 반납규정 */
+#root .DetailPage .detailContent .D_location .D_rentalPolicy{
+    background-color: #f7f8fa;
+    padding: 30px;
+    border-radius: 7px;
+}
+/* 유의사항 */
+#root .DetailPage .detailContent .D_usageNotice{
+    margin-top: 30px;
+    background-color: #e9eaee;
+    padding: 30px;
+    border-radius: 7px;
+}
+#root .DetailPage .detailContent .D_usageNotice > hr{
+    margin: 25px 0;
+    /* color: #fff; */
+}
+#root .DetailPage .detailContent .D_usageNotice .bi-exclamation-circle-fill{
+    color: #ff6f43;
+}
 
 /* ----------------------------------- */
 

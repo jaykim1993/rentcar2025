@@ -5,11 +5,13 @@ import './Searchcarlist.css'
 import { Link } from "react-router-dom";
 import Calendar from './Calendar';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { BookingContext } from "../contexts/Bookingcontext";
 
 export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn } = useContext(CalendarContext);
+    const { calculatePrice } = useContext(BookingContext);
 
     // ================= 달력 관련 =================
 
@@ -179,67 +181,6 @@ export default function Recentcar(){
         }
         return false;
     };
-
-    // ================= 금액 =================
-    const calculatePrice = (car) => {
-        const basePrice = 3000;  // 기본요금
-        let totalPrice = basePrice;  // 값이 담길 변수
-    
-        // 연식
-        const baseModelYear = car.model_year;
-    
-        if(baseModelYear === 2022){
-            totalPrice -= 200;
-        }else if(baseModelYear === 2023){
-            totalPrice -= 100;
-        }else if(baseModelYear === 2025){
-            totalPrice += 200;
-        }else{
-            totalPrice += 0;
-        }
-    
-        // 크기
-        const baseVehicleSize = car.car_size;
-    
-        if(baseVehicleSize === '중형'){
-            totalPrice += 100;
-        }else if(baseVehicleSize === '대형'){
-            totalPrice += 200;
-        }else{
-            totalPrice += 0;
-        }
-    
-        // 연료
-        const baseFuelType = car.fuel_type;
-    
-        if(baseFuelType === '휘발유'){
-            totalPrice += 100;
-        }else if(baseFuelType === '하이브리드'){
-            totalPrice += 200;
-        }else{
-            totalPrice += 0;
-        }
-    
-        // 옵션
-        if(car.heated_seat){ totalPrice += 100; }
-        if(car.heated_handle){ totalPrice += 100; }
-        if(car.sun_loof){ totalPrice += 200; }
-        else{ null }
-    
-        // 브랜드별 값
-        const priceValue = car.price_value;
-    
-        // 최종 산출금액
-        const finalPrice = Math.round(totalPrice * priceValue);
-
-        return finalPrice;
-
-        // 총가격?
-        const pricePrice=()=>{
-            let datePrice = endDate-startDate;
-            let pppprice = datePrice * finalPrice;
-        }
-    }
 
     // ================= 출력 =================
     const renderGroupedCars = () => {

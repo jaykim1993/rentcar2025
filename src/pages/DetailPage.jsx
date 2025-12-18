@@ -50,13 +50,13 @@ export default function DetailPage(){
 
     // 지도
     // 여러 좌표를 배열로 관리 각 데이터에있는 주소 위도,경도 검색 후 삽입
-    const positions = [
-        {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항" },
-        {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항" },
-        {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부" },
-        {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부" },
-        {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부" },
-    ];
+  const positions = [
+    {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항" , address: "인천광역시 중구 공항로 271" },
+    {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항" , address: "서울특별시 강서구 하늘길 38"},
+    {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부", address: "서울 동대문구 한천로 100 1-2층" },
+    {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부", address: "서울특별시 서초구 서초대로 283" },
+    {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부", address: "서울 노원구 노해로 456 동방빌딩 1층"},
+  ];
     const detail = positions.find(item => item.name === selectedCar.location);
   
     let detail_lat=detail?.lat;
@@ -132,9 +132,12 @@ export default function DetailPage(){
                 <hr />
 
                 {/* 요금안내 */}
-                <div className="D_">
-                    <Link to={'/guide'}><h4>요금안내 <i className="bi bi-arrow-right-circle-fill"></i></h4></Link>
-                    <p></p>
+                <div className="D_priceInfo">
+                    <h4>요금안내</h4>
+                    <p>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 가치를 가지며,</p>
+                    <p>차량의 연식, 차량 크기, 연료, 옵션 유무에 따라 가격이 계산됩니다.</p>
+                    <br/>
+                    <Link to={'/guide'}>상세보기<i className="bi bi-arrow-right-circle-fill"></i></Link>
                 </div>
 
                 <hr />
@@ -154,9 +157,38 @@ export default function DetailPage(){
                         </Marker>
                         ))}
                     </MapContainer>
-                    <h4>{selectedCar.brand} {selectedCar.model} {selectedCar.fuel_type}</h4>
+                    <h5>{detail.name}</h5>
+                    <p className="D_detial_address_title">주소</p>
+                    <span className="D_detial_address">{detail.address}</span>
+                    
+                    <hr />
+                    {/* 반납규정 */}
+                    <div className="D_rentalPolicy">
+                        <strong>대여 및 반납 규정</strong>
+                        <p>· 대여 및 반납은 지점별 이용 가능한 시간 내 가능해요.</p>
+                        <p>· 예약자(제 1운전자) 뿐 아니라 사전에 등록된 제 2운전자와 제 3운전자도 대여 및 반납이 가능해요.</p>
+                        <p>· 차량 대여 시, 운전면허 지참은 필수세요. (도로교통법상 유효한 운전면허 소지자)</p>
+                    </div>
+                </div>
+
+                {/* 유의사항 */}
+                <div className="D_usageNotice">
+                    <div className="D_notice">
+                        <strong><i className="bi bi-exclamation-circle-fill"></i> 유의사항</strong>
+                        <p>· 이미지와 실제 차량은 사양, 색상이 다를 수 있어요.</p>
+                        <p>· 100% 금연차량으로 운영하고 있어요.</p>
+                        <p>· 반려동물은 같이 탈 수 없어요.</p>
+                        <p>· 낚시용품을 실을 수 없어요.</p>
+                        <p>· 반납 시 남은 대여시간이 6시간 미만이면 환불을 받을 수 없어요.</p>
+                    </div>
+                    <hr />
+                    <div className="D_covid_notice">
+                        <strong><i className="bi bi-exclamation-circle-fill"></i> COVID-19 방역 안내</strong>
+                        <p>차랑차랑은 COVID-19 감염 예방을 위해 전 직원 마스크 착용 의무화 및 전 차량을 소독하고 있습니다.</p>
+                    </div>
                 </div>
             </div>
+
             {/* 우측 - 요약 및 예약하기 버튼 */}
             <div className="detailSummary">
                 <div className="summary_card">
