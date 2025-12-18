@@ -147,7 +147,7 @@ export default function Home(){
        {/* 지점 모달 파트 */}
 {isLocation && (
   <div className="H_location">
-    <span className="H_close" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
+    <span className="H_close01" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
     {/* 상세 위치 (지도) */}
     {isDetail ? (
       <>
@@ -224,8 +224,9 @@ export default function Home(){
 )}
 
         <div className={`calendar-slide ${iscalendar ? "open" : ""}`}>
-	              <Calendar />
-	            </div>
+          <span className="H_close02" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
+	        <Calendar />
+	      </div>
 
         {/* sec01 - 배너 슬라이드 */}
         <div className="H_sec01"
