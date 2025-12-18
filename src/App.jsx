@@ -14,6 +14,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import DataProvider from './contexts/Datacontext'
 import Footer from './common/Footer'
 import LocationPage from './pages/Location'
+import CustomerService from './pages/CustomerService'
 
 // s
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="/searchcarlist" element={<Searchcarlist/>}/>
             <Route path="/guide" element={<GuidePage/>}/>
+            <Route path="/customerservice" element={<CustomerService/>}/>
             <Route path="/location" element={<LocationPage/>}/>
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/joinA" element={<JoinFormA/>}/>

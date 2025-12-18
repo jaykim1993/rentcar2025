@@ -1,0 +1,144 @@
+.CusAssistance{
+    display: flex;
+    justify-content: space-between;
+}
+.CusAssistanceBox1{
+    width: 420px;
+    height: 160px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    background-image: url('./images/customer/mantoman.jpg');
+}
+.CusAssistanceBox2{
+    width: 420px;
+    height: 160px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    background-image: url('./images/customer/chatbot.jpg');
+}
+.CusAssH2{
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.CusAssistance a{
+    text-decoration: none;
+}
+.CusAssistance a p{
+    font-weight: 600;
+    margin: 10px 0;
+}
+.CusAssistance a i{
+    font-size: 20px;
+    font-weight: 700;
+}
+.CusAssH2{
+    font-weight: 600;
+}
+.CusAssistanceWrap{
+    margin-bottom: 80px;
+}
+.CusFAQ h2{
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+.CusFAQ{
+    font-size: 20px;
+}
+.CusFAQ > div{
+    margin: 30px 0;
+}
+.CusNotice h2{
+    font-weight: 600;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+.CusFAQ .bi-caret-down-fill.active {
+  transform: rotate(180deg);
+  display: inline-block;
+}
+.togglediv{
+    padding: 15px;
+    border-radius:15px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+.togglediv p{
+    color: dodgerblue;
+    font-weight: 500;
+    font-size: 18px;
+}
+.CusFAQSpan{
+    cursor: pointer;
+    font-weight: 600;
+}
+.CusNoticeLink{
+    border: 1px solid rgb(204, 204, 204);
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.CusNoticeLink div p{
+    margin: 20px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(209, 209, 209);
+    font-size: 18px;
+    cursor: pointer;
+}
+.CusNoticeLink div p:hover{
+    color: dodgerblue;
+}
+.CusNoticeBox{
+    margin-bottom: 100px;
+}
+.guideSideMenus{
+    cursor: pointer;
+}
+.guideSideMenus2{
+    width: 150px;
+    font-size: 20px;
+    margin: 10px 0;
+    font-weight: 700;
+    cursor: pointer;
+    color: #333;
+}
+.guideSideMenus2:hover{
+    color: dodgerblue;
+}
+.guideSideMenus2.active{
+    color: rgb(211, 211, 211);
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
+}
+.cusNoticeH3{
+    margin-bottom: 30px;
+}
+.cusBottomBtnBox{
+    width: 300px;
+    margin: 80px auto;
+}
+.cusBottomBtn{
+    width: 250px;
+    padding: 15px;
+    border: none;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+}
+.cusBottomBtn:hover{
+    background-color: rgb(85, 85, 85);
+}
+.customertotop{
+    cursor: pointer;
+}
+.guideGoToHome.active{
+    color: #333;
+}
+.CusFAQSpan{
+    user-select: none;
+}
+.togglediv{
+    user-select: none;
+}

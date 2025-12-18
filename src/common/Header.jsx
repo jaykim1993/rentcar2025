@@ -92,7 +92,7 @@ export default function Header() {
                         <li className='headerNavLi'><div>빠른 예약</div> <div className='headerNavpointer'>→</div></li><br />
                         <li className='headerNavLi'><div>월 렌트</div> <div className='headerNavpointer'>→</div></li><br />
                         <p className='headerNavH'>고객 가이드</p>
-                        <li className='headerNavLi'><div>고객센터</div> <div className='headerNavpointer'>→</div></li><br />
+                        <Link to={'/customerservice'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>고객센터</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         <Link to={'/location'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>지점안내</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         <Link to={'/guide'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>이용가이드</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         <p className='headerNavH'>회원 맞춤</p>
