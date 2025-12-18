@@ -84,18 +84,18 @@ export default function BookingProvider({ children }) {
 
   // ================= 금액 =================
   const calculatePrice = (car) => {
-    const basePrice = 3000;  // 기본요금
+    const basePrice = 700;  // 기본요금
     let totalPrice = basePrice;  // 값이 담길 변수
 
     // 연식
     const baseModelYear = car.model_year;
 
     if(baseModelYear === 2022){
-        totalPrice -= 200;
-    }else if(baseModelYear === 2023){
         totalPrice -= 100;
+    }else if(baseModelYear === 2023){
+        totalPrice -= 50;
     }else if(baseModelYear === 2025){
-        totalPrice += 200;
+        totalPrice += 100;
     }else{
         totalPrice += 0;
     }
@@ -104,9 +104,9 @@ export default function BookingProvider({ children }) {
     const baseVehicleSize = car.car_size;
 
     if(baseVehicleSize === '중형'){
-        totalPrice += 100;
+        totalPrice += 50;
     }else if(baseVehicleSize === '대형'){
-        totalPrice += 200;
+        totalPrice += 100;
     }else{
         totalPrice += 0;
     }
@@ -115,17 +115,17 @@ export default function BookingProvider({ children }) {
     const baseFuelType = car.fuel_type;
 
     if(baseFuelType === '휘발유'){
-        totalPrice += 100;
+        totalPrice += 50;
     }else if(baseFuelType === '하이브리드'){
-        totalPrice += 200;
+        totalPrice += 100;
     }else{
         totalPrice += 0;
     }
 
     // 옵션
-    if(car.heated_seat){ totalPrice += 100; }
-    if(car.heated_handle){ totalPrice += 100; }
-    if(car.sun_loof){ totalPrice += 200; }
+    if(car.heated_seat){ totalPrice += 50; }
+    if(car.heated_handle){ totalPrice += 50; }
+    if(car.sun_loof){ totalPrice += 100; }
     else{ null }
 
     // 브랜드별 값

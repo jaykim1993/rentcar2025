@@ -16,7 +16,7 @@ export default function DetailPage(){
     // console.log('여기왔어');
     const { availableCars, filteredInfoUser } = useContext(CalendarContext);
 
-    const { addBookInfo } = useContext(BookingContext);
+    const { addBookInfo, calculatePrice } = useContext(BookingContext);
 
     // 차 id 가져오기
     const { id } = useParams();
@@ -50,13 +50,13 @@ export default function DetailPage(){
 
     // 지도
     // 여러 좌표를 배열로 관리 각 데이터에있는 주소 위도,경도 검색 후 삽입
-  const positions = [
-    {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항" , address: "인천광역시 중구 공항로 271" },
-    {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항" , address: "서울특별시 강서구 하늘길 38"},
-    {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부", address: "서울 동대문구 한천로 100 1-2층" },
-    {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부", address: "서울특별시 서초구 서초대로 283" },
-    {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부", address: "서울 노원구 노해로 456 동방빌딩 1층"},
-  ];
+    const positions = [
+        {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항" , address: "인천광역시 중구 공항로 271" },
+        {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항" , address: "서울특별시 강서구 하늘길 38"},
+        {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부", address: "서울 동대문구 한천로 100 1-2층" },
+        {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부", address: "서울특별시 서초구 서초대로 283" },
+        {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부", address: "서울 노원구 노해로 456 동방빌딩 1층"},
+    ];
     const detail = positions.find(item => item.name === selectedCar.location);
   
     let detail_lat=detail?.lat;
@@ -68,19 +68,31 @@ export default function DetailPage(){
 
     if(!selectedCar) return <div>차량정보를 불러올 수 없습니다.</div>;
 
+    // 가격 계산
+    let date = (new Date(`${filterCar.filterEndDate}T${filterCar.filterEndTime}`)-new Date(`${filterCar.filterStartDate}T${filterCar.filterStartTime}`))/ (1000 * 60 * 30);
+
+    console.log('기간: ',date);
+
+    const totalPrice =
+        date && calculatePrice && selectedCar
+        ? calculatePrice(selectedCar) * date
+        : 0;
+
     return(
         <div className="DetailPage">
             {/* 좌측 - 상세 전체 */}
             <div className="detailContent">
                 {/* 홈 > 예약 */}
                 <div className="D_Head">
-                    <span>홈</span>
+                    <Link to={'/home'}><span>홈</span></Link>
                     <i className="bi bi-caret-right-fill"></i>
                     <span>예약하기</span>
                 </div>
                 {/* 이미지, 차이름 등 */}
                 <div className="D_imgInfo">
-                    <img src={`/images/cars/${selectedCar.car_img}`} alt={`${selectedCar.brand} ${selectedCar.model}`} />
+                    <div className="D_carImg">
+                        <img src={`/images/cars/${selectedCar.car_img}`} alt={`${selectedCar.brand} ${selectedCar.model}`} />
+                    </div>
                     <p><img src={`/images/brands/${selectedCar.brand_logo}`} alt={`${selectedCar.brand}`} /> {selectedCar.brand}</p>
                     <h4>{selectedCar.model} {selectedCar.fuel_type}</h4>
                 </div>
@@ -137,7 +149,7 @@ export default function DetailPage(){
                     <p>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 가치를 가지며,</p>
                     <p>차량의 연식, 차량 크기, 연료, 옵션 유무에 따라 가격이 계산됩니다.</p>
                     <br/>
-                    <Link to={'/guide'}>상세보기<i className="bi bi-arrow-right-circle-fill"></i></Link>
+                    <Link to={'/guide'}>상세보기 <i className="bi bi-arrow-right-circle-fill"></i></Link>
                 </div>
 
                 <hr />
@@ -192,7 +204,7 @@ export default function DetailPage(){
             {/* 우측 - 요약 및 예약하기 버튼 */}
             <div className="detailSummary">
                 <div className="summary_card">
-                    <h3>예약 요약</h3>
+                    <h5>예약 정보</h5>
                     {/* filteredInfoUser가 배열일 경우 map으로 돌리고, 단일 객체면 바로 출력 */}
                     {filterCar && [filterCar].map((info, idx) => (
                         <div key={idx} className="info_box">
@@ -200,6 +212,7 @@ export default function DetailPage(){
                                 <p className="label">지점</p>
                                 <h4 className="val">{info.location}</h4>
                             </div>
+                            <hr />
                             <div className="info_item">
                                 <p className="label">일정</p>
                                 <h4 className="val">{info.filterStartDate} {info.filterStartTime} ~ {info.filterEndDate} {info.filterEndTime}</h4>
@@ -210,8 +223,7 @@ export default function DetailPage(){
                     <hr />
 
                     <div className="price_total">
-                        <span>최종 결제 금액</span>
-                        <strong>{/* car_price */} 원</strong>
+                        <p>총&nbsp;&nbsp;<h4>{totalPrice.toLocaleString()}</h4>&nbsp;원</p>
                     </div>
                     <button className="reserve_btn">예약하기</button>
                 </div>

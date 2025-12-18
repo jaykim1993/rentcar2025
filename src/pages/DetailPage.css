@@ -4,6 +4,7 @@ a{
 }
 hr{
     margin: 70px 0;
+    color: #a1a1a1;
 }
 
 #root .DetailPage{
@@ -17,10 +18,11 @@ hr{
 #root .DetailPage .detailContent{
     /* border: 1px solid red; */
     width: 900px;
-    margin: 50px 0;
+    margin: 50px 0 200px 0;
 }
 #root .DetailPage .detailContent h4{
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 #root .DetailPage .detailContent .D_Head{
@@ -31,8 +33,13 @@ hr{
 #root .DetailPage .detailContent .D_imgInfo{
     margin-bottom: 30px;
 }
-#root .DetailPage .detailContent .D_imgInfo > img{
-    width: 550px;
+#root .DetailPage .detailContent .D_imgInfo .D_carImg{
+    display: flex;
+    justify-content: center;
+}
+#root .DetailPage .detailContent .D_imgInfo .D_carImg > img{
+    /* width: 600px; */
+    height: 350px;
 }
 #root .DetailPage .detailContent .D_imgInfo > p >img{
     width: 45px;
@@ -48,7 +55,7 @@ hr{
 #root .DetailPage .detailContent .D_carInfo > ul li{
     font-size: 19px;
     word-break: keep-all;
-    border: 1px solid #ccc;
+    border: 1px solid #e0e1e4;
     border-radius: 7px;
     width: 279px;
     height: 165px;
@@ -83,6 +90,15 @@ hr{
 #root .DetailPage .detailContent div.D_carInfo div.option_list ul.option_list > li i{
     margin-right: 10px;
     font-size: 20px;
+}
+/* 요금안내 */
+#root .DetailPage .detailContent .D_priceInfo > a{
+    font-size: 18x;
+}
+#root .DetailPage .detailContent .D_priceInfo > a:hover,
+#root .DetailPage .detailContent .D_priceInfo > a:hover i{
+    color: #29abf7;
+    text-decoration: underline;
 }
 /* 지도 */
 /* #root .DetailPage .detailContent .D_location{
@@ -120,7 +136,45 @@ hr{
 /* ----------------------------------- */
 
 /* 우측 요약 및 예약하기 버튼 */
+#root .DetailPage {
+  position: relative;
+}
 #root .DetailPage .detailSummary{
+    position: sticky;
+    align-self: flex-start;
+    right: 0;
+    top: 120px;
     width: 330px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
+    height: 700px;
+}
+#root .DetailPage .detailSummary .summary_card .reserve_btn{
+    border: none;
+    border-radius: 7px;
+    padding: 15px;
+    width: 100%;
+    font-size: 20px;
+    background-color: #333;
+    color: #f7f8fa;
+    margin-top: 20px;
+}
+#root .DetailPage .detailSummary .summary_card .info_box{
+    margin: 40px 0;
+}
+#root .DetailPage .detailSummary .summary_card .info_box .info_item{
+    margin: 20px 0;
+}
+#root .DetailPage .detailSummary .summary_card .info_box .info_item > h4{
+    font-size: 18px;
+    margin: 10px 0;
+}
+#root .DetailPage .detailSummary .summary_card hr{
+    margin: 30px 0;
+}
+#root .DetailPage .detailSummary .summary_card .reserve_btn:hover{
+    background-color: #111;
+}
+#root .DetailPage .detailSummary .price_total > p{
+    display: flex;
+    align-items: flex-end;
 }
