@@ -125,6 +125,7 @@ input:checked + .checkmark {
     width: 444px;
     margin: 0 auto;
     padding: 25px;
+    padding-bottom: 0;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
@@ -141,7 +142,7 @@ input:checked + .checkmark {
 }
 
 #root .Home .H_location .H_selectLocation{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     position: relative;
     padding-top: 20px;
 }
@@ -152,7 +153,7 @@ input:checked + .checkmark {
 }
 #root .Home .H_location .H_selectLocation p{
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 37px;
     display: flex;
     align-items: center;
 }
@@ -161,20 +162,28 @@ input:checked + .checkmark {
     color: rgb(157, 156, 156);
     margin-left: 10px;
 }
-#root .Home .H_location .H_selectLocation p .H_detail{
-    margin-left: 264px;
+#root .Home .H_location .H_selectLocation .H_detail{
+    width: 40px;
+    height: 30px;
+    border: none;
+    font-size: 14px;
+    border-radius: 3px;
+}
+#root .Home .H_location .H_selectLocation .H_gu{
+    display: flex;
+    justify-content: space-between;
 }
 #root .Home .H_location .H_selectLocation .H_seoul::before{
     content: '';
     width: 100%;
-    border: 0.5px solid lightgray;
+    border-bottom: 1px solid rgb(227, 227, 227);
     position: absolute;
-    top:180px;
+    top:215px;
 }
 #root .Home .H_location .H_selectLocation .H_gimpo::before{
     content: '';
     width: 100%;
-    border: 0.7px solid lightgray;
+    border-bottom: 1px solid rgb(227, 227, 227);
     position: absolute;
-    top:240px;
+    top:310px;
 }
