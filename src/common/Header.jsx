@@ -60,7 +60,7 @@ export default function Header() {
                         // 로그인 상태일 때
                         <>
                             <button className='headerBtn' type='text'>
-                                {userid?.userid}님
+                                {userid}님
                             </button>
                             <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
                                 예약내역
@@ -85,7 +85,7 @@ export default function Header() {
                     }
                 </nav>
                 <div className={`headerUserBookedModal ${openUserBookedModal? "open":""}`}>
-                    <strong className='headerModalH'>{userid?.userid}님의 예약내역</strong>
+                    <strong className='headerModalH'>{userid}님의 예약내역</strong>
                     <button className="headerModalBtnX" onClick={closeModal}>
                         <i className="bi bi-x"></i>
                     </button>

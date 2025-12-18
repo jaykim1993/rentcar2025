@@ -2,6 +2,10 @@ a{
     text-decoration: none;
     color: #333;
 }
+hr{
+    margin: 70px 0;
+}
+
 #root .DetailPage{
     width: 1300px;
     margin: 0 auto;
@@ -28,6 +32,34 @@ a{
 }
 #root .DetailPage .detailContent .D_imgInfo > p >img{
     width: 45px;
+}
+
+#root .DetailPage .D_carInfo > ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+#root .DetailPage .D_carInfo > ul li{
+    font-size: 19px;
+    word-break: keep-all;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    width: 279px;
+    height: 165px;
+    padding: 30px;
+    position: relative;
+}
+#root .DetailPage .D_carInfo > ul li i{
+    font-size: 30px;
+    color: #a1a1a1;
+    display: block;
+    position: absolute;
+    bottom: 30px;
+}
+#root .DetailPage div.D_carInfo ul.option_list{
+    display: flex;
+    justify-content: space-between;
 }
 
 

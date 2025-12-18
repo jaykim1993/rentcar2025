@@ -22,20 +22,23 @@ export default function DetailPage(){
     const { id } = useParams();
 
     const selectedCar = availableCars.find(car => car.id === Number(id)) || availableCars[0];
+    const filterCar = filteredInfoUser.find(car => car.id === Number(id)) || filteredInfoUser[0];
  
     
     console.log('selectedCar');
     console.log(selectedCar)
+    console.log('filterCar');
+    console.log(filterCar)
 
     // true인 옵션만 필터링
     const getActiveOptions = (car) => {
         const optionsMap = {
             navigation: { name: '내비게이션', icon: 'bi-map' },
-            rear_camera: { name: '후방카메라', icon: 'bi-camera-video' },
+            rear_camera: { name: '후방카메라', icon: 'bi-webcam-fill' },
             heated_seat: { name: '열선시트', icon: 'bi-thermometer-sun' },
             heated_handle: { name: '핸들열선', icon: 'bi-sun' },
             bluetooth: { name: '블루투스', icon: 'bi-bluetooth' },
-            smart_key: { name: '스마트키', icon: 'bi-key' },
+            smart_key: { name: '스마트키', icon: 'bi-key-fill' },
             sun_loof: { name: '썬루프', icon: 'bi-brightness-high' },
         };
 
@@ -89,14 +92,27 @@ export default function DetailPage(){
                     <h4>차량 정보</h4>
                     {/* 기본정보 */}
                     <ul className="basic_info_list">
-                        <li><p><strong>{selectedCar.model_year}</strong>년식 이에요</p></li>
-                        <li><span><strong>{selectedCar.seats}인승</strong>이에요</span></li>
-                        <li><span><strong>{selectedCar.km_per}</strong></span></li>
-                        <li><span><strong>{selectedCar.drive_license_type}</strong> 이상 이용 가능해요</span></li>
-                        <li><span><strong>만 {selectedCar.driver_min_age}세 이상</strong> 이용 가능해요</span></li>
+                        <li><strong>{selectedCar.fuel_type}</strong>로 움직이는 차량이에요.
+                            <i className="bi bi-fuel-pump-fill"></i>
+                        </li>
+                        <li><strong>{selectedCar.model_year}</strong>년식 이에요.
+                            <i className="bi bi-car-front-fill"></i>
+                        </li>
+                        <li><strong>{selectedCar.seats}인승</strong>이에요.
+                            <i className="bi bi-people-fill"></i>
+                        </li>
+                        <li>연비는 <strong>{selectedCar.km_per}</strong>이에요.
+                            <i className="bi bi-ev-front-fill"></i>
+                        </li>
+                        <li><strong>{selectedCar.drive_license_type}</strong>부터 이용 가능해요.
+                            <i className="bi bi-person-fill-up"></i>
+                        </li>
+                        <li><strong>만 {selectedCar.driver_min_age}세 이상</strong> 이용 가능해요.
+                            <i className="bi bi-person-vcard"></i>
+                        </li>
                     </ul>
                     {/* 옵션 */}
-                    <div>
+                    <div className="option_list">
                         <p>옵션</p>
                         <ul className="option_list">
                         {activeOptions.length > 0 ? (
@@ -117,7 +133,7 @@ export default function DetailPage(){
 
                 {/* 요금안내 */}
                 <div className="D_">
-                    <Link to={'/guide'}><h4>요금안내 <i class="bi bi-arrow-right-circle-fill"></i></h4></Link>
+                    <Link to={'/guide'}><h4>요금안내 <i className="bi bi-arrow-right-circle-fill"></i></h4></Link>
                     <p></p>
                 </div>
 
@@ -146,15 +162,15 @@ export default function DetailPage(){
                 <div className="summary_card">
                     <h3>예약 요약</h3>
                     {/* filteredInfoUser가 배열일 경우 map으로 돌리고, 단일 객체면 바로 출력 */}
-                    {filteredInfoUser && [filteredInfoUser].map((info, idx) => (
+                    {filterCar && [filterCar].map((info, idx) => (
                         <div key={idx} className="info_box">
                             <div className="info_item">
-                                <span className="label">지점</span>
-                                <span className="val">{info.location}</span>
+                                <p className="label">지점</p>
+                                <h4 className="val">{info.location}</h4>
                             </div>
                             <div className="info_item">
-                                <span className="label">대여 기간</span>
-                                <span className="val">{info.startDate} ~ {info.endDate}</span>
+                                <p className="label">일정</p>
+                                <h4 className="val">{info.filterStartDate} {info.filterStartTime} ~ {info.filterEndDate} {info.filterEndTime}</h4>
                             </div>
                         </div>
                     ))}
