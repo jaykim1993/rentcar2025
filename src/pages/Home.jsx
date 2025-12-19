@@ -146,7 +146,7 @@ export default function Home(){
 {isLocation && (
   <div className="H_location">
     <span className="H_close01" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
-    {/* 상세 위치 (지도) */}
+    {/* 상세 위치 (지도.) */}
     {isDetail ? (
       <>
         <div className="H_selectLocation_detail">
