@@ -3,19 +3,40 @@ import { Link } from "react-router-dom"
 import './CustomerService.css'
 import { useContext } from "react"
 import { AuthContext } from "../contexts/Authcontext"
+import { useNavigate } from "react-router-dom"
 
 export default function CustomerService(){
 
+    const navigate = useNavigate();
     //로그인 상태 받아오기
     const {userid}=useContext(AuthContext)
     console.log(userid)
-    const isLogin = !!userid?.userid;
+    const isLogin = !!userid;
     console.log(isLogin)
 
     //모달 기본값
     const [modal1Open,setModal1Open]=useState(false)
     const [modal2Open,setModal2Open]=useState(false)
     const [modalOverLay,setModalOverLay]=useState(false)
+
+    //모달컨트롤러
+    const modal1 =()=>{
+        setModal1Open(true)
+        setModalOverLay(true)
+    }
+    const modalClose=()=>{
+        if(modal1Open){
+        setModal1Open(false);
+        setModalOverLay(false);
+        }
+    }
+    const gotoLogin =()=>{
+        if(modal1Open){
+        setModal1Open(false);
+        setModalOverLay(false);
+        navigate('/login')
+        }
+    }
 
     //FAQ state 토글
     const [openIndex, setOpenIndex] = useState(null);
@@ -66,10 +87,48 @@ export default function CustomerService(){
     const day = week[today.getDay()];
     const custoday = `${year}. ${month}. ${date} ${day}`;
 
-    console.log(custoday);
+    //날짜 따오기 
+    function formatDate(date) {
+        const d = new Date(date);
 
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0"); // 월은 0~11
+        const day = String(d.getDate()).padStart(2, "0");
 
+        const hours = String(d.getHours()).padStart(2, "0");
+        const minutes = String(d.getMinutes()).padStart(2, "0");
+        const seconds = String(d.getSeconds()).padStart(2, "0");
 
+        return `${year}-${month}-${day} / ${hours}:${minutes}:${seconds}`;
+        }
+    
+    // 1:1문의 로컬스토리지 남기기
+    const [inquiries,setInquiries]=useState([]); //전체문의내역 배열
+
+    const [inquiriesTitle,setInquiriesTitle]=useState(''); //문의 제목
+    const [inquiriesContent,setInquiriesContent]=useState(''); //문의 본문
+    const inquiriesHandler = () => {
+    if (!inquiriesTitle || !inquiriesContent) return alert("모든 항목을 입력하세요");
+        
+    const newinquiries ={id:Date.now(),
+                        userid:userid,
+                        title:inquiriesTitle,
+                        content:inquiriesContent,
+                        whenCreate:formatDate(new Date())
+    }
+    //제이슨형태로 현재 빈 배열에있는걸 읽고 
+    const prev = JSON.parse(localStorage.getItem("inquiries")) || [];
+
+    const updatedInquiries = [...prev, newinquiries];
+        localStorage.setItem("inquiries", JSON.stringify(updatedInquiries));
+
+    setInquiries(updatedInquiries);
+    setInquiriesTitle('')
+    setInquiriesContent('')
+    alert('1:1문의 등록이 완료되었습니다.')
+    setModal1Open(false)
+    setModalOverLay(false)
+    }
     return(
         <>
             
@@ -77,55 +136,27 @@ export default function CustomerService(){
             //1대1문의
                 (isLogin?
                     //로그인상태일때
-                    <div>
-                        <button><i className="bi bi-x"></i></button>
+                    <div className="modalOpen">
+                        <i className="bi bi-x" onClick={modalClose}></i>
+                        <h3>1:1 문의</h3>
+                        <div className="modal1Content">
+                            <span>안녕하세요 {userid}님</span>
+                            <p>무엇을 도와드릴까요?</p>
+                            <input className="modal1title" type="text" placeholder="제목을 입력하세요." onChange={(e)=>setInquiriesTitle(e.target.value)} value={inquiriesTitle}/>
+                            <textarea className="modal1content" type="text" placeholder="문의 내용을 입력하세요." onChange={(e)=>setInquiriesContent(e.target.value)} value={inquiriesContent}/>
+                        </div>
+                        <div className="submitinqu">
+                            <button onClick={inquiriesHandler} >등록하기</button>
+                        </div>
                     </div>
                     :
                     //비로그인상태일때
-                    <div className="cusHaveToLogin">
-                        <button><i className="bi bi-x"></i></button>
-                        <span>1:1문의는 로그인 이후에 이용할 수 있어요.</span>
-                        <Link>로그인하기</Link>
-                    </div>
-                )
-            }
-            {modal2Open &&
-            //챗봇상담
-                (isLogin?
-                    //로그인상태일때
-                    <div>
-                        <div>
-                            <button><i class="bi bi-arrow-clockwise"></i></button>
-                            <button><i className="bi bi-x"></i></button>
+                    <div className="modalOpen">
+                        <i onClick={modalClose} className="bi bi-x"></i>
+                        <p className="havetologin">1:1문의는 로그인 이후에 이용할 수 있어요.</p>
+                        <div className="submitinqu">
+                            <button onClick={gotoLogin} >로그인하기</button>
                         </div>
-                        <img src="./charangcharang_logo.png/" alt="logo"/>
-                        <div>
-                            <p>{custoday}</p>
-                            <p>안녕하세요. {userid.userid}님</p>
-                            <p>차랑차랑렌터카 챗봇이에요. 무엇이 궁금하신가요??</p>
-                        </div>
-                        <div>
-                            <div>
-                                <img src="./images/chatbot/chatbot1.jpg"/>
-                                <h4>단기 렌트</h4>
-                                <p>서울 집중!</p>
-                                <p>최대 30일까지</p>
-                            </div>
-                            <div>
-                                <img src="./images/chatbot/chatbot2.jpg"/>
-                                <h4>긴급 출동</h4>
-                                <p>주행중 도움이 필요할 때</p>
-                            </div>
-                        </div>
-                        
-
-                    </div>
-                    :
-                    //비로그인상태일때
-                    <div className="cusHaveToLogin">
-                        <button><i className="bi bi-x"></i></button>
-                        <span>챗봇상담은 로그인 이후에 이용할 수 있어요.</span>
-                        <Link>로그인하기</Link>
                     </div>
                 )
             }
@@ -156,25 +187,15 @@ export default function CustomerService(){
                                 <div className="CusAssistanceWrap">
                                     <h2 className="CusAssH2">무엇을 도와드릴까요?</h2>
                                     <div className="CusAssistance">
-                                        <Link to={'/'}>
-                                            <div className="CusAssistanceBox1">
-                                                <h3>1:1 문의</h3>
-                                                <p>전문 상담원이 필요해요.</p>
-                                                <i className="bi bi-arrow-right"></i>
-                                            </div>
-                                        </Link>
-                                        <Link to={'/'}>
-                                            <div className="CusAssistanceBox2">
-                                                <h3>챗봇 문의</h3>
-                                                <p>간편하게 물어보세요.</p>
-                                                <i className="bi bi-arrow-right"></i>
-                                            </div>
-                                        </Link>
+                                        <div className="CusAssistanceBox1" onClick={modal1}>
+                                            <h3>1:1 문의</h3>
+                                            <p>전문 상담원이 필요해요.</p>
+                                            <i className="bi bi-arrow-right"></i>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="CusFAQ">
                                     <h2>자주 찾는 질문</h2>
-
                                     {faqList.map((item, index) => (
                                         <div key={index}>
                                         <div onClick={() => 
@@ -183,7 +204,6 @@ export default function CustomerService(){
                                             <span className="CusFAQSpan">Q. {item.q}</span>
                                             <i className={`bi bi-caret-down-fill ${openIndex === index ? 'active' : ''}`}></i>
                                         </div>
-
                                         {openIndex === index && (
                                             <div className="togglediv">
                                             <p>{item.a}</p>

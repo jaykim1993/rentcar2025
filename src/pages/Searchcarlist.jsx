@@ -550,7 +550,7 @@ export default function Recentcar(){
                         </div>
                     )}
                 </div>
-                <p>총&nbsp;<h5>{displayedCars.length}</h5>&nbsp;종</p>
+                <p>총&nbsp;<strong>{displayedCars.length}</strong>&nbsp;종</p>
                 <ul>
                     {renderGroupedCars()}
                 </ul>

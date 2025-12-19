@@ -10,13 +10,11 @@ export default function BookingProvider({ children }) {
 
     // 개인의 최근 본 차량 내역 담길 상태 변수
     // 로그인 상태에서 상세페이지를 눌렀을 때 데이터가 담기게
-    // recentViewlist=[{car_id,car_img,brand_logo,model_year, fuel_type}]
+    // recentViewlist=[{car_id,model,car_img,brand_logo,model_year, fuel_type}]
     const [recentViewlist, setRecentViewlist] = useState([]);
     // 개인의 예약된 내역 담길 상태변수
     // booklistUser 는 recentViewResult와 같으나 앞 부분에 두개의 키 추가된 형태(booking_num, book_date)
     const [booklistUser, setBooklistUser] = useState([]);
-
-
 
   // 해당 차량 상세보기 클릭 시 해당 데이터 담기 함수
     // 해당 데이터는 쿠키혹은 세션으로 남기기(더 권장되는 방식으로)
@@ -65,7 +63,6 @@ export default function BookingProvider({ children }) {
           console.log('전체예약 배열: ', bookedlistAll );
     };
 
-
     // 예약 취소 버튼 함수
     // removeBookInfo
       const removeBookInfo = (bookId) => {
@@ -80,7 +77,7 @@ export default function BookingProvider({ children }) {
         );
 
         alert("예약이 취소되었습니다.");
-      };
+      };   
 
   // ================= 금액 =================
   const calculatePrice = (car) => {
@@ -136,6 +133,8 @@ export default function BookingProvider({ children }) {
 
     return finalPrice;
   }
+
+
 
   return (
     <BookingContext.Provider value={{

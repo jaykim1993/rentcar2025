@@ -234,7 +234,9 @@ const getFilteredCars = () => {
                                  )}
                                 </tbody>
                             </table>
-                            <button className="guideGoToBook">예약하러가기</button>
+                            <div className="guideGoToBookBox">
+                                <Link to='/searchcarlist'className="guideGoToBook"  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>예약하러가기</Link>
+                            </div>
                         </div>
                     )}
                     </div>

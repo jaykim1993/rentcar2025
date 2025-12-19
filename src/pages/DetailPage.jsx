@@ -14,9 +14,12 @@ import 'leaflet/dist/leaflet.css';
 
 export default function DetailPage(){
     // console.log('여기왔어');
-    const { availableCars, filteredInfoUser } = useContext(CalendarContext);
+    const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn, filteredInfoUser } = useContext(CalendarContext);
 
     const { addBookInfo, calculatePrice } = useContext(BookingContext);
+
+    // console.log('calculatePrice');
+    // console.log(calculatePrice);
 
     // 차 id 가져오기
     const { id } = useParams();
@@ -25,10 +28,10 @@ export default function DetailPage(){
     const filterCar = filteredInfoUser.find(car => car.id === Number(id)) || filteredInfoUser[0];
  
     
-    console.log('selectedCar');
-    console.log(selectedCar)
-    console.log('filterCar');
-    console.log(filterCar)
+    // console.log('selectedCar');
+    // console.log(selectedCar)
+    // console.log('filterCar');
+    // console.log(filterCar)
 
     // true인 옵션만 필터링
     const getActiveOptions = (car) => {
@@ -61,10 +64,6 @@ export default function DetailPage(){
   
     let detail_lat=detail?.lat;
     let detail_lng=detail?.lng;
-
-    console.log(detail_lat);
-    console.log(detail_lng);
-    console.log(detail);
 
     if(!selectedCar) return <div>차량정보를 불러올 수 없습니다.</div>;
 
