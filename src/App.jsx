@@ -35,6 +35,7 @@ function App() {
                 <Route path="/guide" element={<GuidePage/>}/>
                 <Route path="/customerservice" element={<CustomerService/>}/>
                 <Route path="/location" element={<LocationPage/>}/>
+                <Route path="/mypage" element={<Mypage/>}/>
                 <Route path="/login" element={<LoginForm/>}/>
                 <Route path="/joinA" element={<JoinFormA/>}/>
                 <Route path="/joinB" element={<JoinFormB/>}/>

@@ -144,7 +144,7 @@ input:checked + .checkmark {
     top: 120px;
     z-index: 100;
     width: 1060px;
-   height: 620px;
+   height: 820px;
    background-color: #fff;
    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
    border-radius: 15px;
@@ -157,13 +157,13 @@ input:checked + .checkmark {
     padding-right: 25px;
 }
 
-.calendar-slide.open {
+#root .Home .calendar-slide.open {
   max-height: 800px; /* 캘린더 높이 예상값 */
   position: absolute;
   top: 120px;
   z-index: 100;
-   width: 1060px;
-   height: 620px;
+   width: 710px;
+   height: 785px;
    background-color: #fff;
    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
    border-radius: 15px;

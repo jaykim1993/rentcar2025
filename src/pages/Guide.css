@@ -229,19 +229,23 @@
     height: 70px;
     border-bottom: 1px solid rgb(212, 212, 212);
 }
+.guideGoToBookBox{
+    width: 900px;
+    display: flex;
+    justify-content: center;
+}
 .guideGoToBook{
-    display: block;
-    width: 450px;
-    margin: 50px auto;
-    padding: 10px;
-    font-size: 22px;
+    width: 400px;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    margin-bottom: 80px;
     background-color: black;
     color: white;
-    height: 70px;
-    border-radius: 15px;
-    outline: none;
-    border: none;
+    font-size: 20px;
+    border-radius: 10px;
 }
+
 .guideGoToBook:hover{
     background-color: rgb(56, 56, 56);
 }

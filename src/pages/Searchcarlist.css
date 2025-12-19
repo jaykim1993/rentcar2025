@@ -6,7 +6,7 @@ a, p, h4, h3, h2, h1{
 }
 #root .Recentcar{
     width: 1300px;
-    margin: 50px auto;
+    margin: 120px auto;
     display: flex;
     gap: 50px
 }
@@ -76,8 +76,10 @@ a, p, h4, h3, h2, h1{
 #root .Recentcar .R_carlist{
     width: 900px;
 }
+
 #root .Recentcar .R_carlist .cate_choice{
     position: relative;
+    margin-top: 20px;
 }
 /* 카테고리 선택 취소버튼 */
 #root .Recentcar .R_carlist .cate_choice .cate_Btn{
@@ -109,7 +111,7 @@ a, p, h4, h3, h2, h1{
     text-align: right;
     position: absolute;
     right: 0;
-    top: -45px;
+    bottom: -53px;
 }
 #root .Recentcar .R_carlist .cate_choice .delBtn > button{
     height: 40px;
@@ -133,6 +135,38 @@ a, p, h4, h3, h2, h1{
     color: #2591cf;
 }
 
+/* 총 n대 */
+#root .Recentcar .R_carlist > p{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    color: #8d8d8d;
+}
+#root .Recentcar .R_carlist > p strong{
+    color: #333;
+    font-size: 19px;
+}
+
+/* 날짜 . 지점 선택 */
+#root .Recentcar .R_carlist .R_reservation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+#root .Recentcar .R_carlist .R_reservation .R_spotTable{
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+#root .Recentcar .R_reservation .R_spotTable .searchButton > button{
+    border: none;
+    background-color: #e5e7eb;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 18px;
+}
+
 /* 목록 */
 #root .Recentcar .R_carlist ul li a{
     width: 900px;
@@ -143,9 +177,10 @@ a, p, h4, h3, h2, h1{
     align-items: center;
     margin-bottom: 50px;
     padding: 40px 30px;
-    background-color: #fff;
+    background-color: #f6f7f8;
     /* border: 1px solid #ccc; */
-    box-shadow: 0 0 7px rgba(0,0,0,0.3);
+    /* box-shadow: 0 0 7px rgba(0,0,0,0.15); */
+    /* border: 1px solid #ccc; */
     border-radius: 10px;
 }
 .car_variant_info.Line_active{
@@ -159,7 +194,7 @@ a, p, h4, h3, h2, h1{
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e5e7eb;
     width: 100%;
 }
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info{
@@ -170,6 +205,7 @@ a, p, h4, h3, h2, h1{
 }
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover h4,
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover p,
+#root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover strong,
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover i{
     color: #0b79b7;
 }
@@ -211,6 +247,7 @@ a, p, h4, h3, h2, h1{
 }
 .grouped_car_item .car_list_ul .car_variant_info > h4{
     font-size: 20px;
+    
 }
 .grouped_car_item .car_list_ul .car_variant_info .carPrice{
     display: flex;
@@ -218,4 +255,190 @@ a, p, h4, h3, h2, h1{
 }
 .grouped_car_item .car_list_ul .car_variant_info .carPrice > strong{
     font-size: 20px;
+}
+
+/* ---------------------------------- */
+
+/* 예약섹션 */
+/* #root .R_carlist .R_reservation{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 80px;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+    background-color: #f2f2f2;
+    margin: 50px auto;
+    width: 720px;
+} */
+#root .R_carlist .R_dateReservation{
+    display: flex;
+    border: 1px solid red;
+}
+
+/* 지점선택 */
+#root .R_carlist .R_dateReservation .R_spotTable{
+    display: flex;
+    align-items: center;
+}
+#root .R_carlist .R_dateReservation .R_spotTable .spot_choice{
+    width: 350px;
+}
+#root .R_carlist .R_dateReservation .R_spotTable .spot_choice h2{
+    cursor: pointer;
+}
+/* 찾기버튼 */
+#root .R_carlist .R_dateReservation .R_spotTable .searchButton{
+    width: 170px;
+    padding: 15px 0px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0b79b7 ;
+    border: none;
+}
+#root .R_carlist .R_dateReservation .R_spotTable .searchButton i{
+    color: #fff;
+    /* font-weight: bold; */
+}
+
+/* 지점 선택 모달 */
+#root .R_carlist .R_location{
+    width: 444px;
+    margin: 0 auto;
+    padding: 25px;
+    padding-bottom: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    position: absolute;
+    top: 120px;
+    right: 170px;
+    z-index: 100;
+}
+
+/* 달력 */
+.calendar-slide {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    position: absolute;
+    top: 120px;
+    z-index: 100;
+    width: 1060px;
+   height: 620px;
+   background-color: #fff;
+   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+   border-radius: 15px;
+}
+.calendar-slide .R_close02 > i{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: #999;
+    padding-right: 25px;
+}
+
+.calendar-slide.open {
+  max-height: 800px; /* 캘린더 높이 예상값 */
+  position: absolute;
+  top: 120px;
+  z-index: 100;
+   width: 1060px;
+   height: 620px;
+   background-color: #fff;
+   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+   border-radius: 15px;
+   padding: 25px 5px 0 0;
+}
+.calendar-slide.open .R_close02 > i{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: #999;
+    padding-right: 25px;
+}
+
+/* 지점 선택 목록 */
+#root .R_carlist .R_location .R_close01 > i{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    color: #999;
+}
+#root .R_carlist .R_location .R_close01:hover > i{
+    color: #333;
+}
+#root .R_carlist .R_location .R_selectLocation{
+    /* border: 1px solid red; */
+    position: relative;
+    padding-top: 20px;
+}
+#root .R_carlist .R_location .R_selectLocation > span{
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+#root .R_carlist .R_location .R_selectLocation p{
+    font-size: 16px;
+    margin-bottom: 37px;
+    display: flex;
+    align-items: center;
+}
+#root .R_carlist .R_location .R_selectLocation p > span{
+    font-size: 12px;
+    color: rgb(157, 156, 156);
+    margin-left: 10px;
+}
+#root .R_carlist .R_location .R_selectLocation .R_detail{
+    width: 40px;
+    height: 30px;
+    border: none;
+    font-size: 14px;
+    border-radius: 3px;
+}
+#root .R_carlist .R_location .R_selectLocation .R_detail:hover{
+   background-color: rgb(225, 225, 225);
+}
+#root .R_carlist .R_location .R_selectLocation .R_gu{
+    display: flex;
+    justify-content: space-between;
+}
+#root .R_carlist .R_location .R_selectLocation .R_gu > p{
+    cursor: pointer;
+}
+#root .R_carlist .R_location .R_selectLocation .R_seoul::before{
+    content: '';
+    width: 100%;
+    border-bottom: 1px solid rgb(227, 227, 227);
+    position: absolute;
+    top:215px;
+}
+#root .R_carlist .R_location .R_selectLocation .R_gimpo::before{
+    content: '';
+    width: 100%;
+    border-bottom: 1px solid rgb(227, 227, 227);
+    position: absolute;
+    top:310px;
+}
+
+/* 지점 위치 상세보기 (지도) */
+#root .R_carlist .R_location .R_selectLocation_detail{
+    padding: 25px 0 25px 0;
+    width: 444px;
+}
+#root .R_carlist .R_location .R_selectLocation_detail > h5{
+    padding: 20px 0;
+}
+#root .R_carlist .R_location .R_selectLocation_detail > h5::before{
+    content: '';
+    width: 394px;
+    border-bottom: 1px solid rgb(227, 227, 227);
+    position: absolute;
+    top:710px;
+}
+#root .R_carlist .R_location .R_selectLocation_detail .R_detial_address_title{
+    color: rgb(190, 190, 190) ;
+    font-size: 15px;
+    padding: 10px 0;
 }
