@@ -18,6 +18,7 @@ import CustomerService from './pages/CustomerService'
 import DetailPage from './pages/DetailPage'
 import Recentcarlist from './pages/Recentcarlist'
 import Mypage from './pages/Mypage'
+import Reservation from './pages/Reservation'
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/joinC" element={<JoinFormC/>}/>
                 <Route path="/recent" element={<Recentcarlist/>}/>
                 <Route path="/mypage" element={<Mypage/>}/>
+                <Route path="/reservation" element={<Reservation/>}/>
               </Routes>
               <Footer />
             </BrowserRouter>

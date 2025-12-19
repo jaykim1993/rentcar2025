@@ -1,0 +1,20 @@
+#root .ReservationSection{
+    width: 1300px;
+    margin: 120px auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 좌측 */
+#root .ReservationSection .Reser_reservationInfo{
+    width: 900px;
+}
+
+/* 우측 */
+#root .ReservationSection .Reser_reservationSummary{
+    width: 300px;
+}
+#root .ReservationSection .Reser_reservationSummary .summary_card .info_box > hr{
+    margin: 30px 0;
+}

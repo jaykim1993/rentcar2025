@@ -102,6 +102,11 @@ export default function CalendarProvider({ children }) {
   navigate("/searchcarlist");
 };
 
+// 지점 모달 toggle
+  const [isLocation, setIsLocation] = useState(false);
+  // 달력 모달 toggle
+  const [isCalendar, setIsCalendar] = useState(false);
+
   return (
     <CalendarContext.Provider
       value={{
@@ -130,7 +135,13 @@ export default function CalendarProvider({ children }) {
 
         /* 함수 */
         handleDateFilter,
-        handleSearchBtn
+        handleSearchBtn,
+
+        // 모달창 열림 닫힘
+        setIsLocation,
+        setIsCalendar,
+        isLocation,
+        isCalendar
       }}
     >
       {children}

@@ -1,17 +1,18 @@
 import { useState, useContext, useEffect } from "react";
-import { DataContext } from "../contexts/Datacontext";
 import { CalendarContext } from "../contexts/Calendarcontext";
-import './DetailPage.css'
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import { BookingContext } from "../contexts/Bookingcontext";
 import { AuthContext } from "../contexts/Authcontext";
+import { DataContext } from "../contexts/Datacontext";
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // MapContainer = 맵을 불러오는 상자 
 // TileLayer 하단 설명 참고
 // Marker 마커 좌표 설정시 마커 생성
 // Popup 마커 클릭시 텍스트 출력
 import 'leaflet/dist/leaflet.css';
+import './DetailPage.css'
 
 export default function DetailPage(){
     // console.log("재가공된 filteredInfoUser: ", filteredInfoUser);
@@ -25,6 +26,8 @@ export default function DetailPage(){
     const { id } = useParams();
     // user id 가져오기
     const { userid } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const selectedCar = availableCars.find(car => car.id === Number(id)) || availableCars[0];
     const filterCar = filteredInfoUser.find(car => car.id === Number(id)) || filteredInfoUser[0];
@@ -53,36 +56,13 @@ export default function DetailPage(){
                 brand: selectedCar.brand,
                 brand_logo: selectedCar.brand_logo,
                 fuel_type: selectedCar.fuel_type,
+                viewDate: new Date().toISOString().slice(0, 10),
             };
 
         const updated = [newRecentView, ...filtered];
 
         localStorage.setItem("recentView", JSON.stringify(updated));
     }, [selectedCar?.id, userid]);
-
-    // 예약하기 버튼 함수
-    const addBookInfo = () => {
-        if (!filterCar || !userid) {
-            alert("예약 정보를 다시 선택해주세요.");
-            return;
-        } else {
-            alert("예약이 완료되었습니다.");
-        }
-        setBookedlistAll(prev => [
-          ...prev,
-          {
-            id: `${Date.now()}_${userid}`,
-            bookedDate: new Date().toISOString().slice(0, 10),
-            userId:userid,
-            carId:selectedCar.id,
-            startDate: filterCar.filterStartDate,
-            endDate: filterCar.filterEndDate,
-            startTime: filterCar.filterStartTime,
-            endTime: filterCar.filterEndTime,
-            price: totalPrice
-          }
-        ]);
-    };
 
     // true인 옵션만 필터링
     const getActiveOptions = (car) => {
@@ -121,13 +101,62 @@ export default function DetailPage(){
     // 가격 계산
     let date = (new Date(`${filterCar.filterEndDate}T${filterCar.filterEndTime}`)-new Date(`${filterCar.filterStartDate}T${filterCar.filterStartTime}`))/ (1000 * 60 * 30);
 
-    console.log('기간: ',date);
+    // console.log('기간: ',date);
 
     const totalPrice =
         date && calculatePrice && selectedCar
         ? calculatePrice(selectedCar) * date
         : 0;
 
+    // ===================== Reservation으로 값 넘기기 ========================
+    const toReservation = () => {
+        if(!filterCar || !userid){
+            alert("예약 정보를 다시 선택해주세요");
+            return;
+        }
+        
+        // 결제 페이지로 값 전달
+        navigate('/reservation', {
+            state: {
+                car: selectedCar,
+                filter: filterCar,
+                totalPrice: totalPrice,
+                id: `${Date.now()}_${userid}`,
+                bookedDate: new Date().toISOString().slice(0, 10),
+                userid:userid,
+                carId:selectedCar.id,
+                filterStartDate: filterCar.filterStartDate,
+                filterEndDate: filterCar.filterEndDate,
+                filterStartTime: filterCar.filterStartTime,
+                filterEndTime: filterCar.filterEndTime,
+                totalPrice: totalPrice
+            }
+        })
+    };
+
+    // 예약하기 버튼 함수
+    const addBookInfo = () => {
+        if (!filterCar || !userid) {
+            alert("예약 정보를 다시 선택해주세요.");
+            return;
+        } else {
+            alert("예약이 완료되었습니다.");
+        }
+        setBookedlistAll(prev => [
+          ...prev,
+          {
+            id: `${Date.now()}_${userid}`,
+            bookedDate: new Date().toISOString().slice(0, 10),
+            userId:userid,
+            carId:selectedCar.id,
+            startDate: filterCar.filterStartDate,
+            endDate: filterCar.filterEndDate,
+            startTime: filterCar.filterStartTime,
+            endTime: filterCar.filterEndTime,
+            price: totalPrice
+          }
+        ]);
+    };
     return(
         <div className="DetailPage">
             {/* 좌측 - 상세 전체 */}
@@ -276,7 +305,8 @@ export default function DetailPage(){
                         <p>총&nbsp;&nbsp;<strong>{totalPrice.toLocaleString()}</strong>&nbsp;원</p>
                     </div>
                     <button className="reserve_btn"
-                    onClick={addBookInfo}
+                    // onClick={addBookInfo}
+                    onClick={toReservation}
                     >예약하기
                     </button>
                 </div>

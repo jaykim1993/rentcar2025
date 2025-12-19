@@ -13,37 +13,63 @@ input:checked + .checkmark {
 }
 #root .Home{
     width: 1300px;
-    margin: 0 auto;
+    margin: 120px auto;
     position: relative;
+    /* border: 1px solid red; */
 }
 
 /* 예약섹션 */
 #root .Home .H_reservation{
+    width: 880px;
+    height: 136px;
     display: flex;
     justify-content: space-between;
-    padding: 20px 80px;
-    border: 1px solid #ccc;
+    padding: 18px 50px;
+    border: 1px solid #dbdbdb;
     border-radius: 100px;
-    background-color: #f2f2f2;
+    background-color: #f2f4f7;
     margin: 50px auto;
 }
 /* 날짜/시간선택 */
-/* #root .Home .H_reservation .H_dateTable{
-    width: 300px;
-} */
+#root .Home .H_reservation .H_dateTable{
+    flex: 1;
+    margin-top: 25px;
+
+}
+#root .Home .H_reservation .H_dateTable > p{
+    color: rgb(176, 176, 176);
+    font-size: 15px;
+}
+#root .Home .H_reservation .H_spotTable .spot_choice > p {
+    color: rgb(176, 176, 176);
+    font-size: 15px;
+}
+
+#root .Home .H_reservation .H_dateTable .H_dateTitle > p{
+    font-size: 18px;
+    font-weight: 700;
+}
 /* 지점선택 */
 #root .Home .H_reservation .H_spotTable{
+    flex: 1;
     display: flex;
     align-items: center;
+    position: relative;
 }
 #root .Home .H_reservation .H_spotTable .spot_choice{
-    width: 350px;
+    margin-left: 30px;
 }
-#root .Home .H_reservation .H_spotTable .spot_choice h2{
+#root .Home .H_reservation .H_spotTable .spot_choice .H_spotTitle h2{
     cursor: pointer;
 }
+#root .Home .H_reservation .H_spotTable .spot_choice .H_spotTitle >p{
+    font-size: 18px;
+    font-weight: 700;
+}
 /* 찾기버튼 */
-#root .Home .H_reservation .H_spotTable .searchButton{
+#root .Home .H_reservation .H_spotTable .H_searchButton{
+    position: absolute;
+    right: 0;
     width: 170px;
     padding: 15px 0px;
     border-radius: 50px;
@@ -53,7 +79,7 @@ input:checked + .checkmark {
     background-color: #0b79b7 ;
     border: none;
 }
-#root .Home .H_reservation .H_spotTable .searchButton i{
+#root .Home .H_reservation .H_spotTable .H_searchButton i{
     color: #fff;
     /* font-weight: bold; */
 }
@@ -65,6 +91,7 @@ input:checked + .checkmark {
     width: 100%;
     height: 300px;
     margin: 50px 0;
+    border-radius: 10px;
 }
 
 /* ---------------------------------- */
@@ -102,21 +129,40 @@ input:checked + .checkmark {
 
 /* 최근 본 차량 */
 #root .Home .H_sec03{
-    margin-bottom: 50px;
-}
-#root .Home .H_sec03 ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
-    /* justify-content: space-between; */
+    padding-bottom: 20px;
+}
+#root .Home .H_sec03 .H_more > span{
+    color: #888;
+    font-weight: 500;
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 15px;
+}
+#root .Home .H_sec03 .H_more > span:hover{
+    color: #333;
+}
+#root .Home .H_sec03_1{
+    margin-bottom: 50px;
+    display: flex;
     gap: 25px;
 }
-#root .Home .H_sec03 ul li{
+#root .Home .H_sec03_1 .recent_car_item{
+    display: inline-block;
+    background-color: #eeeeee;
     width: 220px;
     height: 270px;
-    background-color: #0b79b7 ;
     border-radius: 10px;
+    overflow: hidden;
+}
+#root .Home .H_sec03_1 .recent_car_item:hover{
+    background-color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+#root .Home .H_sec03_1 .recent_car_item > img{
+    width: 350px;
+    padding: 50px 0 0 30px;
 }
 /* ---------------------------------- */
 
@@ -131,7 +177,7 @@ input:checked + .checkmark {
     border-radius: 15px;
     position: absolute;
     top: 120px;
-    right: 170px;
+    right: 180px;
     z-index: 100;
 }
 
@@ -161,6 +207,7 @@ input:checked + .checkmark {
   max-height: 800px; /* 캘린더 높이 예상값 */
   position: absolute;
   top: 120px;
+  left: 210px;
   z-index: 100;
    width: 710px;
    height: 785px;
