@@ -16,7 +16,8 @@ import 'leaflet/dist/leaflet.css';
 
 export default function Home(){
   const navigate = useNavigate();
-  const {setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar} = useContext(CalendarContext);
+  const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
+         handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar} = useContext(CalendarContext);
   const {myRecentlist} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
 
@@ -123,24 +124,24 @@ const recentViewList = myRecentlist(userid);
     <div className="Home">
         {/* 예약 섹션 */}
         <div className="H_reservation">
-            <div className="H_dateTable">
+            <div className={`H_dateTable ${isCalendar ? "open" : ""}`}>
                   <p>언제?</p>
                   <div className="H_dateTitle" onClick={calendarHandler}>
                     {apply?
                     <p>
                      {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
                     </p>:
-                    <h2>날짜선택</h2>}
+                    <p>날짜를 선택하세요</p>}
                   </div>
-                  
-                
             </div>
     
             {/* 지점 선택 파트 */}
             <div className="H_spotTable">
-                <div className="spot_choice">
+                <div className={`spot_choice ${isLocation ? "open" : ""}`}>
                     <p>어디?</p>
-                    <div className="H_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
+                    <div className="H_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> 
+                    :<p>지점을 선택하세요</p>}
+                    </div>
                 </div>
                 <button className="H_searchButton" type="submit" onClick={()=>handleSearchBtn(navigate)}>
                     예약할 차량 찾기
@@ -280,16 +281,18 @@ const recentViewList = myRecentlist(userid);
         <div className="H_sec02">
             <h2>인기순</h2>
             <button type="button">많이 찾는 모델</button>
-            <ul>
-                <li><img src='/images/cars/hy_2.webp' alt='car_img'/></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
         </div>
+        <div className="H_sec02_1">
+            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
+            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
+            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
+            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
+            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
+        </div>
+        
 
         {/* sec03 - 최근본차량 */}
+        {userid && <div className="H_section03">
         <div className="H_sec03">
             <h2>{username}님의 최근 본 차량</h2>
             <Link to={'/recent'} className="H_more">
@@ -303,6 +306,7 @@ const recentViewList = myRecentlist(userid);
               </Link>
             ))}
         </div>
+        </div>}
 
         {/* 고객센터 */}
         <div className="H_customer">
