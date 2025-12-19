@@ -17,11 +17,10 @@ export default function Home(){
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn} = useContext(CalendarContext);
 
     const images = [
-      "https://picsum.photos/1200/430?random=1",
-      "https://picsum.photos/1200/430?random=2",
-      "https://picsum.photos/1200/430?random=3",
-      "https://picsum.photos/1200/430?random=4",
-      "https://picsum.photos/1200/430?random=5",
+      "/images/banner/banner01.png",
+      "/images/banner/banner02.png",
+      "/images/banner/banner03.png",
+      "/images/banner/banner04.png",
     ];
   
     const [index, setIndex] = useState(0);
