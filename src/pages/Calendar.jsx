@@ -1,4 +1,4 @@
-import { useContext, useRef, useMemo } from "react";
+import { useContext, useRef, useMemo, useState } from "react";
 import { CalendarContext } from "../contexts/Calendarcontext";
 import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
@@ -9,6 +9,7 @@ import "./Calendar.css";
 
 export default function RentalCalendar() {
   const {
+    setIsCalendar,
     startDate,
     setStartDate,
     endDate,
@@ -87,6 +88,7 @@ export default function RentalCalendar() {
       return;
     }else{
       setApply(!apply);
+      setIsCalendar(false);
     }
 
     handleDateFilter({
@@ -128,8 +130,10 @@ export default function RentalCalendar() {
     return events;
   }, [startDate, endDate]);
 
+
   return (
-    <div className="calendarWrap">
+    <>
+      <div className="calendarWrap">
       <FullCalendar
         ref={calendarRef}
         plugins={[multiMonthPlugin, interactionPlugin]}
@@ -216,6 +220,7 @@ export default function RentalCalendar() {
         </div>
       {/* )} */}
       </div>
-    // </div>
+    </>
+    
   );
 }
