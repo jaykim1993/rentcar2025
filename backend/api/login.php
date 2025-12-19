@@ -28,7 +28,7 @@ if (empty($userid) || empty($userpw)) {
 // DB 사용자 정보 조회
 // SELECT userid, userpw FROM users WHERE userid=? AND userpw=?
 // sql문 작성 시 담을 변수 지정
-$sql = 'SELECT userid, userpw FROM users WHERE userid=? AND userpw=?';
+$sql = 'SELECT userid, username FROM users WHERE userid=? AND userpw=?';
 // admin, 1234 => 결과를 만족하면 출력될 데이터
 // DB에 연결해야 sql문을 실행할 수 있다.
 $stmt = $conn->prepare($sql);
@@ -41,15 +41,16 @@ $result = $stmt->get_result();
 
 // 결과를 배열로 된 변수에 저장한다.
 $response = [];
-// num_rows => 행의 개수 출력 속성(property)
-if($result->num_rows >= 1){
-    // 로그인할 id, pw가 존재할때
+
+if ($result->num_rows >= 1) {
+    $user = $result->fetch_assoc();   // 이과정을 하지 않으면 DB 내 정보가 안들어온다
+    // 셀렉트문으로 추출한 결과를 배열로 가져오는 메서드(한줄의 배열로 저장한다.)
     $response['status'] = 'success';
     $response['message'] = '로그인 성공';
-        // AuthContext 이후 추가된 내용!!
-        // 로그인 성공 시, userid를 $reponse['userid'] 담아야 LoginForm.jsx에서 userid를 화면에 출력 시킬 수 있다.
-        $response['userid'] = $userid;
-} else {
+    $response['userid'] = $user['userid']; // 한줄의 배열
+    $response['username'] = $user['username']; // 한줄의 배열
+}
+else {
     // 로그인할 id, pw가 존재하지 않을 때
     $response['status'] = 'fail';
     $response['message'] = '아이디 또는 비밀번호가 일치하지 않습니다.';

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import GuidePage from './pages/Guide'
 import Header from './common/Header'
@@ -17,14 +16,16 @@ import Footer from './common/Footer'
 import LocationPage from './pages/Location'
 import CustomerService from './pages/CustomerService'
 import DetailPage from './pages/DetailPage'
+import Recentcarlist from './pages/Recentcarlist'
+import Mypage from './pages/Mypage'
 
 function App() {
 
   return (
     <AuthProvider>
       <DataProvider>
-        <CalendarProvider>
-          <BookingProvider>
+        <BookingProvider>
+          <CalendarProvider>
             <BrowserRouter>
               <Header/>
               <Routes>
@@ -38,11 +39,13 @@ function App() {
                 <Route path="/joinA" element={<JoinFormA/>}/>
                 <Route path="/joinB" element={<JoinFormB/>}/>
                 <Route path="/joinC" element={<JoinFormC/>}/>
+                <Route path="/recent" element={<Recentcarlist/>}/>
+                <Route path="/mypage" element={<Mypage/>}/>
               </Routes>
               <Footer />
             </BrowserRouter>
-            </BookingProvider>
-        </CalendarProvider>
+          </CalendarProvider>
+        </BookingProvider>
       </DataProvider>
     </AuthProvider>
   )

@@ -135,7 +135,7 @@ export default function Home(){
                 </div>
                 <div className="searchButton">
                     
-                      <button type="submit" onClick={()=>handleSearchBtn(navigate)} onMouseOver={()=>console.log('오버확인')}>
+                      <button type="submit" onClick={()=>handleSearchBtn(navigate)}>
                           예약할 차량 찾기
                           <i className="bi bi-arrow-right"></i>
                       </button>

@@ -9,6 +9,7 @@ export default function LoginForm() {
     const [userid, setUserid] = useState('');
     const [userpw, setUserpw] = useState('');
 
+   
     const navigate = useNavigate();
     const {loginsave} = useContext(AuthContext);
 
@@ -28,13 +29,14 @@ export default function LoginForm() {
             );
 
             console.log("login 입력", res.data);
-
             if (res.data.status === 'success') {
-                loginsave({ userid: res.data.userid });
-                alert(`${res.data.userid}님, 환영합니다.`);
+                loginsave({
+                    userid: res.data.userid,
+                    username: res.data.username,
+                });
+
+                alert(`${res.data.username}님, 환영합니다.`);
                 navigate('/');
-                setUserid('');
-                setUserpw('');
             } else {
                 alert('아이디 또는 비밀번호가 일치하지 않습니다.');
             }

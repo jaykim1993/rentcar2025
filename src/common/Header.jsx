@@ -7,7 +7,7 @@ export default function Header() {
     const navigate = useNavigate();
 
     // login 관련 Context API에서 변수&함수 불러오기
-    const{userid, logout} = useContext(AuthContext);
+    const{userid, username, logout} = useContext(AuthContext);
 
     // logout 핸들러 함수
     const logoutHandler =()=>{
@@ -60,7 +60,7 @@ export default function Header() {
                         // 로그인 상태일 때
                         <>
                             <button className='headerBtn' type='text'>
-                                {userid?.userid}님
+                                {username}님
                             </button>
                             <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
                                 예약내역
@@ -85,7 +85,7 @@ export default function Header() {
                     }
                 </nav>
                 <div className={`headerUserBookedModal ${openUserBookedModal? "open":""}`}>
-                    <strong className='headerModalH'>{userid?.userid}님의 예약내역</strong>
+                    <strong className='headerModalH'>{username}님의 예약내역</strong>
                     <button className="headerModalBtnX" onClick={closeModal}>
                         <i className="bi bi-x"></i>
                     </button>
@@ -115,8 +115,8 @@ export default function Header() {
                         <Link to={'/location'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>지점안내</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         <Link to={'/guide'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>이용가이드</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         <p className='headerNavH'>회원 맞춤</p>
-                        <li className='headerNavLi'><div>최근 본 차량</div> <div className='headerNavpointer'>→</div></li><br />
-                        <li className='headerNavLi'><div>마이페이지</div> <div className='headerNavpointer'>→</div></li><br />
+                        <Link to={'/recent'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>최근 본 차량</div> <div className='headerNavpointer'>→</div></li><br /></Link>
+                        <Link to={'/mypage'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>마이페이지</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                     </ul>
                 </div>
             </nav>

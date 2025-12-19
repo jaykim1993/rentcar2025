@@ -4,6 +4,7 @@ import { CalendarContext } from "../contexts/Calendarcontext";
 import './DetailPage.css'
 import { Link, useParams } from "react-router-dom";
 import { BookingContext } from "../contexts/Bookingcontext";
+import { AuthContext } from "../contexts/Authcontext";
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // MapContainer = 맵을 불러오는 상자 
@@ -15,17 +16,71 @@ import 'leaflet/dist/leaflet.css';
 export default function DetailPage(){
     // console.log('여기왔어');
     const { availableCars, filteredInfoUser } = useContext(CalendarContext);
-
-    const { addBookInfo } = useContext(BookingContext);
-
+    console.log("재가공된 filteredInfoUser: ", filteredInfoUser);
+    const { bookedlistAll, setBookedlistAll } = useContext(BookingContext);
     // 차 id 가져오기
     const { id } = useParams();
+    // user id 가져오기
+    const { userid } = useContext(AuthContext);
 
     const selectedCar = availableCars.find(car => car.id === Number(id)) || availableCars[0];
- 
-    
-    console.log('selectedCar');
-    console.log(selectedCar)
+    const filterCar = filteredInfoUser.find(car => car.id === Number(id)) || filteredInfoUser[0];
+
+    // 최근 본 차량 추가(Local Storage)
+    useEffect(() => {
+        if (!selectedCar || !userid) return;
+
+            const prev = JSON.parse(localStorage.getItem("recentView")) || [];
+
+            // 같은 유저 + 같은 차량 제거
+            const filtered = prev.filter(
+                (item) =>
+                !(
+                    item.userid === userid &&
+                    item.car_id === selectedCar.id
+                )
+            );
+
+            const newRecentView = {
+                id: `${Date.now()}_${userid}`,
+                userid: userid,
+                car_id: selectedCar.id,
+                model: selectedCar.model,
+                car_img: selectedCar.car_img,
+                brand: selectedCar.brand,
+                brand_logo: selectedCar.brand_logo,
+                fuel_type: selectedCar.fuel_type,
+            };
+
+        const updated = [newRecentView, ...filtered];
+
+        localStorage.setItem("recentView", JSON.stringify(updated));
+    }, [selectedCar?.id, userid]);
+
+    // 예약하기 버튼 함수
+    const addBookInfo = () => {
+        if (!filterCar || !userid) {
+            alert("예약 정보를 다시 선택해주세요.");
+            return;
+        } else {
+            alert("예약이 완료되었습니다.");
+        }
+        setBookedlistAll(prev => [
+          ...prev,
+          {
+            id: `${Date.now()}_${userid}`,
+            bookedDate: new Date().toISOString().slice(0, 10),
+            userId:userid,
+            carId:selectedCar.id,
+            startDate: filterCar.filterStartDate,
+            endDate: filterCar.filterEndDate,
+            startTime: filterCar.filterStartTime,
+            endTime: filterCar.filterEndTime,
+            price: totalPrice
+          }
+        ]);
+    };
+    const totalPrice = 10000;// 임시값
 
     // true인 옵션만 필터링
     const getActiveOptions = (car) => {
@@ -59,11 +114,12 @@ export default function DetailPage(){
     let detail_lat=detail?.lat;
     let detail_lng=detail?.lng;
 
-    console.log(detail_lat);
-    console.log(detail_lng);
-    console.log(detail);
+    // console.log(detail_lat);
+    // console.log(detail_lng);
+    // console.log(detail);
 
     if(!selectedCar) return <div>차량정보를 불러올 수 없습니다.</div>;
+
 
     return(
         <div className="DetailPage">
@@ -117,7 +173,7 @@ export default function DetailPage(){
 
                 {/* 요금안내 */}
                 <div className="D_">
-                    <Link to={'/guide'}><h4>요금안내 <i class="bi bi-arrow-right-circle-fill"></i></h4></Link>
+                    <Link to={'/guide'}><h4>요금안내 <i className="bi bi-arrow-right-circle-fill"></i></h4></Link>
                     <p></p>
                 </div>
 
@@ -165,7 +221,10 @@ export default function DetailPage(){
                         <span>최종 결제 금액</span>
                         <strong>{/* car_price */} 원</strong>
                     </div>
-                    <button className="reserve_btn">예약하기</button>
+                    <button className="reserve_btn"
+                    onClick={addBookInfo}
+                    >예약하기
+                    </button>
                 </div>
             </div>
         </div>

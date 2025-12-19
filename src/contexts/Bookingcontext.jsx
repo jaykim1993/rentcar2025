@@ -1,112 +1,311 @@
 import { createContext, useContext, useState } from "react";
 import { AuthContext } from "./Authcontext";
-import { CalendarContext } from "./Calendarcontext";
+import { DataContext } from "./Datacontext";
+import { useEffect, useMemo } from "react";
+
 
 export const BookingContext = createContext();
 
 export default function BookingProvider({ children }) {
   const { userid } = useContext(AuthContext);
-  const { bookedlistAll, setBookedlistAll } = useContext(CalendarContext);
+  const { cars } = useContext(DataContext);
+      // bookedlistAll (기존 예약 배열)
+      // 20개의 초기값
+      // local storage에 저장되어있음
+    const INITIAL_BOOKED_LIST= [
+      {
+      id:'1766041300000_user01',
+      bookedDate: '2025-12-08',
+      userId:'user01',
+      carId:19,
+      startDate:'2025-12-03',
+      endDate:'2025-12-04',
+      startTime:'10:00',
+      endTime:'16:00',
+      price:14000
+      },
+      {
+      id:'1766041300001_user01',
+      bookedDate: '2025-12-09',
+      userId:'user01',
+      carId:105,
+      startDate:'2025-12-15',
+      endDate:'2025-12-20',
+      startTime:'09:00',
+      endTime:'10:00',
+      price:114000
+      },
+      {
+      id:'1766041300002_user02',
+      bookedDate: '2025-12-09',
+      userId:'user02',
+      carId:25,
+      startDate:'2025-12-19',
+      endDate:'2025-12-20',
+      startTime:'16:30',
+      endTime:'18:00',
+      price:18000
+      },
+      {
+      id:'1766041300003_user02',
+      bookedDate: '2025-12-10',
+      userId:'user02',
+      carId:32,
+      startDate:'2025-12-01',
+      endDate:'2025-12-10',
+      startTime:'08:30',
+      endTime:'18:00',
+      price:25000
+      },
+      {
+      id:'1766041300004_user03',
+      bookedDate: '2025-12-10',
+      userId:'user03',
+      carId:40,
+      startDate:'2025-12-16',
+      endDate:'2025-12-17',
+      startTime:'10:30',
+      endTime:'13:00',
+      price:200000
+      },
+      {
+      id:'1766041300005_user03',
+      bookedDate: '2025-12-10',
+      userId:'user03',
+      carId:56,
+      startDate:'2025-12-06',
+      endDate:'2025-12-14',
+      startTime:'09:00',
+      endTime:'21:30',
+      price:14000
+      },
+      {
+      id:'1766041300006_user04', 
+      bookedDate: '2025-12-11',
+      userId:'user04',
+      carId:102,
+      startDate:'2025-12-20',
+      endDate:'2025-12-24',
+      startTime:'07:00',
+      endTime:'22:30',
+      price:14000
+      },
+      {
+      id:'1766041300007_user04',
+      bookedDate: '2025-12-11',
+      userId:'user04',
+      carId:96,
+      startDate:'2025-12-24',
+      endDate:'2025-12-25',
+      startTime:'10:00',
+      endTime:'22:00',
+      price:14000
+      },
+      {
+      id:'1766041300008_user05',
+      bookedDate: '2025-12-11',
+      userId:'user05',
+      carId:90,
+      startDate:'2025-12-10',
+      endDate:'2025-12-11',
+      startTime:'17:00',
+      endTime:'23:00',
+      price:14000
+      },
+      {
+      id:'1766041300009_user05',
+      bookedDate: '2025-12-11',
+      userId:'user05',
+      carId:110,
+      startDate:'2025-12-19',
+      endDate:'2025-12-21',
+      startTime:'07:00',
+      endTime:'16:30',
+      price:14000
+      },
+      {
+      id:'1766041300010_user06',
+      bookedDate: '2025-12-11',
+      userId:'user06',
+      carId:116,
+      startDate:'2025-12-05',
+      endDate:'2025-12-07',
+      startTime:'10:00',
+      endTime:'22:30',
+      price:14000
+      },
+      {
+      id:'1766041300011_user06',
+      bookedDate: '2025-12-11',
+      userId:'user06',
+      carId:80,
+      startDate:'2025-12-11',
+      endDate:'2025-12-14',
+      startTime:'16:00',
+      endTime:'22:00',
+      price:14000
+      },
+      {
+      id:'1766041300012_user07',
+      bookedDate: '2025-12-12',
+      userId:'user07',
+      carId:116,
+      startDate:'2025-12-02',
+      endDate:'2025-12-06',
+      startTime:'08:30',
+      endTime:'22:00',
+      price:14000
+      },
+      {
+      id:'1766041300013_user07',
+      bookedDate: '2025-12-12',
+      userId:'user07',
+      carId:50,
+      startDate:'2025-12-15',
+      endDate:'2025-12-17',
+      startTime:'06:30',
+      endTime:'10:00',
+      price:14000
+      },
+      {
+      id:'1766041300014_user08',
+      bookedDate: '2025-12-12',
+      userId:'user08',
+      carId:100,
+      startDate:'2025-12-12',
+      endDate:'2025-12-13',
+      startTime:'16:00',
+      endTime:'20:00',
+      price:14000
+      },
+      {
+      id:'1766041300015_user08',
+      bookedDate: '2025-12-12',
+      userId:'user08',
+      carId:187,
+      startDate:'2025-12-19',
+      endDate:'2025-12-20',
+      startTime:'20:00',
+      endTime:'23:00',
+      price:14000
+      },
+      {
+      id:'1766041300016_user09',
+      bookedDate: '2025-12-12',
+      userId:'user09',
+      carId:180,
+      startDate:'2025-12-05',
+      endDate:'2025-12-08',
+      startTime:'12:00',
+      endTime:'16:00',
+      price:14000
+      },
+      {
+      id:'1766041300017_user09',
+      bookedDate: '2025-12-12',
+      userId:'user09',
+      carId:64,
+      startDate:'2025-12-18',
+      endDate:'2025-12-20',
+      startTime:'14:00',
+      endTime:'20:00',
+      price:14000
+      },
+      {
+      id:'1766041300018_user10',
+      bookedDate: '2025-12-12',
+      userId:'user10',
+      carId:190,
+      startDate:'2025-12-10',
+      endDate:'2025-12-12',
+      startTime:'13:30',
+      endTime:'17:30',
+      price:14000
+      },
+      {
+      id:'1766041300019_user10',
+      bookedDate: '2025-12-12',
+      userId:'user10',
+      carId:195,
+      startDate:'2025-12-15',
+      endDate:'2025-12-18',
+      startTime:'13:30',
+      endTime:'17:30',
+      price:14000
+      }
+    ];
+    const [bookedlistAll, setBookedlistAll] = useState(() => {
+      const saved = localStorage.getItem("bookedlistAll");
+      return saved ? JSON.parse(saved) : INITIAL_BOOKED_LIST;
+    });
+    useEffect(() => {
+      localStorage.setItem(
+        "bookedlistAll",
+        JSON.stringify(bookedlistAll)
+      );
+      console.log(bookedlistAll);
+    }, [bookedlistAll]);
 
-    // 개인의 최근 본 차량 내역 담길 상태 변수
-    // 로그인 상태에서 상세페이지를 눌렀을 때 데이터가 담기게
-    // recentViewlist=[{car_id,car_img,brand_logo,model_year, fuel_type}]
-    const [recentViewlist, setRecentViewlist] = useState([]);
-    // 개인의 예약된 내역 담길 상태변수
-    // booklistUser 는 recentViewResult와 같으나 앞 부분에 두개의 키 추가된 형태(booking_num, book_date)
-    const [booklistUser, setBooklistUser] = useState([]);
+
+    
+    // 예약 취소 버튼 함수
+    // 마이페이지 혹은 예약내역 페이지에서 예약 취소 버튼용
+      // const removeBookInfo = (bookId) => {
+      //   // booklistUser 에서 해당 데이터 제거
+      //   setBooklistUser((prev) =>
+      //     prev.((book) => book.id !== bookId)
+      //   );
+
+      //   // booklistAll 에서 해당 데이터 제거
+      //   setBookedlistAll((prev) =>
+      //     prev.((book) => book.id !== bookId)
+      //   );
+
+      //   alert("예약이 취소되었습니다.");
+      // };
 
 
+    //  Mypage.jsx 용 
+      // 예약 내역 보이기
+      // 전체 예약에서 userid 매칭해서 해당 user 예약내역
+      // + 차량 정보 합치기(cars)
+      const myBookings = useMemo(() => {
+          return bookedlistAll
+            .filter(book => book.userId === userid)
+            .map(book => {
+              const car = cars.find(c => c.id === book.carId);
+              return { ...book, car };
+            })
+            .sort(
+              (a, b) => new Date(b.startDate) - new Date(a.startDate)
+            );
+          }, [bookedlistAll, userid, cars]);
 
-  // 해당 차량 상세보기 클릭 시 해당 데이터 담기 함수
-    // 해당 데이터는 쿠키혹은 세션으로 남기기(더 권장되는 방식으로)
-    const addRecentView = (car) => {
-      setRecentViewlist((prev) => {
-        // 이미 본 차량 제거 (중복 방지)
-        const filtered = prev.filter(
-          (item) => item.car_id !== car.id
-        );
 
-        // 최근 본 차량 데이터 형태
-        const newItem = {
-          car_id: car.id,
-          car_img: car.image,
-          brand_logo: car.brand_logo,
-          model_year: car.model_year,
-          fuel_type: car.fuel_type,
+      
+      // Recentcarlist.jsx 용
+      // 최근 본 차량 목록 보이기
+      // 목록은 배열로 실존하지 않으며 local storage에만 존재한다
+      // localStorage 내에서 해당 userid에 부합하는 내용만 찾기
+        const myRecentlist = (userid) => {
+          if (!userid) return [];
+          const data = JSON.parse(localStorage.getItem("recentView")) || [];
+          return data
+            .filter(item => item.userid === userid)
+            .sort((a, b) => b.viewed_at - a.viewed_at)
         };
 
-        // 맨 앞에 추가
-        return [newItem, ...filtered];
-      });
-    };
-
-  
-  // 예약 버튼 함수
-    const addBookInfo = (selectedCar) => {
-  // selectedCar === filteredInfoUser 의 단일 객체
-
-      const bookingData = {
-        ...selectedCar,              // 화면에 쓰던 데이터 그대로
-        id: Date.now(),              // booking id만 추가
-        booking_num: `BK-${Date.now()}`,
-        book_date: Date.now(),
-      };
-      // 개인 예약 내역
-      setBooklistUser((prev) => [...prev, bookingData]);
-      // 전체 예약 내역
-      setBookedlistAll((prev) => [...prev, bookingData]);
-
-      alert("예약이 완료되었습니다.");
-      // booklistUser 에 담기기
-          // booklistAll 에 담기기
-          // 마이페이지로 이동됨('/mypage')
-          console.log('개인예약 배열: ', booklistUser);
-          console.log('전체예약 배열: ', bookedlistAll );
-    };
-
-
-    // 예약 취소 버튼 함수
-    // removeBookInfo
-      const removeBookInfo = (bookId) => {
-        // booklistUser 에서 해당 데이터 제거
-        setBooklistUser((prev) =>
-          prev.filter((book) => book.id !== bookId)
-        );
-
-        // booklistAll 에서 해당 데이터 제거
-        setBookedlistAll((prev) =>
-          prev.filter((book) => book.id !== bookId)
-        );
-
-        alert("예약이 취소되었습니다.");
-      };
 
   return (
     <BookingContext.Provider value={{
-      recentViewlist,
-      booklistUser,
-      addRecentView,
-      addBookInfo,
-      removeBookInfo,
+      bookedlistAll, 
+      setBookedlistAll,
+      myBookings,
+      myRecentlist
+      // removeBookInfo
     }}>
       {children}
     </BookingContext.Provider>
   );
 }
 
-
-
-
-
-    // 예약하기 버튼 클릭 시 함수
-        // addBookInfo
-
-    //     {filteredInfoUser.map((item) => (
-    //   <button
-    //     key={item.carId}
-    //     onClick={() => addBookInfo(item)}
-    //   >
-    //     예약하기
-    //   </button>
-    // ))}
