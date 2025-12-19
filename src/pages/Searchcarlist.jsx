@@ -5,11 +5,13 @@ import './Searchcarlist.css'
 import { Link } from "react-router-dom";
 import Calendar from './Calendar';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { BookingContext } from "../contexts/Bookingcontext";
 
 export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn } = useContext(CalendarContext);
+    const { calculatePrice } = useContext(BookingContext);
 
     // ================= 달력 관련 =================
 
@@ -40,23 +42,34 @@ export default function Recentcar(){
     // console.log('번호: ',isDetail);
 
     // 여러 좌표를 배열로 관리  각 데이터에있는 주소 위도,경도 검색 후 삽입
-  const positions = [
-    {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항점" , address: "인천광역시 중구 공항로 271" },
-    {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항점" , address: "서울특별시 강서구 하늘길 38"},
-    {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부점", address: "서울 동대문구 한천로 100 1-2층" },
-    {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부점", address: "서울특별시 서초구 서초대로 283" },
-    {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부점", address: "서울 노원구 노해로 456 동방빌딩 1층"},
-  ];
-  
-  const detail=positions.find(item => item.id === isDetail);
-  
-  let detail_lat=detail?.lat;
-  let detail_lng=detail?.lng;
-  
+    const positions = [
+        {id:1, lat: 37.446842, lng: 126.454047, name: "인천공항점" , address: "인천광역시 중구 공항로 271" },
+        {id:2, lat: 37.56517, lng: 126.803013, name: "김포공항점" , address: "서울특별시 강서구 하늘길 38"},
+        {id:3, lat: 37.570097, lng: 127.064886, name: "서울동부점", address: "서울 동대문구 한천로 100 1-2층" },
+        {id:4, lat: 37.493788, lng: 127.012596, name: "서울남부점", address: "서울특별시 서초구 서초대로 283" },
+        {id:5, lat: 37.653579, lng: 127.058793, name: "서울북부점", address: "서울 노원구 노해로 456 동방빌딩 1층"},
+    ];
+    
+    const detail=positions.find(item => item.id === isDetail);
+    
+    let detail_lat=detail?.lat;
+    let detail_lng=detail?.lng;
+    
+    // ================= 초기화 =================
+    useEffect(()=>{
+        setIsDetail(null);
+    },[isLocation]);
 
-  useEffect(()=>{
-    setIsDetail(null);
-  },[isLocation]);
+    const handleResetAll = () => {
+        // 달력/위치 컨텍스트 초기화
+        setLocation(null); 
+        handleSearchBtn(navigate); 
+        
+        // 현재 페이지의 필터 UI 초기화
+        resetFilters();
+        
+        alert("검색 조건이 초기화되었습니다.");
+    };
 
     // ================= 옵션 문자열 =================
     // const getActiveOptionsString = (car) => {
@@ -180,63 +193,6 @@ export default function Recentcar(){
         return false;
     };
 
-    // ================= 금액 =================
-    const calculatePrice = (car) => {
-        const basePrice = 3000;  // 기본요금
-        let totalPrice = basePrice;  // 값이 담길 변수
-    
-        // 연식
-        const baseModelYear = car.model_year;
-    
-        if(baseModelYear === 2022){
-            totalPrice -= 200;
-        }else if(baseModelYear === 2023){
-            totalPrice -= 100;
-        }else if(baseModelYear === 2025){
-            totalPrice += 200;
-        }else{
-            totalPrice += 0;
-        }
-    
-        // 크기
-        const baseVehicleSize = car.car_size;
-    
-        if(baseVehicleSize === '중형'){
-            totalPrice += 100;
-        }else if(baseVehicleSize === '대형'){
-            totalPrice += 200;
-        }else{
-            totalPrice += 0;
-        }
-    
-        // 연료
-        const baseFuelType = car.fuel_type;
-    
-        if(baseFuelType === '휘발유'){
-            totalPrice += 100;
-        }else if(baseFuelType === '하이브리드'){
-            totalPrice += 200;
-        }else{
-            totalPrice += 0;
-        }
-    
-        // 옵션
-        if(car.heated_seat){ totalPrice += 100; }
-        if(car.heated_handle){ totalPrice += 100; }
-        if(car.sun_loof){ totalPrice += 200; }
-        else{ null }
-    
-        // 브랜드별 값
-        const priceValue = car.price_value;
-    
-        // 최종 산출금액
-        const finalPrice = Math.round(totalPrice * priceValue);
-
-        return finalPrice;
-
-        
-    }
-
     // ================= 출력 =================
     const renderGroupedCars = () => {
         const result = [];
@@ -246,7 +202,7 @@ export default function Recentcar(){
             const first = group[0];
             result.push(
                 <li key={modelName} className="grouped_car_item">
-                    <Link to={`/detailpage/${first.id}`} style={{textDecoration:'none'}}>
+                    <Link to={`/detailpage/${first.id}`} style={{textDecoration:'none'}} onClick={()=>window.scrollTo({top:0, behavior:'smooth'})}>
                         <div>
                             <img className="brands" src={`images/brands/${first.brand_logo}`} />
                             <img className="cars" src={`images/cars/${first.car_img}`} alt={`${first.brand} ${first.model}`} />
@@ -261,7 +217,7 @@ export default function Recentcar(){
                                         <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
                                         {/* <p>{getActiveOptionsString(car)}</p> */}
                                         <i className="bi bi-chevron-right"></i>
-                                        <p className="carPrice">시간당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
+                                        <p className="carPrice">30분당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
                                     </div>
                                 )
                             })}
@@ -471,49 +427,34 @@ export default function Recentcar(){
             </div>
             {/* 목록 */}
             <div className="R_carlist">
-                <div className="cate_choice">
-                    <div className="cate_Btn">
-                        {renderSelectedFilters()}
-                    </div>
-                    {shouldShowResetButton() && (
-                        <div className="delBtn">
-                            <button onClick={resetFilters}>
-                                <i className="bi bi-arrow-clockwise"></i>
-                            </button>
-                        </div>
-                    )}
-                </div>
-                {/* 날짜 / 지점 선택 창 */}
+                {/* 날짜 / 지점 선택 */}
                 <div className="R_reservation">
                     {/* 예약 섹션 */}
+                    <div className="R_reservation">
+                        <div className="R_dateTable">
+                            <p>언제?</p>
+                            <div className="R_dateTitle" onClick={calendarHandler}>
+                                {apply?<p>
+                                    {startDate &&`${startDate}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate}${timeAMPM(endTime)}`}
+                                </p> 
+                                : <h4>날짜선택</h4>}
+                            </div>
+                        </div>
+                
                         {/* 지점 선택 파트 */}
-                            <div className="R_spotTable">
-                                <div className="spot_choice">
-                                    <p>어디?</p>
-                                    <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
-                                </div>
+                        <div className="R_spotTable">
+                            <div className="spot_choice">
+                                <p>어디?</p>
+                                <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p>
+                                : <h4>지점선택</h4>}</div>
                             </div>
-                            <div className="R_dateReservation">
-                                <div className="R_dateTable">
-                                      <p>언제?</p>
-                                      <div className="R_dateTitle" onClick={calendarHandler}>
-                                        {apply?<p>
-                                         {startDate &&`${startDate}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate}${timeAMPM(endTime)}`}
-                                        </p>:
-                                        <h2>날짜선택</h2>}
-                                      </div>
-                                </div>
-                            </div>
-                            <div className="searchButton">  
-                                <button className="R_find_btn" type="submit" onClick={()=>handleSearchBtn(navigate)}>
-                                    예약할 차량 찾기
-                                    <i className="bi bi-arrow-right"></i>
-                                </button>
-                                <button className="R_X_btn" type="submit" onClick={()=>handleSearchBtn(navigate)}>
-                                    초기화
-                                    <i className="bi bi-arrow-right"></i>
+                            <div className="searchButton">
+                                <button type="submit" onClick={handleResetAll} onMouseOver={()=>console.log('오버확인')}>
+                                    초기화 <i className="bi bi-arrow-clockwise"></i>
                                 </button>
                             </div>
+                        </div>
+                    </div>
                     {/* 지점 모달 파트 */}
                     {isLocation && (
                       <div className="R_location">
@@ -597,7 +538,19 @@ export default function Recentcar(){
                         <Calendar />
                     </div>
                 </div>
-                <h4>총 {displayedCars.length}대</h4>
+                <div className="cate_choice">
+                    <div className="cate_Btn">
+                        {renderSelectedFilters()}
+                    </div>
+                    {shouldShowResetButton() && (
+                        <div className="delBtn">
+                            <button onClick={resetFilters}>
+                                <i className="bi bi-arrow-clockwise"></i>
+                            </button>
+                        </div>
+                    )}
+                </div>
+                <p>총&nbsp;<strong>{displayedCars.length}</strong>&nbsp;종</p>
                 <ul>
                     {renderGroupedCars()}
                 </ul>

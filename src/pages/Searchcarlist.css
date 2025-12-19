@@ -6,7 +6,7 @@ a, p, h4, h3, h2, h1{
 }
 #root .Recentcar{
     width: 1300px;
-    margin: 50px auto;
+    margin: 120px auto;
     display: flex;
     gap: 50px
 }
@@ -76,8 +76,10 @@ a, p, h4, h3, h2, h1{
 #root .Recentcar .R_carlist{
     width: 900px;
 }
+
 #root .Recentcar .R_carlist .cate_choice{
     position: relative;
+    margin-top: 20px;
 }
 /* 카테고리 선택 취소버튼 */
 #root .Recentcar .R_carlist .cate_choice .cate_Btn{
@@ -109,7 +111,7 @@ a, p, h4, h3, h2, h1{
     text-align: right;
     position: absolute;
     right: 0;
-    top: -45px;
+    bottom: -53px;
 }
 #root .Recentcar .R_carlist .cate_choice .delBtn > button{
     height: 40px;
@@ -133,6 +135,38 @@ a, p, h4, h3, h2, h1{
     color: #2591cf;
 }
 
+/* 총 n대 */
+#root .Recentcar .R_carlist > p{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    color: #8d8d8d;
+}
+#root .Recentcar .R_carlist > p strong{
+    color: #333;
+    font-size: 19px;
+}
+
+/* 날짜 . 지점 선택 */
+#root .Recentcar .R_carlist .R_reservation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+#root .Recentcar .R_carlist .R_reservation .R_spotTable{
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+#root .Recentcar .R_reservation .R_spotTable .searchButton > button{
+    border: none;
+    background-color: #e5e7eb;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 18px;
+}
+
 /* 목록 */
 #root .Recentcar .R_carlist ul li a{
     width: 900px;
@@ -143,9 +177,10 @@ a, p, h4, h3, h2, h1{
     align-items: center;
     margin-bottom: 50px;
     padding: 40px 30px;
-    background-color: #fff;
+    background-color: #f6f7f8;
     /* border: 1px solid #ccc; */
-    box-shadow: 0 0 7px rgba(0,0,0,0.3);
+    /* box-shadow: 0 0 7px rgba(0,0,0,0.15); */
+    /* border: 1px solid #ccc; */
     border-radius: 10px;
 }
 .car_variant_info.Line_active{
@@ -159,7 +194,7 @@ a, p, h4, h3, h2, h1{
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e5e7eb;
     width: 100%;
 }
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info{
@@ -170,6 +205,7 @@ a, p, h4, h3, h2, h1{
 }
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover h4,
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover p,
+#root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover strong,
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover i{
     color: #0b79b7;
 }
@@ -211,6 +247,7 @@ a, p, h4, h3, h2, h1{
 }
 .grouped_car_item .car_list_ul .car_variant_info > h4{
     font-size: 20px;
+    
 }
 .grouped_car_item .car_list_ul .car_variant_info .carPrice{
     display: flex;
@@ -223,7 +260,7 @@ a, p, h4, h3, h2, h1{
 /* ---------------------------------- */
 
 /* 예약섹션 */
-#root .R_carlist .R_reservation{
+/* #root .R_carlist .R_reservation{
     display: flex;
     justify-content: space-between;
     padding: 20px 80px;
@@ -232,7 +269,7 @@ a, p, h4, h3, h2, h1{
     background-color: #f2f2f2;
     margin: 50px auto;
     width: 720px;
-}
+} */
 #root .R_carlist .R_dateReservation{
     display: flex;
     border: 1px solid red;

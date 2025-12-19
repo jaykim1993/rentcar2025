@@ -86,7 +86,7 @@ export default function Header() {
                     }
                 </nav>
                 <div className={`headerUserBookedModal ${openUserBookedModal? "open":""}`}>
-                    <strong className='headerModalH'>{userid?.userid}님의 예약내역</strong>
+                    <strong className='headerModalH'>{userid}님의 예약내역</strong>
                     <button className="headerModalBtnX" onClick={closeModal}>
                         <i className="bi bi-x"></i>
                     </button>
@@ -109,7 +109,7 @@ export default function Header() {
                     </div>
                     <ul className="headerNavUl">
                         <p className='headerNavH'>차량 렌트</p>
-                        <li className='headerNavLi'><div>예약하기</div> <div className='headerNavpointer'>→</div></li><br />
+                        <Link to={'/searchcarlist'}><li className='headerNavLi'><div>예약하기</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         {/* <li className='headerNavLi'><div>차량별 예약</div> <div className='headerNavpointer'>→</div></li><br /> */}
                         <p className='headerNavH'>고객 가이드</p>
                         <Link to={'/customerservice'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>고객센터</div> <div className='headerNavpointer'>→</div></li><br /></Link>

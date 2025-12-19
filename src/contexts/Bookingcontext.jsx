@@ -134,6 +134,8 @@ export default function BookingProvider({ children }) {
     return finalPrice;
   }
 
+
+
   return (
     <BookingContext.Provider value={{
       recentViewlist,

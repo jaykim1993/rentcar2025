@@ -242,8 +242,21 @@ export default function CalendarProvider({ children }) {
   // 원본에서 필요 내용 + 사용자 필터 적용값 정리된 배열 
   const filteredInfoUser = useMemo(() => {
     if (!apply) return [];
+    // if(availableCars.length===292) {
+    //   availableCars.map((car) => ({
+    //   // userId: userid,
+    //   carId: car.id,
+    //   filterStartDate: startDate,
+    //   filterEndDate: endDate,
+    //   filterStartTime: startTime,
+    //   filterEndTime: endTime,
+    //   location: car.location,
+    //   fuel_type: car.fuel_type,
+    // }));
+    // }
 
     return availableCars.map((car) => ({
+      // userId: userid,
       carId: car.id,
       filterStartDate: startDate,
       filterEndDate: endDate,
