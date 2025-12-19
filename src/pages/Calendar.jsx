@@ -144,8 +144,18 @@ export default function RentalCalendar() {
           right: "myNext",
         }}
         customButtons={{
-          myPrev: { text: "이전", click: handlePrev },
-          myNext: { text: "다음", click: handleNext },
+          myPrev: {
+            click: handlePrev,
+            buttonContent: () => (
+              <i className="bi bi-arrow-left-short"></i>
+            ),
+          },
+          myNext: {
+            click: handleNext,
+            buttonContent: () => (
+              <i className="bi bi-arrow-right-short"></i>
+            ),
+          },
         }}
         views={{
           twoMonth: {
@@ -155,23 +165,27 @@ export default function RentalCalendar() {
         }}
         height="auto"
         expandRows={false}
+        contentHeight="auto"
+        fixedWeekCount={false}
       />
-
-      {startDate && (
-        <div style={{ marginTop: "20px" }}>
-          <p>
-            <strong>{startDate}</strong>
-            {endDate && (
+      <div className="C_select">
+      {/* {startDate && ( */}
+        {/* <div style={{ marginTop: "20px" }}> */}
+          {/* <p className="C_select01">
+            <span className="C_dateTitle">대여일자</span><strong className="C_date">{startDate && startDate.replaceAll('-','.')}</strong>
+            
               <>
-                {" "}~ <strong>{endDate}</strong>
+              <span className="C_dateTitle">반납일자</span><strong className="C_date">{endDate && endDate.replaceAll('-','.')}</strong>
               </>
-            )}
-          </p>
+       
+          </p> */}
 
-          {endDate && (
+          {/* {endDate && ( */}
             <>
-              <div style={{ display: "flex", gap: "20px" }}>
+              <div style={{ display: "flex"}} className="C_time">
+                <span className="C_dateTitle">대여시간</span>
                 <select
+                  className="C_selectTime"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
                 >
@@ -179,8 +193,9 @@ export default function RentalCalendar() {
                     <option key={time}>{time}</option>
                   ))}
                 </select>
-
+                <span className="C_dateTitle">반납시간</span>
                 <select
+                  className="C_selectTime"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
                 >
@@ -190,13 +205,17 @@ export default function RentalCalendar() {
                 </select>
               </div>
 
-              <button style={{ marginTop: "20px" }} onClick={handleApply}>
+              <button className="C_X_btn" style={{ marginTop: "20px" }} onClick={handleApply}>
+                초기화
+              </button>
+              <button className="C_apply_btn" style={{ marginTop: "20px" }} onClick={handleApply}>
                 적용하기
               </button>
             </>
-          )}
+          {/* )} */}
         </div>
-      )}
-    </div>
+      {/* )} */}
+      </div>
+    // </div>
   );
 }

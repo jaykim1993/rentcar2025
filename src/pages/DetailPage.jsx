@@ -14,18 +14,24 @@ import 'leaflet/dist/leaflet.css';
 
 export default function DetailPage(){
     // console.log('여기왔어');
-    const { availableCars, filteredInfoUser } = useContext(CalendarContext);
+    const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn, filteredInfoUser } = useContext(CalendarContext);
 
-    const { addBookInfo } = useContext(BookingContext);
+    const { calculatePrice } = useContext(BookingContext);
+
+    console.log('calculatePrice');
+    console.log(calculatePrice);
 
     // 차 id 가져오기
     const { id } = useParams();
 
     const selectedCar = availableCars.find(car => car.id === Number(id)) || availableCars[0];
+    const filteredCar = filteredInfoUser.find(car => car.id === Number(id)) || filteredInfoUser[0];
  
     
     console.log('selectedCar');
-    console.log(selectedCar)
+    console.log(selectedCar);
+    console.log('선택 차량: ');
+    console.log(filteredCar);
 
     // true인 옵션만 필터링
     const getActiveOptions = (car) => {
@@ -59,11 +65,17 @@ export default function DetailPage(){
     let detail_lat=detail?.lat;
     let detail_lng=detail?.lng;
 
-    console.log(detail_lat);
-    console.log(detail_lng);
-    console.log(detail);
-
     if(!selectedCar) return <div>차량정보를 불러올 수 없습니다.</div>;
+
+    // 가격 계산
+    let date = (new Date(`${filteredCar.filterEndDate}T${filteredCar.filterEndTime}`)-new Date(`${filteredCar.filterStartDate}T${filteredCar.filterStartTime}`))/ (1000 * 60 * 30);
+
+    console.log('기간: ',date);
+
+    const totalPrice =
+        date && calculatePrice && selectedCar
+        ? calculatePrice(selectedCar) * date
+        : 0;
 
     return(
         <div className="DetailPage">
@@ -117,7 +129,7 @@ export default function DetailPage(){
 
                 {/* 요금안내 */}
                 <div className="D_">
-                    <Link to={'/guide'}><h4>요금안내 <i class="bi bi-arrow-right-circle-fill"></i></h4></Link>
+                    <Link to={'/guide'}><h4>요금안내 <i className="bi bi-arrow-right-circle-fill"></i></h4></Link>
                     <p></p>
                 </div>
 
@@ -146,7 +158,7 @@ export default function DetailPage(){
                 <div className="summary_card">
                     <h3>예약 요약</h3>
                     {/* filteredInfoUser가 배열일 경우 map으로 돌리고, 단일 객체면 바로 출력 */}
-                    {filteredInfoUser && [filteredInfoUser].map((info, idx) => (
+                    {filteredCar && [filteredCar].map((info, idx) => (
                         <div key={idx} className="info_box">
                             <div className="info_item">
                                 <span className="label">지점</span>
@@ -154,7 +166,7 @@ export default function DetailPage(){
                             </div>
                             <div className="info_item">
                                 <span className="label">대여 기간</span>
-                                <span className="val">{info.startDate} ~ {info.endDate}</span>
+                                <span className="val">{info.filterStartDate}{info.filterStartTime} ~ {info.filterEndDate}{info.filterEndTime}</span>
                             </div>
                         </div>
                     ))}
@@ -163,7 +175,7 @@ export default function DetailPage(){
 
                     <div className="price_total">
                         <span>최종 결제 금액</span>
-                        <strong>{/* car_price */} 원</strong>
+                        <strong>{totalPrice.toLocaleString()} 원</strong>
                     </div>
                     <button className="reserve_btn">예약하기</button>
                 </div>

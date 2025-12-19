@@ -17,11 +17,10 @@ export default function Home(){
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn} = useContext(CalendarContext);
 
     const images = [
-      "https://picsum.photos/1200/430?random=1",
-      "https://picsum.photos/1200/430?random=2",
-      "https://picsum.photos/1200/430?random=3",
-      "https://picsum.photos/1200/430?random=4",
-      "https://picsum.photos/1200/430?random=5",
+      "/images/banner/banner01.png",
+      "/images/banner/banner02.png",
+      "/images/banner/banner03.png",
+      "/images/banner/banner04.png",
     ];
   
     const [index, setIndex] = useState(0);
@@ -135,7 +134,7 @@ export default function Home(){
                 </div>
                 <div className="searchButton">
                     
-                      <button type="submit" onClick={()=>handleSearchBtn(navigate)} onMouseOver={()=>console.log('오버확인')}>
+                      <button type="submit" onClick={()=>handleSearchBtn(navigate)}>
                           예약할 차량 찾기
                           <i className="bi bi-arrow-right"></i>
                       </button>
@@ -147,7 +146,7 @@ export default function Home(){
 {isLocation && (
   <div className="H_location">
     <span className="H_close01" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
-    {/* 상세 위치 (지도) */}
+    {/* 상세 위치 (지도.) */}
     {isDetail ? (
       <>
         <div className="H_selectLocation_detail">
@@ -223,7 +222,7 @@ export default function Home(){
 )}
 
         <div className={`calendar-slide ${iscalendar ? "open" : ""}`}>
-          <span className="H_close02" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
+          <span className="H_close02" onClick={()=>setIscalendar(false)}><i className="bi bi-x-lg"></i></span>
 	        <Calendar />
 	      </div>
 

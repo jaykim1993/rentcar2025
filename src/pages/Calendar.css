@@ -2,19 +2,56 @@
    Base Layout / Theme
 ====================================================== */
 .calendarWrap {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
   width: 100%;
   padding: 20px;
 }
 .fc {
   background-color: #f9f9f9;
   color: #333;
-  width: 1000px !important;
-  max-width: 1000px !important;
-  margin: 0 auto;
+  width: 650px !important;
+  max-width: 650px !important;
+  /* margin: 0 auto; */
   padding-bottom: 0 !important;
+  font-size: 18px;
+  margin: 0 !important;
+  /* width: 100% !important; */
+  /* max-width: none !important; */
 }
+
+/* 날짜 셀 테두리 제거 */
+.fc .fc-daygrid-day {
+  border: none !important;
+}
+
+/* 날짜 안쪽 선 제거 */
+.fc .fc-daygrid-day-frame {
+  border: none !important;
+}
+
+/* 헤더(요일) 아래 선 제거 */
+.fc .fc-col-header-cell {
+  border: none !important;
+}
+
+/* 전체 그리드 선 제거 (가장 중요) */
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: none !important;
+}
+
+/* 테이블 외곽선 제거 */
+.fc-scrollgrid {
+  border: none !important;
+}
+
+/* 상단 가운데 제목 (2025년 12월 – 2026년 1월) 제거 */
+.fc-toolbar-title {
+  display: none !important;
+}
+
+
 
 /* 높이 강제 문제 방지 */
 .fc-scrollgrid,
@@ -22,12 +59,74 @@
 .fc-daygrid-body {
   height: auto !important;
 }
+.fc .fc-view-harness{
+  /* height: 360px; */
+  padding: 0 !important;
+}
 
 /* 링크 기본 스타일 */
 .fc a {
   text-decoration: none;
   color: #000;
 }
+
+/* 🔥 multiMonth 무조건 가로 2개 */
+.fc-multimonth {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 0 !important;
+  gap: 20px !important;
+}
+/* 회색 배경 전부 제거 */
+.fc,
+.fc-theme-standard,
+.fc .fc-toolbar,
+.fc .fc-view-harness,
+.fc .fc-scrollgrid,
+.fc .fc-scrollgrid-section,
+.fc .fc-scrollgrid-section-liquid {
+  background: transparent !important;
+  border: none !important;
+}
+.fc .fc-myPrev-button::before {
+  content: "<";
+  font-size: 28px;
+}
+
+.fc .fc-myNext-button::before {
+  content: ">";
+  font-size: 28px;
+}
+/* 🔥 달력 한 개 크기 고정 */
+.fc-multimonth-month {
+  width: 300px !important;
+  max-width: 300px !important;
+  height: 300px !important;
+  flex: 0 0 300px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+}
+
+/* ===== 하단 회색 여백 완전 제거 ===== */
+.fc .fc-scrollgrid-section-liquid {
+  display: none !important;
+}
+
+.fc-scrollgrid,
+.fc-scrollgrid-section,
+.fc-scrollgrid-section-header,
+.fc-scrollgrid-section-body {
+  height: auto !important;
+}
+
+/* multiMonth 달 제목 */
+.fc-multimonth-title {
+  font-size: 16px !important;   /* 기본보다 작게 */
+  font-weight: 600;
+}
+
 
 /* ======================================================
    Day Cell (날짜 셀)
@@ -50,6 +149,10 @@
 /* hover */
 .fc .fc-daygrid-day:hover {
   background-color: #e9e9e9;
+}
+
+.fc .fc-daygrid-body tr {
+  height: 20px;
 }
 
 /* ======================================================
@@ -115,10 +218,6 @@
   padding: 0 !important;
 }
 
-.fc-daygrid {
-  padding-top: 20px;
-}
-
 /* ======================================================
    Selected Range (background event)
 ====================================================== */
@@ -135,4 +234,44 @@
 .calendar-container {
   min-height: 100vh;
   background: #fff;
+}
+
+/* 선택 날짜 시간 출력되는 부분 */
+.calendarWrap .C_select .C_dateTitle{
+  color: rgb(176, 176, 176);
+  padding: 20px 20px 15px 7px;
+}
+.calendarWrap .C_select .C_date{
+  min-width: 150px;
+  display: inline-block;
+  /* border: 1px solid red; */
+  padding-right: 25px;
+}
+
+.calendarWrap .C_select .C_time{
+  padding: 25px 0 10px 0;
+}
+.calendarWrap .C_select .C_time .C_selectTime{
+  width: 150px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.calendarWrap .C_select .C_select01{
+  padding-bottom: 25px;
+}
+.calendarWrap .C_select .C_X_btn{
+  width: 150px;
+  margin-right: 15px;
+  background-color: transparent;
+  border: 1px solid #555;
+  padding: 13px;
+  border-radius: 5px;
+}
+.calendarWrap .C_select .C_apply_btn{
+  width: 250px;
+  background-color: #000;
+  color: #fff;
+  padding: 13px;
+  border-radius: 5px;
+  border: #000;
 }
