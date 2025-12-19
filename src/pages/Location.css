@@ -231,3 +231,6 @@
     background-color: dodgerblue;
     transition: 0.3s;
 }
+.leaflet-container {
+  z-index: 1;
+}

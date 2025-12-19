@@ -22,30 +22,23 @@ export default function AuthProvider({children}){
     // 컴포넌트 마운트 될 때 localStorage에서 사용자 정보 불러오기
     useEffect(() => {
         const savedUserid = localStorage.getItem("userid");
-
-        if (!savedUserid || savedUserid === "undefined") return;
-
-        try {
-            const parsed = JSON.parse(savedUserid);
-            setUserid(parsed);
-        } catch (error) {
-            console.error("JSON parse 오류: userid 초기화함", error);
-            localStorage.removeItem("userid");
+        if (savedUserid) {
+        setUserid(savedUserid);
         }
     }, []);
 
     // 로그인 정보 저장 함수
-    const loginsave = (userData) => {
-        setUserid(userData); //loginForm.jsx에서 저장할 예정
-        // localStorage에 정보 저장
-        localStorage.setItem('userid', JSON.stringify(userData));
-    }
+      const loginsave = (userData) => {
+        // userData 전체 중 userid만 저장
+        setUserid(userData.userid);
+        localStorage.setItem("userid", userData.userid);
+    };
+    
     // 로그아웃 함수
-    const logout =()=>{
+    const logout = () => {
         setUserid(null);
-        // localStroage에서 삭제
-        localStorage.removeItem('userid');
-    }
+        localStorage.removeItem("userid");
+    };
 
     // 공유할 변수, 함수 내보내기
     return(

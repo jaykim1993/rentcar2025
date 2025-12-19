@@ -26,6 +26,7 @@ export default function Header() {
     const closeNav = () => {
         setIsNavOpen(false)
     };
+ 
 
     // 예약 차량 토글 보이기
     const [openUserBookedModal, setOpenUserBookedModal] = useState(false);
@@ -60,7 +61,7 @@ export default function Header() {
                         // 로그인 상태일 때
                         <>
                             <button className='headerBtn' type='text'>
-                                {userid?.userid}님
+                                {userid}님
                             </button>
                             <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
                                 예약내역
@@ -96,7 +97,7 @@ export default function Header() {
                 </div>
             </header>
             
-            
+            {isNavOpen && <div className='sideNavOverlay' onClick={closeNav}></div>}
             <nav className={`headerNavSide ${isNavOpen ? "on" : ""}`}>
                 <button className="headerBtnX" onClick={closeNav}>
                     <i className="bi bi-x"></i>

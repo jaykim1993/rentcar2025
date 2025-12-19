@@ -17,6 +17,7 @@ import Footer from './common/Footer'
 import LocationPage from './pages/Location'
 import CustomerService from './pages/CustomerService'
 import DetailPage from './pages/DetailPage'
+import Mypage from './pages/Mypage'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/guide" element={<GuidePage/>}/>
                 <Route path="/customerservice" element={<CustomerService/>}/>
                 <Route path="/location" element={<LocationPage/>}/>
+                <Route path="/mypage" element={<Mypage/>}/>
                 <Route path="/login" element={<LoginForm/>}/>
                 <Route path="/joinA" element={<JoinFormA/>}/>
                 <Route path="/joinB" element={<JoinFormB/>}/>
