@@ -241,20 +241,22 @@ export default function Recentcar(){
     };
 
     const clickCarHandler = () => {
-        const clickCarResult=availableCars.filter(item => item.modelName === clickCar );
+        const clickCarResult=availableCars.filter(item => item.model === clickCar );
 
         return(
             <div className="clickCarHandler">
                 <ul>
                     {clickCarResult.map((item)=>(
                         <li key={item.id}>
-                            <h4>{item.modelName} {item.fuel_type}</h4>
+                            <img src={`images/cars/${item.car_img}`} alt={item.car_id}/>
+                            <h4>{item.model} {item.fuel_type}</h4>
                         </li>
                     ))}
                 </ul>
             </div>
         )
     }
+    console.log(clickCar);
 
     return(
         <div className="Recentcar">
@@ -587,8 +589,8 @@ export default function Recentcar(){
                 </div>
                 <p>총&nbsp;<strong>{displayedCars.length}</strong>&nbsp;종</p>
                 <ul>
-                    {/* {clickCar === '' ? renderGroupedCars() : clickCarHandler } */}
-                    {renderGroupedCars()}
+                    {clickCar === '' ? renderGroupedCars() : clickCarHandler() }
+                    {/* {renderGroupedCars()} */}
                 </ul>
             </div>
         </div>

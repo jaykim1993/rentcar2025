@@ -77,7 +77,7 @@ export default function Reservation(){
                                     <input type='text' placeholder='상세주소' name='detailAddress' id='detailAddress'/>
                                     </>
                                 }
-                                    {openModal  ? 
+                                    {openModal ? 
                                         <div className='R_modal'>
                                             <span onClick={()=>setOpenModal(!openModal)}><i className="bi bi-x-lg"></i></span>
                                             <DaumPostCode onComplete={changeAddressHandler}/>

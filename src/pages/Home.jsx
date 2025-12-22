@@ -330,11 +330,11 @@ const newCarList=
         </div>
         {isTop ? 
         <div className="H_sec02_1">
-            <div className="H_good" onClick={()=>setClickCar('그랑조')}><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/bmw_5.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/kia_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/hy_9.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/ZENE_2.webp' alt='car_img'/></div>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('그랑조')}><img src='/images/cars/hy_2.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('dmw new 5')}><img src='/images/cars/bmw_5.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('WV7')}><img src='/images/cars/kia_2.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('아이온')}><img src='/images/cars/hy_9.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('GGE80')}><img src='/images/cars/ZENE_2.webp' alt='car_img'/></div></Link>
         </div>:
         <div className="H_sec02_2">
           <p onClick={before_btn} className="H_before_btn">〈</p>
