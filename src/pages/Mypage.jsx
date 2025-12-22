@@ -10,7 +10,7 @@ export default function Mypage() {
 
   // 예약차량 예외처리
   if (!userid) return <p>로그인 후 이용해주세요.</p>;
-  if (!myBookings.length) return <p>최근 본 차량이 없습니다.</p>;
+  if (!myBookings.length) return <p>예약내역이 없습니다.</p>;
 
 
 

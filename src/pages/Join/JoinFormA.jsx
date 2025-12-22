@@ -3,10 +3,9 @@
 // 각각의 체크박스를 통제하는 모두 동의 체크박스
 import './JoinForm.css';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
-export default function JoinFormA() {
-    const navigate = useNavigate();
+export default function JoinFormA({ onClose, onNext }) {
+
 
     // 약관 펼치기/접기
     const [openA, setOpenA] = useState(false);
@@ -43,14 +42,14 @@ export default function JoinFormA() {
             alert("약관에 모두 동의해야 다음 단계로 진행할 수 있습니다.");
             return;
         }
-        navigate("/joinB");
+        // Header에서 받은 onNext 호출
+        onNext();
     };
-
     return (
         <div className='joinOverlay'>
             <div className="joinWrap">
-                <button className="joinBtnX">
-                    <Link to={'/'}><i className="bi bi-x"></i></Link>
+                <button className="joinBtnX" onClick={onClose}>
+                    <i className="bi bi-x"></i>
                 </button>
                 <h3 className='joinH'><span className='joinColorText'>이용약관</span>과 <span className='joinColorText'>고객정보수집</span>에 동의합니다.</h3>
                     <div className='joinAContentWrap'>
