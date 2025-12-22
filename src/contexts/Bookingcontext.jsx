@@ -243,7 +243,7 @@ export default function BookingProvider({ children }) {
         "bookedlistAll",
         JSON.stringify(bookedlistAll)
       );
-      console.log(bookedlistAll);
+      // console.log(bookedlistAll);
     }, [bookedlistAll]);
 
 

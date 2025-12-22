@@ -1,13 +1,20 @@
 import './Mypage.css'
 import { Outlet } from "react-router-dom";
-import { useContext } from "react"
-import { AuthContext } from '../contexts/Authcontext';
 import { Link } from 'react-router-dom';
-
+import { useContext } from "react";
+import { BookingContext } from "../contexts/Bookingcontext";
+import { AuthContext } from "../contexts/Authcontext";
+import { DataContext } from "../contexts/Datacontext";
+import "./Mypage.css";
 
 export default function Mypage(){
+  const { myBookings } = useContext(BookingContext); // 예약내역 보기 함수 호출
+  const { userid, username } = useContext(AuthContext); // 유저 정보 호출
 
-  const {username}=useContext(AuthContext);
+  // 예약차량 예외처리
+  if (!userid) return <p>로그인 후 이용해주세요.</p>;
+  if (!myBookings.length) return <p>예약내역이 없습니다.</p>;
+
   return(
 
     <>

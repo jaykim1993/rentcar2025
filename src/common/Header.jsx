@@ -1,20 +1,31 @@
 import './Header.css';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/Authcontext';
-import { useNavigate, Link } from 'react-router-dom';
+import { BookingContext } from "../contexts/Bookingcontext";
+import { Link } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import JoinFormA from '../pages/Join/JoinFormA';
+import JoinFormB from '../pages/Join/JoinFormB';
+import JoinFormC from '../pages/Join/JoinFormC';
+
 
 export default function Header() {
-    const navigate = useNavigate();
-
     // login 관련 Context API에서 변수&함수 불러오기
     const{userid, username, logout} = useContext(AuthContext);
-
+    // 예약내역 보기 함수 호출
+      const { myBookings } = useContext(BookingContext); 
     // logout 핸들러 함수
-    const logoutHandler =()=>{
+    const logoutHandler = () => {
         logout();
-        alert("로그아웃 되었습니다.");
-        navigate('/');
-    }
+        alert("로그아웃 되었습니다. 메인페이지로 이동합니다.");
+    };
+    // 로그인 & 회원가입 모달 상태 관리
+    const [modal, setModal] = useState(null); // 'login' | 'joinA' | 'joinB' | 'joinC' | null
+    const [joinData, setJoinData] = useState({ userid:'', userpw:'' });
+
+    const handleJoinComplete = () => {
+        setModal('login'); // 로그인 모달 열기
+    };
 
     // 사이드네비게이션 활성화 상태 변수 (초기값 false)
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -34,7 +45,6 @@ export default function Header() {
         setOpenUserBookedModal(false)
     };
 
-    
     return (
         <div className='headerWrap'>
             <header className="header">
@@ -49,7 +59,6 @@ export default function Header() {
                 </div>
                     <Link to="/">
                         <img className='headerLogo' src='charangcharang_logo.png'/>
-                        {/* <p className='headerBrand'>차랑차랑</p> */}
                     </Link>
                 <nav className="headerNavTop">
                     <Link to="/">
@@ -60,43 +69,82 @@ export default function Header() {
                     {userid?
                         // 로그인 상태일 때
                         <>
-                            <button className='headerBtn' type='text'>
-                                {username}님
-                            </button>
-                            <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
-                                예약내역
-                            </button>
-                            <button className='headerBtn' type='text' onClick={logoutHandler}>
-                                로그아웃
-                            </button>
+                            <Link to={'/mypage/myinfo'}>
+                                <button className='headerBtn' type='text'>
+                                    <strong><div className='loginColor'>{username}</div></strong>님
+                                </button>
+                            </Link>
+                                <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
+                                    예약내역
+                                </button>
+                            <Link to="/">
+                                <button className='headerBtn' type='text' onClick={logoutHandler}>
+                                    로그아웃
+                                </button>
+                            </Link>
                         </>
                         :
                         <>
-                            <Link to="/login">
-                                <button className='headerBtn' type='text'>
+                            <button className='headerBtn' type='text' onClick={()=>setModal('login')}>
                                     로그인
-                                </button>
-                            </Link>
-                            <Link to="/joinA">
-                                <button className='headerBtn' type='text'>
+                            </button>
+                            <button className='headerBtn' type='text' onClick={()=>setModal('joinA')}>
                                     회원가입
-                                </button>
-                            </Link>
+                            </button>
                         </>
                     }
                 </nav>
                 <div className={`headerUserBookedModal ${openUserBookedModal? "open":""}`}>
-                    <strong className='headerModalH'>{username}님의 예약내역</strong>
+                    <strong className='headerModalH'><div className='loginColor'>{username}</div></strong>님의 예약내역
                     <button className="headerModalBtnX" onClick={closeModal}>
                         <i className="bi bi-x"></i>
                     </button>
-                    <p>예약내역이 없습니다.</p>
-                    <p>예약내역이 없습니다.</p>
-                    <button className='headerModalBtn'> 마이페이지 </button>
-                    <img className='headerModalImg' src='../../public/images/bookedModal.jpg'/>
+                    <div className='headerUserBookModalContext'>
+                        {(myBookings.length)===0? 
+                                <p className='headermodalText'>예약내역이 없습니다.</p>
+                                : <>{myBookings.map(book => (
+                                <Link to={'/mypage/booked'}>
+                                    <div key={book.id} className="headerModalInfo">
+                                        <img
+                                            style={{width:'80px', height:'60px'}}
+                                            src={`/images/cars/${book.car?.car_img}`}
+                                            alt={book.car?.model}
+                                        />
+                                        <div>
+                                            <strong className='headermodalText'>
+                                                {book.car.model}
+                                            </strong>
+                                            <p className='headerModalDate'>
+                                                {book.startDate} ~ {book.endDate}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Link>
+                        ))}</>}
+                    </div>
+                    <Link to={'/mypage/booked'}><button className='headerModalBtn'> 더보기 </button></Link>
+                    <Link to={'/customerservice'}><img className='headerModalImg' src='../../public/images/bookedModal.jpg'/></Link>
                 </div>
             </header>
-            
+
+
+
+            {/* ================== 로그인 & 회원가입 모달 렌더링 ================== */}
+            {modal==='login' && <LoginForm onClose={()=>setModal(null)} />}
+            {modal==='joinA' && <JoinFormA onClose={()=>setModal(null)} onNext={()=>setModal('joinB')} />}
+            {modal==='joinB' && <JoinFormB onClose={()=>setModal(null)} onNext={(data)=>{setJoinData(data); setModal('joinC')}} />}
+            {modal === 'joinC' && (
+                <JoinFormC
+                    onClose={() => setModal(null)}
+                    userid={joinData.userid}
+                    userpw={joinData.userpw}
+                    onComplete={handleJoinComplete} 
+                />
+            )}
+
+
+
+
             {isNavOpen && <div className='sideNavOverlay' onClick={closeNav}></div>}
             <nav className={`headerNavSide ${isNavOpen ? "on" : ""}`}>
                 <button className="headerBtnX" onClick={closeNav}>
@@ -106,6 +154,9 @@ export default function Header() {
                     <div className="headerNavAd">
                         <strong>가입 혜택 EVENT</strong>
                         <p>2025.12.01~12.31 기간한정</p>
+                        <div className='headerBannerImgWrap'>
+                            {/* <img src='../../public/images/banner/banner04.png' alt='sindNavAD' /> */}
+                        </div>
                     </div>
                     <ul className="headerNavUl">
                         <p className='headerNavH'>차량 렌트</p>

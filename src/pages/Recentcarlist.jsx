@@ -3,9 +3,11 @@ import { AuthContext } from "../contexts/Authcontext";
 import { Link } from "react-router-dom";
 import { BookingContext } from "../contexts/Bookingcontext";
 
+import './Recentcarlist.css';
+
 export default function Recentcarlist() {
   const { userid, username } = useContext(AuthContext);
-  const { myRecentlist } = useContext(BookingContext);
+  const { myRecentlist, calculatePrice } = useContext(BookingContext);
 
 
   const recentViews = myRecentlist(userid);
@@ -14,25 +16,36 @@ export default function Recentcarlist() {
   if (!recentViews.length) return <p>최근 본 차량이 없습니다.</p>;
 
   return (
-    <div className="recent_car_list">
-        <h3>{username}님의 최근 본 차량</h3>
-      {recentViews.map(item => (
-        <Link
-          to={`/detail/${item.carId}`}
-          key={item.id}
-          className="recent_car_item"
-        >
-          <img
-            style={{ width: "300px" }}
-            src={`/images/cars/${item.car_img}`}
-            alt={item.model}
-          />
-          <div>
-            <p>{item.brand} {item.model}</p>
-            <span>{item.fuel_type}</span>
-          </div>
-        </Link>
-      ))}
+    <div className="Recent_car_list">
+      {/* 홈 > 예약 */}
+      <div className="Recent_Head">
+          <Link to={'/home'}><span>홈</span></Link>
+          <i className="bi bi-caret-right-fill"></i>
+          {/* 〉 */}
+          <span>최근 본 차량</span>
+      </div>
+      {/* <h3><strong>{username}</strong>님의 최근 본 차량</h3> */}
+      <p>총&nbsp;<strong>{recentViews.length}</strong>&nbsp;대</p>
+      {/* <br /> */}
+      <ul className="Recent_ByDate">
+        {recentViews.map(item => (
+          <li className="Recent_ByDate">
+            {/* 최근 본 날짜 */}
+            {/* <h1>{item.viewDate}</h1> */}
+            {/* <Link to={`/detail/${item.carId}`} key={item.id}> */}
+            <div className="Recent_car_item">
+              <img
+                src={`/images/cars/${item.car_img}`}
+                alt={item.model}
+                className="Recent_car_item" />
+                {/* <hr className="Re_hr"/> */}
+              <p>{item.brand} {item.model} {item.fuel_type}</p>
+              {/* <p>{calculatePrice}</p> */}
+            {/* </Link> */}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

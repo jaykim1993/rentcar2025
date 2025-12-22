@@ -1,4 +1,4 @@
-import { useContext, useRef, useMemo } from "react";
+import { useContext, useRef, useMemo, useState } from "react";
 import { CalendarContext } from "../contexts/Calendarcontext";
 import FullCalendar from "@fullcalendar/react";
 import multiMonthPlugin from "@fullcalendar/multimonth";
@@ -9,6 +9,7 @@ import "./Calendar.css";
 
 export default function RentalCalendar() {
   const {
+    setIsCalendar,
     startDate,
     setStartDate,
     endDate,
@@ -86,7 +87,8 @@ export default function RentalCalendar() {
       alert("날짜를 선택해주세요.");
       return;
     }else{
-      setApply(!apply);
+      setApply(true);
+      setIsCalendar(false);
     }
 
     handleDateFilter({
@@ -96,6 +98,13 @@ export default function RentalCalendar() {
       endTime,
     });
   };
+
+    // 초기화 버튼 핸들러
+    const allCancleHandler=()=>{
+      setStartDate(null);
+      setEndDate(null);
+      setApply(false);
+    }
 
   const renderDay = (arg) =>
     arg.dayNumberText.replace("일", "");
@@ -128,8 +137,10 @@ export default function RentalCalendar() {
     return events;
   }, [startDate, endDate]);
 
+
   return (
-    <div className="calendarWrap">
+    <>
+      <div className="calendarWrap">
       <FullCalendar
         ref={calendarRef}
         plugins={[multiMonthPlugin, interactionPlugin]}
@@ -169,18 +180,6 @@ export default function RentalCalendar() {
         fixedWeekCount={false}
       />
       <div className="C_select">
-      {/* {startDate && ( */}
-        {/* <div style={{ marginTop: "20px" }}> */}
-          {/* <p className="C_select01">
-            <span className="C_dateTitle">대여일자</span><strong className="C_date">{startDate && startDate.replaceAll('-','.')}</strong>
-            
-              <>
-              <span className="C_dateTitle">반납일자</span><strong className="C_date">{endDate && endDate.replaceAll('-','.')}</strong>
-              </>
-       
-          </p> */}
-
-          {/* {endDate && ( */}
             <>
               <div style={{ display: "flex"}} className="C_time">
                 <span className="C_dateTitle">대여시간</span>
@@ -205,17 +204,16 @@ export default function RentalCalendar() {
                 </select>
               </div>
 
-              <button className="C_X_btn" style={{ marginTop: "20px" }} onClick={handleApply}>
+              <button className="C_X_btn" style={{ marginTop: "20px" }} onClick={allCancleHandler}>
                 초기화
               </button>
               <button className="C_apply_btn" style={{ marginTop: "20px" }} onClick={handleApply}>
                 적용하기
               </button>
             </>
-          {/* )} */}
         </div>
-      {/* )} */}
       </div>
-    // </div>
+    </>
+    
   );
 }

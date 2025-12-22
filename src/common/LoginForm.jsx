@@ -3,14 +3,11 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/Authcontext';
-import { Link, useNavigate } from 'react-router-dom';
+// import { Link, useNavigate } from 'react-router-dom';
 
-export default function LoginForm() {
+export default function LoginForm({ onClose, onJoin }) {
     const [userid, setUserid] = useState('');
     const [userpw, setUserpw] = useState('');
-
-
-    const navigate = useNavigate();
     const {loginsave} = useContext(AuthContext);
 
     // 로그인 핸들러
@@ -28,7 +25,6 @@ export default function LoginForm() {
                 { userid, userpw }
             );
 
-            console.log("login 입력", res.data);
             if (res.data.status === 'success') {
                 loginsave({
                     userid: res.data.userid,
@@ -43,7 +39,7 @@ export default function LoginForm() {
                 });
 
                 alert(`${res.data.username}님, 환영합니다.`);
-                navigate('/');
+                onClose();
             } else {
                 alert('아이디 또는 비밀번호가 일치하지 않습니다.');
             }
@@ -59,7 +55,7 @@ export default function LoginForm() {
     // 이메일 혹은
     // 전화번호
         // -> 입력하신 이메일로 확인 문자가 발송되었습니다. 
-        // or 존재하지 않는 회원입니다. 회원가입을 원하시나요? (yes or no)
+        // or 존재하지 않는 회원입니다.
 //     const findId = async () => {
 //     if (!user) return alert("아이디를 입력하세요.");
 
@@ -67,9 +63,9 @@ export default function LoginForm() {
 //       const res = await axios.post("http://localhost/rentcar2025/backend/api/join.php", { userid });
 
 //       if (res.data.exists) {
-//         alert(`입력하신 ${res.data}`);
+//         alert(`입력하신 ${res.data}가 확인되었습니다.`);
 //       } else {
-//         alert("사용가능한 아이디입니다.");
+//         alert("존재하지 않는 아이디입니다.");
 //       }
 //     } catch (err) {
 //       console.error(err);
@@ -80,8 +76,8 @@ export default function LoginForm() {
     return (
         <div className='loginOverlay'>
             <div className="loginWrap">
-                <button className="loginBtnX">
-                    <Link to={'/'}><i className="bi bi-x"></i></Link>
+                <button className="loginBtnX" onClick={onClose}>
+                    <i className="bi bi-x"></i>
                 </button>
                 <h2 className='loginH'><div className='loginColor'>차랑차랑</div>에<br></br> 오신것을 환영합니다!</h2>
                 <form onSubmit={login}>
@@ -114,9 +110,9 @@ export default function LoginForm() {
                             </li>
                         </ul>
                         <div className='loginAccount'>
-                                <button className='loginBtnSamll'>아이디 찾기</button> | 
-                                <button className='loginBtnSamll'>비밀번호 찾기</button> | 
-                                <Link to={'/joinA'}><button className='loginBtnSamll'>회원가입</button></Link>
+                                <button className='loginBtnSamll' type='button'>아이디 찾기</button> | 
+                                <button className='loginBtnSamll' type='button'>비밀번호 찾기</button> | 
+                                <button className='loginBtnSamll' type='button' onClick={onJoin}>회원가입</button>
                         </div>
                     </div>
                     <div className="loginBtnWrap">

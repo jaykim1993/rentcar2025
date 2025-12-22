@@ -1,16 +1,17 @@
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     height: 70px; 
-    background-color: white;
+    background-color: #f9fafc;
     width: 100%;
     z-index: 99;
     margin: 0 auto;
     padding: 0.5rem 1rem;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e2e4e9;
 }
 .headerLogolink{
     vertical-align: middle;
@@ -76,7 +77,7 @@
 }
 .headerUserBookedModal.open{
     position: absolute;
-    max-height: 400px;
+    max-height: 500px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     width: 340px;
     top: 75px;
@@ -91,6 +92,36 @@
 .headerModalH{
     display: inline-block;
     margin-bottom: 20px;
+}
+.headerUserBookModalContext{   
+    max-height: 250px;
+    width: 310px;
+    overflow-y: auto;
+}
+.headerUserBookModalContext::-webkit-scrollbar {
+    width: 3px;
+}
+.headerUserBookModalContext::-webkit-scrollbar-thumb {
+  background:  #2591cf80;
+  border-radius: 3px;
+}
+.headermodalText{
+    font-size: 15px;
+    margin-left: 25px;
+}
+.headerModalInfo{
+    display: flex;
+    width: 95%;
+    padding: 10px 5px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+.headerModalDate{
+    display: inline-block;
+    width: 90%;
+    font-size: 13px;
+    margin-top: 5px;
+    margin-left: 30px;
 }
 .headerModalImg {
     margin-top: 20px;
@@ -131,14 +162,21 @@
     font-size: 1rem;
 }
 .headerNavAd {
-    width: 90%;
+    width: 100%;
     height: 200px;
 }
+/* .headerBannerImgWrap{
+    height: 170px;
+}
+.headerBannerImg{
+    width: 170px;
+    height: 170px;
+} */
 .headerNavSide {
     position: fixed;
     top: 0; 
     left: 0;
-    width: 300px;
+    width: 280px;
     height: 100vh;
     transform: translateX(-100%);
     transition: transform 0.5s;
