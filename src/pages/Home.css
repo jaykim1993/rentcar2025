@@ -13,37 +13,83 @@ input:checked + .checkmark {
 }
 #root .Home{
     width: 1300px;
-    margin: 0 auto;
+    margin: 120px auto;
     position: relative;
+    /* border: 1px solid red; */
 }
 
 /* 예약섹션 */
 #root .Home .H_reservation{
+    width: 880px;
+    height: 136px;
     display: flex;
     justify-content: space-between;
-    padding: 20px 80px;
-    border: 1px solid #ccc;
+    padding: 5px 5px;
+    border: 1px solid #e5e5e5;
     border-radius: 100px;
-    background-color: #f2f2f2;
+    background-color: #f2f4f7;
     margin: 50px auto;
+    position: relative;
 }
 /* 날짜/시간선택 */
-/* #root .Home .H_reservation .H_dateTable{
-    width: 300px;
-} */
+#root .Home .H_reservation .H_dateTable{
+    width: 460px;
+}
+#root .Home .H_reservation .H_dateTable.open{
+    margin-top: 25px;
+    background-color: #fff;
+    width: 460px;
+    height: 123px;
+    margin: 0;
+    border-radius: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+#root .Home .H_reservation .H_dateTable > p{
+    color: rgb(142, 142, 142);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 34px 0 0 40px;
+}
+#root .Home .H_reservation .H_spotTable .spot_choice > p {
+    color: rgb(176, 176, 176);
+    font-size: 15px;
+}
+
+#root .Home .H_reservation .H_dateTable .H_dateTitle > p{
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 5px 0 0 40px;
+}
 /* 지점선택 */
-#root .Home .H_reservation .H_spotTable{
-    display: flex;
-    align-items: center;
-}
 #root .Home .H_reservation .H_spotTable .spot_choice{
-    width: 350px;
+    width: 420px;
+    padding: 33px 0 0 40px;
 }
-#root .Home .H_reservation .H_spotTable .spot_choice h2{
+#root .Home .H_reservation .H_spotTable .spot_choice.open{
+    margin-top: 25px;
+    background-color: #fff;
+    width: 420px;
+    height: 123px;
+    margin: 0;
+    padding: 33px 0 0 40px;
+    border-radius: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+/* #root .Home .H_reservation .H_spotTable .spot_choice .H_spotTitle h2{
+    cursor: pointer;
+} */
+#root .Home .H_reservation .H_spotTable .spot_choice .H_spotTitle >p{
+    font-size: 18px;
+    font-weight: 700;
     cursor: pointer;
 }
 /* 찾기버튼 */
-#root .Home .H_reservation .H_spotTable .searchButton{
+#root .Home .H_reservation .H_spotTable .H_searchButton{
+    position: absolute;
+    top: 39px;
+    right: 43px;   
     width: 170px;
     padding: 15px 0px;
     border-radius: 50px;
@@ -53,9 +99,12 @@ input:checked + .checkmark {
     background-color: #0b79b7 ;
     border: none;
 }
-#root .Home .H_reservation .H_spotTable .searchButton i{
+#root .Home .H_reservation .H_spotTable .H_searchButton i{
     color: #fff;
     /* font-weight: bold; */
+}
+#root .Home .H_reservation .H_spotTable .H_searchButton:hover{
+    background-color:#09679e ;
 }
 
 /* ---------------------------------- */
@@ -65,58 +114,147 @@ input:checked + .checkmark {
     width: 100%;
     height: 300px;
     margin: 50px 0;
+    border-radius: 10px;
 }
 
 /* ---------------------------------- */
 
 /* sec02 - 인기순 */
 #root .Home .H_sec02{
-    margin-bottom: 50px;
-}
-#root .Home .H_sec02 button{
-    width: 150px;
-    height: 45px;
-    border-radius: 100px;
-    border: none;
-    background-color: #0b79b7 ;
-    color: #fff;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-#root .Home .H_sec02 ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
-    /* justify-content: space-between; */
+    padding-bottom: 20px;
+}
+#root .Home .H_sec02 h2{
+    padding-right: 40px;
+    cursor: pointer;
+}
+#root .Home .H_sec02::before{
+    content: '';
+    height: 38px;
+    border: 1px solid rgb(212, 212, 212);
+    position: absolute;
+    left: 110px;
+}
+#root .Home .H_sec02 .H_topopen{
+    color: #979797;
+    height: 38px;
+    line-height: 38px;
+}
+
+#root .Home .H_sec02_1{
+    margin-bottom: 50px;
+    display: flex;
     gap: 25px;
 }
-#root .Home .H_sec02 ul li{
-    width: 220px;
-    height: 270px;
-    background-color: #0b79b7 ;
+#root .Home .H_sec02_1 .H_good{
+    display: inline-block;
+    background-color: #eeeeee;
+    width: 250px;
+    height: 300px;
     border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+#root .Home .H_sec02_1 .H_good:hover{
+    background-color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+#root .Home .H_sec02_1 .H_good > img{
+    width: 430px;
+    padding: 50px 0 0 0px;
 }
 
 /* ---------------------------------- */
 
+/* sec02 - 최신순 */
+#root .Home .H_sec02_2{
+    margin-bottom: 50px;
+    width: 1300px;
+    /* border: 1px solid red; */
+    position: relative;
+}
+#root .Home .H_sec02_2 .H_slide{
+    overflow: hidden;
+}
+#root .Home .H_sec02_2 > p{
+    cursor: pointer;
+}
+#root .Home .H_sec02_2 .H_before_btn{
+    position: absolute;
+    top: 130px;
+    left: -50px;
+    z-index: 20;
+    font-size: 30px;
+    border-radius: 50%;
+    color: #979797;
+}
+#root .Home .H_sec02_2 .H_after_btn{
+    position: absolute;
+    top: 130px;
+    right: -50px;
+    z-index: 10;
+    font-size: 30px;
+    border-radius: 50%;
+    color: #979797;
+}
+#root .Home .H_sec02_2 .H_slide > ul{
+    display: flex;
+    gap: 25px;
+    transition: transform 0.8s ease;
+}
+#root .Home .H_sec02_2 .H_slide > ul > li{
+    height: 300px;
+}
+#root .Home .H_sec02_2 .H_slide > ul > li .H_new{
+    display: inline-block;
+    background-color: #eeeeee;
+    width: 240px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+#root .Home .H_sec02_2 .H_slide > ul > li .H_new >img{
+    width: 350px;
+    padding: 50px 0 0 15px;
+}
+
 /* 최근 본 차량 */
 #root .Home .H_sec03{
-    margin-bottom: 50px;
-}
-#root .Home .H_sec03 ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
-    /* justify-content: space-between; */
+    padding-bottom: 20px;
+}
+#root .Home .H_sec03 .H_more > span{
+    color: #888;
+    font-weight: 500;
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 15px;
+}
+#root .Home .H_sec03 .H_more > span:hover{
+    color: #333;
+}
+#root .Home .H_sec03_1{
+    margin-bottom: 50px;
+    display: flex;
     gap: 25px;
 }
-#root .Home .H_sec03 ul li{
+#root .Home .H_sec03_1 .recent_car_item{
+    display: inline-block;
+    background-color: #eeeeee;
     width: 220px;
     height: 270px;
-    background-color: #0b79b7 ;
     border-radius: 10px;
+    overflow: hidden;
+}
+#root .Home .H_sec03_1 .recent_car_item:hover{
+    background-color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+#root .Home .H_sec03_1 .recent_car_item > img{
+    width: 350px;
+    padding: 50px 0 0 30px;
 }
 /* ---------------------------------- */
 
@@ -130,8 +268,8 @@ input:checked + .checkmark {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     position: absolute;
-    top: 120px;
-    right: 170px;
+    top: 150px;
+    right: 210px;
     z-index: 100;
 }
 
@@ -160,7 +298,8 @@ input:checked + .checkmark {
 #root .Home .calendar-slide.open {
   max-height: 800px; /* 캘린더 높이 예상값 */
   position: absolute;
-  top: 120px;
+  top: 150px;
+  left: 210px;
   z-index: 100;
    width: 710px;
    height: 785px;
@@ -222,7 +361,7 @@ input:checked + .checkmark {
     display: flex;
     justify-content: space-between;
 }
-#root .Home .H_location .H_selectLocation .H_gu > p{
+#root .Home .H_location .H_selectLocation .H_gu .H_Click> p{
     cursor: pointer;
 }
 #root .Home .H_location .H_selectLocation .H_seoul::before{
