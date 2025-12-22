@@ -9,7 +9,7 @@ export default function LoginForm() {
     const [userid, setUserid] = useState('');
     const [userpw, setUserpw] = useState('');
 
-   
+
     const navigate = useNavigate();
     const {loginsave} = useContext(AuthContext);
 
@@ -33,6 +33,13 @@ export default function LoginForm() {
                 loginsave({
                     userid: res.data.userid,
                     username: res.data.username,
+                    user_email:res.data.user_email,
+                    user_resistnum:res.data.user_resistnum,
+                    user_phonenum:res.data.user_phonenum,
+                    address:res.data.address,
+                    address_detail:res.data.address_detail,
+                    user_iskorean:res.data.user_iskorean,
+                    user_license:res.data.user_license,
                 });
 
                 alert(`${res.data.username}님, 환영합니다.`);

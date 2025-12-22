@@ -28,7 +28,7 @@ if (empty($userid) || empty($userpw)) {
 // DB 사용자 정보 조회
 // SELECT userid, userpw FROM users WHERE userid=? AND userpw=?
 // sql문 작성 시 담을 변수 지정
-$sql = 'SELECT userid, username FROM users WHERE userid=? AND userpw=?';
+$sql = 'SELECT userid, userpw, username, user_email ,user_resistnum, user_phonenum , address, address_detail, user_iskorean, user_license FROM users WHERE userid=? AND userpw=?';
 // admin, 1234 => 결과를 만족하면 출력될 데이터
 // DB에 연결해야 sql문을 실행할 수 있다.
 $stmt = $conn->prepare($sql);
@@ -49,6 +49,13 @@ if ($result->num_rows >= 1) {
     $response['message'] = '로그인 성공';
     $response['userid'] = $user['userid']; // 한줄의 배열
     $response['username'] = $user['username']; // 한줄의 배열
+    $response['user_email'] = $user['user_email']; // 한줄의 배열
+    $response['user_resistnum'] = $user['user_resistnum']; // 한줄의 배열
+    $response['user_phonenum'] = $user['user_phonenum']; // 한줄의 배열
+    $response['address'] = $user['address']; // 한줄의 배열
+    $response['address_detail'] = $user['address_detail']; // 한줄의 배열
+    $response['user_iskorean'] = $user['user_iskorean']; // 한줄의 배열
+    $response['user_license'] = $user['user_license']; // 한줄의 배열
 }
 else {
     // 로그인할 id, pw가 존재하지 않을 때

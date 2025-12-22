@@ -18,6 +18,10 @@ import CustomerService from './pages/CustomerService'
 import DetailPage from './pages/DetailPage'
 import Recentcarlist from './pages/Recentcarlist'
 import Mypage from './pages/Mypage'
+import MypageDetail from './pages/MypageDetail'
+import MypageInquiry from './pages/MypageInquiry'
+import MypageMyinfo from './pages/MypageMyinfo'
+import MypageBooked from './pages/MypageBooked'
 
 function App() {
 
@@ -35,7 +39,12 @@ function App() {
                 <Route path="/guide" element={<GuidePage/>}/>
                 <Route path="/customerservice" element={<CustomerService/>}/>
                 <Route path="/location" element={<LocationPage/>}/>
-                <Route path="/mypage" element={<Mypage/>}/>
+                <Route path="/mypage" element={<Mypage />}>
+                  <Route path="booked" element={<MypageBooked/>} />
+                  <Route path="detail/:id" element={<MypageDetail />} />
+                  <Route path="inquiry" element={<MypageInquiry />} />
+                  <Route path="myinfo" element={<MypageMyinfo />} />
+                </Route>
                 <Route path="/login" element={<LoginForm/>}/>
                 <Route path="/joinA" element={<JoinFormA/>}/>
                 <Route path="/joinB" element={<JoinFormB/>}/>

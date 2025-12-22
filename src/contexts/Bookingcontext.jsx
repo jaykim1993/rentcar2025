@@ -18,8 +18,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-08',
       userId:'user01',
       carId:19,
-      startDate:'2025-12-03',
-      endDate:'2025-12-04',
+      startDate:'2025-12-29',
+      endDate:'2025-12-31',
       startTime:'10:00',
       endTime:'16:00',
       price:14000
@@ -29,8 +29,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-09',
       userId:'user01',
       carId:105,
-      startDate:'2025-12-15',
-      endDate:'2025-12-20',
+      startDate:'2025-12-26',
+      endDate:'2025-12-27',
       startTime:'09:00',
       endTime:'10:00',
       price:114000
@@ -40,8 +40,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-09',
       userId:'user02',
       carId:25,
-      startDate:'2025-12-19',
-      endDate:'2025-12-20',
+      startDate:'2025-12-26',
+      endDate:'2025-12-27',
       startTime:'16:30',
       endTime:'18:00',
       price:18000
@@ -51,8 +51,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-10',
       userId:'user02',
       carId:32,
-      startDate:'2025-12-01',
-      endDate:'2025-12-10',
+      startDate:'2025-12-28',
+      endDate:'2025-12-31',
       startTime:'08:30',
       endTime:'18:00',
       price:25000
@@ -62,8 +62,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-10',
       userId:'user03',
       carId:40,
-      startDate:'2025-12-16',
-      endDate:'2025-12-17',
+      startDate:'2025-12-28',
+      endDate:'2025-12-28',
       startTime:'10:30',
       endTime:'13:00',
       price:200000
@@ -73,8 +73,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-10',
       userId:'user03',
       carId:56,
-      startDate:'2025-12-06',
-      endDate:'2025-12-14',
+      startDate:'2025-12-29',
+      endDate:'2025-12-31',
       startTime:'09:00',
       endTime:'21:30',
       price:14000
@@ -84,8 +84,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-11',
       userId:'user04',
       carId:102,
-      startDate:'2025-12-20',
-      endDate:'2025-12-24',
+      startDate:'2025-12-26',
+      endDate:'2025-12-27',
       startTime:'07:00',
       endTime:'22:30',
       price:14000
@@ -95,8 +95,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-11',
       userId:'user04',
       carId:96,
-      startDate:'2025-12-24',
-      endDate:'2025-12-25',
+      startDate:'2025-12-29',
+      endDate:'2025-12-30',
       startTime:'10:00',
       endTime:'22:00',
       price:14000
@@ -106,8 +106,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-11',
       userId:'user05',
       carId:90,
-      startDate:'2025-12-10',
-      endDate:'2025-12-11',
+      startDate:'2025-12-25',
+      endDate:'2025-12-27',
       startTime:'17:00',
       endTime:'23:00',
       price:14000
@@ -117,8 +117,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-11',
       userId:'user05',
       carId:110,
-      startDate:'2025-12-19',
-      endDate:'2025-12-21',
+      startDate:'2025-12-28',
+      endDate:'2025-12-31',
       startTime:'07:00',
       endTime:'16:30',
       price:14000
@@ -128,8 +128,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-11',
       userId:'user06',
       carId:116,
-      startDate:'2025-12-05',
-      endDate:'2025-12-07',
+      startDate:'2025-12-28',
+      endDate:'2025-12-30',
       startTime:'10:00',
       endTime:'22:30',
       price:14000
@@ -139,8 +139,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-11',
       userId:'user06',
       carId:80,
-      startDate:'2025-12-11',
-      endDate:'2025-12-14',
+      startDate:'2025-12-26',
+      endDate:'2025-12-27',
       startTime:'16:00',
       endTime:'22:00',
       price:14000
@@ -150,8 +150,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user07',
       carId:116,
-      startDate:'2025-12-02',
-      endDate:'2025-12-06',
+      startDate:'2025-12-22',
+      endDate:'2025-12-27',
       startTime:'08:30',
       endTime:'22:00',
       price:14000
@@ -161,8 +161,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user07',
       carId:50,
-      startDate:'2025-12-15',
-      endDate:'2025-12-17',
+      startDate:'2025-12-28',
+      endDate:'2025-12-30',
       startTime:'06:30',
       endTime:'10:00',
       price:14000
@@ -172,8 +172,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user08',
       carId:100,
-      startDate:'2025-12-12',
-      endDate:'2025-12-13',
+      startDate:'2025-12-27',
+      endDate:'2025-12-28',
       startTime:'16:00',
       endTime:'20:00',
       price:14000
@@ -183,8 +183,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user08',
       carId:187,
-      startDate:'2025-12-19',
-      endDate:'2025-12-20',
+      startDate:'2025-12-29',
+      endDate:'2025-12-30',
       startTime:'20:00',
       endTime:'23:00',
       price:14000
@@ -194,8 +194,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user09',
       carId:180,
-      startDate:'2025-12-05',
-      endDate:'2025-12-08',
+      startDate:'2025-12-25',
+      endDate:'2025-12-26',
       startTime:'12:00',
       endTime:'16:00',
       price:14000
@@ -205,8 +205,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user09',
       carId:64,
-      startDate:'2025-12-18',
-      endDate:'2025-12-20',
+      startDate:'2025-12-27',
+      endDate:'2025-12-30',
       startTime:'14:00',
       endTime:'20:00',
       price:14000
@@ -216,8 +216,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user10',
       carId:190,
-      startDate:'2025-12-10',
-      endDate:'2025-12-12',
+      startDate:'2025-12-27',
+      endDate:'2025-12-28',
       startTime:'13:30',
       endTime:'17:30',
       price:14000
@@ -227,8 +227,8 @@ export default function BookingProvider({ children }) {
       bookedDate: '2025-12-12',
       userId:'user10',
       carId:195,
-      startDate:'2025-12-15',
-      endDate:'2025-12-18',
+      startDate:'2025-12-29',
+      endDate:'2025-12-30',
       startTime:'13:30',
       endTime:'17:30',
       price:14000
@@ -277,7 +277,7 @@ export default function BookingProvider({ children }) {
               return { ...book, car };
             })
             .sort(
-              (a, b) => new Date(b.startDate) - new Date(a.startDate)
+              (a, b) => new Date(b.bookedDate) - new Date(a.bookedDate)
             );
           }, [bookedlistAll, userid, cars]);
 

@@ -11,13 +11,13 @@ export default function AuthProvider({children}){
     const[userid, setUserid]=useState(null);
     // const[userpw, setUserpw]=useState(null);
     const[username, setUsername]=useState(null);
-    // const[user_email, setUser_email]=useState(null);
-    // const[user_resistnum, setUser_resistnum]=useState(null);
-    // const[user_phonenum, setUser_phonenum]=useState(null);
-    // const[address, setAddress]=useState(null);
-    // const[address_detail, setAddress_detail]=useState(null);
-    // const[user_iskorean, setUser_iskorean]=useState(null);
-    // const[user_license, setUser_license]=useState(null);
+    const[user_email, setUser_email]=useState(null);
+    const[user_resistnum, setUser_resistnum]=useState(null);
+    const[user_phonenum, setUser_phonenum]=useState(null);
+    const[address, setAddress]=useState(null);
+    const[address_detail, setAddress_detail]=useState(null);
+    const[user_iskorean, setUser_iskorean]=useState(null);
+    const[user_license, setUser_license]=useState(null);
 
     // 컴포넌트 마운트 될 때 localStorage에서 사용자 정보 불러오기
     useEffect(() => {
@@ -29,29 +29,84 @@ export default function AuthProvider({children}){
         if (savedUsername) {
         setUsername(savedUsername);
         }
+        const savedUser_email = localStorage.getItem("user_email");
+        if (savedUser_email) {
+        setUser_email(savedUser_email);
+        }
+        const savedUser_resistnum = localStorage.getItem("user_resistnum");
+        if (savedUser_resistnum) {
+        setUser_resistnum(savedUser_resistnum);
+        }
+        const savedUser_phonenum = localStorage.getItem("user_phonenum");
+        if (savedUser_phonenum) {
+        setUser_phonenum(savedUser_phonenum);
+        }
+        const savedUser_address = localStorage.getItem("address");
+        if (savedUser_address) {
+        setAddress(savedUser_address);
+        }
+        const savedUser_address_detail = localStorage.getItem("address_detail");
+        if (savedUser_address_detail) {
+        setAddress_detail(savedUser_address_detail);
+        }
+        const savedUser_iskorean = localStorage.getItem("user_iskorean");
+        if (savedUser_iskorean) {
+        setUser_iskorean(savedUser_iskorean);
+        }
+        const savedUser_license = localStorage.getItem("user_license");
+        if (savedUser_resistnum) {
+        setUser_license(savedUser_license);
+        }
     }, []);
-
     // 로그인 정보 저장 함수
       const loginsave = (userData) => {
         // userData 전체 중 userid, username 저장
         setUserid(userData.userid);
         setUsername(userData.username);
+        setUser_email(userData.user_email);
+        setUser_resistnum(userData.user_resistnum);
+        setUser_phonenum(userData.user_phonenum);
+        setAddress(userData.address);
+        setAddress_detail(userData.address_detail);
+        setUser_iskorean(userData.user_iskorean);
+        setUser_license(userData.user_license);
         localStorage.setItem("userid", userData.userid);
         localStorage.setItem("username", userData.username);
-        console.log("로그인 시도 값", userid, username);
+        localStorage.setItem("user_email", userData.user_email);
+        localStorage.setItem("user_resistnum", userData.user_resistnum);
+        localStorage.setItem("user_phonenum", userData.user_phonenum);
+        localStorage.setItem("address", userData.address);
+        localStorage.setItem("address_detail", userData.address_detail);
+        localStorage.setItem("user_iskorean", userData.user_iskorean);
+        localStorage.setItem("user_license", userData.user_license);
+        console.log("로그인 시도 값", userid, username, address_detail);
     };
-    
+
     // 로그아웃 함수
     const logout = () => {
         setUserid(null);
         setUsername(null);
+        setUser_email(null);
+        setUser_resistnum(null);
+        setUser_phonenum(null);
+        setAddress(null);
+        setAddress_detail(null);
+        setUser_iskorean(null);
+        setUser_license(null);
         localStorage.removeItem("userid");
         localStorage.removeItem("username");
+        localStorage.removeItem("user_email");
+        localStorage.removeItem("user_resistnum");
+        localStorage.removeItem("user_phonenum");
+        localStorage.removeItem("address");
+        localStorage.removeItem("address_detail");
+        localStorage.removeItem("user_iskorean");
+        localStorage.removeItem("user_license");
     };
 
     // 공유할 변수, 함수 내보내기
     return(
-        <AuthContext.Provider value={{userid, username, loginsave, logout}}>
+        <AuthContext.Provider value={{userid, username, user_email, user_resistnum, user_phonenum, address, address_detail, user_iskorean, user_license ,loginsave, logout}}>
             {children}
         </AuthContext.Provider>
     )

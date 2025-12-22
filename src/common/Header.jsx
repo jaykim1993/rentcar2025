@@ -117,7 +117,7 @@ export default function Header() {
                         <Link to={'/guide'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>이용가이드</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         <p className='headerNavH'>회원 맞춤</p>
                         <Link to={'/recent'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>최근 본 차량</div> <div className='headerNavpointer'>→</div></li><br /></Link>
-                        <Link to={'/mypage'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>마이페이지</div> <div className='headerNavpointer'>→</div></li><br /></Link>
+                        <Link to={'/mypage/booked'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>마이페이지</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                     </ul>
                 </div>
             </nav>

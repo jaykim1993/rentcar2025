@@ -1,0 +1,26 @@
+.myPageBookWarp{
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 15px;
+    padding: 0px 25px;
+    margin-bottom: 100px;
+}
+.mypageBookCard{
+    background-color: rgb(231, 231, 231);
+    border-radius: 15px;
+    display: flex;
+    padding: 30px;
+    margin: 30px 0;
+    position: relative;
+}
+.mypageBookCard img{
+    width: 350px;
+}
+.mypageBookCard .mypageBookinfo{
+    background-color: aquamarine;
+    width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+}
+.mypageBookinfo h3{
+    font-size: 25px;
+}
