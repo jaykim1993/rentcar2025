@@ -243,7 +243,7 @@ export default function BookingProvider({ children }) {
         "bookedlistAll",
         JSON.stringify(bookedlistAll)
       );
-      console.log(bookedlistAll);
+      // console.log(bookedlistAll);
     }, [bookedlistAll]);
 
 
@@ -277,7 +277,7 @@ export default function BookingProvider({ children }) {
               return { ...book, car };
             })
             .sort(
-              (a, b) => new Date(b.startDate) - new Date(a.startDate)
+              (a, b) => new Date(a.bookedDate) - new Date(b.bookedDate)
             );
           }, [bookedlistAll, userid, cars]);
 

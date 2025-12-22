@@ -448,7 +448,7 @@ export default function Recentcar(){
                                 : <h4>지점선택</h4>}</div>
                             </div>
                             <div className="searchButton">
-                                <button type="submit" onClick={handleResetAll} onMouseOver={()=>console.log('오버확인')}>
+                                <button type="submit" onClick={handleResetAll}>
                                     초기화 <i className="bi bi-arrow-clockwise"></i>
                                 </button>
                             </div>
