@@ -321,7 +321,7 @@ const newCarList=
         </div>
     
 
-        {/* sec02 - 인기차량 */}
+        {/* sec02 - 인기차량. */}
         <div className="H_sec02">
             <h2 className={`H_top${isTop?"":"open"}`} onClick={topClickHandler}>인기순</h2>
             <h2 className={`H_top${isNew?"":"open"}`} onClick={topClickHandler}>신규 차량</h2>
