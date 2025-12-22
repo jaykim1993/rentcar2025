@@ -1,28 +1,13 @@
 // 추가정보 입력(필수는 * 표시)
 // 가입완료 버튼 (+자동로그인, 메인으로 넘어가기)
 import './JoinForm.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate, Link } from "react-router-dom";
 import DaumPostCode from 'react-daum-postcode';
 
 
-export default function JoinFormC() {
-    const navigate = useNavigate();
 
-    // state에서 데이터 받아오기
-    
-    const { state } = useLocation();
-    const { userid, userpw } = state || {};
-  
-    // 앞에서 받아오지 못할 시 방어코드
-    useEffect(() => {
-        if (!userid || !userpw) {
-        alert("잘못된 접근입니다. 다시 회원가입을 진행해주세요.");
-        navigate("/joinB");
-        }
-    }, [userid, userpw, navigate]);
-
+export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
 
     // 3. 이름: 홍길동
     const[username, setUserName] = useState("");
@@ -86,6 +71,11 @@ export default function JoinFormC() {
     // 데이터 DB에 추가
     const signup = async (e) => {
         e.preventDefault();
+        if (!username || !emailId || !resistFront || !resistBack || !phoneFront || !phoneMiddle || !phoneBack) {
+            alert("필수 기입 사항을 입력하세요");
+            return;
+        }
+
         try {
             const res = await axios.post(
                 'http://localhost/rentcar2025/backend/api/join.php',
@@ -98,8 +88,8 @@ export default function JoinFormC() {
                     user_phonenum,
                     user_license,
                     address,
-                    address_detail
-
+                    address_detail,
+                    user_iskorean
                 }
             );
 
@@ -107,25 +97,34 @@ export default function JoinFormC() {
 
             if (res.data.status === 'success') {
                 alert("회원 가입을 환영합니다. 로그인 페이지로 이동합니다.");
-                navigate('/login');
+                onClose();
+                onComplete();
+                
+                
+
                 // 초기화
-                setEmailId("");
-                setEmailDomain("naver.com");
-                setResistFront("");
-                setResistBack("");
-                setPhoneFront("");
-                setPhoneMiddle("");
-                setPhoneBack("");
-                setAddress("");
-                setAddress_detail("");
-                setLicenseFront("");
-                setLicenseBack("");
-                setUser_iskorean("");
+                setUserName('');
+                setEmailId('');
+                setEmailDomain('naver.com');
+                setResistFront('');
+                setResistBack('');
+                setPhoneFront('');
+                setPhoneMiddle('');
+                setPhoneBack('');
+                setAddress('');
+                setAddress_detail('');
+                setZipcode('');
+                setLicenseFront('');
+                setLicenseSecond('');
+                setLicenseThird('');
+                setLicenseBack('');
+                setUser_iskorean(false);
+                
             } else {
                 alert(res.data.message || "회원 가입 실패");
             }
         } catch (error) {
-            console.log("에러", error);
+            console.log("회원가입 에러", error);
             alert("서버 연결 오류");
         }
     };
@@ -133,8 +132,8 @@ export default function JoinFormC() {
     return (
         <div className='joinOverlay'>
             <div className="joinWrap">
-                <button className="joinBtnX">
-                    <Link to={'/'}><i className="bi bi-x"></i></Link>
+                <button className="joinBtnX" onClick={onClose}>
+                    <i className="bi bi-x"></i>
                 </button>
                 <h2 className='joinH'><span className='joinColorText'>추가정보</span>를 입력해주세요.</h2>
                 <ul className='joinUlC'>
@@ -258,9 +257,9 @@ export default function JoinFormC() {
                                 id='address_detial'
                                 />
                                 {isOpen && 
-                                <div className='joinCOverlay' onClick={addressToggle}>
-                                    <div className='addressWrap'>
-                                        <button className='joinBtnX' onComplete={addresstHandler}><i className="bi bi-x"></i></button>
+                                <div className='joinCOverlay' onClick={() => setIsOpen(false)}>
+                                    <div className='addressWrap' onClick={(e) => e.stopPropagation()}>
+                                        <button className='joinBtnX' type='button' onClick={addressToggle}><i className="bi bi-x"></i></button>
                                         <h2 className='joinH'>주소 검색</h2>
                                         <DaumPostCode  onComplete={addresstHandler} height="100%"/>
                                     </div>
@@ -321,10 +320,11 @@ export default function JoinFormC() {
 
                 </ul>
                 <div className="joinNextbtn">
-                    <button 
-                    className="joinFormNext" 
-                    type="submit" 
-                    onClick={signup}>
+                    <button
+                        type="button"
+                        className="joinFormNext"
+                        onClick={signup}
+                    >
                         회원가입
                     </button>
                 </div>

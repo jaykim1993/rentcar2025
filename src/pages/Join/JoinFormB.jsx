@@ -4,63 +4,70 @@
 // 비밀번호 10~20자 내외
 import './JoinForm.css';
 import { useState } from 'react';
-import axios, { Axios } from 'axios';
-import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
-export default function JoinFormB() {
-  const navigate = useNavigate();
+export default function JoinFormB({ onClose, onNext }) {
 
   const [userid, setUserid] = useState("");
   const [userpw, setUserpw] = useState("");
   const [userpwCheck, setUserpwCheck] = useState("");
 
   // DB 내 아이디 중복 체크
+  const [isidChecked, setIsidChecked] = useState(false);
+  const [ispwChecked, setIspwChecked] = useState(false);
   const checkId = async () => {
     if (!userid) return alert("아이디를 입력하세요.");
 
     try {
-      const res = await axios.post("http://localhost/rentcar2025/backend/api/join.php", { userid });
+      // await 사용해서 Promise 완료 후 결과 받기
+      const res = await axios.post('http://localhost/rentcar2025/backend/api/join.php', {
+        action: 'checkId',
+        userid: userid  //  실제 입력값 전달
+      });
 
+      // 서버에서 { exists: true/false } 반환
       if (res.data.exists) {
         alert("중복된 아이디입니다.");
+        setIsidChecked(false);
       } else {
-        alert("사용가능한 아이디입니다.");
+        alert("사용 가능한 아이디입니다.");
+        setIsidChecked(true);
       }
+
     } catch (err) {
       console.error(err);
       alert("오류 발생");
+      setIsidChecked(false);
     }
   };
 
   // 비밀번호 확인 버튼 함수
   const checkpw =()=>{
     if(userpw == userpwCheck){
+      setIspwChecked(true);
       alert("비밀번호 확인 완료")
     } else { 
+      setIspwChecked(false);
       alert("입력하신 비밀번호가 다릅니다.")
       setUserpwCheck('')
     }
   }
   // 다음 버튼 함수
-  const goNext = () => {
-    if (!userid || !userpw)
-      return alert("아이디와 비밀번호를 모두 입력하세요.");
-    if (userpw != userpwCheck)
-      return alert("비밀번호 확인을 진행해주세요")
-    // 페이지 이동 + userid, userpw 전달
-    navigate("/joinC", {
-      state: {
-        userid,
-        userpw,
-      },
-    });
+  const handleNext = () => {
+    if (!userid || !userpw) return alert("아이디와 비밀번호를 모두 입력하세요.");
+    if (userpw !== userpwCheck) return alert("비밀번호가 일치하지 않습니다.");
+    if (!isidChecked) return alert("아이디 중복 확인이 필요합니다.");
+    if (!ispwChecked) return alert("비밀번호 확인이 필요합니다.");
+  
+    // Header에서 받은 onNext 호출, userid/userpw 전달
+    onNext({ userid, userpw });
   };
     return (
       <div className='joinOverlay'>
         <div className="joinWrap">
-            <button className="joinBtnX">
-              <Link to={'/'}><i className="bi bi-x"></i></Link>
+            <button className="joinBtnX" onClick={onClose}>
+                <i className="bi bi-x"></i>
             </button>
             <h3 className='joinH'><span className='joinColorText'>아이디</span>와 <span className='joinColorText'>비밀번호</span>를 설정해주세요.</h3>
             <ul className='joinUlB'>
@@ -124,7 +131,7 @@ export default function JoinFormB() {
                 <button 
                 className="joinFormNext" 
                 type="submit" 
-                onClick={goNext}>
+                 onClick={handleNext}>
                   다음
                 </button>
             </div>

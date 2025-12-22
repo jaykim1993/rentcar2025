@@ -437,37 +437,34 @@ export default function Recentcar(){
             </div>
             {/* 목록 */}
             <div className="R_carlist">
-                
                 {/* 예약 섹션 */}
-                        <div className="R_reservation">
-                            <div className="R_dateTable">
-                                  <p>언제?</p>
-                                  <div className="R_dateTitle" onClick={calendarHandler}>
-                                    {apply?
-                                    <p>
-                                     {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
-                                    </p>:
-                                    <h2>날짜선택</h2>}
-                                  </div>
-                                  
-                                
-                            </div>
-                    
-                            {/* 지점 선택 파트 */}
-                            <div className="R_spotTable">
-                                <div className="spot_choice">
-                                    <p>어디?</p>
-                                    <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
-                                </div>
-                                <div className="searchButton">
-                                    <button type="submit" onClick={handleResetAll} onMouseOver={()=>console.log('오버확인')}>
-                                        초기화 <i className="bi bi-arrow-clockwise"></i>
-                                    </button>
-                                </div>
+                    <div className="R_reservation">
+                        <div className="R_dateTable">
+                            <p>언제?</p>
+                            <div className="R_dateTitle" onClick={calendarHandler}>
+                                {apply?
+                                <p>
+                                    {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
+                                </p>:
+                                <h2>날짜선택</h2>}
                             </div>
                         </div>
                 
-                       {/* 지점 모달 파트 */}
+                        {/* 지점 선택 파트 */}
+                        <div className="R_spotTable">
+                            <div className="spot_choice">
+                                <p>어디?</p>
+                                <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
+                            </div>
+                            <div className="searchButton">
+                                <button type="submit" onClick={handleResetAll} onMouseOver={()=>console.log('오버확인')}>
+                                    초기화 <i className="bi bi-arrow-clockwise"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                
+                {/* 지점 모달 파트 */}
                 {isLocation && (
                   <div className="R_location">
                     <span className="R_close01" onClick={detailCloseHandler}><i className="bi bi-x-lg"></i></span>
@@ -492,7 +489,6 @@ export default function Recentcar(){
                           <p className="R_detial_address_title">주소</p>
                           <span className="R_detial_address">{detail.address}</span>
                         </div>
-                        
                       </>
                     ) : (
                     // 지점 목록 
@@ -556,10 +552,11 @@ export default function Recentcar(){
                   </div>
                 )}
                 
-                        {isCalendar && <div className={`calendar-slide ${isCalendar ? "open" : ""}`}>
-                          <span className="R_close02" onClick={()=>setIsCalendar(false)}><i className="bi bi-x-lg"></i></span>
-                            <Calendar />
-                          </div>}
+                {isCalendar && 
+                    <div className={`calendar-slide ${isCalendar ? "open" : ""}`}>
+                        <span className="R_close02" onClick={()=>setIsCalendar(false)}><i className="bi bi-x-lg"></i></span>
+                        <Calendar />
+                    </div>}
                 <div className="cate_choice">
                     <div className="cate_Btn">
                         {renderSelectedFilters()}
