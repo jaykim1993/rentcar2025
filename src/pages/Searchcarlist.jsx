@@ -10,24 +10,34 @@ import { BookingContext } from "../contexts/Bookingcontext";
 export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
-    const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, apply, handleSearchBtn } = useContext(CalendarContext);
-    const { calculatePrice } = useContext(BookingContext);
+    const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, 
+        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
+    const { calculatePrice} = useContext(BookingContext);
 
     // ================= 달력 관련 =================
 
-    // 지점 모달 toggle
-    const [isLocation, setIsLocation] = useState(false);
-    // 달력 모달 toggle
-    const [iscalendar, setIscalendar] = useState(false);
+    // // 지점 모달 toggle
+    // const [isLocation, setIsLocation] = useState(false);
+    // // 달력 모달 toggle
+    // const [iscalendar, setIscalendar] = useState(false);
 
     const calendarHandler=()=>{
-      setIscalendar(!iscalendar);
+      setIsCalendar(!isCalendar);
       setIsLocation(false);
     };
     const locationHandler=()=>{
-      setIscalendar(false);
+      setIsCalendar(false);
       setIsLocation(!isLocation);
     };
+
+    // 상세보기 close 버튼 핸들러함수
+  const detailCloseHandler=()=>{
+    if(isDetail){
+      setIsDetail(false);
+    }else{
+      setIsLocation(false);
+    }
+  };
 
     // 오전 오후
     const timeAMPM= (time)=>{
@@ -63,6 +73,7 @@ export default function Recentcar(){
     const handleResetAll = () => {
         // 달력/위치 컨텍스트 초기화
         setLocation(null); 
+        handleSearchBtn(navigate); 
         
         // 현재 페이지의 필터 UI 초기화
         resetFilters();
@@ -426,17 +437,16 @@ export default function Recentcar(){
             </div>
             {/* 목록 */}
             <div className="R_carlist">
-                {/* 날짜 / 지점 선택 */}
-                <div className="R_reservation">
-                    {/* 예약 섹션 */}
+                {/* 예약 섹션 */}
                     <div className="R_reservation">
                         <div className="R_dateTable">
                             <p>언제?</p>
                             <div className="R_dateTitle" onClick={calendarHandler}>
-                                {apply?<p>
-                                    {startDate &&`${startDate}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate}${timeAMPM(endTime)}`}
-                                </p> 
-                                : <h4>날짜선택</h4>}
+                                {apply?
+                                <p>
+                                    {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
+                                </p>:
+                                <h2>날짜선택</h2>}
                             </div>
                         </div>
                 
@@ -444,99 +454,109 @@ export default function Recentcar(){
                         <div className="R_spotTable">
                             <div className="spot_choice">
                                 <p>어디?</p>
-                                <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p>
-                                : <h4>지점선택</h4>}</div>
+                                <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
                             </div>
                             <div className="searchButton">
-                                <button type="submit" onClick={handleResetAll}>
+                                <button type="submit" onClick={handleResetAll} onMouseOver={()=>console.log('오버확인')}>
                                     초기화 <i className="bi bi-arrow-clockwise"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    {/* 지점 모달 파트 */}
-                    {isLocation && (
-                      <div className="R_location">
-                        <span className="R_close01" onClick={()=>setIsLocation(false)}><i className="bi bi-x-lg"></i></span>
-                        {/* 상세 위치 (지도) */}
-                        {isDetail ? (
-                          <>
-                            <div className="R_selectLocation_detail">
-                    
-                              <MapContainer center={[detail_lat, detail_lng]} zoom={20} style={{ height: "300px", width: "394px"}}> 
-                                <TileLayer
-                                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                                />
-                                {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
-                                {positions.map((spot) => (
-                                  <Marker key={spot.id} position={[spot.lat, spot.lng]}>
-                                    <Popup>{spot.name}</Popup>
-                                  </Marker>
-                                ))}
-                              </MapContainer>
-                              <h5>{detail.name}</h5>
-                              <p className="R_detial_address_title">주소</p>
-                              <span className="R_detial_address">{detail.address}</span>
-                            </div>
-                            
-                          </>
-                        ) : (
-                        // 지점 목록 
-                          <>
-                            <h3>지점을 선택하세요</h3>
-                            <div className="R_selectLocation">
-                              <span>서울</span>
-                              <div className="R_seoul">
-                                <div className="R_gu">
-                                  <p onClick={()=>setLocation("서울북부")}>
-                                    서울 북부 <span>노원구</span>
-                                  </p>
-                                  <button className="R_detail" onClick={()=>setIsDetail(5)}>상세</button>
-                                </div>
-                    
-                                <div className="R_gu">
-                                  <p onClick={()=>setLocation("서울남부")}>
-                                    서울 남부 <span>서초구</span>
-                                  </p>
-                                  <button className="R_detail" onClick={()=>setIsDetail(4)}>상세</button>
-                                </div>
-                    
-                                <div className="R_gu">
-                                  <p onClick={()=>setLocation("서울동부")}>
-                                    서울 동부 <span>동대문구</span>
-                                  </p>
-                                  <button className="R_detail" onClick={()=>setIsDetail(3)}>상세</button>
-                                </div>
-                              </div>
-                    
-                              <span>김포</span>
-                              <div className="R_gimpo">
-                                <div className="R_gu">
-                                  <p onClick={()=>setLocation("김포공항")}>
-                                    김포공항 <span>강서구</span>
-                                  </p>
-                                  <button className="R_detail" onClick={()=>setIsDetail(2)}>상세</button>
-                                </div>
-                              </div>
-                    
-                              <span>인천</span>
-                              <div className="R_gu">
-                                <p onClick={()=>setLocation("인천공항")}>
-                                  인천공항 <span>서초구</span>
+                
+                {/* 지점 모달 파트 */}
+                {isLocation && (
+                  <div className="R_location">
+                    <span className="R_close01" onClick={detailCloseHandler}><i className="bi bi-x-lg"></i></span>
+                    {/* 상세 위치 (지도.) */}
+                    {isDetail ? (
+                      <>
+                        <div className="R_selectLocation_detail">
+                
+                          <MapContainer center={[detail_lat, detail_lng]} zoom={20} style={{ height: "300px", width: "394px"}}> 
+                            <TileLayer
+                              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+                            />
+                            {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
+                            {positions.map((spot) => (
+                              <Marker key={spot.id} position={[spot.lat, spot.lng]}>
+                                <Popup>{spot.name}</Popup>
+                              </Marker>
+                            ))}
+                          </MapContainer>
+                          <h5>{detail.name}</h5>
+                          <p className="R_detial_address_title">주소</p>
+                          <span className="R_detial_address">{detail.address}</span>
+                        </div>
+                      </>
+                    ) : (
+                    // 지점 목록 
+                      <>
+                        <h3>지점을 선택하세요</h3>
+                        <div className="R_selectLocation">
+                          <span>서울</span>
+                          <div className="R_seoul">
+                            <div className="R_gu">
+                              <div className="R_Click" onClick={()=>setIsLocation(false)}>
+                                <p onClick={()=>setLocation("서울북부")}>
+                                  서울 북부 <span>노원구</span>
                                 </p>
-                                <button className="R_detail" onClick={()=>setIsDetail(1)}>상세</button>
                               </div>
+                              <button className="R_detail" onClick={()=>setIsDetail(5)}>상세</button>
                             </div>
-                          </>
-                        )}
-                      </div>
+                
+                            <div className="R_gu">
+                              <div className="R_Click" onClick={()=>setIsLocation(false)}>
+                                <p onClick={()=>setLocation("서울남부")}>
+                                  서울 남부 <span>서초구</span>
+                                </p>
+                              </div>
+                              <button className="R_detail" onClick={()=>setIsDetail(4)}>상세</button>
+                            </div>
+                
+                            <div className="R_gu">
+                              <div className="R_Click" onClick={()=>setIsLocation(false)}>
+                                <p onClick={()=>setLocation("서울동부")}>
+                                  서울 동부 <span>동대문구</span>
+                                </p>
+                              </div>
+                              <button className="R_detail" onClick={()=>setIsDetail(3)}>상세</button>
+                            </div>
+                          </div>
+                
+                          <span>김포</span>
+                          <div className="R_gimpo">
+                            <div className="R_gu">
+                              <div className="R_Click" onClick={()=>setIsLocation(false)}>
+                                <p onClick={()=>setLocation("김포공항")}>
+                                  김포공항 <span>강서구</span>
+                                </p>
+                              </div>
+                              <button className="R_detail" onClick={()=>setIsDetail(2)}>상세</button>
+                            </div>
+                          </div>
+                
+                          <span>인천</span>
+                          <div className="R_gu">
+                            <div className="R_Click" onClick={()=>setIsLocation(false)}>
+                              <p onClick={()=>setLocation("인천공항")}>
+                                인천공항 <span>서초구</span>
+                              </p>
+                            </div>
+                            <button className="R_detail" onClick={()=>setIsDetail(1)}>상세</button>
+                          </div>
+                        </div>
+                      </>
                     )}
-                    <div className={`calendar-slide ${iscalendar ? "open" : ""}`}>
-                        <span className="R_close02" onClick={()=>setIscalendar(false)}><i className="bi bi-x-lg"></i></span>
+                  </div>
+                )}
+                
+                {isCalendar && 
+                    <div className={`calendar-slide ${isCalendar ? "open" : ""}`}>
+                        <span className="R_close02" onClick={()=>setIsCalendar(false)}><i className="bi bi-x-lg"></i></span>
                         <Calendar />
-                    </div>
-                </div>
+                    </div>}
                 <div className="cate_choice">
                     <div className="cate_Btn">
                         {renderSelectedFilters()}

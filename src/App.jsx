@@ -1,3 +1,4 @@
+
 import './App.css';
 import GuidePage from './pages/Guide';
 import Header from './common/Header';
@@ -5,6 +6,7 @@ import Home from './pages/Home';
 import Searchcarlist from './pages/Searchcarlist';
 import DetailPage from './pages/DetailPage';
 import Recentcarlist from './pages/Recentcarlist';
+import Reservation from './pages/Reservation'
 import Mypage from './pages/Mypage';
 import CustomerService from './pages/CustomerService';
 import LocationPage from './pages/Location';
@@ -30,6 +32,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/searchcarlist" element={<Searchcarlist />} />
                 <Route path="/detailpage/:id" element={<DetailPage />} />
+                <Route path="/reservation" element={<Reservation/>}/>
                 <Route path="/guide" element={<GuidePage />} />
                 <Route path="/customerservice" element={<CustomerService />} />
                 <Route path="/location" element={<LocationPage />} />

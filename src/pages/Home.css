@@ -85,6 +85,10 @@ input:checked + .checkmark {
     font-weight: 700;
     cursor: pointer;
 }
+#root .Home .H_reservation .H_spotTable .spot_choice .H_spotTitle >p{
+    font-size: 18px;
+    font-weight: 700;
+}
 /* 찾기버튼 */
 #root .Home .H_reservation .H_spotTable .H_searchButton{
     position: absolute;
