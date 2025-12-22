@@ -7,9 +7,13 @@ import Searchcarlist from './pages/Searchcarlist';
 import DetailPage from './pages/DetailPage';
 import Recentcarlist from './pages/Recentcarlist';
 import Reservation from './pages/Reservation'
-import Mypage from './pages/Mypage';
 import CustomerService from './pages/CustomerService';
 import LocationPage from './pages/Location';
+import Mypage from './pages/Mypage'
+import MypageDetail from './pages/MypageDetail'
+import MypageInquiry from './pages/MypageInquiry'
+import MypageMyinfo from './pages/MypageMyinfo'
+import MypageBooked from './pages/MypageBooked'
 
 import AuthProvider from './contexts/Authcontext';
 import CalendarProvider from './contexts/Calendarcontext';
@@ -37,7 +41,12 @@ function App() {
                 <Route path="/customerservice" element={<CustomerService />} />
                 <Route path="/location" element={<LocationPage />} />
                 <Route path="/recent" element={<Recentcarlist />} />
-                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/mypage" element={<Mypage />}>
+                    <Route path="booked" element={<MypageBooked/>} />
+                    <Route path="detail/:id" element={<MypageDetail />} />
+                    <Route path="inquiry" element={<MypageInquiry />} />
+                    <Route path="myinfo" element={<MypageMyinfo />} />
+                </Route>
               </Routes>
               <Footer />
             </BrowserRouter>

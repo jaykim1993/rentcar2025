@@ -1,10 +1,13 @@
+import './Mypage.css'
+import { Outlet } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { BookingContext } from "../contexts/Bookingcontext";
 import { AuthContext } from "../contexts/Authcontext";
 import { DataContext } from "../contexts/Datacontext";
 import "./Mypage.css";
 
-export default function Mypage() {
+export default function Mypage(){
   const { myBookings } = useContext(BookingContext); // 예약내역 보기 함수 호출
   const { userid, username } = useContext(AuthContext); // 유저 정보 호출
 
@@ -12,69 +15,31 @@ export default function Mypage() {
   if (!userid) return <p>로그인 후 이용해주세요.</p>;
   if (!myBookings.length) return <p>예약내역이 없습니다.</p>;
 
+  return(
 
-
-  // 1:1 문의내역
-        //로컬스토리지 문의내역 받아오기
-        const allInquiries = JSON.parse(localStorage.getItem("inquiries")) || [];
-        console.log(allInquiries)
-        // 변수에 필터한 배열 담기
-        const myInquiries = allInquiries.filter(item => item.userid === userid);
-        console.log(myInquiries)
-        
-  return (
     <>
-    {/* 예약문의 div */}
-    <div className="mypage-book">
-      <h2>{username}님의 예약 내역</h2>
-
-      {myBookings.map(book => (
-        <div key={book.id} className="mypage-card">
-          <img
-            src={`/images/cars/${book.car?.car_img}`}
-            alt={book.car?.model}
-          />
-
-          <div className="mypage-info">
-            <h3>
-              {book.car?.brand} {book.car?.model}
-            </h3>
-
-            <p>연료: {book.car?.fuel_type}</p>
-            <p>대여 지점: {book.car?.location}</p>
-
-            <p>
-              대여 기간<br />
-              {book.startDate} {book.startTime}
-              {" ~ "}
-              {book.endDate} {book.endTime}
-            </p>
-
-            <p className="price">
-              {book.price.toLocaleString()}원
-            </p>
-
-            <p className="booked-date">
-              예약일: {book.bookedDate}
-            </p>
+      <div className="guideWrap">
+        <div className="guideTop">
+            {/* 수정 필요 */}
+            <div className="guideGoToHome" to={'/'}>홈</div>
+            <span><i className="bi bi-caret-right-fill"></i></span>
+            <div>이용가이드</div>
+        </div>
+        <div className="guideFlex">
+          <div className="guideLeft">
+            <h2 className="guideSideText"><div className='loginColor'>{username}</div>님,</h2>
+            <h2 className="guideSideText">안녕하세요!</h2>
+            <Link to='booked'><span className='MyPageSideMenus'>예약내역</span></Link>
+            <Link to='myinfo'><span className='MyPageSideMenus'>내 정보</span></Link>
+            <Link to='inquiry'><span className='MyPageSideMenus'>1:1문의내역</span></Link>
+          </div>
+          <div className="guideRight">
+            <main>
+              <Outlet />
+            </main>
           </div>
         </div>
-      ))}
-    </div>
-
-    {/* 밑에는 1:1문의 div */}
-     <div className="mypage-inquries">
-            <h2>내 문의 내역</h2>
-            {myInquiries.length === 0 && <p>문의 내역이 없습니다.</p>}
-            {myInquiries.map((data) => (
-                <div key={data.id}>
-                    <h4>{data.title}</h4>
-                    <p>{data.content}</p>
-                </div>
-            ))}
-        </div>
+      </div>
     </>
-    
-  );
+  )
 }
-

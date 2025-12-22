@@ -69,14 +69,14 @@ export default function Header() {
                     {userid?
                         // 로그인 상태일 때
                         <>
-                            <Link to={'/mypage'}>
+                            <Link to={'/mypage/myinfo'}>
                                 <button className='headerBtn' type='text'>
                                     <strong><div className='loginColor'>{username}</div></strong>님
                                 </button>
+                            </Link>
                                 <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
                                     예약내역
                                 </button>
-                            </Link>
                             <Link to="/">
                                 <button className='headerBtn' type='text' onClick={logoutHandler}>
                                     로그아웃
@@ -103,7 +103,7 @@ export default function Header() {
                         {(myBookings.length)===0? 
                                 <p className='headermodalText'>예약내역이 없습니다.</p>
                                 : <>{myBookings.map(book => (
-                                <Link to={'/mypage'}>
+                                <Link to={'/mypage/booked'}>
                                     <div key={book.id} className="headerModalInfo">
                                         <img
                                             style={{width:'80px', height:'60px'}}
@@ -122,7 +122,7 @@ export default function Header() {
                                 </Link>
                         ))}</>}
                     </div>
-                    <Link to={'/mypage'}><button className='headerModalBtn'> 더보기 </button></Link>
+                    <Link to={'/mypage/booked'}><button className='headerModalBtn'> 더보기 </button></Link>
                     <Link to={'/customerservice'}><img className='headerModalImg' src='../../public/images/bookedModal.jpg'/></Link>
                 </div>
             </header>
@@ -168,7 +168,7 @@ export default function Header() {
                         <Link to={'/guide'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>이용가이드</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                         <p className='headerNavH'>회원 맞춤</p>
                         <Link to={'/recent'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>최근 본 차량</div> <div className='headerNavpointer'>→</div></li><br /></Link>
-                        <Link to={'/mypage'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>마이페이지</div> <div className='headerNavpointer'>→</div></li><br /></Link>
+                        <Link to={'/mypage/booked'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>마이페이지</div> <div className='headerNavpointer'>→</div></li><br /></Link>
                     </ul>
                 </div>
             </nav>
