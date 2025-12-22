@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { CalendarContext } from "../contexts/Calendarcontext";
 import { AuthContext } from "../contexts/Authcontext";
 import { BookingContext } from "../contexts/Bookingcontext";
+import { DataContext } from "../contexts/Datacontext";
 import Calendar from './Calendar';
 import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -20,6 +21,7 @@ export default function Home(){
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar} = useContext(CalendarContext);
   const {myRecentlist} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
+  const {cars} = useContext(DataContext);
 
     const images = [
       "/images/banner/banner01.png",
@@ -119,6 +121,48 @@ export default function Home(){
 
 // 최근 본 차량
 const recentViewList = myRecentlist(userid);
+
+// 인기순 | 신규 차량 toggle
+const [isTop,setIsTop]=useState(true);
+const [isNew,setIsNew]=useState(false);
+const topClickHandler=()=>{
+  setIsTop(!isTop);
+  setIsNew(!isNew);
+}
+
+// 25년도 차량만 
+const newCarList=
+  cars
+  .filter(item => item.model_year === 2025)
+  .reduce((carImgList,nowCarImg) => {
+    if(!carImgList.some(img=>img.car_img === nowCarImg.car_img)){
+      carImgList.push(nowCarImg)
+    }
+    return(carImgList);
+  },[]);
+
+  // 이전 이후 버튼
+  const [before_x,setBefore_x] = useState(0);
+  const before_btn=()=>{
+    if(before_x > 0){
+        setBefore_x(before_x+1325);
+    }else{
+      setBefore_x(0);
+    }
+  }
+  const after_btn=()=>{
+    if(before_x === -14575){
+      setBefore_x(before_x-505);
+    }else if(before_x > -15080){
+      setBefore_x(before_x-1325);
+    }else{
+      setBefore_x(0);
+    }
+  }
+ 
+  useEffect(()=>{
+    setBefore_x(0);
+  },[isNew])
 
     return(
     <div className="Home">
@@ -279,16 +323,30 @@ const recentViewList = myRecentlist(userid);
 
         {/* sec02 - 인기차량 */}
         <div className="H_sec02">
-            <h2>인기순</h2>
-            <button type="button">많이 찾는 모델</button>
+            <h2 className={`H_top${isTop?"":"open"}`} onClick={topClickHandler}>인기순</h2>
+            <h2 className={`H_top${isNew?"":"open"}`} onClick={topClickHandler}>신규 차량</h2>
         </div>
+        {isTop ? 
         <div className="H_sec02_1">
             <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
-        </div>
+            <div className="H_good"><img src='/images/cars/bmw_5.webp' alt='car_img'/></div>
+            <div className="H_good"><img src='/images/cars/kia_2.webp' alt='car_img'/></div>
+            <div className="H_good"><img src='/images/cars/hy_9.webp' alt='car_img'/></div>
+            <div className="H_good"><img src='/images/cars/ZENE_2.webp' alt='car_img'/></div>
+        </div>:
+        <div className="H_sec02_2">
+          <p onClick={before_btn} className="H_before_btn">〈</p>
+          <div className="H_slide">
+            <ul style={{transform:`translateX(${before_x}px)`}}>
+              {newCarList && newCarList.map((item)=>(
+                <li key={item.id}>
+                  <div className="H_new"><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p onClick={after_btn} className="H_after_btn">〉</p>
+        </div>}
         
 
         {/* sec03 - 최근본차량 */}

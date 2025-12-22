@@ -124,16 +124,23 @@ input:checked + .checkmark {
     display: flex;
     padding-bottom: 20px;
 }
-#root .Home .H_sec02  > button{
-    color: #888;
-    margin-left: 15px;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
+#root .Home .H_sec02 h2{
+    padding-right: 40px;
+    cursor: pointer;
 }
-/* #root .Home .H_sec02 .H_more > span:hover{
-    color: #333;
-} */
+#root .Home .H_sec02::before{
+    content: '';
+    height: 38px;
+    border: 1px solid rgb(212, 212, 212);
+    position: absolute;
+    left: 110px;
+}
+#root .Home .H_sec02 .H_topopen{
+    color: #979797;
+    height: 38px;
+    line-height: 38px;
+}
+
 #root .Home .H_sec02_1{
     margin-bottom: 50px;
     display: flex;
@@ -142,8 +149,8 @@ input:checked + .checkmark {
 #root .Home .H_sec02_1 .H_good{
     display: inline-block;
     background-color: #eeeeee;
-    width: 220px;
-    height: 270px;
+    width: 250px;
+    height: 300px;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
@@ -153,11 +160,64 @@ input:checked + .checkmark {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 #root .Home .H_sec02_1 .H_good > img{
-    width: 350px;
-    padding: 50px 0 0 30px;
+    width: 430px;
+    padding: 50px 0 0 0px;
 }
 
 /* ---------------------------------- */
+
+/* sec02 - 최신순 */
+#root .Home .H_sec02_2{
+    margin-bottom: 50px;
+    width: 1300px;
+    /* border: 1px solid red; */
+    position: relative;
+}
+#root .Home .H_sec02_2 .H_slide{
+    overflow: hidden;
+}
+#root .Home .H_sec02_2 > p{
+    cursor: pointer;
+}
+#root .Home .H_sec02_2 .H_before_btn{
+    position: absolute;
+    top: 130px;
+    left: -50px;
+    z-index: 20;
+    font-size: 30px;
+    border-radius: 50%;
+    color: #979797;
+}
+#root .Home .H_sec02_2 .H_after_btn{
+    position: absolute;
+    top: 130px;
+    right: -50px;
+    z-index: 10;
+    font-size: 30px;
+    border-radius: 50%;
+    color: #979797;
+}
+#root .Home .H_sec02_2 .H_slide > ul{
+    display: flex;
+    gap: 25px;
+    transition: transform 0.8s ease;
+}
+#root .Home .H_sec02_2 .H_slide > ul > li{
+    height: 300px;
+}
+#root .Home .H_sec02_2 .H_slide > ul > li .H_new{
+    display: inline-block;
+    background-color: #eeeeee;
+    width: 240px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+#root .Home .H_sec02_2 .H_slide > ul > li .H_new >img{
+    width: 350px;
+    padding: 50px 0 0 15px;
+}
 
 /* 최근 본 차량 */
 #root .Home .H_sec03{
@@ -301,7 +361,7 @@ input:checked + .checkmark {
     display: flex;
     justify-content: space-between;
 }
-#root .Home .H_location .H_selectLocation .H_gu > p{
+#root .Home .H_location .H_selectLocation .H_gu .H_Click> p{
     cursor: pointer;
 }
 #root .Home .H_location .H_selectLocation .H_seoul::before{
