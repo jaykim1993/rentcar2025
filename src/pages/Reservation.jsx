@@ -72,6 +72,20 @@ export default function Reservation(){
                             </ul>
                         </div>
                     </div>
+                    {/* 결제정보 */}
+                    <div className='Reser_payment'>
+                        <h4>결제 정보</h4>
+                        <ul>
+                            <li>
+                                <p>결제수단 선택</p>
+                                <input type='checkbox' id='payment' />
+                                <label id='payment'>무통장입금</label>
+                            </li>
+                            <li>
+                                <label>환불 방법</label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 {/* 안내문구 */}
                 <div className='Reser_reservationNotice'>
