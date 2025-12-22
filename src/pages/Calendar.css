@@ -12,12 +12,9 @@
   color: #333;
   width: 650px !important;
   max-width: 650px !important;
-  /* margin: 0 auto; */
   padding-bottom: 0 !important;
   font-size: 18px;
   margin: 0 !important;
-  /* width: 100% !important; */
-  /* max-width: none !important; */
 }
 
 /* 날짜 셀 테두리 제거 */
@@ -70,7 +67,7 @@
   color: #000;
 }
 
-/* 🔥 multiMonth 무조건 가로 2개 */
+/* multiMonth 무조건 가로 2개 */
 .fc-multimonth {
   display: flex !important;
   flex-direction: row !important;
@@ -99,7 +96,7 @@
   content: ">";
   font-size: 28px;
 }
-/* 🔥 달력 한 개 크기 고정 */
+/* 달력 한 개 크기 고정 */
 .fc-multimonth-month {
   width: 300px !important;
   max-width: 300px !important;
