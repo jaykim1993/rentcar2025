@@ -103,8 +103,8 @@ export default function Header() {
                         {(myBookings.length)===0? 
                                 <p className='headermodalText'>예약내역이 없습니다.</p>
                                 : <>{myBookings.map(book => (
-                                <Link to={'/mypage/booked'}>
-                                    <div key={book.id} className="headerModalInfo">
+                                <Link to={'/mypage/booked'} key={book.id}>
+                                    <div className="headerModalInfo">
                                         <img
                                             style={{width:'80px', height:'60px'}}
                                             src={`/images/cars/${book.car?.car_img}`}
