@@ -163,7 +163,7 @@ export default function DetailPage(){
             <div className="detailContent">
                 {/* 홈 > 예약 */}
                 <div className="D_Head">
-                    <Link to={'/home'}><span>홈</span></Link>
+                    <Link to={'/'}><span>홈</span></Link>
                     <i className="bi bi-caret-right-fill"></i>
                     <span>예약하기</span>
                 </div>
