@@ -12,7 +12,7 @@ export default function Recentcar(){
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, 
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
-    const { calculatePrice} = useContext(BookingContext);
+    const { calculatePrice, clickCar} = useContext(BookingContext);
 
     // ================= 달력 관련 =================
 
@@ -239,6 +239,22 @@ export default function Recentcar(){
 
         return result;
     };
+
+    const clickCarHandler = () => {
+        const clickCarResult=availableCars.filter(item => item.modelName === clickCar );
+
+        return(
+            <div className="clickCarHandler">
+                <ul>
+                    {clickCarResult.map((item)=>(
+                        <li key={item.id}>
+                            <h4>{item.modelName} {item.fuel_type}</h4>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
 
     return(
         <div className="Recentcar">
@@ -571,6 +587,7 @@ export default function Recentcar(){
                 </div>
                 <p>총&nbsp;<strong>{displayedCars.length}</strong>&nbsp;종</p>
                 <ul>
+                    {/* {clickCar === '' ? renderGroupedCars() : clickCarHandler } */}
                     {renderGroupedCars()}
                 </ul>
             </div>

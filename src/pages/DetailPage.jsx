@@ -101,7 +101,7 @@ export default function DetailPage(){
     // 가격 계산
     let date = (new Date(`${filterCar.filterEndDate}T${filterCar.filterEndTime}`)-new Date(`${filterCar.filterStartDate}T${filterCar.filterStartTime}`))/ (1000 * 60 * 30);
 
-    // console.log('기간: ',date);
+    //  console.log('기간: ',date);
 
     const totalPrice =
         date && calculatePrice && selectedCar

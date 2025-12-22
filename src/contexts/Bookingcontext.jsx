@@ -352,6 +352,8 @@ export default function BookingProvider({ children }) {
     return finalPrice;
   }
 
+  // 인기차량 선택하면 해당 차량목록에서 보기
+  const [clickCar,setClickCar]= useState('');
 
 
   return (
@@ -360,8 +362,10 @@ export default function BookingProvider({ children }) {
       bookedlistAll, 
       setBookedlistAll,
       myBookings,
-      myRecentlist
+      myRecentlist,
       // removeBookInfo
+      clickCar,
+      setClickCar
     }}>
       {children}
     </BookingContext.Provider>

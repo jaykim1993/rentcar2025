@@ -420,7 +420,7 @@ return(
                             <li className="LocationPage3Li">차량 반납 시 직원의 차량 상태 확인 절차가 진행될 수 있어요.</li>
                         </ol>
                         <div className="LocationPage3BottomDiv">
-                            <button className="LocationPage3Btn">마이페이지로 이동</button>
+                            <Link to='mypage/booked' className="LocationPage3Btn">마이페이지로 이동</Link>
                         </div>
                     </div>
                     }

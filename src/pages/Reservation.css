@@ -10,6 +10,11 @@
 #root .ReservationSection .Reser_reservationInfo{
     width: 900px;
 }
+#root .ReservationSection .Reser_reservationInfo .R_modal{
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
 
 /* 우측 */
 #root .ReservationSection .Reser_reservationSummary{
