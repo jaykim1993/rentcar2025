@@ -240,6 +240,10 @@ export default function Recentcar(){
         return result;
     };
 
+    // 인기순 차량 선택 핸들러
+    useEffect(()=>{
+        clickCarResult
+    },[])
     const clickCarHandler = () => {
         const clickCarResult=availableCars.filter(item => item.model === clickCar );
 
