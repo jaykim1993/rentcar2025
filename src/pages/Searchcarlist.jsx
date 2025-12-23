@@ -7,14 +7,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Calendar from './Calendar';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { BookingContext } from "../contexts/Bookingcontext";
+import { Link } from "react-router-dom";
 
 
 export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
-    const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, 
+    const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, setStartDate, setEndDate, setApply,
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
-    const { calculatePrice, clickCar} = useContext(BookingContext);
+    const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar} = useContext(BookingContext);
     const { userid, setModal } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
 
     // ================= 달력 관련 =================
@@ -66,18 +67,19 @@ export default function Recentcar(){
     // ================= 초기화 =================
     useEffect(()=>{
         setIsDetail(null);
+        // setClickCar('');
     },[isLocation]);
 
-    const handleResetAll = () => {
-        // 달력/위치 컨텍스트 초기화
-        setLocation(null); 
-        handleSearchBtn(navigate); 
+    // const handleResetAll = () => {
+    //     // 달력/위치 컨텍스트 초기화
+    //     setLocation(null); 
+    //     handleSearchBtn(navigate); 
         
-        // 현재 페이지의 필터 UI 초기화
-        resetFilters();
+    //     // 현재 페이지의 필터 UI 초기화
+    //     resetFilters();
         
-        alert("검색 조건이 초기화되었습니다.");
-    };
+    //     alert("검색 조건이 초기화되었습니다.");
+    // };
 
 
     // ================= 필터 판별 =================
@@ -170,24 +172,30 @@ export default function Recentcar(){
     //     if (!groupedCars[car.model]) groupedCars[car.model] = [];
     //     groupedCars[car.model].push(car);
     // }
+
+    console.log(selectedModel);
+    const [carNum, setCarNum] = useState();
+
     useEffect(() => {
-    let sourceCars = displayedCars;
-    // model이 있으면 해당 모델만 필터
-    if (selectedModel) {
-        sourceCars = displayedCars.filter(
-        car => car.model === selectedModel
-        );
-    }
+        let sourceCars = displayedCars;
+        // model이 있으면 해당 모델만 필터
+        if (selectedModel) {
+            sourceCars = displayedCars.filter(
+            car => car.model === selectedModel
+            );
+            setCarNum(sourceCars.length);
+        }
 
-  // 그룹화
-  const grouped = {};
-  sourceCars.forEach(car => {
-    if (!grouped[car.model]) grouped[car.model] = [];
-    grouped[car.model].push(car);
-  });
+        // 그룹화
+        const grouped = {};
+        sourceCars.forEach(car => {
+            if (!grouped[car.model]) grouped[car.model] = [];
+            grouped[car.model].push(car);
+        });
 
-  setGroupedCars(grouped);
-}, [displayedCars, selectedModel]);
+        setGroupedCars(grouped);
+    }, [displayedCars, selectedModel]);
+    
 
     // ================= 선택 태그 =================
     const renderSelectedFilters = () => {
@@ -196,7 +204,7 @@ export default function Recentcar(){
             for (const value of selectedFilters[category]) {
                 result.push(
                     <button key={`${category}-${value}`} onClick={() => removeSingleValueFilter(category, value)}>
-                        {value} ×
+                        {value}
                     </button>
                 );
             }
@@ -210,6 +218,7 @@ export default function Recentcar(){
         }
         return false;
     };
+
 
     // ================= 출력 =================
         // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
@@ -238,9 +247,11 @@ export default function Recentcar(){
     const renderGroupedCars = () => {
         const result = [];
         
+
         for(const modelName in groupedCars){
             const group = groupedCars[modelName];
             const first = group[0];
+            
             result.push(
                 // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
                 <li key={modelName} className="grouped_car_item">
@@ -288,6 +299,46 @@ export default function Recentcar(){
     };
     // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
 
+    // 필터 초기화 시 navigate 전달 오류 해결
+    const handleResetAll = () => {
+        setLocation(null);
+        setIsCalendar(null);
+        setClickCar('');
+        setStartDate(null);
+        setEndDate(null);
+        setApply(false);
+        if(handleSearchBtn) handleSearchBtn(navigate); // navigate 전달
+        resetFilters();
+        alert("검색 조건이 초기화되었습니다.");
+    };
+
+
+
+    // 개별 모델 리스트 렌더링
+    // const renderIndividualCars = () => {
+    //     return (
+    //         <div className="clickCarHandler">
+    //             <ul className="car_list_ul">
+    //                 {clickCarArr.map((item) => (
+    //                     <li key={item.id} className="car_variant_info">
+    //                         <Link to={`/detailpage/${item.id}`}>
+    //                             <img src={`images/cars/${item.car_img}`} alt={item.model} style={{width: '100px'}}/>
+    //                             <h4>{item.model} {item.fuel_type}</h4>
+    //                             <p>{item.model_year}년식 · {item.car_size}</p>
+    //                             <p className="carPrice">
+    //                                 30분당 <strong>{calculatePrice(item).toLocaleString()}</strong>원
+    //                             </p>
+    //                         </Link>
+    //                     </li>
+    //                 ))}
+    //             </ul>
+    //         </div>
+    //     );
+    // };
+    
+    
+    // setClickCarArr(clickCarResult);
+    // console.log('클릭한 차량 리스트: ',clickCarArr);
 
     return(
         <div className="Recentcar">
@@ -296,7 +347,7 @@ export default function Recentcar(){
                 <ul>
                     <li>
                         <h3>차종/차량등급</h3>
-                        {/* 다중 선택 토글 기능 적용 */}
+                        {/* 다중 선택 토글 기능 적용 .*/}
                         <div className="cateBtn">
                             <button 
                                 onClick={() => toggleFilter('carSize', '경소형')} 
@@ -491,7 +542,7 @@ export default function Recentcar(){
                         <div className="R_dateTable">
                             <p>언제?</p>
                             <div className="R_dateTitle" onClick={calendarHandler}>
-                                {apply?
+                                {apply ?
                                 <p>
                                     {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
                                 </p>:
@@ -618,9 +669,8 @@ export default function Recentcar(){
                         </div>
                     )}
                 </div>
-                <p>총&nbsp;<strong>{displayedCars.length}</strong>&nbsp;종</p>
+                <p>총&nbsp;<strong>{selectedModel ?  carNum : displayedCars.length}</strong>&nbsp;종</p>
                 <ul>
-                    {/* {clickCar === '' ? renderGroupedCars() : clickCarHandler() } */}
                     {renderGroupedCars()}
                 </ul>
             </div>
