@@ -9,6 +9,7 @@ export const BookingContext = createContext();
 export default function BookingProvider({ children }) {
   const { userid } = useContext(AuthContext);
   const { cars } = useContext(DataContext);
+
       // bookedlistAll (기존 예약 배열)
       // 20개의 초기값
       // local storage에 저장되어있음
@@ -352,8 +353,6 @@ export default function BookingProvider({ children }) {
     return finalPrice;
   }
 
-  // 인기차량 선택하면 해당 차량목록에서 보기
-  const [clickCar,setClickCar]= useState('');
 
 
   return (
@@ -362,10 +361,8 @@ export default function BookingProvider({ children }) {
       bookedlistAll, 
       setBookedlistAll,
       myBookings,
-      myRecentlist,
+      myRecentlist
       // removeBookInfo
-      clickCar,
-      setClickCar
     }}>
       {children}
     </BookingContext.Provider>
