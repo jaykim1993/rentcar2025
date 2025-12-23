@@ -178,3 +178,21 @@ hr{
     display: flex;
     align-items: flex-end;
 }
+
+.calendar-slide.open{
+    width: 690px;
+    top: 85px;
+}
+#root .Recentcar .R_carlist{
+    position: relative;
+}
+#root .R_carlist .R_location{
+    top: 85px;
+    right: 0;
+}
+.fc .fc-myPrev-button::before{
+    content: '〈';
+}
+.fc .fc-myNext-button::before{
+    content: '〉';
+}
