@@ -142,29 +142,7 @@ export default function DetailPage(){
         })
     };
 
-    // 예약하기 버튼 함수
-    const addBookInfo = () => {
-        if (!filterCar || !userid) {
-            alert("예약 정보를 다시 선택해주세요.");
-            return;
-        } else {
-            alert("예약이 완료되었습니다.");
-        }
-        setBookedlistAll(prev => [
-          ...prev,
-          {
-            id: `${Date.now()}_${userid}`,
-            bookedDate: new Date().toISOString().slice(0, 10),
-            userId:userid,
-            carId:selectedCar.id,
-            startDate: filterCar.filterStartDate,
-            endDate: filterCar.filterEndDate,
-            startTime: filterCar.filterStartTime,
-            endTime: filterCar.filterEndTime,
-            price: totalPrice
-          }
-        ]);
-    };
+
     return(
         <div className="DetailPage">
             {/* 좌측 - 상세 전체 */}

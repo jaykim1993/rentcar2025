@@ -100,9 +100,11 @@ export default function Header() {
                 {/* 예약 내역 헤더 모달 */}
                 {userid? 
                     <div className={`headerUserBookedModal ${openUserBookedModal? "open":""}`}>
-                        <strong className='headerModalH'>
-                            <div className='loginColor'>{username}</div>
-                        </strong>님의 예약내역
+                        <div className='headerModalH'>
+                            <strong className='loginColor'>
+                                {username}
+                            </strong>님의 예약내역
+                        </div>
                         <button className="headerModalBtnX" onClick={closeModal}>
                             <i className="bi bi-x"></i>
                         </button>
@@ -118,9 +120,9 @@ export default function Header() {
                                                 alt={book.car?.model}
                                             />
                                             <div>
-                                                <strong className='headermodalText'>
+                                                <p className='headermodalText'>
                                                     {book.car.model}
-                                                </strong>
+                                                </p>
                                                 <p className='headerModalDate'>
                                                     {book.startDate} ~ {book.endDate}
                                                 </p>

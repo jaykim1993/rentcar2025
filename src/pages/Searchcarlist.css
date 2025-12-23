@@ -24,12 +24,24 @@ a, p, h4, h3, h2, h1{
 
 #root .Recentcar .R_category ul li{
     margin-bottom: 30px;
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 15px;
+    position: relative;
 }
 
+/* #root .Recentcar .R_category ul li .R_title{
+    position: absolute;
+    left: 0;
+    width: 2px;
+    height: 18px;
+    background-color: #666;
+} */
+
 #root .Recentcar .R_category ul li h3{
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 700;
     color: #272727;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #root .Recentcar .R_category ul li .cateBtn{
@@ -65,7 +77,7 @@ a, p, h4, h3, h2, h1{
 #root .Recentcar .R_category ul li h4{
     color: #5c5c5c;
     font-size: 15px;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 #root .Recentcar .R_category ul li img{
     height: 20px;
@@ -168,7 +180,7 @@ a, p, h4, h3, h2, h1{
 }
 
 /* 목록 */
-#root .Recentcar .R_carlist ul li a{
+#root .Recentcar .R_carlist ul li{
     width: 900px;
     /* height: 400px; */
     display: flex;

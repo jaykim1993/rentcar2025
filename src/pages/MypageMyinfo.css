@@ -1,0 +1,50 @@
+.myinfo-context{
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgb(218, 218, 218);
+    margin-bottom: 300px;
+}
+.myinfo-list {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+}
+
+.myinfo-list li {
+  display: grid;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.myinfo-label {
+  font-weight: 500;
+  color: rgb(131, 131, 131);
+  font-size: 14px;
+}
+
+.myinfo-value {
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.myinfo-btn {
+  margin-top: 100px;
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  border: none;
+  background-color: #0b79b7;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:  0.2s ease;
+}
+
+.myinfo-btn:hover {
+  background-color: #09679c;
+}
+
+
