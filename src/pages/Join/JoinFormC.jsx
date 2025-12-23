@@ -32,8 +32,9 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
     // DaumPostCode API 사용
     const [address, setAddress] = useState("");
     const [address_detail, setAddress_detail] = useState("");
-    const [zipcode, setZipcode]=useState('')
-    const [isOpen, setIsOpen] = useState(false)
+    const [zipcode, setZipcode]=useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    console.log(isOpen);
 
     const addresstHandler = (data) => {
         let arr =''
@@ -44,10 +45,8 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
         }
         setZipcode(data.zonecode);
         setAddress(arr);
-        setIsOpen(!isOpen)
-    }
-     // 모달 보이기/숨기기
-    const addressToggle = () => { setIsOpen(!isOpen) }    
+        setIsOpen(false);
+    }  
 
     // 9. 내/외국인 체크박스
     const [user_iskorean, setUser_iskorean] = useState(false)
@@ -135,7 +134,7 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
                 <button className="joinBtnX" onClick={onClose}>
                     <i className="bi bi-x"></i>
                 </button>
-                <h2 className='joinH'><span className='joinColorText'>추가정보</span>를 입력해주세요.</h2>
+                <h2 className='loginH'><span className='joinColorText'>추가정보</span>를 입력해주세요.</h2>
                 <ul className='joinUlC'>
                     <li className='joinLiB'>
                         <label className='joinLabelB'>
@@ -229,9 +228,10 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
                                 <button className='joinbtnC'
                                     type='button' 
                                     id='userAddSearch' 
-                                    onClick={addressToggle}>
+                                    onClick={()=>setIsOpen(true)}>
                                         우편번호 검색
                                 </button>
+                        
                                 <input  className='joinInputAdd'
                                     type='text' 
                                     value={zipcode} 
@@ -239,6 +239,7 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
                                     readOnly 
                                     name='post' 
                                     id='post'/>
+                        
                                 <div className="joinContentC">
                                     <input  className='joinInputLong'
                                     type='text' 
@@ -256,17 +257,32 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
                                 name='Address' 
                                 id='address_detial'
                                 />
-                                {isOpen && 
-                                <div className='joinCOverlay' onClick={() => setIsOpen(false)}>
-                                    <div className='addressWrap' onClick={(e) => e.stopPropagation()}>
-                                        <button className='joinBtnX' type='button' onClick={addressToggle}><i className="bi bi-x"></i></button>
-                                        <h2 className='joinH'>주소 검색</h2>
-                                        <DaumPostCode  onComplete={addresstHandler} height="100%"/>
-                                    </div>
-                                </div>
-                                }
                             </div>
                         </label>
+                         {isOpen && (
+                            <div
+                                className="joinCOverlay" 
+                            >
+                                <div
+                                className="addressWrap"
+                                onClick={(e) => e.stopPropagation()} 
+                                >
+                                    <button
+                                        className="joinBtnXx"
+                                        type="button"
+                                        onClick={() => setIsOpen(false)} 
+                                    >
+                                        <i className="bi bi-x"></i>
+                                    </button>
+                                    <h2 className="loginH">주소 검색</h2>
+                                    <DaumPostCode
+                                        style={{ height: '550px' }} 
+                                        onComplete={addresstHandler} 
+                                        height="100%" 
+                                    />
+                                </div>
+                            </div>
+                        )}
                     </li>
                     <li className='joinLiB'>
                         <label htmlFor="isKorean" className='joinLabelB'>
