@@ -7,7 +7,7 @@ import './Recentcarlist.css';
 
 export default function Recentcarlist() {
   const { userid, username } = useContext(AuthContext);
-  const { myRecentlist, calculatePrice } = useContext(BookingContext);
+  const { myRecentlist, calculatePrice, setClickCar, clickCar} = useContext(BookingContext);
 
 
   const recentViews = myRecentlist(userid);
@@ -29,21 +29,23 @@ export default function Recentcarlist() {
       {/* <br /> */}
       <ul className="Recent_ByDate">
         {recentViews.map(item => (
-          <li className="Recent_ByDate">
-            {/* 최근 본 날짜 */}
-            {/* <h1>{item.viewDate}</h1> */}
-            {/* <Link to={`/detail/${item.carId}`} key={item.id}> */}
-            <div className="Recent_car_item">
-              <img
-                src={`/images/cars/${item.car_img}`}
-                alt={item.model}
-                className="Recent_car_item" />
-                {/* <hr className="Re_hr"/> */}
-              <p>{item.brand} {item.model} {item.fuel_type}</p>
-              {/* <p>{calculatePrice}</p> */}
-            {/* </Link> */}
-            </div>
-          </li>
+           <Link to={`/searchcarlist`} key={item.id} className="recent_car_item">
+            <li className="Recent_ByDate" onClick={()=>setClickCar(`${item.model}`)}>
+              {/* 최근 본 날짜 */}
+              {/* <h1>{item.viewDate}</h1> */}
+              {/* <Link to={`/detail/${item.carId}`} key={item.id}> */}
+              <div className="Recent_car_item" >
+                <img
+                  src={`/images/cars/${item.car_img}`}
+                  alt={item.model}
+                  className="Recent_car_item" />
+                  {/* <hr className="Re_hr"/> */}
+                <p>{item.brand} {item.model} {item.fuel_type}</p>
+                {/* <p>{calculatePrice}</p> */}
+              {/* </Link> */}
+              </div>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>

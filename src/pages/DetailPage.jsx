@@ -16,7 +16,7 @@ import './DetailPage.css'
 
 export default function DetailPage(){
     // console.log("재가공된 filteredInfoUser: ", filteredInfoUser);
-    const { setBookedlistAll, calculatePrice } = useContext(BookingContext);
+    const { setBookedlistAll, calculatePrice, clickCarArr, setClickCarArr } = useContext(BookingContext);
     const { availableCars, filteredInfoUser } = useContext(CalendarContext);
 
     // console.log('calculatePrice');
@@ -37,7 +37,8 @@ export default function DetailPage(){
         if (!selectedCar || !filterCar) {
         return <div>예약 정보를 불러오는 중입니다...</div>;
         } // 방어코드 , 22일 성중 수정
-
+        
+        console.log(selectedCar);
 
     // 최근 본 차량 추가(Local Storage)
     useEffect(() => {

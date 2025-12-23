@@ -353,6 +353,11 @@ export default function BookingProvider({ children }) {
     return finalPrice;
   }
 
+  // 인기순 차량 선택 변수
+  const [clickCar, setClickCar] = useState('');
+
+  const [clickCarArr, setClickCarArr] = useState([]); // 클릭된 모델 리스트 상태
+
 
 
   return (
@@ -361,7 +366,11 @@ export default function BookingProvider({ children }) {
       bookedlistAll, 
       setBookedlistAll,
       myBookings,
-      myRecentlist
+      myRecentlist,
+      setClickCar,
+      clickCar,
+      clickCarArr, 
+      setClickCarArr
       // removeBookInfo
     }}>
       {children}

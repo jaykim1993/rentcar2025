@@ -19,7 +19,7 @@ export default function Home(){
   const navigate = useNavigate();
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar} = useContext(CalendarContext);
-  const {myRecentlist} = useContext(BookingContext);
+  const {myRecentlist,setClickCar} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
 
@@ -344,7 +344,7 @@ const newCarList=
               <ul style={{transform:`translateX(${before_x}px)`}}>
                 {newCarList && newCarList.map((item)=>(
                   <li key={item.id}>
-                    <div className="H_new"><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
+                    <Link to={`/searchcarlist`}><div className="H_new" onClick={()=>setClickCar(`${item.model}`)}><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div></Link>
                   </li>
                 ))}
               </ul>
@@ -364,8 +364,8 @@ const newCarList=
             </div>
             <div className="H_sec03_1">
                 {sec03Sort.map(item=>(
-                  <Link to={`/detail/${item.carId}`} key={item.id} className="recent_car_item">
-                    <img src={`/images/cars/${item.car_img}`} alt={item.model}/>
+                  <Link to={`/searchcarlist`} key={item.id} className="recent_car_item">
+                    <div className="H_good" onClick={()=>setClickCar(`${item.model}`)}><img src={`/images/cars/${item.car_img}`} alt={item.model}/></div>
                   </Link>
                 ))}
             </div>
