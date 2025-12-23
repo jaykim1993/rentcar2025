@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { useState } from 'react';
 import L from 'leaflet';
 import './Location.css'
+import { AuthContext } from "../contexts/Authcontext"; // 미로그인 시 방어코드 12.22 - 성중 - 성중
 
 //===================================================================================
 export default function LocationPage(){
@@ -164,6 +165,9 @@ const filteredCars = locaselected === '지점을 선택해주세요'
 
 
 //============================================================================================
+// 미로그인 시 방어코드 12.22 - 성중 - 성중
+const { userid, loginNeeded } = useContext(AuthContext);
+
 return(
         <>
             <div className="guideWrap">
@@ -420,7 +424,12 @@ return(
                             <li className="LocationPage3Li">차량 반납 시 직원의 차량 상태 확인 절차가 진행될 수 있어요.</li>
                         </ol>
                         <div className="LocationPage3BottomDiv">
-                            <Link to='mypage/booked' className="LocationPage3Btn">마이페이지로 이동</Link>
+                            {/* 미로그인 시 방어코드 12.22 - 성중 */}
+                            {userid?
+                                <Link to={'/mypage/booked'}><button className="LocationPage3Btn">마이페이지로 이동</button></Link>
+                                :
+                                <button className="LocationPage3Btn" onClick={loginNeeded}>마이페이지로 이동</button>
+                            }
                         </div>
                     </div>
                     }

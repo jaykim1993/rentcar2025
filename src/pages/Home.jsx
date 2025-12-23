@@ -122,6 +122,10 @@ export default function Home(){
 // 최근 본 차량
 const recentViewList = myRecentlist(userid);
 
+// 최근 본 차량 5개 컷
+const recentViewListCoopy = [...recentViewList];
+const sec03Sort = recentViewListCoopy.sort((a,b) => b.id - a.id).slice(0, 5);
+
 // 인기순 | 신규 차량 toggle
 const [isTop,setIsTop]=useState(true);
 const [isNew,setIsNew]=useState(false);
@@ -167,7 +171,7 @@ const newCarList=
   
 
     return(
-    <div className="Home">
+      <div className="Home">
         {/* 예약 섹션 */}
         <div className="H_reservation">
             <div className={`H_dateTable ${isCalendar ? "open" : ""}`}>
@@ -175,7 +179,7 @@ const newCarList=
                   <div className="H_dateTitle" onClick={calendarHandler}>
                     {apply?
                     <p>
-                     {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
+                      {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
                     </p>:
                     <p>날짜를 선택하세요</p>}
                   </div>
@@ -190,105 +194,105 @@ const newCarList=
                     </div>
                 </div>
                 <button className="H_searchButton" type="submit" onClick={()=>handleSearchBtn(navigate)}>
-                    예약할 차량 찾기
+                    예약할 차량 찾기&nbsp;
                     <i className="bi bi-arrow-right"></i>
                 </button>
             </div>
         </div>
 
-       {/* 지점 모달 파트 */}
-{isLocation && (
-  <div className="H_location">
-    <span className="H_close01" onClick={detailCloseHandler}><i className="bi bi-x-lg"></i></span>
-    {/* 상세 위치 (지도.) */}
-    {isDetail ? (
-      <>
-        <div className="H_selectLocation_detail">
+        {/* 지점 모달 파트 */}
+        {isLocation && (
+          <div className="H_location">
+            <span className="H_close01" onClick={detailCloseHandler}><i className="bi bi-x-lg"></i></span>
+            {/* 상세 위치 (지도.) */}
+            {isDetail ? (
+              <>
+                <div className="H_selectLocation_detail">
 
-          <MapContainer center={[detail_lat, detail_lng]} zoom={20} style={{ height: "300px", width: "394px"}}> 
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-            />
-            {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
-            {positions.map((spot) => (
-              <Marker key={spot.id} position={[spot.lat, spot.lng]}>
-                <Popup>{spot.name}</Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-          <h5>{detail.name}</h5>
-          <p className="H_detial_address_title">주소</p>
-          <span className="H_detial_address">{detail.address}</span>
-        </div>
-        
-      </>
-    ) : (
-    // 지점 목록 
-      <>
-        <h3>지점을 선택하세요</h3>
-        <div className="H_selectLocation">
-          <span>서울</span>
-          <div className="H_seoul">
-            <div className="H_gu">
-              <div className="H_Click" onClick={()=>setIsLocation(false)}>
-                <p onClick={()=>setLocation("서울북부")}>
-                  서울 북부 <span>노원구</span>
-                </p>
-              </div>
-              <button className="H_detail" onClick={()=>setIsDetail(5)}>상세</button>
-            </div>
+                  <MapContainer center={[detail_lat, detail_lng]} zoom={20} style={{ height: "300px", width: "394px"}}> 
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+                    />
+                    {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
+                    {positions.map((spot) => (
+                      <Marker key={spot.id} position={[spot.lat, spot.lng]}>
+                        <Popup>{spot.name}</Popup>
+                      </Marker>
+                    ))}
+                  </MapContainer>
+                  <h5>{detail.name}</h5>
+                  <p className="H_detial_address_title">주소</p>
+                  <span className="H_detial_address">{detail.address}</span>
+                </div>
+                
+              </>
+            ) : (
+              // 지점 목록 
+              <>
+                <h3>지점을 선택하세요</h3>
+                <div className="H_selectLocation">
+                  <span>서울</span>
+                  <div className="H_seoul">
+                    <div className="H_gu">
+                      <div className="H_Click" onClick={()=>setIsLocation(false)}>
+                        <p onClick={()=>setLocation("서울북부")}>
+                          서울 북부 <span>노원구</span>
+                        </p>
+                      </div>
+                      <button className="H_detail" onClick={()=>setIsDetail(5)}>상세</button>
+                    </div>
 
-            <div className="H_gu">
-              <div className="H_Click" onClick={()=>setIsLocation(false)}>
-                <p onClick={()=>setLocation("서울남부")}>
-                  서울 남부 <span>서초구</span>
-                </p>
-              </div>
-              <button className="H_detail" onClick={()=>setIsDetail(4)}>상세</button>
-            </div>
+                    <div className="H_gu">
+                      <div className="H_Click" onClick={()=>setIsLocation(false)}>
+                        <p onClick={()=>setLocation("서울남부")}>
+                          서울 남부 <span>서초구</span>
+                        </p>
+                      </div>
+                      <button className="H_detail" onClick={()=>setIsDetail(4)}>상세</button>
+                    </div>
 
-            <div className="H_gu">
-              <div className="H_Click" onClick={()=>setIsLocation(false)}>
-                <p onClick={()=>setLocation("서울동부")}>
-                  서울 동부 <span>동대문구</span>
-                </p>
-              </div>
-              <button className="H_detail" onClick={()=>setIsDetail(3)}>상세</button>
-            </div>
+                    <div className="H_gu">
+                      <div className="H_Click" onClick={()=>setIsLocation(false)}>
+                        <p onClick={()=>setLocation("서울동부")}>
+                          서울 동부 <span>동대문구</span>
+                        </p>
+                      </div>
+                      <button className="H_detail" onClick={()=>setIsDetail(3)}>상세</button>
+                    </div>
+                  </div>
+
+                  <span>김포</span>
+                  <div className="H_gimpo">
+                    <div className="H_gu">
+                      <div className="H_Click" onClick={()=>setIsLocation(false)}>
+                        <p onClick={()=>setLocation("김포공항")}>
+                          김포공항 <span>강서구</span>
+                        </p>
+                      </div>
+                      <button className="H_detail" onClick={()=>setIsDetail(2)}>상세</button>
+                    </div>
+                  </div>
+
+                  <span>인천</span>
+                  <div className="H_gu">
+                    <div className="H_Click" onClick={()=>setIsLocation(false)}>
+                      <p onClick={()=>setLocation("인천공항")}>
+                        인천공항 <span>서초구</span>
+                      </p>
+                    </div>
+                    <button className="H_detail" onClick={()=>setIsDetail(1)}>상세</button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-
-          <span>김포</span>
-          <div className="H_gimpo">
-            <div className="H_gu">
-              <div className="H_Click" onClick={()=>setIsLocation(false)}>
-                <p onClick={()=>setLocation("김포공항")}>
-                  김포공항 <span>강서구</span>
-                </p>
-              </div>
-              <button className="H_detail" onClick={()=>setIsDetail(2)}>상세</button>
-            </div>
-          </div>
-
-          <span>인천</span>
-          <div className="H_gu">
-            <div className="H_Click" onClick={()=>setIsLocation(false)}>
-              <p onClick={()=>setLocation("인천공항")}>
-                인천공항 <span>서초구</span>
-              </p>
-            </div>
-            <button className="H_detail" onClick={()=>setIsDetail(1)}>상세</button>
-          </div>
-        </div>
-      </>
-    )}
-  </div>
-)}
+        )}
 
         {isCalendar && <div className={`calendar-slide ${isCalendar ? "open" : ""}`}>
           <span className="H_close02" onClick={()=>setIsCalendar(false)}><i className="bi bi-x-lg"></i></span>
-	        <Calendar />
-	      </div>}
+          <Calendar />
+        </div>}
 
         {/* sec01 - 배너 슬라이드 */}
         <div className="H_sec01"
@@ -325,8 +329,8 @@ const newCarList=
 
         {/* sec02 - 인기차량. */}
         <div className="H_sec02">
-            <h2 className={`H_top${isTop?"":"open"}`} onClick={topClickHandler}>인기순</h2>
-            <h2 className={`H_top${isNew?"":"open"}`} onClick={topClickHandler}>신규 차량</h2>
+          <h4 className={`H_top${isTop?"":"open"}`} onClick={topClickHandler}>인기순</h4>
+          <h4 className={`H_top${isNew?"":"open"}`} onClick={topClickHandler}>신규 차량</h4>
         </div>
         {isTop ? 
         <div className="H_sec02_1">
@@ -337,41 +341,50 @@ const newCarList=
             <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('GGE80')}><img src='/images/cars/ZENE_2.webp' alt='car_img'/></div></Link>
         </div>:
         <div className="H_sec02_2">
-          <p onClick={before_btn} className="H_before_btn">〈</p>
-          <div className="H_slide">
-            <ul style={{transform:`translateX(${before_x}px)`}}>
-              {newCarList && newCarList.map((item)=>(
-                <li key={item.id}>
-                  <div className="H_new"><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
-                </li>
-              ))}
-            </ul>
+            <p onClick={before_btn} className="H_before_btn">〈</p>
+            <div className="H_slide">
+              <ul style={{transform:`translateX(${before_x}px)`}}>
+                {newCarList && newCarList.map((item)=>(
+                  <li key={item.id}>
+                    <div className="H_new"><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p onClick={after_btn} className="H_after_btn">〉</p>
           </div>
-          <p onClick={after_btn} className="H_after_btn">〉</p>
-        </div>}
-        
+        }
 
         {/* sec03 - 최근본차량 */}
-        {userid && <div className="H_section03">
-        <div className="H_sec03">
-            <h4><span className="joinColorText">{username}</span>님의 최근 본 차량</h4>
-            <Link to={'/recent'} className="H_more">
-              <span>더보기</span>
-            </Link>
-        </div>
-        <div className="H_sec03_1">
-            {recentViewList.map(item=>(
-              <Link to={`/detail/${item.carId}`} key={item.id} className="recent_car_item">
-                <img src={`/images/cars/${item.car_img}`} alt={item.model}/>
-              </Link>
-            ))}
-        </div>
-        </div>}
+        {userid && 
+          <div className="H_section03">
+            <div className="H_sec03">
+                <h4><span className="joinColorText">{username}</span>님의 최근 본 차량</h4>
+                <Link to={'/recent'} className="H_more">
+                  <span>더보기</span>
+                </Link>
+            </div>
+            <div className="H_sec03_1">
+                {sec03Sort.map(item=>(
+                  <Link to={`/detail/${item.carId}`} key={item.id} className="recent_car_item">
+                    <img src={`/images/cars/${item.car_img}`} alt={item.model}/>
+                  </Link>
+                ))}
+            </div>
+          </div>
+        }
 
-        {/* 고객센터 */}
-        <div className="H_customer">
-            <h2>고객센터</h2>
+        {/* 광고배너 */}
+        <div className="H_section04">
+          <h4>2025 마지막 혜택!</h4>
+          <div className="H_sec04_advertisementBanner">
+            <img src="/images/banner/advertisementBanner01.png" alt="광고배너1" />
+            <img src="/images/banner/advertisementBanner02.png" alt="광고배너2" />
+            <img src="/images/banner/advertisementBanner03.png" alt="광고배너3" />
+            <img src="/images/banner/advertisementBanner04.png" alt="광고배너4" />
+            <img src="/images/banner/advertisementBanner05.png" alt="광고배너5" />
+          </div>
         </div>
     </div>
-    )
+  )
 }

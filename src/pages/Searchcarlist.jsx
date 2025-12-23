@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { DataContext } from "../contexts/Datacontext";
 import { CalendarContext } from "../contexts/Calendarcontext";
+import { AuthContext } from "../contexts/Authcontext";
 import './Searchcarlist.css'
 import { Link } from "react-router-dom";
 import Calendar from './Calendar';
@@ -13,6 +14,7 @@ export default function Recentcar(){
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, 
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
     const { calculatePrice, clickCar} = useContext(BookingContext);
+    const { userid, loginNeeded } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
 
     // ================= 달력 관련 =================
 
@@ -211,29 +213,90 @@ export default function Recentcar(){
             const group = groupedCars[modelName];
             const first = group[0];
             result.push(
+                // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.22 -성중
                 <li key={modelName} className="grouped_car_item">
-                    <Link to={`/detailpage/${first.id}`} style={{textDecoration:'none'}} onClick={()=>window.scrollTo({top:0, behavior:'smooth'})}>
+                    {userid?
+                        <Link
+                        to={`/detailpage/${first.id}`}
+                        style={{ textDecoration: 'none' }}
+                        onClick={(e) => {
+                            // 로그인 안 된 경우
+                            if (!userid) {
+                            e.preventDefault();
+                            alert('로그인 후 이용 가능합니다.');
+                            return;
+                            }
+
+                            // 날짜 or 지점 미선택
+                            if (!location || !endTime) {
+                            e.preventDefault();
+                            alert('날짜와 지점을 먼저 선택해주세요.');
+                            return;
+                            }
+
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        >
                         <div>
-                            <img className="brands" src={`images/brands/${first.brand_logo}`} />
-                            <img className="cars" src={`images/cars/${first.car_img}`} alt={`${first.brand} ${first.model}`} />
+                            <img
+                            className="brands"
+                            src={`images/brands/${first.brand_logo}`}
+                            />
+                            <img
+                            className="cars"
+                            src={`images/cars/${first.car_img}`}
+                            alt={`${first.brand} ${first.model}`}
+                            />
                         </div>
 
                         <div className="car_list_ul">
                             {group.map((car, index) => {
-                                const car_price = calculatePrice(car)
-                                return(
-                                    <div key={car.id} className={`car_variant_info ${index !== group.length - 1 ? 'Line_active' : ''}`}>
-                                        <h4>{modelName} {car.fuel_type}</h4>
-                                        <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
-                                        {/* <p>{getActiveOptionsString(car)}</p> */}
-                                        <i className="bi bi-chevron-right"></i>
-                                        <p className="carPrice">30분당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
-                                    </div>
-                                )
+                            const car_price = apply ? calculatePrice(car) : 0;
+
+                            return (
+                                <div
+                                key={car.id}
+                                className={`car_variant_info ${
+                                    index !== group.length - 1 ? 'Line_active' : ''
+                                }`}
+                                >
+                                <h4>{modelName} {car.fuel_type}</h4>
+                                <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
+                                <i className="bi bi-chevron-right"></i>
+                                <p className="carPrice">
+                                    30분당&nbsp;
+                                    <strong>{car_price.toLocaleString()}</strong>원
+                                </p>
+                                </div>
+                            );
                             })}
                         </div>
-                    </Link>
+                        </Link>  
+                    :
+                        <a onClick={loginNeeded}>
+                            <div>
+                                <img className="brands" src={`images/brands/${first.brand_logo}`} />
+                                <img className="cars" src={`images/cars/${first.car_img}`} alt={`${first.brand} ${first.model}`} />
+                            </div>
+
+                            <div className="car_list_ul">
+                                {group.map((car, index) => {
+                                    const car_price = calculatePrice(car)
+                                    return(
+                                        <div key={car.id} className={`car_variant_info ${index !== group.length - 1 ? 'Line_active' : ''}`}>
+                                            <h4>{modelName} {car.fuel_type}</h4>
+                                            <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
+                                            {/* <p>{getActiveOptionsString(car)}</p> */}
+                                            <i className="bi bi-chevron-right"></i>
+                                            <p className="carPrice">30분당&nbsp;<strong>{car_price.toLocaleString()}</strong>원</p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </a>
+                    }
                 </li>
+                // 미로그인 시 방어코드 12.22 -성중
             );
         }
 
@@ -241,9 +304,6 @@ export default function Recentcar(){
     };
 
     // 인기순 차량 선택 핸들러
-    useEffect(()=>{
-        clickCarResult
-    },[])
     const clickCarHandler = () => {
         const clickCarResult=availableCars.filter(item => item.model === clickCar );
 

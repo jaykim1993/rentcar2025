@@ -51,7 +51,7 @@ export default function JoinFormA({ onClose, onNext }) {
                 <button className="joinBtnX" onClick={onClose}>
                     <i className="bi bi-x"></i>
                 </button>
-                <h3 className='joinH'><span className='joinColorText'>이용약관</span>과 <span className='joinColorText'>고객정보수집</span>에 동의합니다.</h3>
+                <h3 className='loginH'><span className='joinColorText'>이용약관</span>과 <span className='joinColorText'>고객정보수집</span>에 동의합니다.</h3>
                     <div className='joinAContentWrap'>
                         {/* 이용약관 동의 창 */}
                         <div className="joinContent">

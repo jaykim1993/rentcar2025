@@ -69,7 +69,7 @@ export default function JoinFormB({ onClose, onNext }) {
             <button className="joinBtnX" onClick={onClose}>
                 <i className="bi bi-x"></i>
             </button>
-            <h3 className='joinH'><span className='joinColorText'>아이디</span>와 <span className='joinColorText'>비밀번호</span>를 설정해주세요.</h3>
+            <h3 className='loginH'><span className='joinColorText'>아이디</span>와 <span className='joinColorText'>비밀번호</span>를 설정해주세요.</h3>
             <ul className='joinUlB'>
                 <li className='joinLiB'>
                     <label className='joinLabelB'>
