@@ -51,32 +51,9 @@ export default function LoginForm({ onClose, onJoin }) {
         }
     };
 
-    // 아이디 찾기 함수
-    // 이름(필수)
-    // 이메일 혹은
-    // 전화번호
-        // -> 입력하신 이메일로 확인 문자가 발송되었습니다. 
-        // or 존재하지 않는 회원입니다.
-//     const findId = async () => {
-//     if (!user) return alert("아이디를 입력하세요.");
-
-//     try {
-//       const res = await axios.post("http://localhost/rentcar2025/backend/api/join.php", { userid });
-
-//       if (res.data.exists) {
-//         alert(`입력하신 ${res.data}가 확인되었습니다.`);
-//       } else {
-//         alert("존재하지 않는 아이디입니다.");
-//       }
-//     } catch (err) {
-//       console.error(err);
-//       alert("오류 발생");
-//     }
-//   };
-// 아직 회원이 아니신가요? 만들기
     return (
-        <div className='loginOverlay'>
-            <div className="loginWrap">
+        <div className='loginOverlay' >
+            <div className="loginWrap" >
                 <button className="loginBtnX" onClick={onClose}>
                     <i className="bi bi-x"></i>
                 </button>
