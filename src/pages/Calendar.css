@@ -5,10 +5,10 @@
   /* display: flex; */
   /* justify-content: center; */
   width: 100%;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 #root .Home .calendar-slide.open{
-  height: 589px;
+  height: 575px;
 }
 /* 상단 화살표 */
 .fc .fc-toolbar.fc-header-toolbar{
@@ -100,12 +100,12 @@
 }
 .fc .fc-myPrev-button::before {
   content: "<";
-  font-size: 28px;
+  font-size: 20px;
 }
 
 .fc .fc-myNext-button::before {
   content: ">";
-  font-size: 28px;
+  font-size: 20px;
 }
 /* 달력 한 개 크기 고정 */
 .fc-multimonth-month {
@@ -270,8 +270,8 @@
 
 /* 선택 날짜 시간 출력되는 부분 */
 .calendarWrap .C_select .C_dateTitle{
-  color: rgb(176, 176, 176);
-  padding: 20px 20px 15px 7px;
+  color: #666;
+  padding-right: 20px;
 }
 .calendarWrap .C_select .C_date{
   min-width: 150px;
@@ -281,13 +281,16 @@
 }
 
 .calendarWrap .C_select .C_time{
-  padding: 25px 0 10px 0;
+  /* padding: 25px 0 10px 0; */
+  padding-top: 20px;
 }
 .calendarWrap .C_select .C_time .C_selectTime{
-  width: 150px;
+  width: 200px;
   border: 1px solid lightgray;
   border-radius: 5px;
-  height: 40px;
+  padding: 10px;
+  height: 50px;
+  /* margin-right: 30px; */
 }
 .calendarWrap .C_select .C_select01{
   padding-bottom: 25px;
@@ -299,9 +302,10 @@
   border: 1px solid #555;
   padding: 13px;
   border-radius: 5px;
+  font-weight: 500;
 }
 .calendarWrap .C_select .C_apply_btn{
-  width: 250px;
+  width: 480px;
   background-color: #000;
   color: #fff;
   padding: 13px;
@@ -314,4 +318,12 @@
 }
 .fc .fc-multimonth{
   border: none;
+}
+
+.fc .fc-button:not(:disabled){
+  font-size: 0px;
+}
+
+.C_select_hr{
+  margin: 0;
 }
