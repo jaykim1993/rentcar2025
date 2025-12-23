@@ -18,11 +18,13 @@ export default function MypageBooked() {
     <h2 className="guideMainText">예약내역</h2>
    <div className="myPageBookWarp">
     {myBookings.length === 0?
+    <div>
       <div className="mypageBookCard">
-        <i class="bi bi-exclamation-lg"></i>
-        <p>아직 예약 내역이 없습니다.</p>
-        <Link to={'/searchcarlist'}>예약하러가기</Link>
+        <i class="bi bi-exclamation-lg warningIcon"></i>
+        <p className="noBookedP">아직 예약 내역이 없습니다.</p>
       </div>
+      <Link to={'/searchcarlist'} className="noBookedGoToBook">예약하러가기</Link>
+    </div>
       :
     <div>
       {myBookings.map(book => {
