@@ -155,7 +155,7 @@ input:checked + .checkmark {
 #root .Home .H_sec02_1 .H_good{
     display: inline-block;
     background-color: #eeeeee;
-    width: 250px;
+    width: 240px;
     height: 300px;
     border-radius: 10px;
     overflow: hidden;
@@ -254,7 +254,7 @@ input:checked + .checkmark {
 #root .Home .H_sec03_1 .recent_car_item{
     display: inline-block;
     background-color: #eeeeee;
-    width: 250px;
+    width: 240px;
     height: 300px;
     border-radius: 10px;
     overflow: hidden;
@@ -283,7 +283,7 @@ input:checked + .checkmark {
 
 /* ---------------------------------- */
 
-/* 지점 선택 모달 */
+/* 지점 선택 모달. */
 #root .Home .H_location{
     width: 444px;
     margin: 0 auto;
