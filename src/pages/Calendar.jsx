@@ -118,25 +118,63 @@ export default function RentalCalendar() {
     return times;
   }, []);
 
+  // const backgroundEvents = useMemo(() => {
+  //   if (!startDate || !endDate) return [];
+
+  //   const events = [];
+  //   let current = new Date(startDate);
+  //   const end = new Date(endDate);
+
+  //   while (current <= end) {
+  //     events.push({
+  //       start: current.toISOString().split("T")[0],
+  //       display: "background",
+  //       className: "selected-range-bg",
+  //     });
+  //     current.setDate(current.getDate() + 1);
+  //   }
+
+  //   return events;
+  // }, [startDate, endDate]);
+
+  // 시작인, 종료일 class
   const backgroundEvents = useMemo(() => {
-    if (!startDate || !endDate) return [];
+  if (!startDate) return [];
 
-    const events = [];
-    let current = new Date(startDate);
-    const end = new Date(endDate);
+  const events = [];
+  
+  // 1. 시작일 표시
+  events.push({
+    start: startDate,
+    display: "background",
+    className: "range-start-node", // 시작일 전용 클래스
+  });
 
-    while (current <= end) {
-      events.push({
-        start: current.toISOString().split("T")[0],
-        display: "background",
-        className: "selected-range-bg",
-      });
-      current.setDate(current.getDate() + 1);
-    }
+  if (!endDate) return events;
 
-    return events;
-  }, [startDate, endDate]);
+  // 2. 중간 날짜들 표시 (시작일 다음날부터 종료일 전날까지)
+  let current = new Date(startDate);
+  current.setDate(current.getDate() + 1);
+  const end = new Date(endDate);
 
+  while (current < end) {
+    events.push({
+      start: current.toISOString().split("T")[0],
+      display: "background",
+      className: "selected-range-bg", // 중간 범위 클래스
+    });
+    current.setDate(current.getDate() + 1);
+  }
+
+  // 3. 종료일 표시
+  events.push({
+    start: endDate,
+    display: "background",
+    className: "range-end-node", // 종료일 전용 클래스
+  });
+
+  return events;
+}, [startDate, endDate]);
 
   return (
     <>
@@ -181,7 +219,7 @@ export default function RentalCalendar() {
       />
       <div className="C_select">
             <>
-              <div style={{ display: "flex"}} className="C_time">
+              <div style={{ display: "flex", alignItems: "center"}} className="C_time">
                 <span className="C_dateTitle">대여시간</span>
                 <select
                   className="C_selectTime"

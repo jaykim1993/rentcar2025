@@ -103,9 +103,9 @@ input:checked + .checkmark {
     background-color: #0b79b7 ;
     border: none;
 }
-#root .Home .H_reservation .H_spotTable .H_searchButton i{
+#root .Home .H_reservation .H_spotTable .H_searchButton > i{
     color: #fff;
-    /* font-weight: bold; */
+    font-weight: 900;
 }
 #root .Home .H_reservation .H_spotTable .H_searchButton:hover{
     background-color:#09679e ;
@@ -126,23 +126,25 @@ input:checked + .checkmark {
 /* sec02 - 인기순 */
 #root .Home .H_sec02{
     display: flex;
+    align-items: center;
     padding-bottom: 20px;
 }
-#root .Home .H_sec02 h2{
+#root .Home .H_sec02 > h4{
     padding-right: 40px;
     cursor: pointer;
 }
 #root .Home .H_sec02::before{
     content: '';
-    height: 38px;
+    height: 25px;
     border: 1px solid rgb(212, 212, 212);
     position: absolute;
-    left: 110px;
+    left: 85px;
 }
 #root .Home .H_sec02 .H_topopen{
     color: #979797;
     height: 38px;
     line-height: 38px;
+    font-weight: 350;
 }
 
 #root .Home .H_sec02_1{
@@ -185,19 +187,23 @@ input:checked + .checkmark {
 }
 #root .Home .H_sec02_2 .H_before_btn{
     position: absolute;
-    top: 130px;
-    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -70px;
     z-index: 20;
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: 250;
     border-radius: 50%;
     color: #979797;
 }
 #root .Home .H_sec02_2 .H_after_btn{
     position: absolute;
-    top: 130px;
-    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -70px;
     z-index: 10;
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: 250;
     border-radius: 50%;
     color: #979797;
 }
@@ -219,13 +225,14 @@ input:checked + .checkmark {
     cursor: pointer;
 }
 #root .Home .H_sec02_2 .H_slide > ul > li .H_new >img{
-    width: 350px;
+    width: 400px;
     padding: 50px 0 0 15px;
 }
 
 /* 최근 본 차량 */
 #root .Home .H_sec03{
     display: flex;
+    align-items: center;
     padding-bottom: 20px;
 }
 #root .Home .H_sec03 .H_more > span{
@@ -247,8 +254,8 @@ input:checked + .checkmark {
 #root .Home .H_sec03_1 .recent_car_item{
     display: inline-block;
     background-color: #eeeeee;
-    width: 220px;
-    height: 270px;
+    width: 250px;
+    height: 300px;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -257,9 +264,23 @@ input:checked + .checkmark {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 #root .Home .H_sec03_1 .recent_car_item > img{
-    width: 350px;
+    width: 400px;
     padding: 50px 0 0 30px;
 }
+
+/* 광고배너 */
+
+#root .Home .H_section04 > h4{
+    padding-bottom: 20px;
+}
+#root .Home .H_section04 > .H_sec04_advertisementBanner{
+    display: flex;
+    justify-content: space-between;
+}
+#root .Home .H_section04 > .H_sec04_advertisementBanner img{
+    border-radius: 10px;
+}
+
 /* ---------------------------------- */
 
 /* 지점 선택 모달 */
@@ -402,7 +423,4 @@ input:checked + .checkmark {
     color: rgb(190, 190, 190) ;
     font-size: 15px;
     padding: 10px 0;
-}
-#root .Home .H_location .H_selectLocation_detail .H_detail_address{
-
 }
