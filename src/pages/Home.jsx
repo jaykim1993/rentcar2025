@@ -78,6 +78,10 @@ export default function Home(){
       setIsCalendar(false);
       setIsLocation(!isLocation);
     };
+    const CloseHandler=()=>{
+      setIsCalendar(false);
+      setIsLocation(false);
+    }
     
     // 오전 오후
     const timeAMPM= (time)=>{
@@ -197,7 +201,7 @@ const newCarList=
                     :<p>지점을 선택하세요</p>}
                     </div>
                 </div>
-                <button className="H_searchButton" type="submit" onClick={()=>handleSearchBtn(navigate)}>
+                <button className="H_searchButton" type="submit" onClick={() => {handleSearchBtn(navigate);CloseHandler();}}>
                     예약할 차량 찾기&nbsp;
                     <i className="bi bi-arrow-right"></i>
                 </button>

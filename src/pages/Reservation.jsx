@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BookingContext } from '../contexts/Bookingcontext';
 import { CalendarContext } from '../contexts/Calendarcontext';
 import { AuthContext } from '../contexts/Authcontext';
@@ -15,6 +15,7 @@ export default function Reservation(){
     const { car, filter, totalPrice, filterStartDate, filterEndDate, filterStartTime, filterEndTime } = location.state || {};
     const { availableCars, filteredInfoUser } = useContext(CalendarContext);
     const {userid, username, user_email, user_resistnum, user_phonenum, address, address_detail, user_iskorean, user_license } = useContext(AuthContext);
+    const { setBookedlistAll, calculatePrice } = useContext(BookingContext);
 
     // 예외처리
     if(!car) return <div className='ReservationSection'>날짜, 지점을 선택해주세요.</div>;
@@ -40,6 +41,44 @@ export default function Reservation(){
         // setIsChange(!isChange);
     }
     console.log(change_address);
+
+    // ===================== 예약/결제 관련 함수 ======================
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const selectedCar = availableCars.find(car => car.id === Number(id)) || availableCars[0];
+    const filterCar =
+        filteredInfoUser?.find(car => car.id === Number(id))
+        ?? filteredInfoUser?.[0];
+
+        if (!selectedCar || !filterCar) {
+        return <div>예약 정보를 불러오는 중입니다...</div>;
+        } // 방어코드 , 22일 성중 수정
+
+    // 예약/결제하기 버튼 함수
+    const addBookInfo = () => {
+        if (!filterCar || !userid) {
+            alert("예약 정보를 다시 선택해주세요.");
+            return;
+        } else {
+            alert("예약이 완료되었습니다.");
+        }
+        setBookedlistAll(prev => [
+          ...prev,
+          {
+            id: `${Date.now()}_${userid}`,
+            bookedDate: new Date().toISOString().slice(0, 10),
+            userId:userid,
+            carId:selectedCar.id,
+            startDate: filterCar.filterStartDate,
+            endDate: filterCar.filterEndDate,
+            startTime: filterCar.filterStartTime,
+            endTime: filterCar.filterEndTime,
+            price: totalPrice
+          }
+        ]);
+        navigate('/mypage/booked');
+    };
 
     return(
         <div className="ReservationSection">
@@ -152,10 +191,7 @@ export default function Reservation(){
                         <div className="price_total">
                             <p>총&nbsp;&nbsp;<strong>{totalPrice.toLocaleString()}</strong>&nbsp;원</p>
                         </div>
-                        <button className="pay_btn"
-                        // onClick={}
-                        >결제하기
-                        </button>
+                        <button className="pay_btn" onClick={addBookInfo}>결제하기</button>
                     </div>
                 </div>
             </div>
