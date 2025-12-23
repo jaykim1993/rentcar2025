@@ -115,6 +115,14 @@
     padding: 10px 5px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+.headerModalInfo:hover {
+    background-color: #2591cf;
+    color: #f4f4f4;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 20px;
 }
 .headerModalDate{
     display: inline-block;
@@ -161,17 +169,23 @@
     text-decoration: none;
     font-size: 1rem;
 }
+.headerBannerImgWrap{
+    text-align: center;
+    width: 220px;
+    height: 220px;
+}
 .headerNavAd {
     width: 100%;
-    height: 200px;
-}
-/* .headerBannerImgWrap{
-    height: 170px;
+    height: 300px;
+    margin-bottom: 30px;
 }
 .headerBannerImg{
-    width: 170px;
-    height: 170px;
-} */
+    width: 220px;
+    height: 220px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    cursor: pointer;
+}
 .headerNavSide {
     position: fixed;
     top: 0; 
@@ -181,7 +195,7 @@
     transform: translateX(-100%);
     transition: transform 0.5s;
     background-color: white;
-    z-index: 10000;
+    z-index: 100;
     padding: 10px 30px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     overflow-y: auto;
@@ -193,7 +207,6 @@
   background:  #2591cf80;
   border-radius: 3px;
 }
-
 .headerNavSide.on {
     transform: translateX(0);
 }
@@ -216,6 +229,7 @@
 }
 .headerNavH {
     font-weight: bold;
+    margin-bottom: 20px;
 }
 .headerNavpointer {
     color: #0b79b7;
