@@ -168,6 +168,12 @@ const newCarList=
     setBefore_x(0);
   },[isNew])
 
+    // 해당 차량 브랜드 searchcarlist로 넘기기
+    const goToSearchcarlist = (model) => {
+      navigate("/searchcarlist", {
+        state: { model }
+      });
+  };
     return(
       <div className="Home">
         {/* 예약 섹션 */}
