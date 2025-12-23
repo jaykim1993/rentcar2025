@@ -120,7 +120,7 @@ export default function CustomerService(){
     //제이슨형태로 현재 빈 배열에있는걸 읽고 
     const prev = JSON.parse(localStorage.getItem("inquiries")) || [];
 
-    const updatedInquiries = [...prev, newinquiries];
+    const updatedInquiries = [newinquiries,...prev ];
         localStorage.setItem("inquiries", JSON.stringify(updatedInquiries));
 
     setInquiries(updatedInquiries);

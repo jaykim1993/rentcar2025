@@ -168,7 +168,7 @@ a, p, h4, h3, h2, h1{
 }
 
 /* 목록 */
-#root .Recentcar .R_carlist ul li a{
+#root .Recentcar .R_carlist ul li{
     width: 900px;
     /* height: 400px; */
     display: flex;

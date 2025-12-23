@@ -90,8 +90,7 @@
     border-radius: 10px;
 }
 .headerModalH{
-    display: inline-block;
-    margin-bottom: 20px;
+    height: 40px;
 }
 .headerUserBookModalContext{   
     max-height: 250px;
@@ -108,6 +107,8 @@
 .headermodalText{
     font-size: 15px;
     margin-left: 25px;
+    font-weight: 500;
+    color: rgb(70, 70, 70);
 }
 .headerModalInfo{
     display: flex;
@@ -115,14 +116,6 @@
     padding: 10px 5px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
-    border-radius: 20px;
-    transition: 0.2s;
-}
-.headerModalInfo:hover {
-    background-color: #2591cf;
-    color: #f4f4f4;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 20px;
 }
 .headerModalDate{
     display: inline-block;
