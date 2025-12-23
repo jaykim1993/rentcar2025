@@ -321,24 +321,25 @@ input:checked + .checkmark {
 }
 
 #root .Home .calendar-slide.open {
-  max-height: 800px; /* 캘린더 높이 예상값 */
-  position: absolute;
-  top: 150px;
-  left: 210px;
-  z-index: 100;
-   width: 710px;
-   height: 785px;
-   background-color: #fff;
-   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-   border-radius: 15px;
-   padding: 25px 5px 0 0;
+    max-height: 800px; /* 캘린더 높이 예상값 */
+    position: absolute;
+    top: 150px;
+    left: 210px;
+    z-index: 100;
+    width: 690px;
+    height: 585px;
+    background-color: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 25px 5px 0 0;
 }
 .calendar-slide.open .H_close02 > i{
     display: flex;
     justify-content: flex-end;
     cursor: pointer;
     color: #999;
-    padding-right: 25px;
+    /* padding-right: 25px; */
+    margin-bottom: 20px;
 }
 
 /* 지점 선택 목록 */

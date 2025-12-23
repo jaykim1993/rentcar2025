@@ -499,21 +499,21 @@ export default function Recentcar(){
                 {/* 예약 섹션 */}
                     <div className="R_reservation">
                         <div className="R_dateTable">
-                            <p>언제?</p>
+                            <p className="R_reservation_p">언제?</p>
                             <div className="R_dateTitle" onClick={calendarHandler}>
                                 {apply?
-                                <p>
+                                <h4>
                                     {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
-                                </p>:
-                                <h2>날짜선택</h2>}
+                                </h4>:
+                                <h4>날짜선택</h4>}
                             </div>
                         </div>
                 
                         {/* 지점 선택 파트 */}
                         <div className="R_spotTable">
                             <div className="spot_choice">
-                                <p>어디?</p>
-                                <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
+                                <p className="R_reservation_p">어디?</p>
+                                <div className="R_spotTitle" onClick={locationHandler}>{location? <h4>{location}</h4> :<h4>지점선택</h4>}</div>
                             </div>
                             <div className="searchButton">
                                 <button type="submit" onClick={handleResetAll} onMouseOver={()=>console.log('오버확인')}>

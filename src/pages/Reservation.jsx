@@ -80,17 +80,37 @@ export default function Reservation(){
         navigate('/mypage/booked');
     };
 
+    // 상세주소 입력
+    const [detailAddress, setDetailAddress] = useState('');
+
+    // 완료 버튼
+    const handleAddressComplete = () => {
+        if (!zipcode || !change_address) {
+            alert("주소를 먼저 검색해주세요.");
+            return;
+        }
+        setIsChange(false);
+    };
+
     return(
         <div className="ReservationSection">
             {/* 좌측 운전자 정보 */}
             <div className='Reser_reservationInfo'>
-                <h2>예약하기</h2>
+                {/* 홈 > 예약하기 > 결제하기 */}
+                <div className="R_Head">
+                    <Link to={'/'}><span style={{color: '#999'}}>홈</span></Link>
+                    <i className="bi bi-caret-right-fill" style={{color: '#999'}}></i>
+                    <span style={{color: '#999'}}>예약하기</span>
+                    <i className="bi bi-caret-right-fill" style={{color: '#999'}}></i>
+                    <span>결제하기</span>
+                </div>
+                <h2>결제하기</h2>
                 <div className='Reser_driverInfo'>
                     <h3><span>운전자 정보(예약자)</span>를 입력해 주세요.</h3>
                     <p>입력한 정보는 안전하게 보호할게요.</p>
                     {/* 운전자 기본 정보 */}
                     <div className='Reser_driverBasicInfo'>
-                        <h4>기본 정보</h4>
+                        <h4 className="Reser_h4">기본 정보</h4>
                         <ul>
                             <li>
                                 <label>이름</label>
@@ -104,80 +124,76 @@ export default function Reservation(){
                                 <label>생년월일</label>
                                 <h5>{user_resistnum}</h5>
                             </li>
-                            <li>
+                            <li className="address_position">
                                 <label>주소</label>
-                                {zipcode === '' ? <h5>{address} {address_detail}</h5> : <h5>{zipcode} {change_address}</h5> }
-                                <button type='button' onClick={()=>setIsChange(!isChange)}>수정</button>
-                                {isChange && 
-                                    <>
-                                    <input type='text' value={zipcode} placeholder='우편번호' readOnly name='post' id='post'/>
-                                    <button type='button' id='userAddrsearch' onClick={()=>setOpenModal(!openModal)}>우편번호 검색</button>
-                                    <input type='text' value={change_address} onChange={(e) => setChange_address(e.target.value)} placeholder='도로명주소' name='userAddress' id='userAddress'/>
-                                    <input type='text' placeholder='상세주소' name='detailAddress' id='detailAddress'/>
-                                    </>
+                                {zipcode === '' 
+                                    ? <h5>{address} {address_detail}</h5> 
+                                    : <><h5>{zipcode}</h5> <h5>{change_address}</h5> <h5>{detailAddress}</h5></>
                                 }
-                                    {openModal ? 
-                                        <div className='R_modal'>
-                                            <span onClick={()=>setOpenModal(!openModal)}><i className="bi bi-x-lg"></i></span>
-                                            <DaumPostCode onComplete={changeAddressHandler}/>
-                                        </div>
-                                    : null}
+                                <button type='button' onClick={()=>setIsChange(!isChange)} className="addressBtn">주소검색</button>
                                 
+                                {isChange && 
+                                    <div className="R_address_Modal">
+                                        <i className="bi bi-x-lg" onClick={()=>setIsChange(!isChange)}></i>
+                                        <input type='text' value={zipcode} placeholder='우편번호' readOnly name='post' id='post'/>
+                                        <button type='button' id='userAddrsearch' onClick={()=>setOpenModal(!openModal)}>
+                                            우편번호 검색
+                                        </button>
+                                        <input type='text' value={change_address} onChange={(e) => setChange_address(e.target.value)} 
+                                            placeholder='도로명주소' name='userAddress' id='userAddress'/>
+                                        <input type='text' placeholder='상세주소 입력' value={detailAddress}
+                                    onChange={(e) => setDetailAddress(e.target.value)} name='detailAddress' id='detailAddress' />
+
+                                        <br />
+
+                                        <button type="button" onClick={handleAddressComplete} className="handleAddressComplete">완료</button>
+                                    </div>
+                                }
+                                {openModal ? 
+                                    <div className='R_modal'>
+                                        <i className="bi bi-x-lg" onClick={()=>setOpenModal(!openModal)}></i>
+                                        <DaumPostCode onComplete={changeAddressHandler} style={{height: '100%'}}/>
+                                    </div>
+                                : null}
                             </li>
                         </ul>
                     </div>
                     {/* 운전면허 정보 */}
                     <div className='Reser_driverLicenseInfo'>
-                        <h4>운전면허 정보</h4>
-                        <div>
-                            <ul>
-                                <li>
-                                    <label>면허번호</label>
-                                    <input type='text' />
-                                    <p>예시: 구면허증 : 서울0112345600 / 신면허증 : 110112345600</p>
-                                </li>
-                                <li>
-                                    <label>면허정보</label>
-                                    <input type='text' />
-                                </li>
-                                <li>
-                                    <label>발급일자</label>
-                                    <input type='text' />
-                                </li>
-                                <li>
-                                    <label>만료일자</label>
-                                    <input type='text' />
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    {/* 결제정보 */}
-                    <div className='Reser_payment'>
-                        <h4>결제 정보</h4>
+                        <h4 className="Reser_h4">운전면허 정보</h4>
                         <ul>
                             <li>
-                                <p>결제수단 선택</p>
-                                <input type='checkbox' id='payment' />
-                                <label id='payment'>무통장입금</label>
+                                <label>면허번호</label>
+                                <input type='text' placeholder="예&#41; 구면허증 : 서울0112345600 / 신면허증 : 110112345600" />
+                                {/* <p>예시&#41; 구면허증 : 서울0112345600 / 신면허증 : 110112345600</p> */}
                             </li>
                             <li>
-                                <label>환불 방법</label>
+                                <label>면허정보</label>
+                                <input type='text' placeholder="예&#41; 2종 보통" />
+                            </li>
+                            <li>
+                                <label>발급일자</label>
+                                <input type='text' placeholder="예&#41; 20250123" />
+                            </li>
+                            <li>
+                                <label>만료일자</label>
+                                <input type='text' placeholder="예&#41; 20350123" />
                             </li>
                         </ul>
+                        {/* 안내문구 */}
+                        <div className='Reser_reservationNotice'>
+                            <p>· 입력한 운전자 정보와 예약자 정보가 다를 경우 대여가 제한될 수 있어요.</p>
+                            <p>· 나이, 면허종류, 운전경력에 따라 이용 가능한 차종 및 차량이 다를 수 있어요.</p>
+                            {/* <p>자세한 자격 조건이 궁금하세요?</p> */}
+                        </div>
                     </div>
-                </div>
-                {/* 안내문구 */}
-                <div className='Reser_reservationNotice'>
-                    <p>· 입력한 운전자 정보와 예약자 정보가 드를 경우 대여가 제한될 수 있어요.</p>
-                    <p>· 나이, 면허종휴, 운전경력에 따라 이용 가능한 차종 및 차량이 다를 수 있어요.</p>
-                    {/* <p>자세한 자격 조건이 궁금하세요?</p> */}
                 </div>
             </div>
 
             {/* 우측 선택일자, 지점, 차량 */}
             <div className='Reser_reservationSummary'>
                 <div className="summary_card">
-                    <h5>{username}님의 여정</h5>
+                    <h5><span className="loginColor">{username}</span>님의 여정</h5>
                     <div className="info_box">
                         <p className="label">지점</p>
                         <h4 className="val">{car.location}</h4>
@@ -189,12 +205,35 @@ export default function Reservation(){
                         <h4 className="val">{car.model}</h4>
                         <hr />                        
                         <div className="price_total">
-                            <p>총&nbsp;&nbsp;<strong>{totalPrice.toLocaleString()}</strong>&nbsp;원</p>
+                            {/* 결제정보 */}
+                            <div className='Reser_payment'>
+                                <h4 className="Reser_h4">결제 정보</h4>
+                                <p>총 결제금액&nbsp;&nbsp;<strong>{totalPrice.toLocaleString()}</strong>&nbsp;원</p>
+                                <hr />
+                                <p>결제수단 선택</p>
+                                <ul>
+                                    <li>
+                                        <input type='checkbox' id='payment01' />
+                                        <label for='payment01'>무통장입금</label>
+                                    </li>
+                                    <li>
+                                        <input type='checkbox' id='payment02' />
+                                        <label for='payment02'>카카오페이</label>
+                                        <img src="kakao_pay.png" alt="카카오페이" className="kakao_pay" />
+                                    </li>
+                                    <li>
+                                        <input type='checkbox' id='payment03' />
+                                        <label for='payment03'>네이버페이</label>
+                                        <img src="naver_pay.png" alt="네이버페이" className="naver_pay" />
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <button className="pay_btn" onClick={addBookInfo}>결제하기</button>
                     </div>
                 </div>
             </div>
+            {isChange && <div className="R_modal_overlay"></div>}
         </div>
     )
 }

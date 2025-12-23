@@ -217,30 +217,36 @@ export default function RentalCalendar() {
         contentHeight="auto"
         fixedWeekCount={false}
       />
+      {/* 12-23 령경 수정 시작 */}
       <div className="C_select">
             <>
-              <div style={{ display: "flex", alignItems: "center"}} className="C_time">
-                <span className="C_dateTitle">대여시간</span>
-                <select
-                  className="C_selectTime"
-                  value={startTime}
-                  onChange={(e) => setStartTime(e.target.value)}
-                >
-                  {timeOptions.map((time) => (
-                    <option key={time}>{time}</option>
-                  ))}
-                </select>
-                <span className="C_dateTitle">반납시간</span>
-                <select
-                  className="C_selectTime"
-                  value={endTime}
-                  onChange={(e) => setEndTime(e.target.value)}
-                >
-                  {timeOptions.map((time) => (
-                    <option key={time}>{time}</option>
-                  ))}
-                </select>
+            <hr className="C_select_hr" />
+              <div style={{ display: "flex", alignItems: "center", justifyContent: 'space-between'}} className="C_time">
+                <div className="C_startTime">
+                  <span className="C_dateTitle">대여시간</span>
+                  <select
+                    className="C_selectTime"
+                    value={startTime}
+                    onChange={(e) => setStartTime(e.target.value)}>
+                    {timeOptions.map((time) => (
+                      <option key={time}>{time}</option>
+                    ))}
+                  </select>
+                </div>
+                <p style={{fontSize: '25px'}}>~</p>
+                <div className="C_endTime">
+                  <span className="C_dateTitle">반납시간</span>
+                  <select
+                    className="C_selectTime"
+                    value={endTime}
+                    onChange={(e) => setEndTime(e.target.value)}>
+                    {timeOptions.map((time) => (
+                      <option key={time}>{time}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
+              {/* 령경 수정 끝 */}
 
               <button className="C_X_btn" style={{ marginTop: "20px" }} onClick={allCancleHandler}>
                 초기화
