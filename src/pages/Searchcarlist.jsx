@@ -347,7 +347,7 @@ export default function Recentcar(){
                 <ul>
                     <li>
                         <h3>차종/차량등급</h3>
-                        {/* 다중 선택 토글 기능 적용 */}
+                        {/* 다중 선택 토글 기능 적용 .*/}
                         <div className="cateBtn">
                             <button 
                                 onClick={() => toggleFilter('carSize', '경소형')} 
