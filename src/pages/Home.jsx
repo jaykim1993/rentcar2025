@@ -19,7 +19,7 @@ export default function Home(){
   const navigate = useNavigate();
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar} = useContext(CalendarContext);
-  const {myRecentlist} = useContext(BookingContext);
+  const {myRecentlist,setClickCar} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
 
@@ -177,7 +177,18 @@ const newCarList=
       navigate("/searchcarlist", {
         state: { model }
       });
-  };
+    };
+
+    // 인기순 차량 배열
+    const goodCar = [
+      {model:'그랑조',img:'hy_2.webp'},
+      {model:'dmw new 5',img:'bmw_5.webp'},
+      {model:'WV7',img:'kia_2.webp'},
+      {model:'아이온',img:'hy_9.webp'},
+      {model:'GGE80',img:'ZENE_2.webp'}
+    ];
+
+
     return(
       <div className="Home">
         {/* 예약 섹션 */}
@@ -334,27 +345,26 @@ const newCarList=
             </div>
         </div>
     
-
         {/* sec02 - 인기차량. */}
         <div className="H_sec02">
             <h4 className={`H_top${isTop?"":"open"}`} onClick={topClickHandler}>인기순</h4>
             <h4 className={`H_top${isNew?"":"open"}`} onClick={topClickHandler}>신규 차량</h4>
         </div>
-        {isTop ? 
-        <div className="H_sec02_1">
-            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('그랑조')}><img src='/images/cars/hy_2.webp' alt='car_img'/></div></Link>
-            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('dmw new 5')}><img src='/images/cars/bmw_5.webp' alt='car_img'/></div></Link>
-            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('WV7')}><img src='/images/cars/kia_2.webp' alt='car_img'/></div></Link>
-            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('아이온')}><img src='/images/cars/hy_9.webp' alt='car_img'/></div></Link>
-            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('GGE80')}><img src='/images/cars/ZENE_2.webp' alt='car_img'/></div></Link>
-        </div>:
+        {isTop ?
+        <ul className="H_sec02_1">
+          {goodCar.map((item,index)=>(
+            <li key={index}>
+              <div className="H_good" onClick={()=>goToSearchcarlist(item.model)}><img src={`/images/cars/${item.img}`} alt='car_img'/></div>
+            </li>
+          ))}
+        </ul>:
         <div className="H_sec02_2">
             <p onClick={before_btn} className="H_before_btn">〈</p>
             <div className="H_slide">
               <ul style={{transform:`translateX(${before_x}px)`}}>
                 {newCarList && newCarList.map((item)=>(
                   <li key={item.id}>
-                    <div className="H_new"><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
+                    <div className="H_new" onClick={()=>goToSearchcarlist(item.model)}><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
                   </li>
                 ))}
               </ul>
@@ -368,15 +378,15 @@ const newCarList=
           <div className="H_section03">
             <div className="H_sec03">
                 <h4><span className="joinColorText">{username}</span>님의 최근 본 차량</h4>
-                <Link to={'/recent'} className="H_more">
+                <Link to={'/recent'} className="H_more" >
                   <span>더보기</span>
                 </Link>
             </div>
             <div className="H_sec03_1">
                 {sec03Sort.map(item=>(
-                  <Link to={`/detail/${item.carId}`} key={item.id} className="recent_car_item">
-                    <img src={`/images/cars/${item.car_img}`} alt={item.model}/>
-                  </Link>
+                    <div className="H_good" key={item.id} onClick={()=>goToSearchcarlist(item.model)} >
+                      <img src={`/images/cars/${item.car_img}`} alt={item.model}/>
+                    </div>
                 ))}
             </div>
           </div>

@@ -251,7 +251,7 @@ input:checked + .checkmark {
     display: flex;
     gap: 25px;
 }
-#root .Home .H_sec03_1 .recent_car_item{
+#root .Home .H_sec03_1 .H_good{
     display: inline-block;
     background-color: #eeeeee;
     width: 240px;
@@ -259,11 +259,11 @@ input:checked + .checkmark {
     border-radius: 10px;
     overflow: hidden;
 }
-#root .Home .H_sec03_1 .recent_car_item:hover{
+#root .Home .H_sec03_1 .H_good:hover{
     background-color: #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-#root .Home .H_sec03_1 .recent_car_item > img{
+#root .Home .H_sec03_1 .H_good > img{
     width: 400px;
     padding: 50px 0 0 30px;
 }
