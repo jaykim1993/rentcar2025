@@ -30,13 +30,21 @@ export default function DetailPage(){
     const navigate = useNavigate();
 
     const selectedCar = availableCars.find(car => car.id === Number(id)) || availableCars[0];
-    const filterCar = filteredInfoUser.find(car => car.id === Number(id)) || filteredInfoUser[0];
+    const filterCar =
+        filteredInfoUser?.find(car => car.id === Number(id))
+        ?? filteredInfoUser?.[0];
+
+        if (!selectedCar || !filterCar) {
+        return <div>예약 정보를 불러오는 중입니다...</div>;
+        } // 방어코드 , 22일 성중 수정
+
 
     // 최근 본 차량 추가(Local Storage)
     useEffect(() => {
         if (!selectedCar || !userid) return;
 
-            const prev = JSON.parse(localStorage.getItem("recentView")) || [];
+            const raw = localStorage.getItem("recentView");
+            const prev = raw ? JSON.parse(raw) : []; // 방어코드 , 22일 성중 수정
 
             // 같은 유저 + 같은 차량 제거
             const filtered = prev.filter(
@@ -128,8 +136,7 @@ export default function DetailPage(){
                 filterStartDate: filterCar.filterStartDate,
                 filterEndDate: filterCar.filterEndDate,
                 filterStartTime: filterCar.filterStartTime,
-                filterEndTime: filterCar.filterEndTime,
-                totalPrice: totalPrice
+                filterEndTime: filterCar.filterEndTime
             }
         })
     };
