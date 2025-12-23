@@ -240,42 +240,46 @@ const dayCellClassNames = (arg) => {
         contentHeight="auto"
         fixedWeekCount={false}
       />
+      {/* 12-23 령경 수정 시작 */}
       <div className="C_select">
             <>
-              <div style={{ display: "flex", alignItems: "center"}} className="C_time">
-                <span className="C_dateTitle">대여시간</span>
+            <hr className="C_select_hr" />
+              <div style={{ display: "flex", alignItems: "center", justifyContent: 'space-between'}} className="C_time">
+                <div className="C_startTime">
+                  <span className="C_dateTitle">대여시간</span>
                   <select
                     className="C_selectTime"
                     value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                    >
+                    onChange={(e) => setStartTime(e.target.value)}>
+                    {timeOptions.map((time) => (
+                      <option 
+                        key={time} 
+                        value={time}
+                        disabled={isDisabledStartTime(startDate, time)}>
+                          {time}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <p style={{fontSize: '25px'}}>~</p>
+                <div className="C_endTime">
+                  <span className="C_dateTitle">반납시간</span>
+                  <select
+                    className="C_selectTime"
+                    value={endTime}
+                    onChange={(e) => setEndTime(e.target.value)}>
                     {timeOptions.map((time) => (
                       <option
                         key={time}
                         value={time}
-                        disabled={isDisabledStartTime(startDate, time)}
-                      >
-                        {time}
-                      </option>
-                    ))}
-                  </select>
-
-                  <select
-                    className="C_selectTime"
-                    value={endTime}
-                    onChange={(e) => setEndTime(e.target.value)}
-                    >
-                    {timeOptions.map((time) => (
-                     <option
-                        key={time}
-                        value={time}
-                        disabled={isDisabledEndTime(endDate, startDate, startTime, time)}
-                      >
+                        disabled={isDisabledEndTime(endDate, startDate, startTime, time)}>
                         {time}
                     </option>
                     ))}
                   </select>
+                </div>
               </div>
+              {/* 령경 수정 끝 */}
 
               <button className="C_X_btn" style={{ marginTop: "20px" }} onClick={allCancleHandler}>
                 초기화

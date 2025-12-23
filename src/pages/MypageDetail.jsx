@@ -114,7 +114,7 @@ export default function MypageDetail(){
                         <div>
                             <div>
                                 <p className='mypageDetailP'>결제</p>
-                                <h4><h4>{bookedThis.price.toLocaleString()}원</h4></h4>
+                                <h4>{bookedThis.price.toLocaleString()}원</h4>
                             </div>
                         </div>
                     </div>
