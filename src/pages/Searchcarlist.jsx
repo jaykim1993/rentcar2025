@@ -3,7 +3,7 @@ import { DataContext } from "../contexts/Datacontext";
 import { CalendarContext } from "../contexts/Calendarcontext";
 import { AuthContext } from "../contexts/Authcontext";
 import './Searchcarlist.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Calendar from './Calendar';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { BookingContext } from "../contexts/Bookingcontext";
@@ -15,14 +15,9 @@ export default function Recentcar(){
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, 
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
     const { calculatePrice, clickCar} = useContext(BookingContext);
-    const { userid, loginNeeded } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
+    const { userid, setModal } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
 
     // ================= 달력 관련 =================
-
-    // // 지점 모달 toggle
-    // const [isLocation, setIsLocation] = useState(false);
-    // // 달력 모달 toggle
-    // const [iscalendar, setIscalendar] = useState(false);
 
     const calendarHandler=()=>{
       setIsCalendar(!isCalendar);
@@ -84,18 +79,6 @@ export default function Recentcar(){
         alert("검색 조건이 초기화되었습니다.");
     };
 
-    // ================= 옵션 문자열 =================
-    // const getActiveOptionsString = (car) => {
-    //     const activeOptions = [];
-    //     if (car.navigation) activeOptions.push('내비게이션');
-    //     if (car.rear_camera) activeOptions.push('후방카메라');
-    //     if (car.heated_seat) activeOptions.push('열선시트');
-    //     if (car.heated_handle) activeOptions.push('핸들열선');
-    //     if (car.bluetooth) activeOptions.push('블루투스');
-    //     if (car.smart_key) activeOptions.push('스마트키');
-    //     if (car.sun_loof) activeOptions.push('썬루프');
-    //     return activeOptions.join(', ');
-    // };
 
     // ================= 필터 판별 =================
     const filterCar = (car, filters) => {
@@ -178,11 +161,33 @@ export default function Recentcar(){
     };
 
     // ================= 그룹화 =================
-    const groupedCars = {};
-    for(const car of displayedCars){
-        if (!groupedCars[car.model]) groupedCars[car.model] = [];
-        groupedCars[car.model].push(car);
+        // 외부에서 차량 모델명 가져와서 랜더링하기 12.23 - 성중
+    const { state } = useLocation();
+    const selectedModel = state?.model;
+    // const groupedCars = {};
+    const [groupedCars, setGroupedCars] = useState({});
+    // for(const car of displayedCars){
+    //     if (!groupedCars[car.model]) groupedCars[car.model] = [];
+    //     groupedCars[car.model].push(car);
+    // }
+    useEffect(() => {
+    let sourceCars = displayedCars;
+    // model이 있으면 해당 모델만 필터
+    if (selectedModel) {
+        sourceCars = displayedCars.filter(
+        car => car.model === selectedModel
+        );
     }
+
+  // 그룹화
+  const grouped = {};
+  sourceCars.forEach(car => {
+    if (!grouped[car.model]) grouped[car.model] = [];
+    grouped[car.model].push(car);
+  });
+
+  setGroupedCars(grouped);
+}, [displayedCars, selectedModel]);
 
     // ================= 선택 태그 =================
     const renderSelectedFilters = () => {
@@ -211,22 +216,25 @@ export default function Recentcar(){
     const navigate = useNavigate();
     
     const goToDetail = (carId) => {
-    // 로그인 체크
-    if (!userid) {
-        alert("로그인 후 이용 가능합니다.");
-        return;
-    }
+        // 로그인 체크
+        if (!userid) {
+            alert("로그인 후 이용 가능합니다.");
+            setModal('login');
+            return;
+            
+        }
 
-    // 날짜 / 지점 체크
-    if (!location || !endTime) {
-        alert("날짜와 지점을 먼저 선택해주세요.");
-        return;
-    }
+        // 날짜 / 지점 체크
+        if (!location || !endTime) {
+            alert("날짜와 지점을 먼저 선택해주세요.");
+            return;
+        }
 
-    // 정상 이동
-    navigate(`/detailpage/${carId}`);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+        // 정상 이동
+        navigate(`/detailpage/${carId}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
+    // 출력 함수
     const renderGroupedCars = () => {
         const result = [];
         
@@ -266,8 +274,8 @@ export default function Recentcar(){
                                     <i className="bi bi-chevron-right"></i>
 
                                     <p className="carPrice">
-                                            30분당&nbsp;
-                                            <strong>{car_price.toLocaleString()}</strong>원
+                                        30분당&nbsp;
+                                        <strong>{car_price.toLocaleString()}</strong>원
                                     </p>
                                 </div>
                             );
@@ -276,28 +284,10 @@ export default function Recentcar(){
                 </li>
             );
         }
-                // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
         return result;
     };
+    // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
 
-    // 인기순 차량 선택 핸들러
-    // const clickCarHandler = () => {
-    //     const clickCarResult=availableCars.filter(item => item.model === clickCar );
-
-    //     return(
-    //         <div className="clickCarHandler">
-    //             <ul>
-    //                 {clickCarResult.map((item)=>(
-    //                     <li key={item.id}>
-    //                         <img src={`images/cars/${item.car_img}`} alt={item.car_id}/>
-    //                         <h4>{item.model} {item.fuel_type}</h4>
-    //                     </li>
-    //                 ))}
-    //             </ul>
-    //         </div>
-    //     )
-    // }
-    // console.log(clickCar);
 
     return(
         <div className="Recentcar">
