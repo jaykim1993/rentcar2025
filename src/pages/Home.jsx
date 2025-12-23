@@ -18,7 +18,7 @@ import 'leaflet/dist/leaflet.css';
 export default function Home(){
   const navigate = useNavigate();
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
-         handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar} = useContext(CalendarContext);
+         handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar,startdayText, enddayText, DeleteYear} = useContext(CalendarContext);
   const {myRecentlist} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
@@ -172,6 +172,7 @@ const newCarList=
     setBefore_x(0);
   },[isNew])
 
+
     return(
       <div className="Home">
         {/* 예약 섹션 */}
@@ -181,8 +182,15 @@ const newCarList=
                   <div className="H_dateTitle" onClick={calendarHandler}>
                     {apply?
                     <p>
-                      {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
-                    </p>:
+                     {startDate && endDate && (
+                        <>
+                          {DeleteYear(startDate)} ({startdayText}){timeAMPM(startTime)}
+                          {" ~ "}
+                          {DeleteYear(endDate)} ({enddayText}){timeAMPM(endTime)}
+                        </>
+                      )}
+                    </p>
+                    :
                     <p>날짜를 선택하세요</p>}
                   </div>
             </div>

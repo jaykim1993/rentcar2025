@@ -7,7 +7,6 @@ export const CalendarContext = createContext();
 
 const toDateTime = (date, time) =>
   new Date(`${date}T${time}:00`);
-
 export default function CalendarProvider({ children }) {
   const { userid } = useContext(AuthContext);
   const { cars } = useContext(DataContext);
@@ -21,7 +20,6 @@ export default function CalendarProvider({ children }) {
   // 사용자 입력 차량 위치 정보, 홈에서 공유받아야 하며 지금은 임시
   const [location, setLocation] = useState("");
   const [apply, setApply] = useState(false);
-
   /* ================= 시간 필터 ================= */
   const blockedCarIds = useMemo(() => {
     if (!startDate || !endDate) return [];
@@ -45,7 +43,6 @@ export default function CalendarProvider({ children }) {
       })
       .map((book) => book.carId);
   }, [bookedlistAll, startDate, endDate, startTime, endTime]);
-
   /* ================= 예약 가능 차량 ================= */
   // 원본 cars 형식 그대로 필터 => 령경씨가 사용할 배열
   const availableCars = useMemo(() => {
@@ -107,6 +104,77 @@ export default function CalendarProvider({ children }) {
   // 달력 모달 toggle
   const [isCalendar, setIsCalendar] = useState(false);
 
+  //요일뽑기
+  const startdateObj= new Date(startDate);
+  const enddateObj= new Date(endDate);
+  const startdayindex =startdateObj.getDay();
+  const enddayindex =enddateObj.getDay();
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
+  const startdayText = days[startdayindex];
+  const enddayText = days[enddayindex];
+
+  const DeleteYear = (dateStr) => {
+  const [, month, day] = dateStr.split("-");
+  return `${month}.${day}`;
+  };
+
+  //다음예약가능 시간 30분으로 쪼개서 ex) 현재시간 오후 4시52분 => 4시30분 && 이전 블럭될수있게
+// 현재 시각 기준 → 다음 예약 가능한 30분 단위 시간
+const getNextAvailableTime = () => {
+  const now = new Date();
+
+  const minutes = now.getMinutes();
+  const roundedMinutes = Math.ceil(minutes / 30) * 30;
+
+  if (roundedMinutes === 60) {
+    now.setHours(now.getHours() + 1);
+    now.setMinutes(0);
+  } else {
+    now.setMinutes(roundedMinutes);
+  }
+  now.setSeconds(0);
+  now.setMilliseconds(0);
+
+  return now;
+};
+  //예약가능여부
+const isDisabledStartTime = (date, time) => {
+  if (!date || !time) return false;
+
+  const now = new Date();
+  const todayStr = now.toISOString().split("T")[0];
+
+  if (date !== todayStr) return false;
+
+  const selected = toDateTime(date, time);
+  const limit = getNextAvailableTime();
+
+  return selected < limit;
+};
+
+const isDisabledEndTime = (dateStr, startDateStr, startTime, endTime) => {
+  if (!dateStr || !startDateStr || !endTime) return false;
+
+  const selected = toDateTime(dateStr, endTime);
+  const start = toDateTime(startDateStr, startTime);
+
+  const selectedDate = new Date(dateStr);
+  const startDate = new Date(startDateStr);
+
+  // 시작일과 같은 날이면
+  if (
+    selectedDate.getFullYear() === startDate.getFullYear() &&
+    selectedDate.getMonth() === startDate.getMonth() &&
+    selectedDate.getDate() === startDate.getDate()
+  ) {
+    // 최소 30분 이후부터 선택 가능
+    return selected < new Date(start.getTime() + 30 * 60 * 1000);
+  }
+
+  // 다른 날이면 제한 없음
+  return false;
+};
+
   return (
     <CalendarContext.Provider
       value={{
@@ -119,6 +187,12 @@ export default function CalendarProvider({ children }) {
         setStartTime,
         endTime,
         setEndTime,
+        //요일
+        startdayText,
+        enddayText,
+        DeleteYear,
+        isDisabledStartTime,
+        isDisabledEndTime,
 
         /* 위치 */
         location,

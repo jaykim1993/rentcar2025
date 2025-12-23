@@ -25,23 +25,58 @@ export default function MypageDetail(){
         navigate("/mypage/booked");
         };
 
+    //며칠 남앗는지
+        const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const [y, m, d] = bookedThis.startDate.split('-');
+            const startDate = new Date(y, m - 1, d);
+            const diffDays = Math.ceil(
+            (startDate - today) / (1000 * 60 * 60 * 24)
+        );
+        let dText;
+            if (diffDays > 0) dText = `D-${diffDays}`;
+            else if (diffDays === 0) dText = 'D-Day';
+            else dText = `D+${Math.abs(diffDays)}`;
   
+    //몇시간 이용하는지
+        let date = (new Date(`${bookedThis.endDate}T${bookedThis.endTime}`)-new Date(`${bookedThis.startDate}T${bookedThis.startTime}`))/ (1000 * 60 * 30);
+        const hours = Math.floor(date / 2);
+        const minutes = (date % 2) * 30;
 
-    let date = (new Date(`${bookedThis.endDate}T${bookedThis.endTime}`)-new Date(`${bookedThis.startDate}T${bookedThis.startTime}`))/ (1000 * 60 * 30);
-    const hours = Math.floor(date / 2);
-    const minutes = (date % 2) * 30;
+        const copyText = async (text) => {
+            try {
+                await navigator.clipboard.writeText(text);
+                alert('예약번호가 복사되었습니다.')
+            } catch (err) {
+            }
+        };
+
     return(
         <>
             <h1 className="guideMainText">마이페이지</h1>
             <h2 className="guideMainText">예약상세</h2>
-                
-                <div>
-                    <div>
-                        <p>{username}</p>
-                        <p>예약번호 : {bookedThis.id}</p>
-                        <p>출발일시 : {bookedThis.startDate} - {bookedThis.startTime}</p>
+                <div className='myPageDetailWrap'>
+                    <div className='myPageDetailTop'>
+                        <div >
+                            <div className='myPageDetailTopflex'>
+                                <span className='myPageDetailname'>{username}</span>
+                                <span className='myPageDateLeft'>{dText}</span>
+                            </div>
+                            <div className='myPageDetailTopflex'>
+                                <span className='myPageDetailbooknum'>예약번호</span>
+                                <span className='myPageDetailspan1'>{bookedThis.id}</span>
+                                <i onClick={() => copyText(bookedThis.id)} className="bi bi-copy"></i>
+                            </div>
+                            <div className='myPageDetailTopflex'>
+                                <span className='myPageDetailwhengo'>출발일시</span>
+                                <span className='myPageDetailspan'>{bookedThis.startDate} - {bookedThis.startTime}</span>
+                            </div>
+                        </div>
+                        <div className='myPageCancleBtnBox'>
+                            <button className='myPageCancleBtn' onClick={bookdeleteHandle}>예약 취소하기</button>
+                        </div>
                     </div>
-                    <div>
+                    <div className='mypageDetail2'>
                         <div>
                             <p>{bookedThis.car.brand}</p>
                             <p>{bookedThis.car.model}</p>
@@ -50,42 +85,43 @@ export default function MypageDetail(){
                             <img src={`/images/cars/${bookedThis.car?.car_img}`}/>
                         </div>
                     </div>
-                    <div>
-                        <div>
+                    <div className='mypageDetail3'>
                             <div>
-                                <p>지역</p>
+                                <p className='mypageDetailP'>지역</p>
                                 <h4>{bookedThis.car.location}점</h4>
                             </div>
-                            <div>
-                                <button>지도보기</button>
-                            </div>
-                        </div>
+                            <hr/>
                         <div>
                             <div>
-                                <p>일정</p>
+                                <p className='mypageDetailP'>일정</p>
                                 <h4>{bookedThis.startDate}-{bookedThis.startTime} ~ 
                                     {bookedThis.endDate}-{bookedThis.endTime} 
                                 </h4>
                                 <p>이용 시간: {hours}시간{minutes ? ` ${minutes}분` : ""}</p>
                             </div>
+                            <hr/>
                         </div>
                         <div>
                             <div>
-                                <p>차량</p>
+                                <p className='mypageDetailP'>차량</p>
                                 <h4>{bookedThis.car.model}</h4>
                                 <h4>{bookedThis.car.model_year}년식</h4>
-                                <h4>연료타입 : {bookedThis.car.fuel_type}</h4>
-                                <p>이용 시간: {hours}시간{minutes ? ` ${minutes}분` : ""}</p>
+                                <h4>{bookedThis.car.fuel_type}</h4>
+                                <p>이용 시간 : {hours}시간{minutes ? ` ${minutes}분` : ""}</p>
                             </div>
+                            <hr/>
                         </div>
                         <div>
-                            <button onClick={bookdeleteHandle}>예약 취소하기</button>
+                            <div>
+                                <p className='mypageDetailP'>결제</p>
+                                <h4><h4>{bookedThis.price.toLocaleString()}원</h4></h4>
+                            </div>
                         </div>
                     </div>
-                
+                    <div className='mypageDetailBackBox' >
+                        <button className='mypageDetailBack' onClick={()=>navigate(-1)} >뒤로가기</button>
+                    </div>
                 </div>
-                :
-
         </>
     )
 }

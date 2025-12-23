@@ -315,3 +315,21 @@
 .fc .fc-multimonth{
   border: none;
 }
+.select option:disabled {
+  color: #aaa;
+  background-color: #f2f2f2;
+}
+.C_selectTime option:disabled {
+  color: #a5a5a5;       /* 회색으로 */
+  background-color: #dddddd; /* 배경도 바꾸고 싶으면 */
+}
+.fc .disabled-day .fc-daygrid-day-number {
+  color: #cfcfcf;
+}
+.fc .disabled-day{
+  background-color: white;
+}
+.fc .disabled-day:hover{
+  background-color: white;
+}
+

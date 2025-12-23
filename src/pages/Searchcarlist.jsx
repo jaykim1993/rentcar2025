@@ -13,7 +13,7 @@ export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, 
-        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
+        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear} = useContext(CalendarContext);
     const { calculatePrice, clickCar} = useContext(BookingContext);
     const { userid, loginNeeded } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
 
@@ -498,12 +498,18 @@ export default function Recentcar(){
             <div className="R_carlist">
                 {/* 예약 섹션 */}
                     <div className="R_reservation">
-                        <div className="R_dateTable">
+                        <div className="R_dateTable" style={{cursor:'pointer'}}>
                             <p>언제?</p>
                             <div className="R_dateTitle" onClick={calendarHandler}>
                                 {apply?
                                 <p>
-                                    {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
+                                    {startDate && endDate && (
+                                        <>
+                                            {DeleteYear(startDate)} ({startdayText}){timeAMPM(startTime)}
+                                            {" ~ "}
+                                            {DeleteYear(endDate)} ({enddayText}){timeAMPM(endTime)}
+                                        </>
+                                    )}
                                 </p>:
                                 <h2>날짜선택</h2>}
                             </div>
@@ -511,7 +517,7 @@ export default function Recentcar(){
                 
                         {/* 지점 선택 파트 */}
                         <div className="R_spotTable">
-                            <div className="spot_choice">
+                            <div className="spot_choice" style={{cursor:'pointer'}}>
                                 <p>어디?</p>
                                 <div className="R_spotTitle" onClick={locationHandler}>{location? <p>{location}</p> :<h2>지점선택</h2>}</div>
                             </div>
