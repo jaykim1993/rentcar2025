@@ -283,7 +283,7 @@ input:checked + .checkmark {
 
 /* ---------------------------------- */
 
-/* 지점 선택 모달 */
+/* 지점 선택 모달. */
 #root .Home .H_location{
     width: 444px;
     margin: 0 auto;
