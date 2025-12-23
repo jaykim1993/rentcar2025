@@ -1,8 +1,10 @@
 import { useContext } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { BookingContext } from '../contexts/Bookingcontext';
 import { CalendarContext } from '../contexts/Calendarcontext';
 import { AuthContext } from '../contexts/Authcontext';
+import DaumPostCode from 'react-daum-postcode';
 
 import './Reservation.css';
 
@@ -12,10 +14,32 @@ export default function Reservation(){
     // navigate 보낼 때 넣었던 state 객체 꺼내기 / 비어있을 경우를 대비해 기본값 {} 설정
     const { car, filter, totalPrice, filterStartDate, filterEndDate, filterStartTime, filterEndTime } = location.state || {};
     const { availableCars, filteredInfoUser } = useContext(CalendarContext);
-    const { userid, username } = useContext(AuthContext);
+    const {userid, username, user_email, user_resistnum, user_phonenum, address, address_detail, user_iskorean, user_license } = useContext(AuthContext);
 
     // 예외처리
     if(!car) return <div className='ReservationSection'>날짜, 지점을 선택해주세요.</div>;
+
+    // 주소 수정 (상세주소 검색 모달)
+    const [isChange, setIsChange]=useState(false);
+    const [openModal,setOpenModal]=useState(false);
+
+    const [zipcode,setZipcode]=useState(''); // 우편번호
+    const [change_address, setChange_address]=useState(''); // 지역명 주소
+
+    // const [arr,setArr]=useState('');
+    const changeAddressHandler=(data)=>{
+        // 도로명, 지역명으로 입력할 예정
+        let arr = '';
+        if(data.userSeletedType === 'R'){
+            arr = data.roadAddress; // 도로명 주소
+        }else{
+            arr = data.jibunAddress; // 지역명 주소
+        }
+        setZipcode(data.zonecode);
+        setChange_address(arr);
+        // setIsChange(!isChange);
+    }
+    console.log(change_address);
 
     return(
         <div className="ReservationSection">
@@ -35,14 +59,30 @@ export default function Reservation(){
                             </li>
                             <li>
                                 <label>휴대폰 번호</label>
-                                <h5>{username}</h5>
+                                <h5>{user_phonenum}</h5>
                             </li>
                             <li>
                                 <label>생년월일</label>
-                                <h5>{username}</h5>
+                                <h5>{user_resistnum}</h5>
                             </li>
                             <li>
                                 <label>주소</label>
+                                {zipcode === '' ? <h5>{address} {address_detail}</h5> : <h5>{zipcode} {change_address}</h5> }
+                                <button type='button' onClick={()=>setIsChange(!isChange)}>수정</button>
+                                {isChange && 
+                                    <>
+                                    <input type='text' value={zipcode} placeholder='우편번호' readOnly name='post' id='post'/>
+                                    <button type='button' id='userAddrsearch' onClick={()=>setOpenModal(!openModal)}>우편번호 검색</button>
+                                    <input type='text' value={change_address} onChange={(e) => setChange_address(e.target.value)} placeholder='도로명주소' name='userAddress' id='userAddress'/>
+                                    <input type='text' placeholder='상세주소' name='detailAddress' id='detailAddress'/>
+                                    </>
+                                }
+                                    {openModal ? 
+                                        <div className='R_modal'>
+                                            <span onClick={()=>setOpenModal(!openModal)}><i className="bi bi-x-lg"></i></span>
+                                            <DaumPostCode onComplete={changeAddressHandler}/>
+                                        </div>
+                                    : null}
                                 
                             </li>
                         </ul>
@@ -53,9 +93,9 @@ export default function Reservation(){
                         <div>
                             <ul>
                                 <li>
-                                    <label>면허종류</label>
+                                    <label>면허번호</label>
                                     <input type='text' />
-                                    <p>구면허증 : 서울0112345600 / 신면허증 : 110112345600</p>
+                                    <p>예시: 구면허증 : 서울0112345600 / 신면허증 : 110112345600</p>
                                 </li>
                                 <li>
                                     <label>면허정보</label>

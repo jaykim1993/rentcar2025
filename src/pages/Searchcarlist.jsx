@@ -13,7 +13,7 @@ export default function Recentcar(){
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, 
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
-    const { calculatePrice} = useContext(BookingContext);
+    const { calculatePrice, clickCar} = useContext(BookingContext);
     const { userid, loginNeeded } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
 
     // ================= 달력 관련 =================
@@ -302,6 +302,25 @@ export default function Recentcar(){
 
         return result;
     };
+
+    // 인기순 차량 선택 핸들러
+    const clickCarHandler = () => {
+        const clickCarResult=availableCars.filter(item => item.model === clickCar );
+
+        return(
+            <div className="clickCarHandler">
+                <ul>
+                    {clickCarResult.map((item)=>(
+                        <li key={item.id}>
+                            <img src={`images/cars/${item.car_img}`} alt={item.car_id}/>
+                            <h4>{item.model} {item.fuel_type}</h4>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+    console.log(clickCar);
 
     return(
         <div className="Recentcar">
@@ -634,7 +653,8 @@ export default function Recentcar(){
                 </div>
                 <p>총&nbsp;<strong>{displayedCars.length}</strong>&nbsp;종</p>
                 <ul>
-                    {renderGroupedCars()}
+                    {clickCar === '' ? renderGroupedCars() : clickCarHandler() }
+                    {/* {renderGroupedCars()} */}
                 </ul>
             </div>
         </div>
