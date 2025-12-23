@@ -9,6 +9,7 @@ export const BookingContext = createContext();
 export default function BookingProvider({ children }) {
   const { userid } = useContext(AuthContext);
   const { cars } = useContext(DataContext);
+
       // bookedlistAll (기존 예약 배열)
       // 20개의 초기값
       // local storage에 저장되어있음

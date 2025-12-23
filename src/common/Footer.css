@@ -7,7 +7,9 @@
     width: 1300px;
     margin: 0 auto;
 }
-
+.F_hr{
+    margin: 20px 0;
+}
 /* 공지사항 */
 /* #root .FooterContainer .Footer_Top .notice{
     position: relative;
@@ -37,8 +39,8 @@
 /* 로고 */
 #root .FooterContainer .Footer_Top > img{
     width: 100px;
-    margin-top: 70px;
-    margin-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 
 /* 푸터 섹션 */
@@ -87,8 +89,7 @@
 
 /* 하단 카피라이트 */
 #root .FooterContainer .F_copyright{
-    margin: 40px 0;
-    margin: 40px 0;
+    margin: 10px 0 30px 0;
     font-size: 12px;
     text-align: center;
 }

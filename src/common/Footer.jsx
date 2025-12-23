@@ -25,9 +25,9 @@ export default function Footer(){
                                     <p>이메인무단수집거부</p>
                                 </li>
                                 <li className='F_infoLi02'>
-                                    <p><strong>차랑차랑㈜</strong> | 서울특별시 신촌로</p>
-                                    <p>대표이사 정해연 | 차빌려조</p>
-                                    <p>대표번호 | 1234-5678</p>
+                                    <p><strong>차랑차랑㈜</strong> | 서울 마포구 신촌로 104 4층</p>
+                                    <p>대표이사 <strong>정해연</strong> | 차빌려조</p>
+                                    <p>대표번호 1234-5678</p>
                                 </li>
                             </ul>
                         </div>
@@ -36,7 +36,7 @@ export default function Footer(){
                         <div className='F_support'>
                             <p>차랑차랑 고객센터</p>
                             <h4>910-1112</h4>
-                            <hr/>
+                            <hr className='F_hr'/>
                             <p>평일 : 09 ~ 18 시</p>
                             <p>사고/정비/긴급출동 24시간 접수 가능</p>
                         </div>

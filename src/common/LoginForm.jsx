@@ -42,6 +42,7 @@ export default function LoginForm({ onClose, onJoin }) {
                 onClose();
             } else {
                 alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+                setUserpw('');
             }
 
         } catch (error) {
@@ -72,7 +73,7 @@ export default function LoginForm({ onClose, onJoin }) {
 //       alert("오류 발생");
 //     }
 //   };
-
+// 아직 회원이 아니신가요? 만들기
     return (
         <div className='loginOverlay'>
             <div className="loginWrap">

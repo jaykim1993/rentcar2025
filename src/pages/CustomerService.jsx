@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom"
 export default function CustomerService(){
 
     const navigate = useNavigate();
-    //로그인 상태 받아오기
-    const {userid}=useContext(AuthContext)
+    // 로그인 상태 받아오기
+    // 로그인 페이지 열기 상태 받아오기(setModal) - 12.22 성중 추가
+    const {userid, setModal}=useContext(AuthContext)
     console.log(userid)
     const isLogin = !!userid;
     console.log(isLogin)
@@ -155,7 +156,7 @@ export default function CustomerService(){
                         <i onClick={modalClose} className="bi bi-x"></i>
                         <p className="havetologin">1:1문의는 로그인 이후에 이용할 수 있어요.</p>
                         <div className="submitinqu">
-                            <button onClick={gotoLogin} >로그인하기</button>
+                            <button onClick={() => setModal('login')} >로그인하기</button>
                         </div>
                     </div>
                 )

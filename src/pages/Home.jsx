@@ -19,7 +19,7 @@ export default function Home(){
   const navigate = useNavigate();
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar} = useContext(CalendarContext);
-  const {myRecentlist} = useContext(BookingContext);
+  const {myRecentlist,setClickCar} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
 
@@ -163,6 +163,8 @@ const newCarList=
   useEffect(()=>{
     setBefore_x(0);
   },[isNew])
+
+  
 
     return(
     <div className="Home">
@@ -328,11 +330,11 @@ const newCarList=
         </div>
         {isTop ? 
         <div className="H_sec02_1">
-            <div className="H_good"><img src='/images/cars/hy_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/bmw_5.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/kia_2.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/hy_9.webp' alt='car_img'/></div>
-            <div className="H_good"><img src='/images/cars/ZENE_2.webp' alt='car_img'/></div>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('그랑조')}><img src='/images/cars/hy_2.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('dmw new 5')}><img src='/images/cars/bmw_5.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('WV7')}><img src='/images/cars/kia_2.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('아이온')}><img src='/images/cars/hy_9.webp' alt='car_img'/></div></Link>
+            <Link to='/searchcarlist'><div className="H_good" onClick={()=>setClickCar('GGE80')}><img src='/images/cars/ZENE_2.webp' alt='car_img'/></div></Link>
         </div>:
         <div className="H_sec02_2">
           <p onClick={before_btn} className="H_before_btn">〈</p>
@@ -349,10 +351,10 @@ const newCarList=
         </div>}
         
 
-        {/* sec03 - 최근본차량 */}
+        {/* sec03 - 최근본차량. */}
         {userid && <div className="H_section03">
         <div className="H_sec03">
-            <h2>{username}님의 최근 본 차량</h2>
+            <h4><span className="joinColorText">{username}</span>님의 최근 본 차량</h4>
             <Link to={'/recent'} className="H_more">
               <span>더보기</span>
             </Link>

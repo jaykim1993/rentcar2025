@@ -104,9 +104,35 @@ export default function AuthProvider({children}){
         localStorage.removeItem("user_license");
     };
 
+    // 로그인 및 회원가입 열기
+     const [modal, setModal] = useState(null); // 값 : 'login' | 'joinA' | 'joinB' | 'joinC' | null
+
+    // 미로그인 상태에서 로그인 필요한 페이지 링크 클릭 시 함수
+    const loginNeeded =() => {
+        alert('로그인 후 이용 가능합니다.')
+        setModal('login')
+    }
+
+
     // 공유할 변수, 함수 내보내기
     return(
-        <AuthContext.Provider value={{userid, username, user_email, user_resistnum, user_phonenum, address, address_detail, user_iskorean, user_license ,loginsave, logout}}>
+        <AuthContext.Provider 
+        value={{
+            userid, 
+            username, 
+            user_email, 
+            user_resistnum, 
+            user_phonenum, 
+            address, 
+            address_detail, 
+            user_iskorean, 
+            user_license ,
+            loginsave, 
+            logout,
+            modal,
+            setModal,
+            loginNeeded
+            }}>
             {children}
         </AuthContext.Provider>
     )
