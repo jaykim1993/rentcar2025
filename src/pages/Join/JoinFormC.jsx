@@ -129,7 +129,7 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
     };
 
     return (
-        <div className='joinOverlay'>
+        <div className='joinOverlay' >
             <div className="joinWrap">
                 <button className="joinBtnX" onClick={onClose}>
                     <i className="bi bi-x"></i>

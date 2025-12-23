@@ -178,6 +178,33 @@ const newCarList=
         state: { model }
       });
   };
+
+  const homeAD = [
+  {
+    id: 1,
+    title: "저렴한 요금!",
+    desc: "4일 요금으로 7일 제공",
+    icon: "/images/banner/cardAD.png",
+  },
+  {
+    id: 2,
+    title: "최신식 차량 보유",
+    desc: "23–25년식 차량",
+    icon: "/images/banner/carAD.png",
+  },
+  {
+    id: 3,
+    title: "수도권 5개 지점",
+    desc: "지점별 유기적 네트워킹",
+    icon: "/images/banner/locationAD.png",
+  },
+  {
+    id: 4,
+    title: "압도적인 차량 대수",
+    desc: "원하는 시간 언제든지 렌트",
+    icon: "/images/banner/spotAD.png",
+  },
+];
     return(
       <div className="Home">
         {/* 예약 섹션 */}
@@ -362,7 +389,10 @@ const newCarList=
             <p onClick={after_btn} className="H_after_btn">〉</p>
           </div>
         }
-
+        {/* 광고 추가 12.23 - 성중 */}
+        <div>
+          <img className="H_ad10" src='/images/banner/advertise10.png'></img>
+        </div>
         {/* sec03 - 최근본차량 */}
         {userid && 
           <div className="H_section03">
@@ -381,8 +411,28 @@ const newCarList=
             </div>
           </div>
         }
+        {/* 광고 추가 12.23 - 성중 */}
+        <div className="H_section05">
+          <Link to={'/guide'}>
+            <h4 className="H_sec04_H">
+              원하는 차량을 어디서나 빠르게!
+            </h4>
+          </Link>
 
-        {/* 광고배너 */}
+          <ul className="H_sec04_list">
+            {homeAD.map((item) => (
+              <li key={item.id} className="H_sec04_card">
+                <div className="H_sec04_imgWrap">
+                  <img className="H_sec04_img" src={item.icon} alt={item.title} />
+                </div>
+                <h3 className="H_sec04_h3">{item.title}</h3>
+                <p className="H_sec04_p">{item.desc}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 광고 3 배너 */}
         <div className="H_section04">
           <h4>2025 마지막 혜택!</h4>
           <div className="H_sec04_advertisementBanner">
