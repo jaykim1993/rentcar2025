@@ -31,6 +31,7 @@
     min-width: 0;
 }
 .guideMainText{
+    font-size: 25px;
     margin-top: 50px;
     margin-bottom: 20px;
 }
@@ -76,9 +77,12 @@
     margin-top: 60px;
     margin-bottom: 10px;
 }
+.guideFifth{
+    margin-bottom: 80px;
+}
 .guideFifthExplain{
     margin-top: 60px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 .guideSecondExplainDetail{
      font-size: 14px;
@@ -137,7 +141,7 @@
     background-color: rgb(190, 190, 190);
 }
 .guideSelectWhereCar.active{
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     color: white;
 }
 .guideSelectCarSizeBtn{
@@ -181,14 +185,14 @@
     background-color: rgb(179, 179, 179);
 }
 .guideSelectCarSizeBtn.active{
-     background-color: dodgerblue;
+     background-color: #0b79b7;
     color: white;
 }
 .guideSelectCarSizeBtn2:hover{
     background-color: rgb(179, 179, 179);
 }
 .guideSelectCarSizeBtn2.active{
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     color: white;
 }
 .guideSelectKorCar{
@@ -211,7 +215,7 @@
     width: 900px;
 }
 .guideThead{
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     height: 70px;
     font-size: 20px;
     text-align: center;
@@ -253,4 +257,66 @@
     color: rgb(160, 160, 160);
     text-decoration: none;
 }
+.guidetable1{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #f2f3f5;
+  }
+.guidetable1th,.guidetable1td{
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+  }
+.guidetable1th{
+    background-color: #0b79b7;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+.guidetable1td{
+    vertical-align: top;
+  }
+.guidetable2 {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #f2f3f5;
+  }
 
+.guidetable2th, .guidetable2td {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 12px 20px;
+  }
+
+.guidetable2th{
+    background-color: #0b79b7;
+    color: white;
+    font-weight: 500;
+  }
+ .guide4service-card {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 40px 50px;
+    margin: 10px 0;
+  }
+
+  .guide4service-item {
+    text-align: center;
+  }
+  .guide4service-item .title {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+  }
+
+  .guide4service-item .content {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+  }

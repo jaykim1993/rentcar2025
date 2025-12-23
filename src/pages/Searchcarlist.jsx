@@ -14,7 +14,7 @@ export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, setStartDate, setEndDate, setApply,
-        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar} = useContext(CalendarContext);
+        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear} = useContext(CalendarContext);
     const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar} = useContext(BookingContext);
     const { userid, setModal } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
 
@@ -539,12 +539,18 @@ export default function Recentcar(){
             <div className="R_carlist">
                 {/* 예약 섹션 */}
                     <div className="R_reservation">
-                        <div className="R_dateTable">
-                            <p className="R_reservation_p">언제?</p>
+                        <div className="R_dateTable" style={{cursor:'pointer'}}>
+                            <p>언제?</p>
                             <div className="R_dateTitle" onClick={calendarHandler}>
                                 {apply?
                                 <h4>
-                                    {startDate &&`${startDate.replaceAll('-','.')}${timeAMPM(startTime)}`} ~ {endDate &&`${endDate.replaceAll('-','.')}${timeAMPM(endTime)}`}
+                                    {startDate && endDate && (
+                                        <>
+                                            {DeleteYear(startDate)} ({startdayText}){timeAMPM(startTime)}
+                                            {" ~ "}
+                                            {DeleteYear(endDate)} ({enddayText}){timeAMPM(endTime)}
+                                        </>
+                                    )}
                                 </h4>:
                                 <h4>날짜선택</h4>}
                             </div>
@@ -552,7 +558,7 @@ export default function Recentcar(){
                 
                         {/* 지점 선택 파트 */}
                         <div className="R_spotTable">
-                            <div className="spot_choice">
+                            <div className="spot_choice" style={{cursor:'pointer'}}>
                                 <p className="R_reservation_p">어디?</p>
                                 <div className="R_spotTitle" onClick={locationHandler}>{location? <h4>{location}</h4> :<h4>지점선택</h4>}</div>
                             </div>

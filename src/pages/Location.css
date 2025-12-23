@@ -6,12 +6,12 @@
     font-size: 17px;
     font-weight: 700;
     border-radius: 15px;
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     border: none;
     color: white;
 }
 .findNearestBtn:hover{
-    background-color: dodgerblue;
+    background-color: #0b79b7;
 }
 .locationDetailBox{
     border: 1px solid rgb(179, 179, 179);
@@ -122,15 +122,15 @@
     justify-content: right;
 }
 .LocationdropdownBtn{
-    background-color: rgb(121, 188, 255);
+    background-color: #065d8f;
     padding: 10px 0;
     color: white;
 }
 .LocationdropdownBtn:hover{
-    background-color: rgb(69, 162, 255);
+    background-color: #0b79b7;
 }
 .LocationTH{
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     color: white;
     padding: 15px 0;
     text-align: center;
@@ -214,23 +214,26 @@
     border-radius: 15px;
     font-size: 17px;
     font-weight: 500;
-    color: dodgerblue;
+    color: #0b79b7;
     background-color: white;
-    border: 1px solid dodgerblue;
+    border: 1px solid #0b79b7;
     transition: 
     transform 0.3s ease,
     background-color 0.3s ease,
     color 0.3s ease;
 }
 .LocationupBtn.active{
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     color: white;
 }
 .LocationupBtn:hover{
     color: white;
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     transition: 0.3s;
 }
 .leaflet-container {
   z-index: 1;
+}
+.LocationPage3Btn:hover{
+    background-color: rgb(59, 59, 59);
 }

@@ -22,6 +22,8 @@ export default function RentalCalendar() {
     apply,
     setApply,
     handleDateFilter,
+    isDisabledEndTime,
+    isDisabledStartTime
   } = useContext(CalendarContext);
 
   const calendarRef = useRef(null);
@@ -176,6 +178,21 @@ export default function RentalCalendar() {
   return events;
 }, [startDate, endDate]);
 
+  const todayStr = new Date().toISOString().split("T")[0];
+
+// 날짜 비활성화돼서 없어진거 css주기위함
+const dayCellClassNames = (arg) => {
+  const today = new Date();
+  const date = new Date(arg.date);
+
+  // 오늘 이전 날짜면 disabled-day 클래스 추가
+  if (date < today.setHours(0, 0, 0, 0)) {
+    return ["disabled-day"];
+  }
+  return [];
+};
+
+
   return (
     <>
       <div className="calendarWrap">
@@ -184,7 +201,13 @@ export default function RentalCalendar() {
         plugins={[multiMonthPlugin, interactionPlugin]}
         initialView="twoMonth"
         locale={koLocale}
-        dateClick={handleDateClick}
+        dayCellClassNames={dayCellClassNames}
+        dateClick={(info) => {
+          const todayStr = new Date().toISOString().split("T")[0];
+          if (info.dateStr < todayStr) return; // 클릭 막기
+          handleDateClick(info);
+        }}
+
         dayCellContent={renderDay}
         events={backgroundEvents}
         headerToolbar={{
@@ -229,7 +252,12 @@ export default function RentalCalendar() {
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}>
                     {timeOptions.map((time) => (
-                      <option key={time}>{time}</option>
+                      <option 
+                        key={time} 
+                        value={time}
+                        disabled={isDisabledStartTime(startDate, time)}>
+                          {time}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -241,7 +269,12 @@ export default function RentalCalendar() {
                     value={endTime}
                     onChange={(e) => setEndTime(e.target.value)}>
                     {timeOptions.map((time) => (
-                      <option key={time}>{time}</option>
+                      <option
+                        key={time}
+                        value={time}
+                        disabled={isDisabledEndTime(endDate, startDate, startTime, time)}>
+                        {time}
+                    </option>
                     ))}
                   </select>
                 </div>

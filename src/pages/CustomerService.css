@@ -61,7 +61,7 @@
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 }
 .togglediv p{
-    color: dodgerblue;
+    color: #0b79b7;
     font-weight: 500;
     font-size: 18px;
 }
@@ -83,7 +83,7 @@
     cursor: pointer;
 }
 .CusNoticeLink div p:hover{
-    color: dodgerblue;
+    color: #0b79b7;
 }
 .CusNoticeBox{
     margin-bottom: 100px;
@@ -100,7 +100,7 @@
     color: #333;
 }
 .guideSideMenus2:hover{
-    color: dodgerblue;
+    color: #0b79b7;
 }
 .guideSideMenus2.active{
     color: rgb(211, 211, 211);
@@ -173,7 +173,7 @@
     border-radius: 10px;
     padding: 5px;
     padding-left: 10px;
-    outline-color: dodgerblue;
+    outline-color: #0b79b7;
     font-weight: 500;
 }
 .modal1Content textarea{
@@ -181,7 +181,7 @@
     padding: 10px;
     border-radius: 10px;
     border: 1px solid rgb(194, 194, 194);
-    outline-color: dodgerblue;
+    outline-color: #0b79b7;
 }
 .modal1Content p, .modal1Content span{
     font-weight: 500;
@@ -214,7 +214,7 @@
     font-size: 20px;
     padding: 10px;
     border: none;
-    background-color: dodgerblue;
+    background-color: #0b79b7;
     border-radius: 10px;
     color: white;
 }
@@ -222,7 +222,7 @@
     background-color: rgb(25, 99, 172);
 }
 .modalOpen .bi-x:hover{
-    color: dodgerblue;
+    color: #0b79b7;
 }
 .havetologin{
     text-align: center;

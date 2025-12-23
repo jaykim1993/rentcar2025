@@ -1,0 +1,122 @@
+.myPageDetailWrap{
+    width: 100%;
+}
+.myPageDetailTop{
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 10px;
+}
+.myPageDetailTopflex{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    position: relative;
+}
+.myPageDetailname{
+    font-size: 22px;
+    font-weight: 600;
+}
+.myPageDateLeft{
+    background-color:  #0b79b7;
+    padding: 5px 10px;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+}
+.myPageDetailbooknum ,.myPageDetailwhengo{
+    font-size: 20px;
+    font-weight: 500;
+    color: gray;
+}
+.myPageDetailspan{
+    font-size: 19px;
+    color: rgb(82, 82, 82);
+    font-weight: 500;
+}
+.myPageDetailspan1{
+    font-size: 19px;
+    color: rgb(82, 82, 82);
+    font-weight: 500;
+    margin-right: 20px;
+}
+.myPageCancleBtnBox{
+    width: 250px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.myPageCancleBtn{
+    padding: 10px;
+    width: 100%;
+    margin-left: 605px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #9c9c9c;
+    background-color: white;
+}
+.myPageCancleBtn:hover{
+    background-color: rgb(219, 219, 219);
+}
+.mypageDetail2{
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #f2f3f5;
+    margin-bottom: 20px;
+}
+.mypageDetail2 img{
+    width: 200px;
+}
+.mypageDetail2 p{
+    font-size: 20px;
+    font-weight: 500;
+}
+.mypageDetail3{
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgb(218, 218, 218);
+}
+.bi-copy{
+    position: absolute;
+    right: -3px;
+    top: 2px;
+    color: rgb(170, 170, 170);
+}
+.bi-copy:hover{
+    color: rgb(100, 100, 100);
+}
+.mypageDetail3 hr{
+    margin: 20px;
+    padding: 0;
+}
+.mypageDetail3 h4{
+    margin: 15px 0;
+}
+.mypageDetailBackBox{
+    text-align: center;
+    width: 100%;
+}
+.mypageDetailBack{
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 80px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    background-color: black;
+    border: none;
+}
+.mypageDetailBack:hover{
+    background-color: rgb(46, 46, 46);
+}
+.mypageDetailP{
+    font-size: 17px;
+    font-weight: 500;
+    color: #7a7a7a;
+}
