@@ -1,4 +1,6 @@
-
+#root .guideWrap{
+    margin-top: 120px;
+}
 .MyPageSideMenus{
     display: block;
     font-size: 20px;
