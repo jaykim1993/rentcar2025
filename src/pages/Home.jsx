@@ -209,11 +209,11 @@ const newCarList=
 
     // 인기순 차량 배열
     const goodCar = [
-      {model:'그랑조',img:'hy_2.webp'},
-      {model:'dmw new 5',img:'bmw_5.webp'},
-      {model:'WV7',img:'kia_2.webp'},
-      {model:'아이온',img:'hy_9.webp'},
-      {model:'GGE80',img:'ZENE_2.webp'}
+      {id:1, model:'그랑조',img:'hy_2.webp'},
+      {id:2, model:'dmw new 5',img:'bmw_5.webp'},
+      {id:3, model:'WV7',img:'kia_2.webp'},
+      {id:4, model:'아이온',img:'hy_9.webp'},
+      {id:5, model:'GGE80',img:'ZENE_2.webp'}
     ];
 
 
@@ -389,7 +389,10 @@ const newCarList=
         <ul className="H_sec02_1">
           {goodCar.map((item,index)=>(
             <li key={index}>
-              <div className="H_good" onClick={()=>goToSearchcarlist(item.model)}><img src={`/images/cars/${item.img}`} alt='car_img'/></div>
+              <div className="H_good" onClick={()=>goToSearchcarlist(item.model)}>
+                <h1>{item.id}</h1>
+                <img src={`/images/cars/${item.img}`} alt='car_img'/>
+              </div>
             </li>
           ))}
         </ul>:

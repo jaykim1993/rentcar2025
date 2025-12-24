@@ -175,6 +175,14 @@ const isDisabledEndTime = (dateStr, startDateStr, startTime, endTime) => {
   return false;
 };
 
+// 오전 오후
+    const timeAMPM= (time)=>{
+      const hours=Number(time.slice(0,2));
+      const minutes=time.slice(3);
+      const ampm= hours<12 ?'오전':'오후';
+      return ` ${ampm} ${hours}:${minutes}`;
+    }
+
   return (
     <CalendarContext.Provider
       value={{
@@ -215,7 +223,10 @@ const isDisabledEndTime = (dateStr, startDateStr, startTime, endTime) => {
         setIsLocation,
         setIsCalendar,
         isLocation,
-        isCalendar
+        isCalendar,
+
+        // 오전 오후 구분
+        timeAMPM
       }}
     >
       {children}

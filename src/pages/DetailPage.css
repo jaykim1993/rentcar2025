@@ -101,21 +101,29 @@ hr{
     text-decoration: underline;
 }
 /* 지도 */
-/* #root .DetailPage .detailContent .D_location{
-
-} */
+#root .DetailPage .detailContent .D_location hr{
+    /* padding: 25px 0; */
+    margin: 20px 0;
+}
 #root .DetailPage .detailContent .D_location > h5{
-    padding: 20px 0;
+    padding: 20px 0 0 0;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
 }
 #root .DetailPage .detailContent .D_location .D_detial_address_title{
-    color: #ccc;
+    color: #aaaaaa;
     font-size: 15px;
-    padding: 10px 0;
+    padding: 0 0 10px 0;
+}
+#root .DetailPage .detailContent .D_location .D_detial_address{
+    font-weight: 500;
 }
 /* 반납규정 */
 #root .DetailPage .detailContent .D_location .D_rentalPolicy{
     background-color: #f7f8fa;
     padding: 30px;
+    margin-top: 30px;
     border-radius: 7px;
 }
 /* 유의사항 */
@@ -143,10 +151,18 @@ hr{
     position: sticky;
     align-self: flex-start;
     right: 0;
-    top: 120px;
-    width: 330px;
-    /* border: 1px solid blue; */
-    height: 700px;
+    top: 155px;
+    width: 340px;
+    background-color: #f9fafc;
+    /* height: 570px; */
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+}
+#root .DetailPage .detailSummary .summary_card > h5 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 35px;
 }
 #root .DetailPage .detailSummary .summary_card .reserve_btn{
     border: none;
@@ -154,29 +170,31 @@ hr{
     padding: 15px;
     width: 100%;
     font-size: 20px;
-    background-color: #333;
+    background-color: #0b79b7;
     color: #f7f8fa;
     margin-top: 20px;
 }
 #root .DetailPage .detailSummary .summary_card .info_box{
-    margin: 40px 0;
-}
-#root .DetailPage .detailSummary .summary_card .info_box .info_item{
     margin: 20px 0;
 }
+#root .DetailPage .detailSummary .summary_card .info_box .info_item > p{
+    color: #999;
+}
 #root .DetailPage .detailSummary .summary_card .info_box .info_item > h4{
-    font-size: 18px;
-    margin: 10px 0;
+    font-size: 17px;
+    margin: 10px 0 0 0;
+    font-weight: 600;
 }
 #root .DetailPage .detailSummary .summary_card hr{
     margin: 30px 0;
 }
 #root .DetailPage .detailSummary .summary_card .reserve_btn:hover{
-    background-color: #111;
+    background-color: #0a6aa1;
 }
 #root .DetailPage .detailSummary .price_total > p{
     display: flex;
     align-items: flex-end;
+    font-size: 23px;
 }
 
 .calendar-slide.open{

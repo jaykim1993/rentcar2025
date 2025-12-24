@@ -161,14 +161,28 @@ input:checked + .checkmark {
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
 }
 #root .Home .H_sec02_1 .H_good:hover{
     background-color: #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+#root .Home .H_sec02_1  li .H_good > h1{
+    font-style: italic;
+    font-size: 70px;
+    display: inline-block;
+    position: absolute;
+    top: -5px;
+    left: 15px;
+    /* color: #919191; */
+    color: rgba(255,255,255,0.8);    /* 약간 반투명으로 */
+    text-shadow: 1px 1px 3px #aaaaaa,  /* 밝은 그림자 */
+               -1px -1px 2px #7a7a7a; /* 반대 방향 그림자 */
+}
 #root .Home .H_sec02_1 .H_good > img{
     width: 430px;
-    padding: 50px 0 0 0px;
+    padding: 70px 0 0 0px;
+    /* padding-bottom: 20px; */
 }
 
 /* ---------------------------------- */

@@ -17,7 +17,7 @@ import './DetailPage.css'
 export default function DetailPage(){
     // console.log("재가공된 filteredInfoUser: ", filteredInfoUser);
     const { setBookedlistAll, calculatePrice, clickCarArr, setClickCarArr } = useContext(BookingContext);
-    const { availableCars, filteredInfoUser } = useContext(CalendarContext);
+    const { availableCars, filteredInfoUser, DeleteYear, timeAMPM, startdayText, enddayText} = useContext(CalendarContext);
 
     // console.log('calculatePrice');
     // console.log(calculatePrice);
@@ -189,8 +189,9 @@ export default function DetailPage(){
                         </li>
                     </ul>
                     {/* 옵션 */}
+                    <hr/>
                     <div className="option_list">
-                        <p>옵션</p>
+                        <h4>옵션</h4>
                         <ul className="option_list">
                         {activeOptions.length > 0 ? (
                             activeOptions.map((opt, index) => (
@@ -235,10 +236,11 @@ export default function DetailPage(){
                         ))}
                     </MapContainer>
                     <h5>{detail.name}</h5>
+                    <hr className="D_line"/>
                     <p className="D_detial_address_title">주소</p>
                     <span className="D_detial_address">{detail.address}</span>
                     
-                    <hr />
+                    <hr className="D_line"/>
                     {/* 반납규정 */}
                     <div className="D_rentalPolicy">
                         <strong>대여 및 반납 규정</strong>
@@ -280,7 +282,7 @@ export default function DetailPage(){
                             <hr />
                             <div className="info_item">
                                 <p className="label">일정</p>
-                                <h4 className="val">{info.filterStartDate} {info.filterStartTime} ~ {info.filterEndDate} {info.filterEndTime}</h4>
+                                <h4 className="val">{DeleteYear(info.filterStartDate)}({startdayText}) {info.filterStartTime} ~ {DeleteYear(info.filterEndDate)}({enddayText}) {info.filterEndTime}</h4>
                             </div>
                         </div>
                     ))}

@@ -14,8 +14,8 @@ export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, setStartDate, setEndDate, setApply,
-        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear} = useContext(CalendarContext);
-    const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar} = useContext(BookingContext);
+        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear,timeAMPM} = useContext(CalendarContext);
+    const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar, finalPrice} = useContext(BookingContext);
     const { userid, setModal } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
 
     // ================= 달력 관련 =================
@@ -37,14 +37,6 @@ export default function Recentcar(){
       setIsLocation(false);
     }
   };
-
-    // 오전 오후
-    const timeAMPM= (time)=>{
-      const hours=Number(time.slice(0,2));
-      const minutes=time.slice(3);
-      const ampm= hours<12 ?'오전':'오후';
-      return ` ${ampm} ${hours}:${minutes}`;
-    }
 
     // 지점 상세보기 모달
     const [isDetail,setIsDetail]=useState(null);
@@ -205,6 +197,7 @@ export default function Recentcar(){
                 result.push(
                     <button key={`${category}-${value}`} onClick={() => removeSingleValueFilter(category, value)}>
                         {value}
+                        <i class="bi bi-x-lg"></i>
                     </button>
                 );
             }
@@ -243,9 +236,17 @@ export default function Recentcar(){
         navigate(`/detailpage/${carId}`);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
+
     // 출력 함수
     const renderGroupedCars = () => {
         const result = [];
+
+    // 총 가격 산출 
+    // 가격 계산
+    let date = (new Date(`${endDate}T${endTime}`)-new Date(`${startDate}T${startTime}`))/ (1000 * 60 * 30);
+
+    //  console.log('기간: ',date);
+
         
 
         for(const modelName in groupedCars){
@@ -280,14 +281,20 @@ export default function Recentcar(){
                                 onClick={() => goToDetail(first.id)}
                                 style={{ cursor: "pointer" }}
                                 >
-                                    <h4>{modelName} {car.fuel_type}</h4>
-                                    <p>{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
+                                    <h4>{modelName}  {car.fuel_type} </h4>
+                                    {/* <span>{car.fuel_type}</span> */}
+                                    <p className="S_detail">{car.model_year}년식 · {car.car_size} · {car.car_type}</p>
                                     <i className="bi bi-chevron-right"></i>
 
+                                    {startDate && endDate && startTime && endTime ? 
                                     <p className="carPrice">
+                                        총 금액 &nbsp;
+                                        <strong>{(car_price*date).toLocaleString()}</strong>원
+                                    </p>
+                                    :<p className="carPrice">
                                         30분당&nbsp;
                                         <strong>{car_price.toLocaleString()}</strong>원
-                                    </p>
+                                    </p>}
                                 </div>
                             );
                             })}
@@ -537,11 +544,20 @@ export default function Recentcar(){
             </div>
             {/* 목록 */}
             <div className="R_carlist">
-                {/* 예약 섹션 */}
+                    {/* 예약 섹션 */}
                     <div className="R_reservation">
+                        {/* 지점 선택 파트 */}
+                        <div className="R_spotTable">
+                            <div className="spot_choice" style={{cursor:'pointer'}}>
+                                <p className="R_reservation_p">어디서 출발할까요?</p>
+                                <div className="R_spotTitle" onClick={locationHandler}>
+                                    {location? <h4>{location}</h4> : <h4>지점선택</h4>}
+                                </div>
+                            </div>
+                        </div>
                         <div className="R_dateTable" style={{cursor:'pointer'}}>
-                            <p>언제?</p>
                             <div className="R_dateTitle" onClick={calendarHandler}>
+                                <p>언제 필요하세요?</p>
                                 {apply?
                                 <h4>
                                     {startDate && endDate && (
@@ -554,20 +570,13 @@ export default function Recentcar(){
                                 </h4>:
                                 <h4>날짜선택</h4>}
                             </div>
-                        </div>
-                
-                        {/* 지점 선택 파트 */}
-                        <div className="R_spotTable">
-                            <div className="spot_choice" style={{cursor:'pointer'}}>
-                                <p className="R_reservation_p">어디?</p>
-                                <div className="R_spotTitle" onClick={locationHandler}>{location? <h4>{location}</h4> :<h4>지점선택</h4>}</div>
-                            </div>
                             <div className="searchButton">
                                 <button type="submit" onClick={handleResetAll} onMouseOver={()=>console.log('오버확인')}>
                                     초기화 <i className="bi bi-arrow-clockwise"></i>
                                 </button>
                             </div>
                         </div>
+                
                     </div>
                 
                 {/* 지점 모달 파트 */}
@@ -680,6 +689,7 @@ export default function Recentcar(){
                     {renderGroupedCars()}
                 </ul>
             </div>
+            <div className="background_gray"></div>
         </div>
     );
 }
