@@ -1,17 +1,25 @@
+#root .mypage-inquries{
+    min-height: 900px;
+    margin-left: 50px;
+}
 .mypage-inquiries-table{
     width: 100%;
-    margin-top: 80px;
-    margin-bottom: 120px;
+    margin-top: 50px;
+    /* margin-bottom: 120px; */
 }
 .mypage-inquiries-table tr{
     text-align: center;
     border-bottom: 1px solid rgb(204, 204, 204);
+    font-size: 14px;
+}
+.mypage-inquiries-table tr > th{
+    padding: 10px;
 }
 .mypage-inquiries-table .mytable1{
-    width: 50px;
+    width: 80px;
 }
 .mypage-inquiries-table .mytable2{
-    width: 150px;
+    width: 180px;
 
 }
 .mypage-inquiries-table .mytable3{
@@ -19,30 +27,33 @@
 
 }
 .mypage-inquiries-table .mytable4{
-    width: 200px;
+    width: 110px;
 
 }
 .mypage-inquiries-table .mytable5{
-    width: 100px;
+    width: 110px;
     
 }
 .mypage-inquiries-table th{
-    background-color: #0b79b7;
-    color: white;
+    /* background-color: #0b79b7;
+    color: white; */
+    background-color: #cccccc;
+    color: #2b2b2b;
     padding: 5px;
     font-weight: 500;
 }
 .myinquTr td{
     padding: 10px;
 }
+
 .mytable1TD{
     font-size: 15px;
-    font-weight: 500;
+    /* font-weight: 500; */
 
 }
 .mytable2TD{
     font-size: 15px;
-    font-weight: 500;
+    /* font-weight: 500; */
     max-width: 150px;      /* 원하는 너비 */
     white-space: nowrap;  /* 줄바꿈 금지 */
     overflow: hidden;     /* 넘친 텍스트 숨김 */
@@ -54,25 +65,30 @@
     white-space: nowrap;  /* 줄바꿈 금지 */
     overflow: hidden;     /* 넘친 텍스트 숨김 */
     text-overflow: ellipsis; /* ... 처리 */
-    color: #444444;
+    color: #333;
+    font-weight: 500;
 }
-.mytable4TD{
+/* .mytable4TD{
     font-size: 14px;
     color: #6e6e6e;
-    
-}
-.mytable5TD span{
+} */
+/* .mytable5TD span{
     font-size: 14px;
     color: white;
-    background-color: #919191;
-    padding: 5px 8px;
+    background-color: #777;
+    padding: 7px 15px;
     border-radius: 5px;
-}
+} */
+ .mytable5TD{
+    /* color: #0b79b7; */
+    color: #666;
+ }
 .myinquTr{
     cursor: pointer;
 }
-.myinquTr:hover{
-    background-color: #e6e6e6;
+.myinquTr:hover .mytable3TD{
+    /* background-color: #f5f5f5; */
+    color: #0b79b7;
 }
 .mypage-inquries .noBookedGoToBook{
     margin-bottom: 80px;
