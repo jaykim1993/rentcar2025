@@ -400,7 +400,7 @@ return(
                                     <tr key={car.id}>
                                         <td className="LocationTableTD">
                                             <img
-                                                src={`./images/cars/${car.car_img}`}
+                                                src={`/images/cars/${car.car_img}`}
                                                 alt={car.model}
                                                 style={{ width: "150px" }}/>
                                         </td>

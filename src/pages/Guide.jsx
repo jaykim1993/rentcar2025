@@ -146,7 +146,7 @@ const getFilteredCars = () => {
                             <h2 className="guideExplain">대여방법 및 절차</h2>
                             <p className="guideExplainDetail">차랑차랑렌터카 사용예약을 위해 고객님께서는 아래 절차대로 진행해 주세요.</p>
                             <div className="guideRentalProcessImg">
-                                <img src="./images/guideimgs/guide_1_1.jpg"/>
+                                <img src="/images/guideimgs/guide_1_1.jpg"/>
                             </div>
                             <p className="guideRentalProcessExplain">온라인으로 예약이 어려우신 경우 지점을 방문하시거나
                                 전화로 예약이 가능합니다. (고객센터 : 1599-9111)</p>
@@ -222,7 +222,7 @@ const getFilteredCars = () => {
                             </div>
                             <div className="guideFifth">
                                 <h3 className="guideFifthExplain">대여 시 유의사항</h3>
-                                <img src="./images/guideimgs/guide_1_5.JPG"/>
+                                <img src="/images/guideimgs/guide_1_5.JPG"/>
                                 <span className="guideFifthExplainDetail">대여 당일 차량인수 시 운전면허증 지참은 필수입니다.(도로교통법상 유효한 운전면허소지자)</span>
                                 <span className="guideFifthExplainDetail">사전 동의 없이 임의로 연장해 사용하실 경우 차량 손해에 대해 보상 및 면책을 받지 못할 수 있으니, 
                                     이용 연장 시 반드시 약속된 반납 시간 이전에 대여지점으로 연락바랍니다.</span>
