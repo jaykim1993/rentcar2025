@@ -160,6 +160,7 @@ export default function DetailPage(){
                     </div>
                     <p><img src={`/images/brands/${selectedCar.brand_logo}`} alt={`${selectedCar.brand}`} /> {selectedCar.brand}</p>
                     <h4>{selectedCar.model} {selectedCar.fuel_type}</h4>
+                    <h5>{selectedCar.plate_number}</h5>
                 </div>
 
                 <hr />

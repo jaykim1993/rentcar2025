@@ -39,6 +39,7 @@ export default function Reservation(){
         setZipcode(data.zonecode);
         setChange_address(arr);
         // setIsChange(!isChange);
+        setOpenModal(false);
     }
     console.log(change_address);
 
@@ -57,6 +58,10 @@ export default function Reservation(){
 
     // 예약/결제하기 버튼 함수
     const addBookInfo = () => {
+        if (!payment) {
+        alert("결제수단을 선택해주세요.");
+        return;
+        }
         if (!filterCar || !userid) {
             alert("예약 정보를 다시 선택해주세요.");
             return;
@@ -256,6 +261,7 @@ export default function Reservation(){
                         <hr />
                         <p className="label">차량</p>
                         <h4 className="val">{car.model}</h4>
+                        <h5>{car.plate_number}</h5>
                         <hr />                        
                         <div className="price_total">
                             {/* 결제정보 */}

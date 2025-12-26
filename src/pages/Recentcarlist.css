@@ -9,12 +9,12 @@
     margin: 30px 0;
 }
 #root .Recent_car_p{
-    margin: 5px 0 20px 0;
-    color: #666;
-    position: absolute;
-    bottom: 3px;
-    left: 5px;
-    font-size: 16px;
+    /* margin: 0 0 20px 0; */
+    padding-top: 15px;
+    color: #333;
+    font-weight: 600;
+    font-size: 17px;
+    border-top: 1px solid #cad7e8;
 }
 #root .Recent_car_p span{
     font-size: 14px;
@@ -24,43 +24,57 @@
 }#root .Recent_car_list{
     min-height: 900px;
 }
-#root .Recent_car_list .Recent_ByDate{
+#root .Recent_car_list > ul{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 25px;
+    gap: 29px 13px;
+    padding: 15px 0;
 }
 /* 1대 */
-#root .Recent_car_list .Recent_ByDate .Recent_car_item{
+#root .Recent_car_list .Recent_ByDate  .Recent_car_item{
     width: 305px;
     font-size: 17px;
     font-weight: 500;
     cursor: pointer;
     position: relative;
     margin: 0;
+    padding: 20px 20px;
+    background-color: #eaf2f9;
+    border-radius: 5px;
 }
 #root .Recent_car_list .Recent_ByDate .Recent_car_img{
-    padding: 10px 30px;
-    background-color: #e0e5eb;
-    /* border: 1px solid red; */
     border-radius: 7px;
     width: 100%;
     margin-bottom: 20px;
-    transition: 0.2s;
+    transition: 0.2s;   
 }
-.Recent_car_img:hover{
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+#root .Recent_car_list .Recent_ByDate  .Recent_car_item:hover{
+    /* background-color: #d8e1e8; */
+    background-color: #f5fbff;
+    border: 1px solid #cad7e8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 .Recent_logo {
     position: absolute;
+    top: 14px;
+    left: 19px;
     width: 50px;
     height: 50px;
-    top: 10px;
-    left: 10px;
 }
 .RecentCar_viewDate{
-    position: absolute;
-    top: 2px;
-    right: 10px;
-    font-size: 14px;
-
+    font-size: 13px;
+    color: #777;
+}
+.Recent_buttons{
+    display: flex;
+    justify-content: center;
+}
+.Recent_buttons > button{
+    padding: 15px; 
+    border: none;
+    background-color: transparent;
+}
+.Recent_buttons > button > i{
+    font-size: 30px;
+    color: #657282;
 }
