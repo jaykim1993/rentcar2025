@@ -256,6 +256,7 @@ export default function Reservation(){
                         <hr />
                         <p className="label">차량</p>
                         <h4 className="val">{car.model}</h4>
+                        <h5>{car.plate_number}</h5>
                         <hr />                        
                         <div className="price_total">
                             {/* 결제정보 */}

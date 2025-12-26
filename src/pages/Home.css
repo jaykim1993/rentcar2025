@@ -289,16 +289,16 @@ input:checked + .checkmark {
     align-items: center;
     padding-bottom: 20px;
 }
-#root .Home .H_sec_history .H_sec_history_block .H_more > span{
-    color: #888;
-    font-weight: 500;
+#root .Home .H_sec03 .H_more > span{
+    color: #0b79b7;
+    font-weight: 600;
     display: inline-block;
     height: 38px;
     line-height: 38px;
     padding-left: 15px;
 }
-#root .Home .H_sec_history .H_sec_history_block .H_more > span:hover{
-    color: #333;
+#root .Home .H_sec03 .H_more > span:hover{
+    color: #065d8f;
 }
 #root .Home .H_sec_history_map{
     /* margin-bottom: 50px; */
@@ -307,20 +307,21 @@ input:checked + .checkmark {
 }
 #root .Home .H_sec_history_map .H_recent{
     display: inline-block;
-    background-color: #eeeeee;
+    /* background-color: #eeeeee; */
+    background-color: #eaf2f9;
     width: 240px;
-    height: 300px;
+    height: 150px;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
 }
 #root .Home .H_sec_history_map .H_recent:hover{
-    background-color: #e0e0e0;
+    background-color: #f5fbff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 #root .Home .H_sec_history_map .H_recent > img{
-    width: 400px;
-    padding: 50px 0 0 30px;
+    width: 300px;
+    padding: 0 0 30px 40px;
 }
 
 /* 광고배너 */
