@@ -440,7 +440,7 @@ export default function Home(){
         <img className="H_ad10" src='/images/banner/advertise10.png'></img>
       </div>
 
-      {/* sec03 - 최근본차량 */}
+      {/* sec03 - 최근본차량. */}
       {userid && 
         <div className="H_section03">
           <div className="H_sec03">
