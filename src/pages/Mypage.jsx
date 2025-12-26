@@ -30,8 +30,7 @@ export default function Mypage(){
         </div>
         <div className="guideFlex">
           <div className="guideLeft">
-            <h2 className="guideSideText"><div className='loginColor'>{username}</div>님,</h2>
-            <h2 className="guideSideText">안녕하세요!</h2>
+            <h2 className="guideSideText"><div className='loginColor'>{username}</div>님,<br/> 안녕하세요!</h2>
             <Link to='booked'><span className='MyPageSideMenus'>예약내역</span></Link>
             <Link to='myinfo'><span className='MyPageSideMenus'>내 정보</span></Link>
             <Link to='inquiry'><span className='MyPageSideMenus'>1:1문의내역</span></Link>
