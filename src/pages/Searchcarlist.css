@@ -186,7 +186,7 @@ a, p, h4, h3, h2, h1{
     /* align-items: center; */
 }
 #root .Recentcar .R_carlist .R_reservation .R_dateTable .R_dateTitle{
-    width: 566px;
+    width: 580px;
     border-left: 1px solid #d6d6d6;
     padding-left: 50px;
 }
@@ -347,7 +347,7 @@ a, p, h4, h3, h2, h1{
     align-items: center;
 }
 #root .R_carlist .R_reservation .R_spotTable .spot_choice{
-    width: 195px;
+    width: 178px;
     padding-left: 10px;
     /* border: 1px solid red; */
 }
@@ -415,7 +415,7 @@ a, p, h4, h3, h2, h1{
   top: 120px;
   right: 0;
   z-index: 100;
-   width: 1060px;
+   width: 665px;
    height: 620px;
    background-color: #fff;
    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
