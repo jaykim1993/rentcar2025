@@ -109,7 +109,8 @@ export default function MypageDetail(){
                         {/* <div> */}
                             {/* <div> */}
                                 <p className='mypageDetailP'>차량</p>
-                                <h4>{bookedThis.car.model}</h4>
+                                <h4>{bookedThis.car.model} - {bookedThis.car.plate_number} </h4>
+                                <h4></h4>
                                 <span>{bookedThis.car.model_year}년식 {bookedThis.car.fuel_type}</span>
                             {/* </div> */}
                             <hr/>
