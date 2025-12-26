@@ -51,41 +51,44 @@ export default function Header() {
     return (
         <div className='headerWrap'>
             <header className="header">
-                <div>
-                    <button 
-                        className='headerBtnCate' 
-                        onClick={isNavOpen ? closeNav : openNav}
-                    >
-                        <i className="bi bi-list"></i>
-                    </button>
-
-                </div>
-                    <Link to="/">
-                        <img className='headerLogo' src='/charangcharang_logo.png'/>
-                    </Link>
-                <nav className="headerNavTop">
-                    <Link to="/">
-                        <button className='headerBtn' type='text'>
-                            <i className="bi bi-house-door-fill"></i>
+                <div className='headerflex' >
+                    <div>
+                        <button 
+                            className='headerBtnCate' 
+                            onClick={isNavOpen ? closeNav : openNav}
+                        >
+                            <i className="bi bi-list"></i>
                         </button>
-                    </Link>
-                    {userid?
-                        // 로그인 상태일 때
-                        <>
-                            <Link to={'/mypage/myinfo'}>
-                                <button className='headerBtn' type='text'>
-                                    <strong><div className='loginColor'>{username}</div></strong>님
-                                </button>
-                            </Link>
-                                <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
-                                    예약내역
-                                </button>
-                            <Link to="/">
-                                <button className='headerBtn' type='text' onClick={logoutHandler}>
-                                    로그아웃
-                                </button>
-                            </Link>
-                        </>
+
+                    </div>
+                    <div className='headerlogoBox'>
+                        <Link to="/">
+                            <img className='headerLogo' src='/charangcharang_logo.png'/>
+                        </Link>
+                    </div>
+                    <nav className="headerNavTop">
+                        <Link to="/">
+                            <button className='headerBtn' type='text'>
+                                <i className="bi bi-house-door-fill"></i>
+                            </button>
+                        </Link>
+                        {userid?
+                            // 로그인 상태일 때
+                            <>
+                                <Link to={'/mypage/myinfo'}>
+                                    <button className='headerBtn' type='text'>
+                                        <strong><div className='loginColor'>{username}</div></strong>님
+                                    </button>
+                                </Link>
+                                    <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
+                                        예약내역
+                                    </button>
+                                <Link to="/">
+                                    <button className='headerBtn' type='text' onClick={logoutHandler}>
+                                        로그아웃
+                                    </button>
+                                </Link>
+                            </>
                         :
                         <>
                             <button className='headerBtn' type='text' onClick={()=>setModal('login')}>
@@ -96,7 +99,8 @@ export default function Header() {
                             </button>
                         </>
                     }
-                </nav>
+                    </nav>
+                </div>
                 {/* 예약 내역 헤더 모달 */}
                 {userid? 
                     <div className={`headerUserBookedModal ${openUserBookedModal? "open":""}`}>
@@ -184,22 +188,22 @@ export default function Header() {
                         <div className='headerBannerImgWrap'>
                             <img className='headerBannerImg' src='/images/banner/sideNavAD.png' alt='sindNavAD' />
                         </div>
-                        
+                        {/* → */}
                     </div>
                     <ul className="headerNavUl">
                         <p className='headerNavH'>차량 렌트</p>
-                        <Link to={'/searchcarlist'}><li className='headerNavLi'><div>예약하기</div> <div className='headerNavpointer'>→</div></li><br /></Link>
+                        <Link to={'/searchcarlist'}><li className='headerNavLi'><div>예약하기</div> <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div></li><br /></Link>
                         {/* <li className='headerNavLi'><div>차량별 예약</div> <div className='headerNavpointer'>→</div></li><br /> */}
                         <p className='headerNavH'>고객 가이드</p>
-                        <Link to={'/customerservice'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>고객센터</div> <div className='headerNavpointer'>→</div></li><br /></Link>
-                        <Link to={'/location'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>지점안내</div> <div className='headerNavpointer'>→</div></li><br /></Link>
-                        <Link to={'/guide'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>이용가이드</div> <div className='headerNavpointer'>→</div></li><br /></Link>
+                        <Link to={'/customerservice'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>고객센터</div> <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div></li><br /></Link>
+                        <Link to={'/location'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>지점안내</div> <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div></li><br /></Link>
+                        <Link to={'/guide'} style={{textDecoration:'none'}}><li className='headerNavLi'><div>이용가이드</div> <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div></li><br /></Link>
                         <p className='headerNavH'>회원 맞춤</p>
                         { userid? 
                             <Link to={'/recent'} style={{textDecoration:'none'}}>
                                 <li className='headerNavLi'>
                                     <div>최근 본 차량</div> 
-                                    <div className='headerNavpointer'>→</div>
+                                    <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div>
                                 </li>
                                 <br />
                             </Link>
@@ -207,7 +211,7 @@ export default function Header() {
                             <>
                                 <li className='headerNavLi' onClick={loginNeeded}>
                                     <div>최근 본 차량</div> 
-                                    <div className='headerNavpointer'>→</div>
+                                    <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div>
                                 </li>
                                 <br />
                             </>
@@ -216,7 +220,7 @@ export default function Header() {
                             <Link to={'/mypage/booked'} style={{textDecoration:'none'}}>
                                 <li className='headerNavLi'>
                                     <div>마이페이지</div> 
-                                    <div className='headerNavpointer'>→</div>
+                                    <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div>
                                 </li>
                                 <br />
                             </Link>
@@ -224,7 +228,7 @@ export default function Header() {
                             <>
                                 <li className='headerNavLi' onClick={loginNeeded}>
                                     <div>마이페이지</div> 
-                                    <div className='headerNavpointer'>→</div>
+                                    <div className='headerNavpointer'><i className="bi bi-chevron-right"></i></div>
                                 </li>
                                 <br />
                             </>

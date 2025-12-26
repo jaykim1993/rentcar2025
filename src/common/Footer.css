@@ -1,6 +1,8 @@
 #root .FooterContainer{
     width: 100%;
     border-top: 1px solid #d4d4d4;
+    background-color: #464646;
+    position: relative;
 }
 
 #root .FooterContainer .Footer{
@@ -53,6 +55,10 @@
 #root .FooterContainer .Footer_Top .Footer_sec .F_info{
     width:  900px;
     font-size: 14px;
+    display: flex;
+}
+#root .FooterContainer .Footer_Top .Footer_sec .F_info .F_infoUl{
+    margin-right: 20px;
 }
 #root .FooterContainer .Footer_Top .Footer_sec .F_info .F_infoUl .F_infoLi01{
     display: flex;
@@ -61,35 +67,90 @@
 }
 #root .FooterContainer .Footer_Top .Footer_sec .F_info .F_infoUl .F_infoLi01  > p,
 #root .FooterContainer .Footer_Top .Footer_sec .F_info .F_infoUl .F_infoLi01  > p strong{
-    color: #555;
+    color: rgb(173, 173, 173);
 }
 #root .FooterContainer .Footer_Top .Footer_sec .F_info .F_infoUl .F_infoLi02 > p,
 #root .FooterContainer .Footer_Top .Footer_sec .F_info .F_infoUl .F_infoLi02 > p strong{
-    color: #555;
+    color: #7e7e7e;
     padding: 3px 0;
 }
 
 /* 우측 고객센터 */
 #root .FooterContainer .Footer_Top .Footer_sec .F_support{
+    color: #7e7e7e;
     width: 330px;
     /* height: 100px; */
     padding: 30px;
     /* text-align: center; */
-    background-color: #f2f3f5;
+    background-color: #818181;
     border-radius: 10px;
     font-size: 14px;
+    margin-bottom: 20px;
 }
 #root .FooterContainer .Footer_Top .Footer_sec .F_support > h4{
     /* font-size: 22px; */
     font-weight: bold;
-    color: #0b79b7;
+    color: #e6e6e6;
 }
 
 /* -------------------------------------- */
 
 /* 하단 카피라이트 */
 #root .FooterContainer .F_copyright{
-    margin: 10px 0 30px 0;
     font-size: 12px;
     text-align: center;
+    padding-bottom: 30px;
 }
+#root .FooterContainer .F_copyright p{
+    color: rgb(173, 173, 173);
+}
+#root .F_infoLi02flex{
+    display: flex;
+    gap: 60px;
+}
+#root .FooterScrollToTop{
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    width: 50px;
+    height: 50px;
+}
+#root .FooterScrollToTop button{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color:rgb(143, 143, 143);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border: none;
+}
+#root .FooterScrollToTop button:hover{
+    background-color: #696969;
+}
+#root .FooterScrollToTop .bi-chevron-up{
+   color: white;
+   font-size: 30px;
+}
+.FooterShowRecent{
+    position: fixed;
+    right: 100px;
+    width: 50px;
+    height: 50px;
+    transition: bottom 0.4s ease-in-out;
+}
+.FooterShowRecent button{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+.FooterShowRecent button:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.FooterShowRecent button img{
+    width: 100px;
+    height: 60px;
+    
+}
+
