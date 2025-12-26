@@ -131,8 +131,7 @@ input:checked + .checkmark {
 /* ---------------------------------- */
 
 /* sec02 - 인기순 */
-#root .Home .H_sec02{
-}
+
 #root .Home .H_sec02 .H_seo02_title{
     display: flex;
     align-items: center;
@@ -272,37 +271,38 @@ input:checked + .checkmark {
     padding-bottom: 20px;
 }
 #root .Home .H_sec03 .H_more > span{
-    color: #888;
-    font-weight: 500;
+    color: #0b79b7;
+    font-weight: 600;
     display: inline-block;
     height: 38px;
     line-height: 38px;
     padding-left: 15px;
 }
 #root .Home .H_sec03 .H_more > span:hover{
-    color: #333;
+    color: #065d8f;
 }
 #root .Home .H_sec03_1{
     /* margin-bottom: 50px; */
     display: flex;
     gap: 25px;
 }
-#root .Home .H_sec03_1 .H_good{
+#root .Home .H_sec03_1 .H_recent{
     display: inline-block;
-    background-color: #eeeeee;
+    /* background-color: #eeeeee; */
+    background-color: #eaf2f9;
     width: 240px;
-    height: 300px;
+    height: 150px;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
 }
-#root .Home .H_sec03_1 .H_good:hover{
-    background-color: #e0e0e0;
+#root .Home .H_sec03_1 .H_recent:hover{
+    background-color: #f5fbff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-#root .Home .H_sec03_1 .H_good > img{
-    width: 400px;
-    padding: 50px 0 0 30px;
+#root .Home .H_sec03_1 .H_recent > img{
+    width: 300px;
+    padding: 0 0 30px 40px;
 }
 
 /* 광고배너 */

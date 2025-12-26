@@ -19,7 +19,7 @@ export default function Home(){
   const navigate = useNavigate();
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar,startdayText, 
-         enddayText, DeleteYear} = useContext(CalendarContext);
+         enddayText, DeleteYear, timeAMPM} = useContext(CalendarContext);
   const {myRecentlist,setClickCar} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
@@ -451,7 +451,7 @@ export default function Home(){
           </div>
           <div className="H_sec03_1">
               {sec03Sort.map(item=>(
-                  <div className="H_good" key={item.id} onClick={()=>goToSearchcarlist(item.model)} >
+                  <div className="H_recent" key={item.id} onClick={()=>goToSearchcarlist(item.model)} >
                     <img src={`/images/cars/${item.car_img}`} alt={item.model}/>
                   </div>
               ))}
