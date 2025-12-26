@@ -222,6 +222,9 @@ input{
     font-size: 18px;
     margin: 10px 0;
 }
+#root .ReservationSection .Reser_reservationSummary .info_box > h5{
+    font-size: 16px;
+}
 
 /* 총결제금액 */
 .price_total > p{

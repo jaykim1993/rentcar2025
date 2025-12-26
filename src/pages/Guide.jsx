@@ -120,16 +120,9 @@ const getFilteredCars = () => {
     };
     const carListToRender = getFilteredCars();
     const [tdOpen, setTdOpen] = useState(false);
-    return(
 
-        <>
+    return(
             <div className="guideWrap">
-                <div className="guideTop">
-                    {/* 수정 필요 */}
-                    <div><Link className="guideGoToHome" to={'/'}>홈</Link></div>
-                    <span><i className="bi bi-caret-right-fill"></i></span>
-                    <div>이용가이드</div>
-                </div>
                 <div className="guideFlex">
                     <div className="guideLeft">
                         <h2 className="guideSideText">이용가이드</h2>
@@ -137,19 +130,21 @@ const getFilteredCars = () => {
                         <span className={`guideSideMenus ${!showPage?'active':''}`} onClick={showGuideTwo} >요금안내</span>
                     </div>
                     <div className="guideRight">
-                            <div className="guideSelectBar">
+                            {/* <div className="guideSelectBar">
                                 <button  className={`guideSelectButns ${showPage?'active':''}`} onClick={showGuideOne}>대여안내</button>
                                 <button  className={`guideSelectButns ${!showPage?'active':''}`} onClick={showGuideTwo}>요금안내</button>
-                            </div>
+                            </div> */}
                         {showPage ? (
                         <div>
+                            <h3>대여안내</h3>
                             <h2 className="guideExplain">대여방법 및 절차</h2>
                             <p className="guideExplainDetail">차랑차랑렌터카 사용예약을 위해 고객님께서는 아래 절차대로 진행해 주세요.</p>
+                            <p className="guideRentalProcessExplain">
+                                온라인으로 예약이 어려우신 경우 지점을 방문하시거나 전화로 예약이 가능합니다. (고객센터 : 910-1112)
+                            </p>
                             <div className="guideRentalProcessImg">
                                 <img src="/images/guideimgs/guide_1_1.jpg"/>
                             </div>
-                            <p className="guideRentalProcessExplain">온라인으로 예약이 어려우신 경우 지점을 방문하시거나
-                                전화로 예약이 가능합니다. (고객센터 : 1599-9111)</p>
                             <div className="guideSecond">
                                 <h3 className="guideSecondExplain">대여 중 사고시 보상범위</h3>
                                 <table className="guidetable1">
@@ -231,6 +226,7 @@ const getFilteredCars = () => {
                         </div>
                     ) : (
                     <div>
+                        <h3>요금안내</h3>
                         <div className="guideSelectWhereBox">
                             <button className={`guideSelectWhereCar ${selectWhereCar? "active" : ""}`} onClick={selectKorean}>국내</button>
                             <button className={`guideSelectWhereCar ${!selectWhereCar? "active" : ""}`} onClick={selectForeign}>수입</button>
@@ -296,6 +292,5 @@ const getFilteredCars = () => {
                     </div>
                 </div>
             </div>
-        </>
     );
 }

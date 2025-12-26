@@ -38,6 +38,9 @@
     flex: 1;
     min-width: 0;
 }
+.guideRight > div > h3{
+    margin-bottom: 20px;
+}
 .guideMainText{
     font-size: 22px;
     margin-top: 50px;
@@ -53,11 +56,11 @@
     padding: none;
     margin-left: 0;
 }
-.guideSelectButns:hover {
+.guideSelectButns:hover{
     color: #333;
 }
 .guideExplain{
-    margin-top: 90px;
+    /* margin-top: 90px; */
     font-size: 20px;
     margin-bottom: 30px;
 }
@@ -70,8 +73,8 @@
 }
 .guideRentalProcessImg img{
     width: 900px;
-    border: 1px solid gray;
-    border-radius: 15px;
+    /* border: 1px solid gray;
+    border-radius: 15px; */
 }
 .guideRentalProcessExplain{
     font-size: 14px;
@@ -102,22 +105,23 @@
     margin-bottom: 30px;
 }
 .guideSecondExplainDetail{
-     font-size: 14px;
+    font-size: 15px;
     color: #333;
     display: block;
 }
 .guideThirdExplainDetail{
-     font-size: 14px;
+    font-size: 15px;
     color: #333;
     display: block;
+    margin-bottom: 5px;
 }
 .guideFourthExplainDetail{
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
     display: block;
 }
 .guideFifthExplainDetail{
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
     display: block;
 }
@@ -126,7 +130,7 @@
     width: 220px;
     display: flex;
     gap: 20px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     
 }
 .guideSelectWhereCarBtns{
@@ -231,8 +235,8 @@
 }
 .guideThead{
     background-color: #0b79b7;
-    height: 70px;
-    font-size: 18px;
+    height: 45px;
+    font-size: 15px;
     text-align: center;
     font-weight: 500;
 }

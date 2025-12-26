@@ -19,7 +19,7 @@ export default function Home(){
   const navigate = useNavigate();
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar,startdayText, 
-         enddayText, DeleteYear,timeAMPM} = useContext(CalendarContext);
+         enddayText, DeleteYear, timeAMPM } = useContext(CalendarContext);
   const {myRecentlist,setClickCar} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
@@ -201,11 +201,11 @@ export default function Home(){
 
     // 인기순 차량 배열
     const goodCar = [
-      {id:1, model:'그랑조',img:'hy_2.webp'},
-      {id:2, model:'dmw new 5',img:'bmw_5.webp'},
-      {id:3, model:'WV7',img:'kia_2.webp'},
-      {id:4, model:'아이온',img:'hy_9.webp'},
-      {id:5, model:'GGE80',img:'ZENE_2.webp'}
+      {id:1, model:'그랑조', img:'hy_2.webp', carTitle: '한대 그랑조', carInfo: '20대도 즐겨 찾는 인기 렌트카, 세련된 디자인과 편안한 주행감을 갖춘 한대 그랑조!', hashtag: '#요즘세단 #편안한승차감 #인기'},
+      {id:2, model:'dmw new 5', img:'bmw_5.webp', carTitle: 'dmw new 5', carInfo: '프리미엄 세단. 비즈니스와 일상 모두에 잘 어울리는 모델!', hashtag: '#도심드라이브 #안정적인주행 #비즈니스세단'},
+      {id:3, model:'WV7', img:'kia_2.webp', carTitle: '크아 WV7', carInfo: '넉넉한 실내 공간과 실용성을 강조한 SUV. 가족 이동이나 장거리 주행에 부담 없는 선택!', hashtag: '#공간여유 #여행각SUV #가족여행차량'},
+      // {id:4, model:'아이온', img:'hy_9.webp', carTitle: '한대 아이온', carInfo: '프리미엄 감성과 넉넉한 공간으로 20대 여행·드라이브에 잘 어울리는 한대 아이온!'},
+      // {id:5, model:'GGE80', img:'ZENE_2.webp', carTitle: '제네러스 GGE80', carInfo: '고급스러운 승차감과 세련된 인테리어가 돋보이는 대형 세단. 품격 있는 이동을 원하는 고객에게!'},
     ];
 
 
@@ -385,7 +385,6 @@ export default function Home(){
             원하는 차량을 어디서나 빠르게!
           </h4>
         </Link>
-
         <ul className="H_sec04_list">
           {homeAD.map((item) => (
             <li key={item.id} className="H_sec04_card">
@@ -399,59 +398,65 @@ export default function Home(){
         </ul>
       </div>
     
-      {/* sec02 - 인기차량. */}
-      <div className="H_sec02">
-        <div className="H_seo02_title">
-          <h4 className={`H_top${isTop?"":"open"}`} onClick={topClickHandler}>인기순</h4>
-          <h4 className={`H_top${isNew?"":"open"}`} onClick={topClickHandler}>신규 차량</h4>
-        </div>
-        <div className="sec02_map">
-          {isTop ?
-          // 인기순
-            <ul className="H_sec02_1">
-              {goodCar.map((item,index)=>(
-                <li key={index}>
-                  <span className="H_sec02_1_rank">{index + 1}</span>
-                  <div className="H_good" onClick={()=>goToSearchcarlist(item.model)}><img src={`/images/cars/${item.img}`} alt='car_img'/></div>
+      {/* sec - 인기순 */}
+      <div className="H_sec_top5">
+        <h4>인기순</h4>
+        {/* <div className="H_sec_top5_hashtag">
+          <span>#인기폭발</span><span>#가성비갑</span><span>#신차</span>
+        </div> */}
+        <ul className="H_sec_top5_map">
+          {goodCar.map((item,index)=>(
+            <li key={index} onClick={()=>goToSearchcarlist(item.model)}>
+              <span className="H_sec_top5_rank">{index + 1}</span>
+              <div className="top5_img">
+                <img src={`/images/cars/${item.img}`} alt={item.carTitle}/>
+              </div>
+              <div className="H_good">
+                <h5>{item.carTitle}</h5>
+                <p>{item.carInfo}</p>
+                <p className="hashtags">{item.hashtag}</p>
+              </div>
+              <i class="bi bi-arrow-right-circle-fill"></i>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* 신규차량 */}
+      <div className="H_sec_new">
+        <h4>신규 차량</h4>
+        <div className="H_sec_new_map">
+          <p onClick={before_btn} className="H_before_btn">〈</p>
+          <div className="H_slide">
+            <ul style={{transform:`translateX(${before_x}px)`}}>
+              {newCarList && newCarList.map((item)=>(
+                <li key={item.id} onClick={()=>goToSearchcarlist(item.model)}>
+                  <div className="H_new"><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
                 </li>
               ))}
             </ul>
-            :
-            // 신규차량
-            <div className="H_sec02_2">
-              <p onClick={before_btn} className="H_before_btn">〈</p>
-              <div className="H_slide">
-                <ul style={{transform:`translateX(${before_x}px)`}}>
-                  {newCarList && newCarList.map((item)=>(
-                    <li key={item.id}>
-                      <div className="H_new" onClick={()=>goToSearchcarlist(item.model)}><img src={`/images/cars/${item.car_img}`} alt='car_img'/></div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <p onClick={after_btn} className="H_after_btn">〉</p>
-            </div>
-          }
+          </div>
+          <p onClick={after_btn} className="H_after_btn">〉</p>
         </div>
       </div>
 
       {/* 광고_2 */}
-      <div className="H_sec06">
+      <div className="H_sec_banner_one">
         <img className="H_ad10" src='/images/banner/advertise10.png'></img>
       </div>
 
-      {/* sec03 - 최근본차량 */}
+      {/* sec - 최근본차량 */}
       {userid && 
-        <div className="H_section03">
-          <div className="H_sec03">
+        <div className="H_sec_history">
+          <div className="H_sec_history_block">
               <h4><span className="joinColorText">{username}</span>님의 최근 본 차량</h4>
               <Link to={'/recent'} className="H_more" >
                 <span>더보기</span>
               </Link>
           </div>
-          <div className="H_sec03_1">
+          <div className="H_sec_history_map">
               {sec03Sort.map(item=>(
-                  <div className="H_good" key={item.id} onClick={()=>goToSearchcarlist(item.model)} >
+                  <div className="H_recent" key={item.id} onClick={()=>goToSearchcarlist(item.model)} >
                     <img src={`/images/cars/${item.car_img}`} alt={item.model}/>
                   </div>
               ))}
@@ -460,7 +465,7 @@ export default function Home(){
       }
 
       {/* 광고 3 배너 */}
-      <div className="H_section04">
+      <div className="H_sect_blockBanner">
         <h4>2025 마지막 혜택!</h4>
         <div className="H_sec04_advertisementBanner">
           <img src="/images/banner/advertisementBanner01.png" alt="광고배너1" />
