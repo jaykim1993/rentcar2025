@@ -16,16 +16,48 @@
     align-items: center;
     position: relative;
 }
-.headerLogolink{
-    vertical-align: middle;
+.headerlogoBox {
+  position: relative;
+  overflow: visible;
+  width: 600px;
 }
+.animate-logo {
+  animation: logoSlideFloat 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes logoSlideFloat {
+  /* 원래 위치 (중앙) */
+  0% {
+    transform: translateX(380px);
+    opacity: 1;
+  }
+
+  /* 왼쪽으로 이동 */
+  20% {
+    transform: translateX(-100px);
+    opacity: 1;
+  }
+
+  /* 고정 + 위아래 흔들림 */
+  35% {
+    transform: translate(-100px, -5px);
+  }
+
+  50% {
+    transform: translate(-100px, 5px);
+  }
+
+  65% {
+    transform: translate(-100px, -5px);
+  }
+  /* 다시 중앙으로 들어오며 사라짐 */
+  100% {
+    transform: translateX(380px);
+    opacity: 1;
+  }
+}
+
 .headerLogo {
     width: 100px;
-    justify-self: center;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
 }
 .bi-list{
     color: #0b79b7;

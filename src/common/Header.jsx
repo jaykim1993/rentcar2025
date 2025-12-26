@@ -61,11 +61,11 @@ export default function Header() {
                         </button>
 
                     </div>
-                    <div className='headerlogoBox'>
-                        <Link to="/">
-                            <img className='headerLogo' src='/charangcharang_logo.png'/>
-                        </Link>
-                    </div>
+                    
+                    <Link to="/">
+                        <img className='headerLogo animate-logo' src='/charangcharang_logo.png'/>
+                    </Link>
+                    
                     <nav className="headerNavTop">
                         <Link to="/">
                             <button className='headerBtn' type='text'>

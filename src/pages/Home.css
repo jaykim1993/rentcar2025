@@ -31,6 +31,7 @@ input:checked + .checkmark {
     margin: 40px auto;
     position: relative;
 }
+
 /* 날짜/시간선택 */
 #root .Home .H_reservation .H_dateTable{
     width: 460px;

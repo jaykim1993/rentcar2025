@@ -25,7 +25,7 @@ export default function CalendarProvider({ children }) {
   const [apply, setApply] = useState(false);
   /* ================= 시간 필터 ================= */
   const blockedCarIds = useMemo(() => {
-    if (!startDate || !endDate) return [];
+    if (!startDate || !endDate || !startTime || !endTime) return [];
 
     const filterStart = toDateTime(startDate, startTime);
     const filterEnd = toDateTime(endDate, endTime);
@@ -33,12 +33,12 @@ export default function CalendarProvider({ children }) {
     return bookedlistAll
       .filter((book) => {
         const bookStart = toDateTime(
-          book.filterStartDate,
-          book.filterStartTime
+          book.startDate,
+          book.startTime
         );
         const bookEnd = toDateTime(
-          book.filterEndDate,
-          book.filterEndTime
+          book.endDate,
+          book.endTime
         );
 
         // 시간 겹침 판단
@@ -46,6 +46,12 @@ export default function CalendarProvider({ children }) {
       })
       .map((book) => book.carId);
   }, [bookedlistAll, startDate, endDate, startTime, endTime]);
+
+  console.log("이용 불가능한 차량 리스트", blockedCarIds);
+
+
+
+
   /* ================= 예약 가능 차량 ================= */
   // 원본 cars 형식 그대로 필터 => 령경씨가 사용할 배열
   const availableCars = useMemo(() => {
@@ -55,12 +61,12 @@ export default function CalendarProvider({ children }) {
       return true;
     });
   }, [cars, blockedCarIds, location]);
-  // console.log("시간 위치 필터 적용 원본 배열 availableCars: ", availableCars);
+  console.log("시간 위치 필터 적용 원본 배열 availableCars: ", availableCars);
 
   /* ================= 검색 결과 가공 ================= */
   // 원본에서 필요 내용 + 사용자 필터 적용값 정리된 배열 
   const filteredInfoUser = useMemo(() => {
-    if (!apply || !userid) return [];
+    if ( !userid) return [];
 
     return availableCars.map((car) => ({
         // userId: userid,
@@ -73,7 +79,6 @@ export default function CalendarProvider({ children }) {
         fuel_type: car.fuel_type,
     }));
     }, [
-      apply,
       availableCars,
       userid,
       startDate,
@@ -81,7 +86,7 @@ export default function CalendarProvider({ children }) {
       startTime,
       endTime,
   ]);
-  // console.log("재가공된 filteredInfoUser: ", filteredInfoUser);
+  console.log("재가공된 filteredInfoUser: ", filteredInfoUser);
 
   /* ================= UI 트리거 ================= */
   // 날짜 선정 확인 함수
@@ -204,7 +209,6 @@ const isDisabledEndTime = (dateStr, startDateStr, startTime, endTime) => {
         DeleteYear,
         isDisabledStartTime,
         isDisabledEndTime,
-        timeAMPM,
         days,
 
         /* 위치 */
