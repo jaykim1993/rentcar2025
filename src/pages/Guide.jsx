@@ -119,7 +119,7 @@ const getFilteredCars = () => {
         }
     };
     const carListToRender = getFilteredCars();
-
+    const [tdOpen, setTdOpen] = useState(false);
     return(
 
         <>
@@ -132,12 +132,11 @@ const getFilteredCars = () => {
                 </div>
                 <div className="guideFlex">
                     <div className="guideLeft">
-                        <h2 className="guideSideText">렌트이용안내</h2>
+                        <h2 className="guideSideText">이용가이드</h2>
                         <span className={`guideSideMenus ${showPage?'active':''}`} onClick={showGuideOne} >대여안내</span>
                         <span className={`guideSideMenus ${!showPage?'active':''}`} onClick={showGuideTwo} >요금안내</span>
                     </div>
                     <div className="guideRight">
-                          <h1 className="guideMainText">이용가이드</h1>
                             <div className="guideSelectBar">
                                 <button  className={`guideSelectButns ${showPage?'active':''}`} onClick={showGuideOne}>대여안내</button>
                                 <button  className={`guideSelectButns ${!showPage?'active':''}`} onClick={showGuideTwo}>요금안내</button>
@@ -251,6 +250,7 @@ const getFilteredCars = () => {
                     </div>
                         <span>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 가치를 가지며, </span>
                         <p>차량의 연식, 차량 크기, 연료, 옵션 유무에 따라 가격이 계산됩니다.   </p>
+                        <div className={`LoTableWrap ${tdOpen ? 'open' : ''}`}>
                             <table className="guideTable">
                                 <thead className="guideThead">
                                     <tr className="guideTr">
@@ -280,6 +280,10 @@ const getFilteredCars = () => {
                                  )}
                                 </tbody>
                             </table>
+                            </div>
+                            <button className="tableOpener" onClick={() => setTdOpen(!tdOpen)}>
+                                {tdOpen ? '접기' : '더보기'}
+                            </button>
                             <div className="guideGoToBookBox">
                                 <Link to='/searchcarlist'className="guideGoToBook"  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>예약하러가기</Link>
                             </div>

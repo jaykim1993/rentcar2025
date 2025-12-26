@@ -1,36 +1,41 @@
-.myinfo-context{
+#root .myinfo-Wrap{
+  min-height: 1100px;
+}
+#root .myinfo-Wrap .myinfo-context{
     padding: 30px;
     border-radius: 10px;
-    border: 1px solid rgb(218, 218, 218);
-    margin-bottom: 300px;
+    /* border: 1px solid rgb(218, 218, 218); */
+    margin-top: 50px;
+    width: 100%;
+    border-top: 2px solid #444;
 }
-.myinfo-list {
+#root .myinfo-Wrap .myinfo-list{
   list-style: none;
   padding: 20px;
   margin: 0;
 }
 
-.myinfo-list li {
-  display: grid;
+#root .myinfo-Wrap .myinfo-list > tr{
+  padding: 20px 0;
+  border-bottom: 1px solid #d4d4d4;
+  display: flex;
   align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid #f0f0f0;
 }
 
-.myinfo-label {
-  font-weight: 500;
-  color: rgb(131, 131, 131);
-  font-size: 14px;
+#root .myinfo-Wrap .myinfo-list > tr .myinfo-label{
+  font-weight: 400;
+  font-size: 15px;
+  width: 250px;
+  padding: 0 35px;
+  color: #555;
 }
 
-.myinfo-value {
+#root .myinfo-Wrap .myinfo-list > tr .myinfo-value{
   font-size: 16px;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
-.myinfo-btn {
-  margin-top: 100px;
+.myinfo-btn{
+  margin-top: 70px;
   width: 100%;
   height: 48px;
   border-radius: 10px;

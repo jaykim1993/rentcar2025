@@ -12,6 +12,9 @@ export default function CalendarProvider({ children }) {
   const { cars } = useContext(DataContext);
   const { bookedlistAll } = useContext(BookingContext);
 
+
+  
+
   /* ================= UI 상태 ================= */
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -201,6 +204,8 @@ const isDisabledEndTime = (dateStr, startDateStr, startTime, endTime) => {
         DeleteYear,
         isDisabledStartTime,
         isDisabledEndTime,
+        timeAMPM,
+        days,
 
         /* 위치 */
         location,

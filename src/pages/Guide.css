@@ -18,11 +18,19 @@
     width: 350px;
     border-right: 1px solid gray;
 }
-
+.guideSideText {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
 .guideSideMenus{
+    display: block;
     font-size: 20px;
     margin: 10px 0;
-    font-weight: 700;
+    font-weight: 500;
+    color: gray;
+}
+.guideSideMenus:hover{
+    color: #333;
 }
 .guideRight{
     width: 900px;
@@ -31,23 +39,27 @@
     min-width: 0;
 }
 .guideMainText{
-    font-size: 25px;
+    font-size: 22px;
     margin-top: 50px;
     margin-bottom: 20px;
 }
 .guideSelectButns{
     background-color: transparent;
-    font-size: 21px;
+    font-size: 18px;
     margin-right: 30px;
-    font-weight: 700;
+    font-weight: 500;
     outline: none;
     border: none;
     padding: none;
     margin-left: 0;
 }
+.guideSelectButns:hover {
+    color: #333;
+}
 .guideExplain{
-    margin-top: 40px;
-    margin-bottom: 10px;
+    margin-top: 90px;
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 .guideExplainDetail{
     font-size: 14px;
@@ -64,25 +76,30 @@
 .guideRentalProcessExplain{
     font-size: 14px;
     color: #333;
+    margin-bottom: 30px;
 }
 .guideSecondExplain{
-    margin-top: 60px;
-    margin-bottom: 10px;
+    margin-top: 90px;
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 .guideThirdExplain{
-    margin-top: 60px;
-    margin-bottom: 10px;
+    margin-top: 90px;
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 .guideFourthExplain{
-    margin-top: 60px;
-    margin-bottom: 10px;
+    margin-top: 90px;
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 .guideFifth{
     margin-bottom: 80px;
 }
 .guideFifthExplain{
-    margin-top: 60px;
-    margin-bottom: 0px;
+    margin-top: 90px;
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 .guideSecondExplainDetail{
      font-size: 14px;
@@ -117,8 +134,8 @@
     width: 100px;
     padding: 10px;
     border-radius: 15px;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 500;
     background-color: #ccc;
     height: 50px;
 }
@@ -128,13 +145,13 @@
 .guideSelectWhereCar{
     background-color: rgb(214, 214, 214);
     border: none;
-    font-size: 22px;
+    font-size: 18px;
     padding: 10px;
     width: 120px;
     height: 60px;
     border-radius: 15px;
     outline: none;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .guideSelectWhereCar:hover{
@@ -148,37 +165,41 @@
     margin-top: 30px;
     background-color: rgb(214, 214, 214);
     border: none;
-    font-size: 22px;
+    font-size: 18px;
     padding: 10px;
     width: 120px;
     height: 60px;
     border-radius: 15px;
     outline: none;
-    font-weight: 700;
+    font-weight: 500;
 }
 .guideSelectCarSizeBtn2{
     margin-top: 30px;
     background-color: rgb(214, 214, 214);
     border: none;
-    font-size: 22px;
+    font-size: 18px;
     padding: 10px;
     width: 120px;
     height: 60px;
     border-radius: 15px;
     outline: none;
-    font-weight: 700;
+    font-weight: 500;
 }
 .guideSideMenus{
+    display: block;
+    font-size: 20px;
+    margin: 10px 0;
+    font-weight: 500;
     color: gray;
 }
 .guideSideMenus.active{
-    color: black;
+    color: #333;
 }
 .guideSelectButns{
     color: gray;
 }
 .guideSelectButns.active{
-    color: black;
+    color: #333;
 }
 
 .guideSelectCarSizeBtn:hover{
@@ -217,19 +238,21 @@
 .guideThead{
     background-color: #0b79b7;
     height: 70px;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
+    font-weight: 500;
 }
 .guideTr th{
     color: white;
 }
 .guideTh{
     width: 225px;
+    font-weight: 500;
 }
 .guideTd{
     width: 225px;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     height: 70px;
     border-bottom: 1px solid rgb(212, 212, 212);
 }
@@ -239,19 +262,21 @@
     justify-content: center;
 }
 .guideGoToBook{
-    width: 400px;
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-    margin-bottom: 80px;
-    background-color: black;
-    color: white;
     font-size: 20px;
+    width: 100%;
+    padding: 20px 40px;
+    border: none;
     border-radius: 10px;
+    background-color: #2591cf;
+    color: white;
+    transition: 0.3s;
+    font-weight: 500;
+    margin-bottom: 100px;
+    text-align: center;
 }
 
 .guideGoToBook:hover{
-    background-color: rgb(56, 56, 56);
+    background-color: #065d8f;
 }
 .guideGoToHome{
     color: rgb(160, 160, 160);
