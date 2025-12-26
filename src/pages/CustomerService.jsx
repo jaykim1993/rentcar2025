@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import './CustomerService.css'
 import { useContext } from "react"
@@ -17,7 +17,6 @@ export default function CustomerService(){
 
     //모달 기본값
     const [modal1Open,setModal1Open]=useState(false)
-    const [modal2Open,setModal2Open]=useState(false)
     const [modalOverLay,setModalOverLay]=useState(false)
 
     //모달컨트롤러
@@ -31,13 +30,7 @@ export default function CustomerService(){
         setModalOverLay(false);
         }
     }
-    const gotoLogin =()=>{
-        if(modal1Open){
-        setModal1Open(false);
-        setModalOverLay(false);
-        navigate('/login')
-        }
-    }
+
 
     //FAQ state 토글
     const [openIndex, setOpenIndex] = useState(null);
@@ -70,12 +63,6 @@ export default function CustomerService(){
     const [cusShowSubPage,setCusShowSubPage]=useState(null);
     const notice1 = ()=>{
         setCusShowSubPage(1);
-    };
-    const notice2 = ()=>{
-        setCusShowSubPage(2);
-    };
-    const notice3 = ()=>{
-        setCusShowSubPage(3);
     };
     const cusBack = ()=>{
         setCusShowSubPage(null);
@@ -164,7 +151,6 @@ export default function CustomerService(){
             {modalOverLay &&<div className="cusOverlay"></div>}
              <div className="guideWrap">
                 <div className="guideTop">
-                    {/* 수정 필요 */}
                     <div><Link to={'/'} className="guideGoToHome">홈</Link></div>
                     <span><i className="bi bi-caret-right-fill"></i></span>
                     <div><span className={`guideGoToHome ${cusShowSubPage?'':'active'}`} onClick={cusBack}>고객센터</span></div>
@@ -186,7 +172,7 @@ export default function CustomerService(){
                         {cusShowSubPage===null?
                             <div>
                                 <div className="CusAssistanceWrap">
-                                    <h2 className="CusAssH2">무엇을 도와드릴까요?</h2>
+                                    <h2 className="guideMainText">무엇을 도와드릴까요?</h2>
                                     <div className="CusAssistance">
                                         <div className="CusAssistanceBox1" onClick={modal1}>
                                             <h3>1:1 문의</h3>
@@ -196,26 +182,27 @@ export default function CustomerService(){
                                     </div>
                                 </div>
                                 <div className="CusFAQ">
-                                    <h2>자주 찾는 질문</h2>
+                                    <h2 className="guideMainText">자주 찾는 질문</h2>
                                     {faqList.map((item, index) => (
                                         <div key={index}>
                                         <div onClick={() => 
                                             setOpenIndex(openIndex === index ? null : index)
                                         }>
-                                            <span className="CusFAQSpan">Q. {item.q}</span>
-                                            <i className={`bi bi-caret-down-fill ${openIndex === index ? 'active' : ''}`}></i>
+                                            <span className="CusFAQSpan">Q. {item.q} 
+                                                <i className={`bi bi-chevron-down ${openIndex === index ? 'active' : ''}`}></i>
+                                            </span>
                                         </div>
                                         {openIndex === index && (
                                             <div className="togglediv">
-                                            <p>{item.a}</p>
+                                            <p>A. {item.a}</p>
                                             </div>
                                         )}
                                         </div>
                                     ))}
-                                    </div>
+                                </div>
                                 <div className="CusNotice">
                                     <div className="CusNoticeBox">
-                                        <h2>공지사항</h2>
+                                        <h2 className="guideMainText">공지사항</h2>
                                         <div className="CusNoticeLink">
                                             <div onClick={()=>{notice1();window.scrollTo({ top: 0, behavior: 'smooth' });}}><p>운전자격확인 서비스 일시 중단 안내(11/27 18:00~19:00)</p></div>
                                             <div onClick={()=>{notice1();window.scrollTo({ top: 0, behavior: 'smooth' });}}><p>기본정비 서비스 변경 재안내</p></div>
