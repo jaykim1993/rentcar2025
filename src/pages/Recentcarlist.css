@@ -10,16 +10,24 @@
 }
 #root .Recent_car_p{
     margin: 5px 0 20px 0;
-    font-size: 20px;
     color: #666;
+    position: absolute;
+    bottom: 3px;
+    left: 5px;
+    font-size: 16px;
+}
+#root .Recent_car_p span{
+    font-size: 14px;
 }
 .Recent_car_span{
     font-size: 15px;
+}#root .Recent_car_list{
+    min-height: 900px;
 }
 #root .Recent_car_list .Recent_ByDate{
     display: flex;
     flex-wrap: wrap;
-    gap: 70px 25px;
+    gap: 10px 25px;
 }
 /* 1대 */
 #root .Recent_car_list .Recent_ByDate .Recent_car_item{
@@ -28,10 +36,11 @@
     font-weight: 500;
     cursor: pointer;
     position: relative;
+    margin: 0;
 }
 #root .Recent_car_list .Recent_ByDate .Recent_car_img{
     padding: 10px 30px;
-    background-color: #f4f5f7;
+    background-color: #e0e5eb;
     /* border: 1px solid red; */
     border-radius: 7px;
     width: 100%;
@@ -47,4 +56,11 @@
     height: 50px;
     top: 10px;
     left: 10px;
+}
+.RecentCar_viewDate{
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    font-size: 14px;
+
 }

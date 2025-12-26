@@ -26,8 +26,8 @@ export default function Recentcarlist() {
     <div className="Recent_car_list">
 
       <div className="Recent_Head">
-          <Link to={'/home'}><span>홈</span></Link>
-
+          <Link to={'/'}><span>홈</span></Link>
+          <i className="bi bi-chevron-right"></i>
           <span>최근 본 차량</span>
       </div>
 
@@ -44,7 +44,8 @@ export default function Recentcarlist() {
                 src={`/images/cars/${item.car_img}`}
                 alt={item.model}
                 className="Recent_car_img" />
-              <p className="Recent_car_p"> {item.model} <span className="Recent_car_span">[{item.fuel_type}]</span></p>
+              <p className="Recent_car_p"> {item.model} <span className="Recent_car_span">{item.fuel_type}</span></p>
+              <p className="RecentCar_viewDate">{item.viewDate}</p>
             </div>
           </li>
         ))}
