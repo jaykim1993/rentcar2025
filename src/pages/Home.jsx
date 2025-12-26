@@ -12,7 +12,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 // MapContainer = 맵을 불러오는 상자 
 // TileLayer 하단 설명 참고
 // Marker 마커 좌표 설정시 마커 생성
-// Popup 마커 클릭시 텍스트 출력
+// Popup 마커 클릭시 텍스트 출력.
 import 'leaflet/dist/leaflet.css';
 
 export default function Home(){
