@@ -1,14 +1,15 @@
-.header {
+.header{
     position: fixed;
     top: 0;
     left: 0;
-    height:70px; 
-    background-color: #f9fafc;
+    height:60px;
+    /* background-color: #f9fafc; */
+    background-color: #333;
     width: 100%;
     z-index: 99;
     margin: 0 auto;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #e2e4e9;
+    padding: 0 20px;
+    /* border-bottom: 1px solid #e2e4e9; */
 }
 .headerflex{
     display: flex;
@@ -28,7 +29,10 @@
     transform: translateX(-50%);
 }
 .bi-list{
-    color: #0b79b7;
+    color: #ececec;
+}
+.bi-house-door-fill{
+    color: #ececec;
 }
 .headerBrand{
     display: inline-block;
@@ -64,10 +68,11 @@
     font-size: 1rem;
     transition: 0.3s;
     cursor: pointer;
+    color: #ececec;
 }
-.headerBtnCate:hover, .headerBrand:hover, .headerBtn:hover,.headerBtnX:hover{
-    text-shadow: 0 0 20px rgba(0,0,0,0.4);
-    color: #065d8f;
+.headerBtnCate:hover, .headerBrand:hover, .headerBtn:hover,.headerBtnX:hover, .bi-house-door-fill:hover{
+    text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+    color: #2591cf;
 }
 .headerUserBookedModal {
     position: absolute;
@@ -173,6 +178,9 @@
     width: 277px;
     height: 277px;
 }
+
+/* ---------------------------------- */
+
 .headerNavAd {
     width: 100%;
     height: 300px;

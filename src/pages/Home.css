@@ -130,98 +130,108 @@ input:checked + .checkmark {
 
 /* ---------------------------------- */
 
-/* sec02 - 인기순 */
-#root .Home .H_sec02{
+/* sec - 인기순 */
+#root .Home .H_sec_top5 > h4{
+    margin-bottom: 20px;
 }
-#root .Home .H_sec02 .H_seo02_title{
-    display: flex;
-    align-items: center;
-    padding-bottom: 20px;
-}
-#root .Home .H_sec02 .H_seo02_title > h4{
-    padding-right: 40px;
-    cursor: pointer;
-}
-#root .Home .H_sec02 .H_seo02_title::before{
-    content: '';
-    height: 25px;
-    border: 1px solid rgb(212, 212, 212);
-    position: absolute;
-    left: 85px;
-}
-#root .Home .H_sec02 .H_topopen{
-    color: #979797;
-    height: 38px;
-    line-height: 38px;
-    font-weight: 350;
-}
-
-#root .Home .H_sec02_1{
+#root .Home .H_sec_top5_map{
     margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
-    /* gap: 25px; */
+    flex-wrap: wrap;
+    gap: 30px;
 }
-#root .Home .H_sec02_1 > li{
-    height: 300px;
+#root .Home .H_sec_top5_map > li{
+    width: 410px;
+    height: 265px;
+    display: flex;
+    gap: 30px;
     position: relative;
+    /* background-color: #fff; */
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    padding: 20px 10px 20px 20px;
+    cursor: pointer;
 }
-#root .Home .H_sec02_1 .H_sec02_1_rank{
+#root .Home .H_sec_top5_map > li:hover{
+    background-color: #f2f3f5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+/* 바로가기 화살표 */
+#root .Home .H_sec_top5_map > li .bi-arrow-right-circle-fill{
     position: absolute;
-    top: 10px;
-    left: 15px;
+    right: 20px;
+    bottom: 13px;
+    font-size: 20px;
+    color: #ff6e1a;
+}
+/* 순위 */
+#root .Home .H_sec_top5_map .H_sec_top5_rank{
+    position: absolute;
+    top: 8px;
+    left: 17px;
     font-size: 30px;
     font-weight: 500;
     font-style: italic;
-    text-shadow: 0 0 10px #0b78b76e;
+    text-shadow: 0 0 10px #00000046;
+    z-index: 10;
+    color: #424242;
 }
-#root .Home .H_sec02_1 .H_good{
-    display: inline-block;
-    background-color: #eeeeee;
+/* li 내용 */
+#root .Home .H_sec_top5_map .H_good{
     width: 240px;
-    height: 300px;
-    border-radius: 10px;
+    padding-right: 20px;
+    word-break: keep-all;
+}
+#root .Home .H_sec_top5_map .H_good > h5{
+    border-bottom: 1px solid #999;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+#root .Home .H_sec_top5 .H_sec_top5_map > li .H_good .hashtags{
+    font-style: italic;
+    font-size: 14px;
+}
+#root .Home .H_sec_top5 .H_sec_top5_map > li .top5_img{
+    width: 280px;
     overflow: hidden;
-    cursor: pointer;
     position: relative;
 }
-#root .Home .H_sec02_1 .H_good:hover{
-    background-color: #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-#root .Home .H_sec02_1  li .H_good > h1{
-    font-style: italic;
-    font-size: 70px;
-    display: inline-block;
-    position: absolute;
-    top: -5px;
-    left: 15px;
-    /* color: #919191; */
-    color: rgba(255,255,255,0.8);    /* 약간 반투명으로 */
-    text-shadow: 1px 1px 3px #aaaaaa,  /* 밝은 그림자 */
-               -1px -1px 2px #7a7a7a; /* 반대 방향 그림자 */
-}
-#root .Home .H_sec02_1 .H_good > img{
+#root .Home .H_sec_top5 .H_sec_top5_map > li .top5_img img{
     width: 400px;
-    padding: 50px 0 0 0;
+    padding-left: 10px;
+}
+#root .Home .H_sec_top5 .H_sec_top5_map > li .top5_img::before{
+    content: '';
+    position: absolute;
+    background-color: #f2f3f5;
+    border-radius: 10px;
+    width: 83%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
 }
 
 /* ---------------------------------- */
 
 /* sec02 - 최신순 */
-#root .Home .H_sec02_2{
+#root .Home .H_sec_new .H_sec_new_map{
     margin-bottom: 50px;
     width: 1300px;
-    /* border: 1px solid red; */
     position: relative;
 }
-#root .Home .H_sec02_2 .H_slide{
+#root .Home .H_sec_new > h4{
+    margin-bottom: 20px;
+}
+#root .Home .H_sec_new .H_sec_new_map .H_slide{
     overflow: hidden;
 }
-#root .Home .H_sec02_2 > p{
+#root .Home .H_sec_new .H_sec_new_map > p{
     cursor: pointer;
 }
-#root .Home .H_sec02_2 .H_before_btn{
+#root .Home .H_sec_new .H_sec_new_map .H_before_btn{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -232,7 +242,7 @@ input:checked + .checkmark {
     border-radius: 50%;
     color: #979797;
 }
-#root .Home .H_sec02_2 .H_after_btn{
+#root .Home .H_sec_new .H_sec_new_map .H_after_btn{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -243,15 +253,23 @@ input:checked + .checkmark {
     border-radius: 50%;
     color: #979797;
 }
-#root .Home .H_sec02_2 .H_slide > ul{
+#root .Home .H_sec_new .H_sec_new_map .H_before_btn:hover,
+#root .Home .H_sec_new .H_sec_new_map .H_after_btn:hover{
+    color: #444;
+}
+#root .Home .H_sec_new .H_sec_new_map .H_slide > ul{
     display: flex;
     gap: 25px;
     transition: transform 0.8s ease;
 }
-#root .Home .H_sec02_2 .H_slide > ul > li{
+#root .Home .H_sec_new .H_sec_new_map .H_slide > ul > li{
     height: 300px;
 }
-#root .Home .H_sec02_2 .H_slide > ul > li .H_new{
+#root .Home .H_sec_new .H_sec_new_map .H_slide > ul > li:hover{
+    background-color: #f2f3f5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+#root .Home .H_sec_new .H_sec_new_map .H_slide > ul > li .H_new{
     display: inline-block;
     background-color: #eeeeee;
     width: 240px;
@@ -260,18 +278,18 @@ input:checked + .checkmark {
     overflow: hidden;
     cursor: pointer;
 }
-#root .Home .H_sec02_2 .H_slide > ul > li .H_new >img{
+#root .Home .H_sec_new .H_sec_new_map .H_slide > ul > li .H_new >img{
     width: 400px;
     padding: 50px 0 0 15px;
 }
 
 /* 최근 본 차량 */
-#root .Home .H_sec03{
+#root .Home .H_sec_history .H_sec_history_block{
     display: flex;
     align-items: center;
     padding-bottom: 20px;
 }
-#root .Home .H_sec03 .H_more > span{
+#root .Home .H_sec_history .H_sec_history_block .H_more > span{
     color: #888;
     font-weight: 500;
     display: inline-block;
@@ -279,15 +297,15 @@ input:checked + .checkmark {
     line-height: 38px;
     padding-left: 15px;
 }
-#root .Home .H_sec03 .H_more > span:hover{
+#root .Home .H_sec_history .H_sec_history_block .H_more > span:hover{
     color: #333;
 }
-#root .Home .H_sec03_1{
+#root .Home .H_sec_history_map{
     /* margin-bottom: 50px; */
     display: flex;
     gap: 25px;
 }
-#root .Home .H_sec03_1 .H_good{
+#root .Home .H_sec_history_map .H_recent{
     display: inline-block;
     background-color: #eeeeee;
     width: 240px;
@@ -296,27 +314,27 @@ input:checked + .checkmark {
     overflow: hidden;
     cursor: pointer;
 }
-#root .Home .H_sec03_1 .H_good:hover{
+#root .Home .H_sec_history_map .H_recent:hover{
     background-color: #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-#root .Home .H_sec03_1 .H_good > img{
+#root .Home .H_sec_history_map .H_recent > img{
     width: 400px;
     padding: 50px 0 0 30px;
 }
 
 /* 광고배너 */
-#root .Home .H_section04{
+#root .Home .H_sect_blockBanner{
     margin: 80px 0;
 }
-#root .Home .H_section04 > h4{
+#root .Home .H_sect_blockBanner > h4{
     padding-bottom: 20px;
 }
-#root .Home .H_section04 > .H_sec04_advertisementBanner{
+#root .Home .H_sect_blockBanner > .H_sec04_advertisementBanner{
     display: flex;
     justify-content: space-between;
 }
-#root .Home .H_section04 > .H_sec04_advertisementBanner img{
+#root .Home .H_sect_blockBanner > .H_sec04_advertisementBanner img{
     border-radius: 10px;
     cursor: pointer;
 }
@@ -536,7 +554,7 @@ input:checked + .checkmark {
 }
 
 /* 광고_2 */
-.H_sec06{
+.H_sec_banner_one{
     margin: 80px 0;
 }
 .H_ad10{

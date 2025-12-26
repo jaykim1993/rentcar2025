@@ -61,11 +61,11 @@ export default function Header() {
                         </button>
 
                     </div>
-                    <div className='headerlogoBox'>
+                    {/* <div className='headerlogoBox'>
                         <Link to="/">
                             <img className='headerLogo' src='/charangcharang_logo.png'/>
                         </Link>
-                    </div>
+                    </div> */}
                     <nav className="headerNavTop">
                         <Link to="/">
                             <button className='headerBtn' type='text'>
@@ -237,6 +237,5 @@ export default function Header() {
                 </div>
             </nav>
         </div>
-        
     );
 }
