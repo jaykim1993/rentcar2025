@@ -148,17 +148,16 @@
     cursor: pointer;
 }
 .headerModalBtn {
+    border: none;
     width: 100%;
     margin-top: 20px;
     padding: 12px 0;
-    border: none;
     background: #0b79b7;
     color: white;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
     transition: 0.2s;
-    
 }
 .headerModalBtn:hover {
     background: #065d8f;
@@ -236,11 +235,11 @@
 .headerNavLi {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    padding: 12px;
     border-bottom: 1px solid #eee;
     font-size: 20px;
     transition: 0.3s;
-    border-radius: 10px;
+    border-radius: 7px;
     cursor: pointer;
 }
 .headerNavLi:hover {

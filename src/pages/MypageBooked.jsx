@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import { useEffect } from "react";
 import { CalendarContext } from "../contexts/Calendarcontext";
 import { BookingContext } from "../contexts/Bookingcontext";
 import { AuthContext } from "../contexts/Authcontext";
@@ -24,6 +24,9 @@ export default function MypageBooked() {
     startdayText,
     enddayText
   })
+  useEffect(() => {
+  window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="MypageBooked">
@@ -76,7 +79,7 @@ export default function MypageBooked() {
                       {DeleteYear(book.endDate)} ({eDay}) {timeAMPM(book.endTime)}
                     </p>
                     <div className="GoToDetailBoxmap">
-                      <Link to={`/mypage/detail/${book.id}`} className="mapGoToDetail">예약 상세보기</Link>
+                      <Link to={`/mypage/detail/${book.id}`} className="mapGoToDetail" onClick={() => window.scrollTo(0,0)}>예약 상세보기</Link>
                   </div>
                   </div>
                 </div>

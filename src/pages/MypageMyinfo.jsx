@@ -40,7 +40,7 @@ export default function MypageMyinfo(){
                     <tr>
                         <td className="myinfo-label">국적</td>
                         <td className="myinfo-value">
-                        {user_iskorean ? "한국 국적자" : "해외 국적자"}
+                        {user_iskorean ? "대한민국 국적" : "외국 국적"}
                         </td>
                     </tr>
                     <tr>

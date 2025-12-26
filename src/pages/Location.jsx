@@ -430,7 +430,7 @@ return(
                         </ol>
                         <div className="LocationPage3BottomDiv">
                             {userid?
-                                <Link to={'/mypage/booked'}><button className="LocationPage3Btn">마이페이지로 이동</button></Link>
+                                <Link to={'/mypage/booked'}><button className="LocationPage3Btn" onClick={() => window.scrollTo(0,0)}>마이페이지로 이동</button></Link>
                                 :
                                 <button className="LocationPage3Btn" onClick={loginNeeded}>마이페이지로 이동</button>
                             }

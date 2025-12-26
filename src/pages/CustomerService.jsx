@@ -10,7 +10,7 @@ export default function CustomerService(){
     const navigate = useNavigate();
     // 로그인 상태 받아오기
     // 로그인 페이지 열기 상태 받아오기(setModal) - 12.22 성중 추가
-    const {userid, setModal}=useContext(AuthContext)
+    const {userid, setModal, username}=useContext(AuthContext)
     console.log(userid)
     const isLogin = !!userid;
     console.log(isLogin)
@@ -63,6 +63,12 @@ export default function CustomerService(){
     const [cusShowSubPage,setCusShowSubPage]=useState(null);
     const notice1 = ()=>{
         setCusShowSubPage(1);
+    };
+    const notice2 = ()=>{
+        setCusShowSubPage(2);
+    };
+    const notice3 = ()=>{
+        setCusShowSubPage(3);
     };
     const cusBack = ()=>{
         setCusShowSubPage(null);
@@ -128,7 +134,7 @@ export default function CustomerService(){
                         <i className="bi bi-x" onClick={modalClose}></i>
                         <h3>1:1 문의</h3>
                         <div className="modal1Content">
-                            <span>안녕하세요 {userid}님</span>
+                            <span >안녕하세요 <span className="modal1Contentspan">{username}</span>님</span>
                             <p>무엇을 도와드릴까요?</p>
                             <input className="modal1title" type="text" placeholder="제목을 입력하세요." onChange={(e)=>setInquiriesTitle(e.target.value)} value={inquiriesTitle}/>
                             <textarea className="modal1content" type="text" placeholder="문의 내용을 입력하세요." onChange={(e)=>setInquiriesContent(e.target.value)} value={inquiriesContent}/>
@@ -205,8 +211,8 @@ export default function CustomerService(){
                                         <h2 className="guideMainText">공지사항</h2>
                                         <div className="CusNoticeLink">
                                             <div onClick={()=>{notice1();window.scrollTo({ top: 0, behavior: 'smooth' });}}><p>운전자격확인 서비스 일시 중단 안내(11/27 18:00~19:00)</p></div>
-                                            <div onClick={()=>{notice1();window.scrollTo({ top: 0, behavior: 'smooth' });}}><p>기본정비 서비스 변경 재안내</p></div>
-                                            <div onClick={()=>{notice1();window.scrollTo({ top: 0, behavior: 'smooth' });}}><p>개인정보처리방침 개정 안내</p></div>
+                                            <div onClick={()=>{notice2();window.scrollTo({ top: 0, behavior: 'smooth' });}}><p>기본정비 서비스 변경 재안내</p></div>
+                                            <div onClick={()=>{notice3();window.scrollTo({ top: 0, behavior: 'smooth' });}}><p>개인정보처리방침 개정 안내</p></div>
                                         </div>
                                     </div>
                                 </div>

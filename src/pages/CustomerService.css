@@ -128,12 +128,12 @@
 }
 .cusBottomBtn{
     width: 250px;
-    padding: 15px;
+    padding: 10px;
     border: none;
     background-color: #2591cf;
     border-radius: 10px;
     color: white;
-    font-size: 20px;
+    font-size: 19px;
     transition: 0.2s;
 }
 .cusBottomBtn:hover{
@@ -179,6 +179,9 @@
     width: 535px;
     height: 300px;
 }
+.modal1Contentspan{
+    color: #0b79b7;
+}
 .modal1Content input{
     margin: 10px 0;
     border: 1px solid rgb(194, 194, 194);
@@ -202,7 +205,7 @@
 .modalOpen h3{
     font-weight: 600;
     margin-bottom: 20px;
-    color: rgb(31, 123, 214);
+    color: #0b79b7;
 }
 .cusOverlay{
     width: 100%;
@@ -218,20 +221,21 @@
 }
 .submitinqu{
     width: 535px;
-    margin: 20px auto;
+    margin: 0 auto;
     text-align: center;
 }
 .submitinqu button{
     width: 535px;
-    font-size: 20px;
+    font-size: 19px;
     padding: 10px;
     border: none;
     background-color: #0b79b7;
     border-radius: 10px;
     color: white;
+    margin-top: 10px;
 }
 .submitinqu button:hover{
-    background-color: rgb(25, 99, 172);
+    background-color: #065d8f ;
 }
 .modalOpen .bi-x:hover{
     color: #0b79b7;

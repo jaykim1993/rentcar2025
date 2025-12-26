@@ -19,7 +19,7 @@ export default function Home(){
   const navigate = useNavigate();
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar,startdayText, 
-         enddayText, DeleteYear} = useContext(CalendarContext);
+         enddayText, DeleteYear,timeAMPM} = useContext(CalendarContext);
   const {myRecentlist,setClickCar} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
