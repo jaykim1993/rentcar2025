@@ -87,10 +87,10 @@ export default function Recentcarlist() {
       {/* 버튼 영역 */}
       <div className="Recent_buttons">
         {viewMore < recentViews.length && (
-          <button onClick={moreHandler} ><i class="bi bi-caret-down-fill"></i></button>
+          <button onClick={moreHandler} ><i className="bi bi-chevron-down"></i></button>
         )}
         {viewMore > 8 && (
-          <button onClick={hiddenHandler}><i class="bi bi-caret-up-fill"></i></button>
+          <button onClick={hiddenHandler}><i className="bi bi-chevron-up"></i></button>
         )}
       </div>
 

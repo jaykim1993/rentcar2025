@@ -318,7 +318,7 @@ a, p, h4, h3, h2, h1{
 .grouped_car_item .car_list_ul .car_variant_info .carPrice{
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .grouped_car_item .car_list_ul .car_variant_info .carPrice > strong{
     font-size: 20px;
@@ -331,6 +331,7 @@ a, p, h4, h3, h2, h1{
 .carPriceTotal > strong {
     font-size: 20px;
 }
+
 /* ---------------------------------- */
 
 .empty_car {
@@ -544,7 +545,7 @@ a, p, h4, h3, h2, h1{
     max-height: 1600px; 
 }
 .GrounpedCarsWrap::-webkit-scrollbar {
-  width: 5px;
+  width: 0px;
 }
 .GrounpedCarsWrap::-webkit-scrollbar-thumb {
   background:  #2591cf;

@@ -273,7 +273,9 @@ export default function Recentcar(){
                                     <i className="bi bi-chevron-right"></i>
 
                                     {startDate && endDate && startTime && endTime ? 
-                                    <div className="carPrice">
+                                    <div className="car_ee">
+                                        <p>{car.location}</p>
+                                        <div className="carPrice">
                                             <span className="carPriceTotal">
                                                 총 금액 &nbsp;
                                                 <strong>{(car_price*date).toLocaleString()}</strong>원
@@ -281,6 +283,7 @@ export default function Recentcar(){
                                             <span className="carPriceMin">(30분당&nbsp;
                                                 <strong>{car_price.toLocaleString()}</strong>원)
                                             </span>
+                                        </div>
                                     </div>
                                     :<div className="carPrice">
                                             <span className="carPriceTotal">

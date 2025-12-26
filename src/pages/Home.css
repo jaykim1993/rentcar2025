@@ -40,7 +40,7 @@ input:checked + .checkmark {
 #root .Home .H_reservation .H_dateTable.open{
     margin-top: 25px;
     background-color: #fff;
-    width: 460px;
+    width: 446px;
     height: 123px;
     margin: 0;
     border-radius: 100px;
@@ -51,7 +51,7 @@ input:checked + .checkmark {
     color: rgb(142, 142, 142);
     font-size: 15px;
     font-weight: 500;
-    padding: 34px 0 0 40px;
+    padding: 34px 0 0 20px;
 
 }
 #root .Home .H_reservation .H_spotTable .spot_choice > p {
@@ -62,10 +62,10 @@ input:checked + .checkmark {
 }
 
 #root .Home .H_reservation .H_dateTable .H_dateTitle > p{
-    font-size: 20px;
-    font-weight: 550;
+    font-size: 19px;
+    font-weight: 700;
     cursor: pointer;
-    padding: 5px 0 0 40px;
+    padding: 5px 0 0 20px;
 }
 /* 지점선택 */
 #root .Home .H_reservation .H_spotTable .spot_choice{
@@ -75,7 +75,7 @@ input:checked + .checkmark {
 #root .Home .H_reservation .H_spotTable .spot_choice.open{
     margin-top: 25px;
     background-color: #fff;
-    width: 420px;
+    width: 460px;
     height: 123px;
     margin: 0;
     padding: 33px 0 0 40px;
@@ -87,7 +87,7 @@ input:checked + .checkmark {
 } */
 #root .Home .H_reservation .H_spotTable .spot_choice .H_spotTitle >p{
     font-size: 20px;
-    font-weight: 550;
+    font-weight: 700;
     cursor: pointer;
     padding: 5px 0 0 0;
 }
@@ -179,6 +179,9 @@ input:checked + .checkmark {
     color: #424242;
 }
 /* li 내용 */
+#root .Home .H_sec_top5_map .H_good .H_good_p{
+    min-height: 120px;
+}
 #root .Home .H_sec_top5_map .H_good{
     width: 240px;
     padding-right: 20px;
@@ -192,7 +195,8 @@ input:checked + .checkmark {
 
 #root .Home .H_sec_top5 .H_sec_top5_map > li .H_good .hashtags{
     font-style: italic;
-    font-size: 14px;
+    font-size: 13px;
+    margin-top: 5px;
 }
 #root .Home .H_sec_top5 .H_sec_top5_map > li .top5_img{
     width: 280px;
@@ -290,7 +294,7 @@ input:checked + .checkmark {
     align-items: center;
     padding-bottom: 20px;
 }
-#root .Home .H_sec03 .H_more > span{
+#root .Home .H_sec_history .H_sec_history_block .H_more > span{
     color: #0b79b7;
     font-weight: 600;
     display: inline-block;
@@ -298,7 +302,7 @@ input:checked + .checkmark {
     line-height: 38px;
     padding-left: 15px;
 }
-#root .Home .H_sec03 .H_more > span:hover{
+#root .Home .H_sec_history .H_sec_history_block .H_more > span:hover{
     color: #065d8f;
 }
 #root .Home .H_sec_history_map{
@@ -394,7 +398,7 @@ input:checked + .checkmark {
 #root .Home .calendar-slide.open {
     max-height: 800px; /* 캘린더 높이 예상값 */
     position: absolute;
-    top: 150px;
+    top: 120px;
     left: 210px;
     z-index: 100;
     width: 660px;

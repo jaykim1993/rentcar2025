@@ -2,13 +2,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 70px;
+    height: 65px;
     /* background-color: #f9fafc; */
     background-color: #333;
     width: 100%;
     z-index: 99;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
     /* border-bottom: 1px solid #e2e4e9; */
 }
 .headerflex{
@@ -16,6 +16,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    transform: translateY(-14px);
 }
 .headerlogoBox {
   position: relative;
@@ -102,7 +103,7 @@
     cursor: pointer;
     color: #ececec;
 }
-.headerBtnCate:hover, .headerBrand:hover, .headerBtn:hover,.headerBtnX:hover, .bi-house-door-fill:hover{
+.headerBtnCate:hover, .headerBrand:hover, .headerBtnX:hover {
     text-shadow: 0 0 20px rgba(255, 255, 255, 1);
     color: #2591cf;
 }

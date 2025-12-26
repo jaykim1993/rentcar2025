@@ -77,7 +77,7 @@ export default function Header() {
                             <>
                                 <Link to={'/mypage/myinfo'}>
                                     <button className='headerBtn' type='text'>
-                                        <strong><div className='loginColor'>{username}</div></strong>님
+                                        <strong><div style={{color:'white', display:'inline-block'}}>{username}</div></strong>님
                                     </button>
                                 </Link>
                                     <button className='headerBtn' onClick={()=> setOpenUserBookedModal(!openUserBookedModal)} type='text'>
