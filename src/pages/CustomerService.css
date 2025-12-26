@@ -8,7 +8,7 @@
     padding: 20px;
     border-radius: 15px;
     margin-top: 60px;
-    background-image: url('./images/customer/mantoman.jpg');
+    background-image: url('/images/customer/mantoman.jpg');
     transition: 0.3s;
     cursor: pointer;
 }
@@ -159,7 +159,7 @@
     left: 50%;
     transform: translate(-50%,-50%);
     padding: 30px;
-    z-index: 100;
+    z-index: 101;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }

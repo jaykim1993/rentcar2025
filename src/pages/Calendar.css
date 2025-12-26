@@ -18,7 +18,7 @@
 .fc {
   background-color: #f9f9f9;
   color: #333;
-  width: 650px !important;
+  width: 620px !important;
   max-width: 650px !important;
   padding-bottom: 0 !important;
   font-size: 18px;
@@ -305,7 +305,7 @@
   font-weight: 500;
 }
 .calendarWrap .C_select .C_apply_btn{
-  width: 480px;
+  width: 450px;
   background-color: #000;
   color: #fff;
   padding: 13px;
@@ -344,4 +344,9 @@
 
 .C_select_hr{
   margin: 0;
+}
+
+.fc .fc-button:hover{
+  background-color: transparent;
+  color: #333;
 }

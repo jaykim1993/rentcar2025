@@ -13,7 +13,7 @@ export default function Reservation(){
     const location = useLocation();
     // navigate 보낼 때 넣었던 state 객체 꺼내기 / 비어있을 경우를 대비해 기본값 {} 설정
     const { car, filter, totalPrice, filterStartDate, filterEndDate, filterStartTime, filterEndTime } = location.state || {};
-    const { availableCars, filteredInfoUser } = useContext(CalendarContext);
+    const { availableCars, filteredInfoUser, startdayText,enddayText, DeleteYear } = useContext(CalendarContext);
     const {userid, username, user_email, user_resistnum, user_phonenum, address, address_detail, user_iskorean, user_license } = useContext(AuthContext);
     const { setBookedlistAll, calculatePrice } = useContext(BookingContext);
 
@@ -92,16 +92,69 @@ export default function Reservation(){
         setIsChange(false);
     };
 
+    //기본 결제수단 
+    const [payment, setPayment] = useState(null);
+    const payChange = (value) => {
+    setPayment(value);
+    };
+
+    //모달 세팅값
+    const [modalOpen,setModalOpen]=useState(false);
+    const [overlayOpen,setOverlayOpen]=useState(false);
+    const [backtohome,setBacktohome]=useState(null);
+
+    //홈으로가기버튼
+    const goHomeBtn=()=>{
+          setOverlayOpen(true);
+          setModalOpen(true);
+          setBacktohome(1)
+    }
+    //뒤로가기버튼
+    const goBackBtn=()=>{
+          setOverlayOpen(true);
+          setModalOpen(true);
+          setBacktohome(2)
+    }
+    //페이지이동버튼
+    const backPage=()=>{
+        setModalOpen(false);
+        setOverlayOpen(false);
+        if(backtohome ===1?navigate('/'):navigate(-1))
+        navigate(-1);
+    }
+    const stayPage=()=>{
+        setModalOpen(false);
+        setOverlayOpen(false);
+        setBacktohome(null);
+    }
+
+
     return(
         <div className="ReservationSection">
+            {modalOpen?
+            <div className="modalOpen">
+                    <i onClick={stayPage} className="bi bi-x"></i>
+                    <p className="havetologin">예약이 아직 완료되지 않았습니다.<br/>
+                        페이지를 떠나시면 입력한 내용이 사라질 수 있습니다.
+                    </p>
+                <div className="reservationmodalbtn">
+                    <button onClick={backPage}>{backtohome===1? '홈으로 이동하기':'뒤로가기'}</button>
+                    <button onClick={stayPage}>예약 계속하기</button>
+                </div>
+            </div>
+            :null}
+
+            {overlayOpen?
+            <div className="reservationOverlay"></div>:null
+            }
             {/* 좌측 운전자 정보 */}
             <div className='Reser_reservationInfo'>
                 {/* 홈 > 예약하기 > 결제하기 */}
                 <div className="R_Head">
-                    <Link to={'/'}><span style={{color: '#999'}}>홈</span></Link>
-                    <i className="bi bi-caret-right-fill" style={{color: '#999'}}></i>
-                    <span style={{color: '#999'}}>예약하기</span>
-                    <i className="bi bi-caret-right-fill" style={{color: '#999'}}></i>
+                    <span onClick={goHomeBtn} style={{color: '#999',cursor:'pointer'}}>홈</span>
+                    <i className="bi bi-chevron-right" style={{color: '#999'}}></i>
+                    <span onClick={goBackBtn} style={{color: '#999',cursor:'pointer'}}>예약하기</span>
+                    <i className="bi bi-chevron-right" style={{color: '#999'}}></i>
                     <span>결제하기</span>
                 </div>
                 <h2>결제하기</h2>
@@ -122,7 +175,7 @@ export default function Reservation(){
                             </li>
                             <li>
                                 <label>생년월일</label>
-                                <h5>{user_resistnum}</h5>
+                                <h5>{user_resistnum.slice(0,5)}-*******</h5>
                             </li>
                             <li className="address_position">
                                 <label>주소</label>
@@ -199,7 +252,7 @@ export default function Reservation(){
                         <h4 className="val">{car.location}</h4>
                         <hr />
                         <p className="label">일정</p>
-                        <h4 className="val">{filterStartDate} {filterStartTime} ~ {filterEndDate} {filterEndTime}</h4>
+                        <h4 className="val">{DeleteYear(filterStartDate)} ({startdayText}) {filterStartTime} ~ {DeleteYear(filterEndDate)} ({enddayText}) {filterEndTime}</h4>
                         <hr />
                         <p className="label">차량</p>
                         <h4 className="val">{car.model}</h4>
@@ -213,17 +266,32 @@ export default function Reservation(){
                                 <p>결제수단 선택</p>
                                 <ul>
                                     <li>
-                                        <input type='checkbox' id='payment01' />
-                                        <label for='payment01'>무통장입금</label>
+                                        <input
+                                        type="checkbox"
+                                        id="payment01"
+                                        checked={payment === "bank"}
+                                        onChange={() => payChange("bank")}
+                                        />
+                                        <label htmlFor="payment01">무통장입금</label>
                                     </li>
                                     <li>
-                                        <input type='checkbox' id='payment02' />
-                                        <label for='payment02'>카카오페이</label>
+                                        <input
+                                        type="checkbox"
+                                        id="payment02"
+                                        checked={payment === "kakao"}
+                                        onChange={() => payChange("kakao")}
+                                        />
+                                        <label htmlFor="payment02">카카오페이</label>
                                         <img src="kakao_pay.png" alt="카카오페이" className="kakao_pay" />
                                     </li>
                                     <li>
-                                        <input type='checkbox' id='payment03' />
-                                        <label for='payment03'>네이버페이</label>
+                                        <input
+                                        type="checkbox"
+                                        id="payment03"
+                                        checked={payment === "naver"}
+                                        onChange={() => payChange("naver")}
+                                        />
+                                        <label htmlFor="payment03">네이버페이</label>
                                         <img src="naver_pay.png" alt="네이버페이" className="naver_pay" />
                                     </li>
                                 </ul>
