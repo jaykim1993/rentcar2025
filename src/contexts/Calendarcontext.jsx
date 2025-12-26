@@ -12,14 +12,42 @@ export default function CalendarProvider({ children }) {
   const { cars } = useContext(DataContext);
   const { bookedlistAll } = useContext(BookingContext);
 
+  //시작 달력 초기값 정하기 13시2분이면 13시30분부터 
+  const canRentStart = new Date();
+
+  //기본 현재 시간 구하기 ex) 13
+  const tocanRentTime = canRentStart.getHours();
+  //기본 현재 분 구하기 ex)12
+  const tocanRentMin =canRentStart.getMinutes();
 
   
+
+  //30분보다 적으면 시간 그대로
+  //30분보다 크면 시간 +1
+  const CanRentHour =()=>{
+    if(tocanRentMin > 30){
+      return tocanRentTime+1
+    }else{
+      return tocanRentTime
+    } 
+  } //CarRentHour() 가 현재 13시19분이면 기본값은 13 출력
+
+  //기본 대여 분 30보다 크면
+   const canRentMin = () => {
+    return tocanRentMin > 30 ? '00' : '30';
+    };
+  
+  const FinishRentHour=()=>{
+    return CanRentHour()+1
+  }
+  
+
 
   /* ================= UI 상태 ================= */
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [startTime, setStartTime] = useState("09:00");
-  const [endTime, setEndTime] = useState("09:00");
+  const [startTime, setStartTime] = useState(`${CanRentHour()}:${canRentMin()}`);
+  const [endTime, setEndTime] = useState(`${FinishRentHour()}:${canRentMin()}`);
   // 사용자 입력 차량 위치 정보, 홈에서 공유받아야 하며 지금은 임시
   const [location, setLocation] = useState("");
   const [apply, setApply] = useState(false);
@@ -177,7 +205,6 @@ const isDisabledEndTime = (dateStr, startDateStr, startTime, endTime) => {
   // 다른 날이면 제한 없음
   return false;
 };
-
 // 오전 오후
     const timeAMPM= (time)=>{
       const hours=Number(time.slice(0,2));

@@ -143,26 +143,28 @@ const getFilteredCars = () => {
                                 온라인으로 예약이 어려우신 경우 지점을 방문하시거나 전화로 예약이 가능합니다. (고객센터 : 910-1112)
                             </p>
                             <div className="guideRentalProcessImg">
-                                <img src="./images/guideimgs/guide_1_1.jpg"/>
+                                <img src="/images/guideimgs/guide_1_1.jpg"/>
                             </div>
                             <div className="guideSecond">
                                 <h3 className="guideSecondExplain">대여 중 사고시 보상범위</h3>
                                 <table className="guidetable1">
-                                    <tr>
-                                        <th className="guidetable1th">대인</th>
-                                        <td className="guidetable1td">무한대</td>
-                                    </tr>
-                                    <tr>
-                                        <th className="guidetable1th">대물</th>
-                                        <td className="guidetable1td">사고 건당 2천만원 한도</td>
-                                    </tr>
-                                    <tr>
-                                        <th className="guidetable1th">자손</th>
-                                        <td className="guidetable1td">
-                                        · 인당 1천5백만원 한도<br/>
-                                        · 사고 건당 1억5천만원 한도
-                                        </td>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <th className="guidetable1th">대인</th>
+                                            <td className="guidetable1td">무한대</td>
+                                        </tr>
+                                        <tr>
+                                            <th className="guidetable1th">대물</th>
+                                            <td className="guidetable1td">사고 건당 2천만원 한도</td>
+                                        </tr>
+                                        <tr>
+                                            <th className="guidetable1th">자손</th>
+                                            <td className="guidetable1td">
+                                            · 인당 1천5백만원 한도<br/>
+                                            · 사고 건당 1억5천만원 한도
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                                 <span className="guideSecondExplainDetail">계약서상 등록되지 않은 운전자는 종합보험혜택을 받으실 수 없어요.</span>
                             </div>
@@ -170,22 +172,24 @@ const getFilteredCars = () => {
                                 <h3 className="guideThirdExplain">보험(차량손해면책제도)</h3>
                                 <p className="guideThirdExplainDetail">보험 가입 시 고객님의 귀책으로 인한 자차사고에 대해 보상을 받을 수 있는 제도예요.</p>
                                 <table className="guidetable2">
-                                    <tr className="guidetable2tr">
-                                        <th className="guidetable2th">구분</th>
-                                        <th className="guidetable2th">국산 · 수입차량</th>
-                                    </tr>
-                                    <tr className="guidetable2tr">
-                                        <td className="guidetable2td">선택안함</td>
-                                        <td className="guidetable2td">전액</td>
-                                    </tr>
-                                    <tr className="guidetable2tr">
-                                        <td className="guidetable2td">일반자차</td>
-                                        <td className="guidetable2td">30만원</td>
-                                    </tr>
-                                    <tr className="guidetable2tr">
-                                        <td className="guidetable2td">완전자차</td>
-                                        <td className="guidetable2td">면제</td>
-                                    </tr>
+                                    <tbody>
+                                        <tr className="guidetable2tr">
+                                            <th className="guidetable2th">구분</th>
+                                            <th className="guidetable2th">국산 · 수입차량</th>
+                                        </tr>
+                                        <tr className="guidetable2tr">
+                                            <td className="guidetable2td">선택안함</td>
+                                            <td className="guidetable2td">전액</td>
+                                        </tr>
+                                        <tr className="guidetable2tr">
+                                            <td className="guidetable2td">일반자차</td>
+                                            <td className="guidetable2td">30만원</td>
+                                        </tr>
+                                        <tr className="guidetable2tr">
+                                            <td className="guidetable2td">완전자차</td>
+                                            <td className="guidetable2td">면제</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                                 <span className="guideThirdExplainDetail">단, 대여차량 계약 시 선택한 보험 종류에 따라 고객 부담금(면책금)이 차등 적용돼요.</span>
                                 <span className="guideThirdExplainDetail">보험을 선택하지 않으면 사고 시 모든 비용을 부담해야 해요.</span>
@@ -213,7 +217,7 @@ const getFilteredCars = () => {
                             </div>
                             <div className="guideFifth">
                                 <h3 className="guideFifthExplain">대여 시 유의사항</h3>
-                                <img src="./images/guideimgs/guide_1_5.JPG"/>
+                                <img src="/images/guideimgs/guide_1_5.JPG"/>
                                 <span className="guideFifthExplainDetail">대여 당일 차량인수 시 운전면허증 지참은 필수입니다.(도로교통법상 유효한 운전면허소지자)</span>
                                 <span className="guideFifthExplainDetail">사전 동의 없이 임의로 연장해 사용하실 경우 차량 손해에 대해 보상 및 면책을 받지 못할 수 있으니, 
                                     이용 연장 시 반드시 약속된 반납 시간 이전에 대여지점으로 연락바랍니다.</span>

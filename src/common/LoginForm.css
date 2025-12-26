@@ -29,6 +29,7 @@
     font-size: 30px;
     transition: 0.3s;
     cursor: pointer;
+    color: #333;
 }
 .loginH {
     font-weight: 900;

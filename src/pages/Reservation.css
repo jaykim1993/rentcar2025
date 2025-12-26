@@ -51,7 +51,7 @@
     top: 50%;
     /* transform: translateY(-50%); */
     right: 200px;
-    border: 1px solid #333;
+    border: 1px solid #999;
     background-color: transparent;
     padding: 5px 10px;
     border-radius: 5px;
@@ -106,7 +106,7 @@ input{
     font-size: 19px;
     color: #fff;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 7px;
     margin-top: 210px;
 }
 #root .ReservationSection .Reser_reservationInfo .address_position .R_address_Modal > button:hover{
@@ -116,7 +116,7 @@ input{
     margin-bottom: 20px;
 } */
 #root .ReservationSection .Reser_reservationInfo .address_position .R_address_Modal #userAddrsearch{
-    border: 1px solid #333;
+    border: 1px solid #999;
     border-radius: 5px;
     background-color: #fff;
     color: #333;
