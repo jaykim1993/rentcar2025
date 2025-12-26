@@ -201,11 +201,11 @@ export default function Home(){
 
     // 인기순 차량 배열
     const goodCar = [
-      {model:'그랑조',img:'hy_2.webp'},
-      {model:'dmw new 5',img:'bmw_5.webp'},
-      {model:'WV7',img:'kia_2.webp'},
-      {model:'아이온',img:'hy_9.webp'},
-      {model:'GGE80',img:'ZENE_2.webp'}
+      {id:1, model:'그랑조',img:'hy_2.webp'},
+      {id:2, model:'dmw new 5',img:'bmw_5.webp'},
+      {id:3, model:'WV7',img:'kia_2.webp'},
+      {id:4, model:'아이온',img:'hy_9.webp'},
+      {id:5, model:'GGE80',img:'ZENE_2.webp'}
     ];
 
 

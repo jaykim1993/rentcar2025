@@ -355,10 +355,8 @@ export default function BookingProvider({ children }) {
 
   // 인기순 차량 선택 변수
   const [clickCar, setClickCar] = useState('');
+
   
-  const [clickCarArr, setClickCarArr] = useState([]); // 클릭된 모델 리스트 상태
-
-
 
   return (
     <BookingContext.Provider value={{
@@ -368,9 +366,7 @@ export default function BookingProvider({ children }) {
       myBookings,
       myRecentlist,
       setClickCar,
-      clickCar,
-      clickCarArr, 
-      setClickCarArr
+      clickCar
       // removeBookInfo
     }}>
       {children}

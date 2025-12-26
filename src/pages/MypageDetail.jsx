@@ -2,6 +2,7 @@ import './MypageDetail.css'
 import { useContext, useState } from "react";
 import { BookingContext } from "../contexts/Bookingcontext";
 import { AuthContext } from "../contexts/Authcontext";
+import { CalendarContext } from '../contexts/Calendarcontext';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,8 @@ export default function MypageDetail(){
     const { id } = useParams(); // 예약번호
     const { myBookings, setBookedlistAll,bookedlistAll } = useContext(BookingContext); // 예약내역 보기 함수 호출
     const { userid, username } = useContext(AuthContext); // 유저 정보 호출
+    const { DeleteYear, timeAMPM, startdayText, enddayText } = useContext(CalendarContext);
+
     const bookedThis = myBookings.find(book => book.id === id);
 
     const [showMap,setShowMap]=useState(false);
@@ -56,67 +59,67 @@ export default function MypageDetail(){
             <h1 className="guideMainText">마이페이지</h1>
             <h2 className="guideMainText">예약상세</h2>
                 <div className='myPageDetailWrap'>
-                    <div className='myPageDetailTop'>
-                        <div >
-                            <div className='myPageDetailTopflex'>
-                                <span className='myPageDetailname'>{username}</span>
-                                <span className='myPageDateLeft'>{dText}</span>
+                    <div className='myPageDetail01'>
+                        <div className='myPageDetailTop'>
+                            <div >
+                                <div className='myPageDetailTopflex'>
+                                    <span className='myPageDetailname'>{username}</span>
+                                    <span className='myPageDateLeft'>{dText}</span>
+                                </div>
+                                <div className='myPageDetailTopflex'>
+                                    <span className='myPageDetailbooknum'>예약번호</span>
+                                    <span className='myPageDetailspan1'>{bookedThis.id}</span>
+                                    <i onClick={() => copyText(bookedThis.id)} className="bi bi-copy"></i>
+                                </div>
+                                <div className='myPageDetailTopflex'>
+                                    <span className='myPageDetailwhengo'>출발일시</span>
+                                    <span className='myPageDetailspan'>{DeleteYear(bookedThis.startDate)} ({startdayText}) {timeAMPM(bookedThis.startTime)}</span>
+                                </div>
                             </div>
-                            <div className='myPageDetailTopflex'>
-                                <span className='myPageDetailbooknum'>예약번호</span>
-                                <span className='myPageDetailspan1'>{bookedThis.id}</span>
-                                <i onClick={() => copyText(bookedThis.id)} className="bi bi-copy"></i>
-                            </div>
-                            <div className='myPageDetailTopflex'>
-                                <span className='myPageDetailwhengo'>출발일시</span>
-                                <span className='myPageDetailspan'>{bookedThis.startDate} - {bookedThis.startTime}</span>
+                            <div className='myPageCancleBtnBox'>
+                                <button className='myPageCancleBtn' onClick={bookdeleteHandle}>예약 취소하기</button>
                             </div>
                         </div>
-                        <div className='myPageCancleBtnBox'>
-                            <button className='myPageCancleBtn' onClick={bookdeleteHandle}>예약 취소하기</button>
-                        </div>
-                    </div>
-                    <div className='mypageDetail2'>
-                        <div>
-                            <p>{bookedThis.car.brand}</p>
-                            <p>{bookedThis.car.model}</p>
-                        </div>
-                        <div>
-                            <img src={`/images/cars/${bookedThis.car?.car_img}`}/>
+                        <div className='mypageDetail2'>
+                            <div className='myPageDetail12_1'>
+                                <strong>{bookedThis.car.brand}</strong>
+                                <p>{bookedThis.car.model}</p>
+                            </div>
+                            <div>
+                                <img src={`/images/cars/${bookedThis.car?.car_img}`}/>
+                            </div>
                         </div>
                     </div>
                     <div className='mypageDetail3'>
-                            <div>
+                            {/* <div> */}
                                 <p className='mypageDetailP'>지역</p>
                                 <h4>{bookedThis.car.location}점</h4>
-                            </div>
+                            {/* </div> */}
                             <hr/>
-                        <div>
-                            <div>
+                        {/* <div> */}
+                            {/* <div> */}
                                 <p className='mypageDetailP'>일정</p>
-                                <h4>{bookedThis.startDate}-{bookedThis.startTime} ~ 
-                                    {bookedThis.endDate}-{bookedThis.endTime} 
+                                <h4>{DeleteYear(bookedThis.startDate)} ({startdayText}) {timeAMPM(bookedThis.startTime)} ~ 
+                                    {DeleteYear(bookedThis.endDate)} ({enddayText}) {timeAMPM(bookedThis.endTime)} 
                                 </h4>
-                                <p>이용 시간: {hours}시간{minutes ? ` ${minutes}분` : ""}</p>
-                            </div>
+                                <span>이용 시간: {hours}시간{minutes ? ` ${minutes}분` : ""}</span>
+                            {/* </div> */}
                             <hr/>
-                        </div>
-                        <div>
-                            <div>
+                        {/* </div> */}
+                        {/* <div> */}
+                            {/* <div> */}
                                 <p className='mypageDetailP'>차량</p>
                                 <h4>{bookedThis.car.model}</h4>
-                                <h4>{bookedThis.car.model_year}년식</h4>
-                                <h4>{bookedThis.car.fuel_type}</h4>
-                                <p>이용 시간 : {hours}시간{minutes ? ` ${minutes}분` : ""}</p>
-                            </div>
+                                <span>{bookedThis.car.model_year}년식 {bookedThis.car.fuel_type}</span>
+                            {/* </div> */}
                             <hr/>
-                        </div>
-                        <div>
-                            <div>
+                        {/* </div> */}
+                        {/* <div> */}
+                            {/* <div> */}
                                 <p className='mypageDetailP'>결제</p>
                                 <h4>{bookedThis.price.toLocaleString()}원</h4>
-                            </div>
-                        </div>
+                            {/* </div> */}
+                        {/* </div> */}
                     </div>
                     <div className='mypageDetailBackBox' >
                         <button className='mypageDetailBack' onClick={()=>navigate(-1)} >뒤로가기</button>
