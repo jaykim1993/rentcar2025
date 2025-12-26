@@ -264,6 +264,7 @@ a, p, h4, h3, h2, h1{
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover h4,
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover p,
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover strong,
+#root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover span,
 #root .Recentcar .R_carlist .car_list_ul .car_variant_info:hover i{
     color: #0b79b7;
 }
@@ -322,20 +323,22 @@ a, p, h4, h3, h2, h1{
 .grouped_car_item .car_list_ul .car_variant_info .carPrice > strong{
     font-size: 20px;
 }
-
+.carPriceMin {
+    font-size: 15px;
+    color: #666666;
+    margin-left: 20px;
+}
+.carPriceTotal > strong {
+    font-size: 20px;
+}
 /* ---------------------------------- */
 
-/* 예약섹션 */
-/* #root .R_carlist .R_reservation{
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 80px;
-    border: 1px solid #ccc;
-    border-radius: 100px;
-    background-color: #f2f2f2;
-    margin: 50px auto;
-    width: 720px;
-} */
+.empty_car {
+    padding: 60px 0;
+    text-align: center;
+    color: #888;
+    font-size: 17px;
+}
 #root .R_carlist .R_reservation{
     display: flex;
     /* border: 1px solid red; */
@@ -382,7 +385,7 @@ a, p, h4, h3, h2, h1{
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     position: absolute;
-    top: 80px;
+    margin-top: 30px;
     left: -460px;
     z-index: 100;
 }
@@ -393,7 +396,8 @@ a, p, h4, h3, h2, h1{
     overflow: hidden;
     transition: max-height 0.3s ease;
     position: absolute;
-    top: 120px;
+    margin-top: 30px;
+    top: 140px;
     z-index: 100;
     width: 1060px;
    height: 620px;
@@ -412,7 +416,7 @@ a, p, h4, h3, h2, h1{
 .calendar-slide.open {
   max-height: 800px; /* 캘린더 높이 예상값 */
   position: absolute;
-  top: 120px;
+  top: 140px;
   right: 0;
   z-index: 100;
    width: 665px;
@@ -528,4 +532,20 @@ a, p, h4, h3, h2, h1{
     height: 100%;
     background-color: #f9fafc;
     z-index: -10;
+}
+
+.GrounpedCarsWrap{
+    max-height: 880px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: max-height 0.4s ease;
+}
+.GrounpedCarsWrap.open {
+    max-height: 1600px; 
+}
+.GrounpedCarsWrap::-webkit-scrollbar {
+  width: 5px;
+}
+.GrounpedCarsWrap::-webkit-scrollbar-thumb {
+  background:  #2591cf;
 }

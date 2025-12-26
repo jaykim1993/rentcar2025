@@ -17,9 +17,9 @@ import 'leaflet/dist/leaflet.css';
 
 export default function Home(){
   const navigate = useNavigate();
-  const {setLocation, location, startDate, endDate ,startTime, endTime, apply,
+  const {setLocation, location, startDate, endDate ,startTime, endTime, apply, setApply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar,startdayText, 
-         enddayText, DeleteYear, timeAMPM } = useContext(CalendarContext);
+         enddayText, DeleteYear, timeAMPM} = useContext(CalendarContext);
   const {myRecentlist,setClickCar} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
@@ -212,11 +212,14 @@ export default function Home(){
   return(
     <div className="Home">
         {/* 예약 섹션 */}
+        <div className="H_secone">
       <div className="H_reservation">
+
         <div className={`H_dateTable ${isCalendar ? "open" : ""}`}>
           <p>언제 필요하세요?</p>
           <div className="H_dateTitle" onClick={calendarHandler}>
-            {apply?
+            {/* 날짜를 선택하세요 출력 조건 수정 12.26 */}
+            {startDate? 
             <p>
               {startDate && endDate && (
                 <>
@@ -239,13 +242,21 @@ export default function Home(){
             :<p>지점을 선택하세요</p>}
             </div>
           </div>
-          <button className="H_searchButton" type="submit" onClick={() => {handleSearchBtn(navigate);CloseHandler();}}>
+          <button
+              className="H_searchButton"
+              type="submit"
+              onClick={() => {
+                setApply(true);
+                handleSearchBtn(navigate);
+                CloseHandler();
+              }}
+            >
             예약할 차량 찾기&nbsp;
             <i className="bi bi-arrow-right"></i>
           </button>
         </div>
       </div>
-
+</div>
       {/* 지점 모달 파트 */}
       {isLocation && (
         <div className="H_location">
@@ -380,20 +391,20 @@ export default function Home(){
 
       {/* 광고_1 */}
       <div className="H_section05">
-        <Link to={'/guide'}>
           <h4 className="H_sec04_H">
             원하는 차량을 어디서나 빠르게!
           </h4>
-        </Link>
+
+
         <ul className="H_sec04_list">
           {homeAD.map((item) => (
-            <li key={item.id} className="H_sec04_card">
+            <Link to={'/guide'} key={item.id} ><li className="H_sec04_card">
               <div className="H_sec04_imgWrap">
                 <img className="H_sec04_img" src={item.icon} alt={item.title} />
               </div>
               <h3 className="H_sec04_h3">{item.title}</h3>
               <p className="H_sec04_p">{item.desc}</p>
-            </li>
+            </li></Link>
           ))}
         </ul>
       </div>
