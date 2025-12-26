@@ -54,21 +54,21 @@ useEffect(() => {
 
     return(
 
-        <div className='FooterContainer'>
+        <div className='FooterContainer' style={{userSelect:'none'}}>
             {totop?
             <div className="FooterScrollToTop">
-                <button type="button" onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}><i className="bi bi-chevron-up"></i></button>
+                <button type="button" onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}><i class="bi bi-arrow-up-short"></i></button>
             </div>:null
             }
-            <div className="FooterShowRecent" style={{bottom:`${moverecentcar?`200px`:`100px`}`}}>
+            <div className="FooterShowRecent" style={{bottom:`${moverecentcar?`150px`:`80px`}`}}>
                  {recentViews?.length > 0 && (
-                   <button type="button" onClick={() => {gotoRecentsideBtn();window.scrollTo({ top: 0, behavior: 'smooth' });}}>
-                    <img
-                        className="recentcarimg"
-                        src={`/images/cars/${recentViews[0].car_img}`}
-                        alt="최근 본 차량"
-                    />
-                    </button>
+                        <button type="button" onClick={gotoRecentsideBtn}>
+                            <img
+                                className="recentcarimg"
+                                src={`/images/cars/${recentViews[0].car_img}`}
+                                alt="최근 본 차량"
+                            />
+                        </button>
                 )}
             </div>
             <div className='Footer'>
@@ -102,6 +102,10 @@ useEffect(() => {
                                         <p>사업자등록번호 214-87-79183</p>
                                         <p>통신판매업신고번호 제2010-경기안양-420호</p>
                                         <p>이메일 charangcharang@green.com</p>
+                                    </div>
+                                    <div className='F_infoLi02'>
+                                        <p>평일 09:00 ~ 18:00 (주말·공휴일 휴무)</p>
+                                        <p>24시간 온라인 예약 가능</p>
                                     </div>
                                 </div>
                             </ul>

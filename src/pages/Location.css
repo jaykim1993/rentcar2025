@@ -32,7 +32,7 @@
 }
 
 .locationDetailBox{
-    border: 1px solid rgb(179, 179, 179);
+    border: 1px solid #999;
     margin-top: 80px;
     padding: 30px;
     border-radius: 15px;
@@ -75,7 +75,7 @@
     margin-bottom: 20px;
 }
 .LocationHowComeBox{
-    border: 1px solid rgb(179, 179, 179);
+    border: 1px solid #999;
     border-radius: 15px;
     list-style: none;
     margin-bottom: 100px !important;
@@ -99,6 +99,9 @@
     font-size: 14px;
     margin: 5px 0 20px 5px;
     font-weight: 400;
+}
+.LocationUl hr {
+    margin: 10px 0;
 }
 .LocationClickMarker{
     font-size: 18px;
@@ -145,7 +148,7 @@
     width: 210px;
     font-size: 16px;
     border: none;
-    border-radius: 15px 15px 0 0 ;
+    border-radius: 7px 7px 0 0 ;
     margin-top: 30px;
 }
 .Locationdropdown{
@@ -174,7 +177,7 @@
   background:  #2591cf;
 }
 .tableOpener{
-    font-size: 20px;
+    font-size: 18px;
     background-color: inherit;
     width: 100%;
     padding: 20px 40px;
@@ -231,7 +234,7 @@
 }
 
 .LocationPage3Ol{
-    border: 1px solid #7a7a7a;
+    border: 1px solid #999;
     border-radius: 15px;
     padding: 30px;
     margin-top: 100px;
@@ -248,15 +251,14 @@
     margin: 130px auto;
 }
 .LocationPage3Btn{
-    font-size: 20px;
+    font-size: 19px;
     width: 100%;
-    padding: 20px 40px;
+    padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #2591cf;
+    background-color: #0b79b7;
     color: white;
     transition: 0.3s;
-    font-weight: 500;
     margin-bottom: 100px;
 }
 .LocationupBtnBox{

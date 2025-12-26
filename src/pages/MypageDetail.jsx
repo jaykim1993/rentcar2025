@@ -123,7 +123,7 @@ export default function MypageDetail(){
                         {/* </div> */}
                     </div>
                     <div className='mypageDetailBackBox' >
-                        <button className='mypageDetailBack' onClick={()=>navigate(-1)} >뒤로가기</button>
+                        <button className='mypageDetailBack' onClick={()=>{navigate(-1);window.scrollTo(0,0);}} >뒤로가기</button> 
                     </div>
                 </div>
         </>

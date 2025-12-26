@@ -313,6 +313,16 @@
   border: #000;
 }
 
+/* searchCarList에서 버튼 사이즈 다르길래 30픽셀 추가해서 맞췄음. -찬하-*/
+.Recentcar .C_select .C_apply_btn{
+  width: 480px;
+  background-color: #000;
+  color: #fff;
+  padding: 13px;
+  border-radius: 5px;
+  border: #000;
+}
+
 .fc .fc-multimonth-compact .fc-multimonth-daygrid-table, .fc .fc-multimonth-compact .fc-multimonth-header-table{
   cursor: pointer;
 }

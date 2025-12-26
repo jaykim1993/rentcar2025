@@ -16,7 +16,7 @@ export default function Recentcar(){
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, setStartDate, setEndDate, setApply,
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear,timeAMPM} = useContext(CalendarContext);
     const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar, finalPrice} = useContext(BookingContext);
-    const { userid, setModal } = useContext(AuthContext); // 미로그인 시 방어코드 12.22 -성중
+    const { userid, setModal } = useContext(AuthContext);
 
     // ================= 달력 관련 =================
 
@@ -61,17 +61,6 @@ export default function Recentcar(){
         setIsDetail(null);
         // setClickCar('');
     },[isLocation]);
-
-    // const handleResetAll = () => {
-    //     // 달력/위치 컨텍스트 초기화
-    //     setLocation(null); 
-    //     handleSearchBtn(navigate); 
-        
-    //     // 현재 페이지의 필터 UI 초기화
-    //     resetFilters();
-        
-    //     alert("검색 조건이 초기화되었습니다.");
-    // };
 
 
     // ================= 필터 판별 =================
@@ -120,11 +109,13 @@ export default function Recentcar(){
         setDisplayedCars(availableCars);
     }, [availableCars]);
 
+    
     // ================= 필터 적용 =================
     const updateDisplayedCars = (filters) => {
         const filtered = availableCars.filter(car => filterCar(car, filters));
         setDisplayedCars(filtered);
     };
+    
 
     const toggleFilter = (category, value) => {
         const current = selectedFilters[category];
@@ -155,17 +146,10 @@ export default function Recentcar(){
     };
 
     // ================= 그룹화 =================
-        // 외부에서 차량 모델명 가져와서 랜더링하기 12.23 - 성중
     const { state } = useLocation();
     const selectedModel = state?.model;
-    // const groupedCars = {};
     const [groupedCars, setGroupedCars] = useState({});
-    // for(const car of displayedCars){
-    //     if (!groupedCars[car.model]) groupedCars[car.model] = [];
-    //     groupedCars[car.model].push(car);
-    // }
 
-    console.log(selectedModel);
     const [carNum, setCarNum] = useState();
 
     useEffect(() => {
@@ -214,7 +198,6 @@ export default function Recentcar(){
 
 
     // ================= 출력 =================
-        // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
     const navigate = useNavigate();
     
     const goToDetail = (carId) => {
@@ -240,7 +223,11 @@ export default function Recentcar(){
     // 출력 함수
     const renderGroupedCars = () => {
         const result = [];
-
+    if (!groupedCars || Object.keys(groupedCars).length === 0) {
+        return (
+            <p className="empty_car">선택 가능한 차량이 없습니다.</p>
+        );
+    }
     // 총 가격 산출 
     // 가격 계산
     let date = (new Date(`${endDate}T${endTime}`)-new Date(`${startDate}T${startTime}`))/ (1000 * 60 * 30);
@@ -254,7 +241,6 @@ export default function Recentcar(){
             const first = group[0];
             
             result.push(
-                // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
                 <li key={modelName} className="grouped_car_item">
                         <div>
                             <img
@@ -287,14 +273,21 @@ export default function Recentcar(){
                                     <i className="bi bi-chevron-right"></i>
 
                                     {startDate && endDate && startTime && endTime ? 
-                                    <p className="carPrice">
-                                        총 금액 &nbsp;
-                                        <strong>{(car_price*date).toLocaleString()}</strong>원
-                                    </p>
-                                    :<p className="carPrice">
-                                        30분당&nbsp;
-                                        <strong>{car_price.toLocaleString()}</strong>원
-                                    </p>}
+                                    <div className="carPrice">
+                                            <span className="carPriceTotal">
+                                                총 금액 &nbsp;
+                                                <strong>{(car_price*date).toLocaleString()}</strong>원
+                                            </span> 
+                                            <span className="carPriceMin">(30분당&nbsp;
+                                                <strong>{car_price.toLocaleString()}</strong>원)
+                                            </span>
+                                    </div>
+                                    :<div className="carPrice">
+                                            <span className="carPriceTotal">
+                                                30분당&nbsp;
+                                                <strong>{car_price.toLocaleString()}</strong>원
+                                            </span>
+                                    </div>}
                                 </div>
                             );
                             })}
@@ -304,7 +297,6 @@ export default function Recentcar(){
         }
         return result;
     };
-    // 미로그인 시 + 날짜 지점 미선택 시 방어코드 12.23 -성중
 
     // 필터 초기화 시 navigate 전달 오류 해결
     const handleResetAll = () => {
@@ -318,35 +310,8 @@ export default function Recentcar(){
         resetFilters();
         alert("검색 조건이 초기화되었습니다.");
     };
-
-
-
-    // 개별 모델 리스트 렌더링
-    // const renderIndividualCars = () => {
-    //     return (
-    //         <div className="clickCarHandler">
-    //             <ul className="car_list_ul">
-    //                 {clickCarArr.map((item) => (
-    //                     <li key={item.id} className="car_variant_info">
-    //                         <Link to={`/detailpage/${item.id}`}>
-    //                             <img src={`images/cars/${item.car_img}`} alt={item.model} style={{width: '100px'}}/>
-    //                             <h4>{item.model} {item.fuel_type}</h4>
-    //                             <p>{item.model_year}년식 · {item.car_size}</p>
-    //                             <p className="carPrice">
-    //                                 30분당 <strong>{calculatePrice(item).toLocaleString()}</strong>원
-    //                             </p>
-    //                         </Link>
-    //                     </li>
-    //                 ))}
-    //             </ul>
-    //         </div>
-    //     );
-    // };
-    
-    
-    // setClickCarArr(clickCarResult);
-    // console.log('클릭한 차량 리스트: ',clickCarArr);
-
+    // 더보기 버튼 추가 12.26 성중
+    const [tdOpen, setTdOpen] = useState(false);
     return(
         <div className="Recentcar">
             {/* 카테고리 */}
@@ -558,7 +523,8 @@ export default function Recentcar(){
                         <div className="R_dateTable" style={{cursor:'pointer'}}>
                             <div className="R_dateTitle" onClick={calendarHandler}>
                                 <p>언제 필요하세요?</p>
-                                {apply?
+                                {/* 날짜를 선택하세요 출력 조건 수정 12.26 */}
+                                {startDate?
                                 <h4>
                                     {startDate && endDate && (
                                         <>
@@ -685,9 +651,12 @@ export default function Recentcar(){
                     )}
                 </div>
                 <p>총&nbsp;<strong>{selectedModel ?  carNum : displayedCars.length}</strong>&nbsp;종</p>
-                <ul>
+                <ul className={`GrounpedCarsWrap ${tdOpen ? 'open' : ''}`}>
                     {renderGroupedCars()}
                 </ul>
+                <button className="tableOpener" onClick={() => setTdOpen(!tdOpen)}>
+                    {tdOpen ? '접기' : '더보기'}
+                </button>
             </div>
             <div className="background_gray"></div>
         </div>

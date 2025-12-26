@@ -1,14 +1,15 @@
-.header {
+.header{
     position: fixed;
     top: 0;
     left: 0;
-    height:70px; 
-    background-color: #f9fafc;
+    height: 70px;
+    /* background-color: #f9fafc; */
+    background-color: #333;
     width: 100%;
     z-index: 99;
     margin: 0 auto;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #e2e4e9;
+    padding: 0 20px;
+    /* border-bottom: 1px solid #e2e4e9; */
 }
 .headerflex{
     display: flex;
@@ -16,19 +17,54 @@
     align-items: center;
     position: relative;
 }
-.headerLogolink{
-    vertical-align: middle;
+.headerlogoBox {
+  position: relative;
+  overflow: visible;
+  width: 600px;
 }
+.animate-logo {
+  animation: logoSlideFloat 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes logoSlideFloat {
+  /* 원래 위치 (중앙) */
+  0% {
+    transform: translateX(380px);
+    opacity: 1;
+  }
+
+  /* 왼쪽으로 이동 */
+  20% {
+    transform: translateX(-100px);
+    opacity: 1;
+  }
+
+  /* 고정 + 위아래 흔들림 */
+  35% {
+    transform: translate(-100px, -3px);
+  }
+
+  50% {
+    transform: translate(-100px, 3px);
+  }
+
+  65% {
+    transform: translate(-100px, -3px);
+  }
+  /* 다시 중앙으로 들어오며 사라짐 */
+  100% {
+    transform: translateX(380px);
+    opacity: 1;
+  }
+}
+
 .headerLogo {
     width: 100px;
-    justify-self: center;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
 }
 .bi-list{
-    color: #0b79b7;
+    color: #ececec;
+}
+.bi-house-door-fill{
+    color: #ececec;
 }
 .headerBrand{
     display: inline-block;
@@ -64,10 +100,11 @@
     font-size: 1rem;
     transition: 0.3s;
     cursor: pointer;
+    color: #ececec;
 }
-.headerBtnCate:hover, .headerBrand:hover, .headerBtn:hover,.headerBtnX:hover{
-    text-shadow: 0 0 20px rgba(0,0,0,0.4);
-    color: #065d8f;
+.headerBtnCate:hover, .headerBrand:hover, .headerBtn:hover,.headerBtnX:hover, .bi-house-door-fill:hover{
+    text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+    color: #2591cf;
 }
 .headerUserBookedModal {
     position: absolute;
@@ -148,17 +185,16 @@
     cursor: pointer;
 }
 .headerModalBtn {
+    border: none;
     width: 100%;
     margin-top: 20px;
     padding: 12px 0;
-    border: none;
     background: #0b79b7;
     color: white;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
     transition: 0.2s;
-    
 }
 .headerModalBtn:hover {
     background: #065d8f;
@@ -173,6 +209,9 @@
     width: 277px;
     height: 277px;
 }
+
+/* ---------------------------------- */
+
 .headerNavAd {
     width: 100%;
     height: 300px;
@@ -236,11 +275,11 @@
 .headerNavLi {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    padding: 12px;
     border-bottom: 1px solid #eee;
     font-size: 20px;
     transition: 0.3s;
-    border-radius: 10px;
+    border-radius: 7px;
     cursor: pointer;
 }
 .headerNavLi:hover {
