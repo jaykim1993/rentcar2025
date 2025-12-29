@@ -15,7 +15,7 @@ export default function Recentcar(){
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, setStartDate, setEndDate, setApply,
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear,timeAMPM} = useContext(CalendarContext);
-    const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar, finalPrice} = useContext(BookingContext);
+    const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar, finalPrice ,resetTest,setResetTest} = useContext(BookingContext);
     const { userid, setModal } = useContext(AuthContext);
 
     // ================= 달력 관련 =================
@@ -105,9 +105,10 @@ export default function Recentcar(){
     const [displayedCars, setDisplayedCars] = useState(availableCars);
 
     /* 달력 조건 바뀌면 목록 초기화 */
-    useEffect(() => {
-        setDisplayedCars(availableCars);
-    }, [availableCars]);
+   useEffect(() => {
+    updateDisplayedCars(selectedFilters); // 현재 필터 적용
+    }, [availableCars, selectedFilters, startDate, endDate]);
+
 
     
     // ================= 필터 적용 =================
@@ -233,6 +234,7 @@ export default function Recentcar(){
     let date = (new Date(`${endDate}T${endTime}`)-new Date(`${startDate}T${startTime}`))/ (1000 * 60 * 30);
 
     //  console.log('기간: ',date);
+    console.log(resetTest)
 
         
 
@@ -322,6 +324,9 @@ export default function Recentcar(){
       iconSize: [25, 41],
       iconAnchor: [12, 41],
     });
+
+
+ 
 
 
     return(
