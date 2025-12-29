@@ -142,6 +142,14 @@ export default function DetailPage(){
         })
     };
 
+       const SelectedIcon = new L.Icon({
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+    });
+
+
 
     return(
         <div className="DetailPage">
@@ -231,7 +239,9 @@ export default function DetailPage(){
                         />
                         {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
                         {positions.map((spot) => (
-                        <Marker key={spot.id} position={[spot.lat, spot.lng]}>
+                        <Marker key={spot.id} position={[spot.lat, spot.lng]}
+                        icon={SelectedIcon}
+                        >
                             <Popup>{spot.name}</Popup>
                         </Marker>
                         ))}
@@ -292,6 +302,7 @@ export default function DetailPage(){
 
                     <div className="price_total">
                         <p>총&nbsp;&nbsp;<strong>{totalPrice.toLocaleString()}</strong>&nbsp;원</p>
+                        <span>(보험금 별도)</span>
                     </div>
                     <button className="reserve_btn"
                     // onClick={addBookInfo}

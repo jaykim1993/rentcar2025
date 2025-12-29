@@ -11,9 +11,6 @@
     font-weight: 600;
     margin: 15px 0 10px 0;
 }
-#root .myPageDetailWrap .mypageDetail3 > h5{
-    
-}
 #root .myPageDetailWrap .mypageDetail3 > span{
     font-size: 16px;
     font-weight: 500;
@@ -149,4 +146,12 @@
     font-size: 18px;
     font-weight: 600;
     color: #7a7a7a;
+}
+.mybookDetailPriceBox{
+    display: flex;
+    justify-content: space-between
+}
+.DetailSpans{
+    font-size: 18px;
+    font-weight: 550;
 }

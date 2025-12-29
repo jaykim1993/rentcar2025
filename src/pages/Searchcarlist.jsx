@@ -14,7 +14,7 @@ export default function Recentcar(){
 
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, setStartDate, setEndDate, setApply,
-        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear,timeAMPM} = useContext(CalendarContext);
+        apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear, timeAMPM} = useContext(CalendarContext);
     const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar, finalPrice} = useContext(BookingContext);
     const { userid, setModal } = useContext(AuthContext);
 

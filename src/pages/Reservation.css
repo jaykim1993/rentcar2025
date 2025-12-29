@@ -304,3 +304,7 @@ input{
     align-items: center;
     z-index: 100;
 }
+.reserPriceBox{
+    display: flex;
+    justify-content: space-between;
+}

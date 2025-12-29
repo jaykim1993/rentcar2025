@@ -9,6 +9,7 @@
 }
 #root .Home .calendar-slide.open{
   height: 575px;
+  width: 676px;
 }
 /* 상단 화살표 */
 .fc .fc-toolbar.fc-header-toolbar{
@@ -18,7 +19,8 @@
 .fc {
   background-color: #f9f9f9;
   color: #333;
-  width: 620px !important;
+  width: 640px !important;
+  /* height: 350px; */
   max-width: 650px !important;
   padding-bottom: 0 !important;
   font-size: 18px;
@@ -328,6 +330,7 @@
 }
 .fc .fc-multimonth{
   border: none;
+  height: 310px;
 }
 .select option:disabled {
   color: #aaa;
