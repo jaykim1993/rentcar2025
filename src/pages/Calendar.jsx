@@ -200,7 +200,8 @@ const dayCellClassNames = (arg) => {
         ref={calendarRef}
         plugins={[multiMonthPlugin, interactionPlugin]}
         initialView="twoMonth"
-        locale={koLocale}
+        locale={koLocale} 
+        showNonCurrentDates={false}
         dayCellClassNames={dayCellClassNames}
         dateClick={(info) => {
           const todayStr = new Date().toISOString().split("T")[0];

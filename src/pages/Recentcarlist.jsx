@@ -49,7 +49,7 @@ export default function Recentcarlist() {
     });
   };
   if (!userid) return <p>로그인 후 이용해주세요.</p>;
-  if (!recentViews.length) return <p>최근 본 차량이 없습니다.</p>;
+  if (!recentViews.length) return <div className="Recent_car_list"><p style={{textAlign: 'center'}}>최근 본 차량이 없습니다.</p></div>;
 
   useEffect(() => {
   window.scrollTo(0, 0);
