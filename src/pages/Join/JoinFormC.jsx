@@ -77,7 +77,7 @@ export default function JoinFormC({ userid, userpw, onClose, onComplete }) {
 
         try {
             const res = await axios.post(
-                'http://localhost/rentcar2025/backend/api/join.php',
+                '/api/join.php',
                 {
                     userid,
                     userpw,
