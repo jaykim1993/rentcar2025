@@ -123,6 +123,12 @@ const getFilteredCars = () => {
 
     return(
             <div className="guideWrap">
+                 <div className="guideTop">
+                    {/* 수정 필요 */}
+                    <div><Link to={'/'} className="guideGoToHome">홈</Link></div>
+                    <span><i className="bi bi-caret-right-fill"></i></span>
+                    <div>이용가이드</div>
+                </div>
                 <div className="guideFlex">
                     <div className="guideLeft">
                         <h2 className="guideSideText">이용가이드</h2>

@@ -16,8 +16,8 @@ export default function MypageBooked() {
   // console.log(myBookings)
   // console.log(bookedlistAll)
 
-  // 예약한 순서대로 정렬
-  const sortedByLatest = [...myBookings].sort((a, b) => b.id - a.id);
+  // 예약날짜 가까운 순서대로 정렬
+  const sortedByLatest = [...myBookings].sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
   const sortedByLatestCopy = [...sortedByLatest];
   sortedByLatestCopy.push(() => {

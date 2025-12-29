@@ -20,11 +20,11 @@ export default function Mypage(){
 
   return(
     <div className="guideWrap">
-      {/* <div className="guideTop">
-        <div className="guideGoToHome" to={'/'}>홈</div>
+      <div className="guideTop">
+        <div><Link to={'/'} className="guideGoToHome">홈</Link></div>
         <span><i className="bi bi-caret-right-fill"></i></span>
-        <div>이용가이드</div>
-      </div> */}
+        <div>마이페이지</div>
+      </div> 
       <div className="guideFlex">
         <div className="guideLeft">
           <h2 className="guideSideText"><div className='loginColor'>{username}</div>님,</h2>

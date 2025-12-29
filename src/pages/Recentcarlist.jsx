@@ -79,7 +79,7 @@ const [recentView, setRecentView] = useState([]);
     <div className="Recent_car_list">
 
       <div className="Recent_Head">
-          <Link to={'/'}><span>홈</span></Link>
+          <Link to={'/'}><span style={{color:'rgb(160, 160, 160)'}}>홈</span></Link>
           <i class="bi bi-caret-right-fill"></i>
           <span>최근 본 차량</span>
       </div>
