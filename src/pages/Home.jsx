@@ -20,7 +20,7 @@ export default function Home(){
   const {setLocation, location, startDate, endDate ,startTime, endTime, apply, setApply,
          handleSearchBtn, setIsLocation,setIsCalendar,isLocation, isCalendar,startdayText, 
          enddayText, DeleteYear, timeAMPM} = useContext(CalendarContext);
-  const {myRecentlist,setClickCar} = useContext(BookingContext);
+  const {myRecentlist,setClickCar,setResetTest,resetTest} = useContext(BookingContext);
   const {userid, username} = useContext(AuthContext);
   const {cars} = useContext(DataContext);
 
@@ -427,7 +427,7 @@ export default function Home(){
         </div> */}
         <ul className="H_sec_top5_map">
           {goodCar.map((item,index)=>(
-            <li key={index} onClick={()=>{goToSearchcarlist(item.model);scrollTo(0,0)}}>
+            <li key={index} onClick={()=>{goToSearchcarlist(item.model); scrollTo(0,0);}}>
               <span className="H_sec_top5_rank">{index + 1}</span>
               <div className="top5_img">
                 <img src={`/images/cars/${item.img}`} alt={item.carTitle}/>

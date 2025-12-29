@@ -57,7 +57,7 @@ useEffect(() => {
         <div className='FooterContainer' style={{userSelect:'none'}}>
             {totop?
             <div className="FooterScrollToTop">
-                <button type="button" onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}><i class="bi bi-arrow-up-short"></i></button>
+                <button type="button" onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}><i className="bi bi-arrow-up-short"></i></button>
             </div>:null
             }
             <div className="FooterShowRecent" style={{bottom:`${moverecentcar?`150px`:`80px`}`}}>
