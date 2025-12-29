@@ -84,10 +84,10 @@ const [recentView, setRecentView] = useState([]);
           <span>최근 본 차량</span>
       </div>
 
-      <p>총&nbsp;<strong>{recentViews.length}</strong>&nbsp;대</p>
-      {recentViews.length > 0?
+      <p>총&nbsp;<strong>{recentView.length}</strong>&nbsp;대</p>
+      {recentView.length > 0?
       <ul className="Recent_ByDate">
-        {recentViews.slice(0,viewMore).map(item => (
+        {recentView.slice(0,viewMore).map(item => (
           // 해당 차량 브랜드 searchcarlist로 넘기기 12.23 성중
           <div className="hihihihi">
             <div className="RecentDelBox">
