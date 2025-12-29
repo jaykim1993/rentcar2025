@@ -17,7 +17,7 @@ export default function Mypage(){
   // if (!myBookings.length) return <p>예약내역이 없습니다.</p>;
   // 위에 방어코드 있으면 화면 전체 렌더오류 발생 헤더랑 푸터만남음
   // !myBookings.length 
-
+//
   return(
     <div className="guideWrap">
       <div className="guideTop">
