@@ -73,7 +73,7 @@ const [recentView, setRecentView] = useState([]);
     return filtered;
   });
   };
-
+//
 
   return (
     <div className="Recent_car_list">
