@@ -48,12 +48,32 @@ export default function Recentcarlist() {
       state: { model }
     });
   };
-  if (!userid) return <p>로그인 후 이용해주세요.</p>;
-  if (!recentViews.length) return <p>최근 본 차량이 없습니다.</p>;
 
   useEffect(() => {
   window.scrollTo(0, 0);
   }, []);
+
+const [recentView, setRecentView] = useState([]);
+
+  useEffect(() => {
+  const raw = localStorage.getItem("recentView");
+  if (raw) {
+    setRecentView(JSON.parse(raw));
+  }
+  }, []);
+
+  //삭제
+  const removeRecentView = (carId) => {
+  setRecentView(prev => {
+    const filtered = prev.filter(
+      item => !(item.userid === userid && item.car_id === carId)
+    );
+
+    localStorage.setItem("recentView", JSON.stringify(filtered));
+    return filtered;
+  });
+  };
+
 
   return (
     <div className="Recent_car_list">
@@ -65,14 +85,16 @@ export default function Recentcarlist() {
       </div>
 
       <p>총&nbsp;<strong>{recentViews.length}</strong>&nbsp;대</p>
-
+      {recentViews.length > 0?
       <ul className="Recent_ByDate">
-
         {recentViews.slice(0,viewMore).map(item => (
           // 해당 차량 브랜드 searchcarlist로 넘기기 12.23 성중
-          <li className="Recent_ByDate" key={item.id} onClick={()=>goToSearchcarlist(item.model)}>
-
-            <div className="Recent_car_item">
+          <div className="hihihihi">
+            <div className="RecentDelBox">
+                <button className="RecentDel"><i  onClick={() => removeRecentView(item.car_id)} className="bi bi-x"></i></button>
+            </div>
+            <li className="Recent_ByDate" key={item.id} >
+            <div className="Recent_car_item" onClick={()=>goToSearchcarlist(item.model)}>
               <img className="Recent_logo" src={`/images/brands/${item.brand}.png`}/>
               <img
                 src={`/images/cars/${item.car_img}`}
@@ -82,9 +104,16 @@ export default function Recentcarlist() {
               <p className="RecentCar_viewDate">최근 본 날짜 : {item.viewDate.replaceAll('-','.')}</p>
             </div>
           </li>
+          </div>
         ))}
       </ul>
-      {/* 버튼 영역 */}
+      :
+      <div className="noRecentCar">
+        <span>최근 본 차량이 없습니다.</span>
+      </div>
+      }
+      
+      {/* 버튼 영역 8개보다 많으면 생기게 */}
       <div className="Recent_buttons">
         {viewMore < recentViews.length && (
           <button onClick={moreHandler} ><i className="bi bi-chevron-down"></i></button>

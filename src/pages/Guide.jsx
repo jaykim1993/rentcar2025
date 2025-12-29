@@ -249,15 +249,14 @@ const getFilteredCars = () => {
                         )}
                     </div>
                         <span>차량의 기본 대여 금액과 보험 금액은 차량 브랜드별로 가치를 가지며, </span>
-                        <p>차량의 연식, 차량 크기, 연료, 옵션 유무에 따라 가격이 계산됩니다.   </p>
+                        <p>차량의 연식, 차량 크기, 연료, 옵션 유무에 따라 가격이 계산됩니다.</p>
                         <div className={`LoTableWrap ${tdOpen ? 'open' : ''}`}>
                             <table className="guideTable">
                                 <thead className="guideThead">
                                     <tr className="guideTr">
                                         <th className="guideTh">차종</th>
-                                        <th className="guideTh">기본 요금 (1시간)</th>
-                                        <th className="guideTh">일반 자차 (24시간)</th>
-                                        <th className="guideTh">완전 자차 (24시간)</th>
+                                        <th className="guideTh">기본 요금 (30분)</th>
+                                        <th className="guideTh">보험 요금 (24시간)</th>
                                     </tr>
                                 </thead>
                                 <tbody className="guideTbody">
@@ -266,11 +265,9 @@ const getFilteredCars = () => {
                                     <tr key={car.id}>
                                         <td className="guideTd">{car.model}</td>
                                         {/* 시간당 요금 (3000 * price_value) */}
-                                        <td className="guideTd">{(3000 * car.price_value)}원</td>
-                                        {/* 하루 일반 자차 보험료 */}
-                                        <td className="guideTd">{(10000 * car.price_value)}원</td>
+                                        <td className="guideTd">{(700 * car.price_value)}원</td>
                                         {/* 하루 완전 자차 보험료 */}
-                                        <td className="guideTd">{(12000 * car.price_value)}원</td>
+                                        <td className="guideTd">{(200 *48* car.price_value)}원</td>
                                     </tr>
                                  ))
                                 ) : (
