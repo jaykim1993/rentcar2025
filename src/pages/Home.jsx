@@ -208,6 +208,14 @@ export default function Home(){
       // {id:5, model:'GGE80', img:'ZENE_2.webp', carTitle: '제네러스 GGE80', carInfo: '고급스러운 승차감과 세련된 인테리어가 돋보이는 대형 세단. 품격 있는 이동을 원하는 고객에게!'},
     ];
 
+    const SelectedIcon = new L.Icon({
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+    });
+
+
 
   return(
     <div className="Home">
@@ -273,7 +281,9 @@ export default function Home(){
                   />
                   {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
                   {positions.map((spot) => (
-                    <Marker key={spot.id} position={[spot.lat, spot.lng]}>
+                    <Marker key={spot.id} position={[spot.lat, spot.lng]}
+                    icon={SelectedIcon}
+                    >
                       <Popup>{spot.name}</Popup>
                     </Marker>
                   ))}

@@ -116,10 +116,21 @@ export default function MypageDetail(){
                             <hr/>
                         {/* </div> */}
                         {/* <div> */}
-                            {/* <div> */}
                                 <p className='mypageDetailP'>결제</p>
-                                <h4>{bookedThis.price.toLocaleString()}원</h4>
-                            {/* </div> */}
+                        <div style={{marginTop:'20px'}}>
+                                <div className='mybookDetailPriceBox'>
+                                    <span className='DetailSpans'>차량 금액</span>
+                                    <h5 style={{color:'gray'}}>{Number(bookedThis?.carPrice ?? 0).toLocaleString()}원</h5>
+                                </div>
+                                <div className='mybookDetailPriceBox'>
+                                    <span className='DetailSpans'>보험 금액</span>
+                                    <h5 style={{color:'gray'}}>{Math.round(Number(bookedThis?.insurancePrice ?? 0)).toLocaleString()}원</h5>
+                                </div>
+                                <div className='mybookDetailPriceBox'>
+                                    <span className='DetailSpans'>총 결제 금액</span>
+                                    <h4 >{Number(bookedThis?.totalPrice ?? 0).toLocaleString()}원</h4>
+                                </div>
+                        </div>
                         {/* </div> */}
                     </div>
                     <div className='mypageDetailBackBox' >

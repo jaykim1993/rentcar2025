@@ -147,3 +147,11 @@
     font-weight: 600;
     color: #7a7a7a;
 }
+.mybookDetailPriceBox{
+    display: flex;
+    justify-content: space-between
+}
+.DetailSpans{
+    font-size: 18px;
+    font-weight: 550;
+}

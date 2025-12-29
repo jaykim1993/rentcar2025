@@ -15,7 +15,7 @@ export default function Reservation(){
     const { car, filter, totalPrice, filterStartDate, filterEndDate, filterStartTime, filterEndTime } = location.state || {};
     const { availableCars, filteredInfoUser, startdayText,enddayText, DeleteYear } = useContext(CalendarContext);
     const {userid, username, user_email, user_resistnum, user_phonenum, address, address_detail, user_iskorean, user_license } = useContext(AuthContext);
-    const { setBookedlistAll, calculatePrice } = useContext(BookingContext);
+    const { setBookedlistAll, calculatePrice} = useContext(BookingContext);
 
     // 예외처리
     if(!car) return <div className='ReservationSection'>날짜, 지점을 선택해주세요.</div>;
@@ -55,7 +55,7 @@ export default function Reservation(){
         if (!selectedCar || !filterCar) {
         return <div>예약 정보를 불러오는 중입니다...</div>;
         } // 방어코드 , 22일 성중 수정
-
+    let date = (new Date(`${filterCar.filterEndDate}T${filterCar.filterEndTime}`)-new Date(`${filterCar.filterStartDate}T${filterCar.filterStartTime}`))/ (1000 * 60 * 30);
     // 예약/결제하기 버튼 함수
     const addBookInfo = () => {
         if (!payment) {
@@ -74,12 +74,14 @@ export default function Reservation(){
             id: `${Date.now()}_${userid}`,
             bookedDate: new Date().toISOString().slice(0, 10),
             userId:userid,
-            carId:selectedCar.id,
+            carId:car.id,
             startDate: filterCar.filterStartDate,
             endDate: filterCar.filterEndDate,
             startTime: filterCar.filterStartTime,
             endTime: filterCar.filterEndTime,
-            price: totalPrice
+            carPrice: totalPrice,
+            insurancePrice:  date * (car.price_value * 200),
+            totalPrice: totalPrice + date*car.price_value*200
           }
         ]);
         navigate('/mypage/booked');
@@ -133,6 +135,7 @@ export default function Reservation(){
         setBacktohome(null);
     }
 
+    
 
     return(
         <div className="ReservationSection">
@@ -267,7 +270,18 @@ export default function Reservation(){
                             {/* 결제정보 */}
                             <div className='Reser_payment'>
                                 <h4 className="Reser_h4">결제 정보</h4>
-                                <p>총 결제금액&nbsp;&nbsp;<strong>{totalPrice.toLocaleString()}</strong>&nbsp;원</p>
+                                <div className="reserPriceBox">
+                                    <span>차량 금액</span>
+                                    <p><strong style={{color:'gray',fontSize:'15px'}}>{totalPrice.toLocaleString()}</strong>&nbsp;원</p>
+                                </div>
+                                <div className="reserPriceBox">
+                                    <span>보험 금액</span>
+                                    <p><strong style={{color:'gray',fontSize:'15px'}}>{(date*car.price_value*200).toLocaleString()}</strong>&nbsp;원</p>
+                                </div>
+                                <div className="reserPriceBox">
+                                    <span>총 결제 금액</span>
+                                    <p><strong>{(totalPrice + date*car.price_value*200).toLocaleString()}</strong>&nbsp;원</p>
+                                </div>     
                                 <hr />
                                 <p>결제수단 선택</p>
                                 <ul>
