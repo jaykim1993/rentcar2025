@@ -105,9 +105,9 @@ export default function Recentcar(){
     const [displayedCars, setDisplayedCars] = useState(availableCars);
 
     /* 달력 조건 바뀌면 목록 초기화 */
-   useEffect(() => {
-    updateDisplayedCars(selectedFilters); // 현재 필터 적용
-    }, [availableCars, selectedFilters, startDate, endDate]);
+    useEffect(() => {
+        setDisplayedCars(availableCars);
+    }, [availableCars]);
 
     
     // ================= 필터 적용 =================
