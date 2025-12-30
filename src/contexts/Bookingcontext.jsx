@@ -196,6 +196,9 @@ export default function BookingProvider({ children }) {
   // 인기순 차량 선택 변수
   const [clickCar, setClickCar] = useState('');
 
+  // 날짜, 시간 초기화
+  const [reset, setReset] = useState(false);
+
   
 
   return (
@@ -206,7 +209,9 @@ export default function BookingProvider({ children }) {
       myBookings,
       myRecentlist,
       setClickCar,
-      clickCar
+      clickCar,
+      setReset,
+      reset
       // removeBookInfo
     }}>
       {children}

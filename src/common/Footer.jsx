@@ -73,11 +73,7 @@ useEffect(() => {
             </div>
             <div className='Footer'>
                 <div className='Footer_Top'>
-                    {/* 공지사항 */}
-                    {/* <div className="notice">
-                        <h4>공지사항</h4>
-                    </div> */}
-                    <img src='./charangcharang_logo_white.png' alt='차랑차랑 로고 이미지' />
+                    <img src='/charangcharang_logo_white.png' alt='차랑차랑 로고 이미지' />
                     {/* 푸터 섹션 */}
                     <div className='Footer_sec'>
                         {/* 좌측 - 회사정보 */}
