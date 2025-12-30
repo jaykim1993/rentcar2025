@@ -21,7 +21,7 @@ export default function LoginForm({ onClose, onJoin }) {
 
         try {
             const res = await axios.post(
-                'http://localhost/rentcar2025/backend/api/login.php',
+                '/api/login.php',
                 { userid, userpw }
             );
 
@@ -88,8 +88,8 @@ export default function LoginForm({ onClose, onJoin }) {
                             </li>
                         </ul>
                         <div className='loginAccount'>
-                                <button className='loginBtnSamll' type='button'>아이디 찾기</button> | 
-                                <button className='loginBtnSamll' type='button'>비밀번호 찾기</button> | 
+                                {/* <button className='loginBtnSamll' type='button'>아이디 찾기</button> | 
+                                <button className='loginBtnSamll' type='button'>비밀번호 찾기</button> |  */}
                                 <button className='loginBtnSamll' type='button' onClick={onJoin}>회원가입</button>
                         </div>
                     </div>

@@ -15,7 +15,7 @@ export default function Recentcar(){
     // const { cars } = useContext(DataContext);
     const { availableCars,setLocation, location, startDate, endDate ,startTime, endTime, setStartDate, setEndDate, setApply,
         apply, handleSearchBtn, setIsLocation, setIsCalendar, isLocation, isCalendar,startdayText, enddayText, DeleteYear,timeAMPM} = useContext(CalendarContext);
-    const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar, finalPrice} = useContext(BookingContext);
+    const { calculatePrice, clickCar, clickCarArr, setClickCarArr, setClickCar, finalPrice ,resetTest,setResetTest} = useContext(BookingContext);
     const { userid, setModal } = useContext(AuthContext);
 
     // ================= 달력 관련 =================
@@ -105,9 +105,10 @@ export default function Recentcar(){
     const [displayedCars, setDisplayedCars] = useState(availableCars);
 
     /* 달력 조건 바뀌면 목록 초기화 */
-    useEffect(() => {
-        setDisplayedCars(availableCars);
-    }, [availableCars]);
+   useEffect(() => {
+    updateDisplayedCars(selectedFilters); // 현재 필터 적용
+    }, [availableCars, selectedFilters, startDate, endDate]);
+
 
     
     // ================= 필터 적용 =================
@@ -233,6 +234,7 @@ export default function Recentcar(){
     let date = (new Date(`${endDate}T${endTime}`)-new Date(`${startDate}T${startTime}`))/ (1000 * 60 * 30);
 
     //  console.log('기간: ',date);
+    console.log(resetTest)
 
         
 
@@ -278,7 +280,7 @@ export default function Recentcar(){
                                         <div className="carPrice">
                                             <span className="carPriceTotal">
                                                 총 금액 &nbsp;
-                                                <strong>{(car_price*date).toLocaleString()}</strong>원
+                                                <strong>{(car_price*date).toLocaleString()}</strong>원~
                                             </span> 
                                             <span className="carPriceMin">(30분당&nbsp;
                                                 <strong>{car_price.toLocaleString()}</strong>원)
@@ -315,6 +317,18 @@ export default function Recentcar(){
     };
     // 더보기 버튼 추가 12.26 성중
     const [tdOpen, setTdOpen] = useState(false);
+
+       const SelectedIcon = new L.Icon({
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+    });
+
+
+ 
+
+
     return(
         <div className="Recentcar">
             {/* 카테고리 */}
@@ -517,8 +531,8 @@ export default function Recentcar(){
                         {/* 지점 선택 파트 */}
                         <div className="R_spotTable">
                             <div className="spot_choice" style={{cursor:'pointer'}}>
-                                <p className="R_reservation_p">어디서 출발할까요?</p>
                                 <div className="R_spotTitle" onClick={locationHandler}>
+                                    <p className="R_reservation_p">어디서 출발할까요?</p>
                                     {location? <h4>{location}</h4> : <h4>지점선택</h4>}
                                 </div>
                             </div>
@@ -545,7 +559,6 @@ export default function Recentcar(){
                                 </button>
                             </div>
                         </div>
-                
                     </div>
                 
                 {/* 지점 모달 파트 */}
@@ -564,7 +577,9 @@ export default function Recentcar(){
                             />
                             {/* positions 배열을 map으로 돌면서 여러 Marker 렌더링 */}
                             {positions.map((spot) => (
-                              <Marker key={spot.id} position={[spot.lat, spot.lng]}>
+                              <Marker key={spot.id} position={[spot.lat, spot.lng]}
+                              icon={SelectedIcon}
+                              >
                                 <Popup>{spot.name}</Popup>
                               </Marker>
                             ))}
@@ -661,7 +676,7 @@ export default function Recentcar(){
                     {tdOpen ? '접기' : '더보기'}
                 </button>
             </div>
-            <div className="background_gray"></div>
+            {/* <div className="background_gray"></div> */}
         </div>
     );
 }

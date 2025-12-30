@@ -21,7 +21,7 @@ export default function JoinFormB({ onClose, onNext }) {
 
     try {
       // await 사용해서 Promise 완료 후 결과 받기
-      const res = await axios.post('http://localhost/rentcar2025/backend/api/join.php', {
+      const res = await axios.post('/api/join.php', {
         action: 'checkId',
         userid: userid  //  실제 입력값 전달
       });
