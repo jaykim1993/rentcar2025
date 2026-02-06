@@ -1,15 +1,21 @@
 #root .myinfo-Wrap{
   min-height: 1100px;
 }
-#root .myinfo-Wrap .myinfo-context{
+
+#root .myinfo-Wrap .myinfo-tableBox{
+  border-radius: 10px;
+  border: 1px solid rgb(234, 234, 234);
+  margin-top: 50px;
+  padding: 20px 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+#root .myinfo-Wrap .myinfo-tableBox .myinfo-context{
     padding: 30px;
-    border-radius: 10px;
-    /* border: 1px solid rgb(218, 218, 218); */
-    margin-top: 50px;
     width: 100%;
-    border-top: 2px solid #444;
+    /* border-top: 2px solid #444; */
 }
 #root .myinfo-Wrap .myinfo-list{
+  list-style: none;
   list-style: none;
   padding: 20px;
   margin: 0;
@@ -23,15 +29,17 @@
 }
 
 #root .myinfo-Wrap .myinfo-list > tr .myinfo-label{
-  font-weight: 400;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 16px;
   width: 250px;
   padding: 0 35px;
-  color: #555;
+  color: #444;
 }
 
 #root .myinfo-Wrap .myinfo-list > tr .myinfo-value{
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #555;
 }
 
 .myinfo-btn{

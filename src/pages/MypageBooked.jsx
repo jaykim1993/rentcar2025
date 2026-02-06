@@ -32,60 +32,75 @@ export default function MypageBooked() {
     <div className="MypageBooked">
       <h2 className="guideMainText">예약내역</h2>
       <div className="myPageBookWarp">
-      {myBookings.length === 0?
-      <div>
-        <div className="mypageBookCard">
-          <i class="bi bi-exclamation-lg warningIcon"></i>
-          <p className="noBookedP">아직 예약 내역이 없습니다.</p>
+        {myBookings.length === 0?
+        <div>
+          <div className="mypageBookCard">
+            <i class="bi bi-exclamation-lg warningIcon"></i>
+            <p className="noBookedP">아직 예약 내역이 없습니다.</p>
+          </div>
+          <Link to={'/searchcarlist'} className="noBookedGoToBook">예약하러가기</Link>
         </div>
-        <Link to={'/searchcarlist'} className="noBookedGoToBook">예약하러가기</Link>
-      </div>
         :
-      <div>
-        {sortedByLatest.map(book => {
-          // 요일
-          const sDate = new Date(book.startDate);
-          const eDate = new Date(book.endDate);
-          const sDay = days[sDate.getDay()]; // 시작일 요일
-          const eDay = days[eDate.getDay()]; // 종료일 요일
+        <div>
+          <table className="mypageBookTable">
+            <thead className="mypageBookThead">
+              <tr>
+                <th>차량 이미지</th>
+                <th>차량 정보</th>
+                <th>예약 정보</th>
+                <th></th>
+              </tr>
+            </thead>
 
-          // 오늘 (날짜 기준)
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          const [y, m, d] = book.startDate.split('-');
-          const startDate = new Date(y, m - 1, d);
-          const diffDays = Math.ceil(
-            (startDate - today) / (1000 * 60 * 60 * 24)
-          );
-          let dText;
-          if (diffDays > 0) dText = `D-${diffDays}`;
-          else if (diffDays === 0) dText = 'D-Day';
-          else dText = `D+${Math.abs(diffDays)}`;
+          {sortedByLatest.map(book => {
+            // 요일
+            const sDate = new Date(book.startDate);
+            const eDate = new Date(book.endDate);
+            const sDay = days[sDate.getDay()]; // 시작일 요일
+            const eDay = days[eDate.getDay()]; // 종료일 요일
 
-          return(
-            <div key={book.id} className="mypageBookCard">
-                <div className="mypageBookinfo">
-                  <img
-                  src={`/images/cars/${book.car?.car_img}`}
-                  alt={book.car?.model}/>
-                  <div className="tomargin">
-                    <h3 className="mapCarname">{book.car?.brand} {book.car?.model}</h3>
-                    <h3 className="mapCarDays">{dText}</h3>
-                    <p className="mapCarBooknum">예약번호 {book.id}</p>
-                    <p className="mapCarBooknum" >{book.car?.location}점</p>
-                    <p className="mapCarDate">
-                      {DeleteYear(book.startDate)} ({sDay}) {timeAMPM(book.startTime)}
-                      {" ~ "}
-                      {DeleteYear(book.endDate)} ({eDay}) {timeAMPM(book.endTime)}
-                    </p>
-                    <div className="GoToDetailBoxmap">
-                      <Link to={`/mypage/detail/${book.id}`} className="mapGoToDetail" onClick={() => window.scrollTo(0,0)}>예약 상세보기</Link>
-                  </div>
-                  </div>
-                </div>
-            </div>
-          );
-        })}
+            // 오늘 (날짜 기준)
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const [y, m, d] = book.startDate.split('-');
+            const startDate = new Date(y, m - 1, d);
+            const diffDays = Math.ceil(
+              (startDate - today) / (1000 * 60 * 60 * 24)
+            );
+            let dText;
+            if (diffDays > 0) dText = `D-${diffDays}`;
+            else if (diffDays === 0) dText = 'D-Day';
+            else dText = `D+${Math.abs(diffDays)}`;
+
+            return(
+                <tbody className="mypage_tbody">
+                  <tr key={book.id}>
+                    <td>
+                      <img src={`/images/cars/${book.car?.car_img}`} alt={book.car?.model}/>
+                    </td>
+                    <td>
+                      <h3 className="mapCarname">{book.car?.brand} {book.car?.model}</h3>
+                      <p className="mapCarBooknum" >{book.car?.location}점</p>
+                    </td>
+                    <td>
+                      <h3 className="mapCarDays">{dText}</h3>
+                      <p className="mapCarDate">
+                        {DeleteYear(book.startDate)} ({sDay}) {timeAMPM(book.startTime)}
+                        {" ~ "}
+                        {DeleteYear(book.endDate)} ({eDay}) {timeAMPM(book.endTime)}
+                      </p>
+                    </td>
+                    <td >
+                      <div className="GoToDetailBoxmap">
+                        <Link to={`/mypage/detail/${book.id}`} className="mapGoToDetail" onClick={() => window.scrollTo(0,0)}>예약 상세보기</Link>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              
+            );
+          })}
+          </table>
         </div>   
         }
       </div>

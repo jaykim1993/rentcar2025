@@ -25,7 +25,7 @@ export default function MypageInquiry(){
         <h2 className="guideMainText">1:1문의내역</h2>
         <div className='MyInquiryWrap'>
             {myInquiries.length === 0 ? (
-            <div>
+            <div className="mypage_none">
                 <div className="mypageBookCard">
                     <i class="bi bi-exclamation-lg warningIcon"></i>
                     <p className="noBookedP">아직 문의내역이 없습니다.</p>

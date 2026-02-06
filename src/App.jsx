@@ -9,11 +9,15 @@ import Recentcarlist from './pages/Recentcarlist';
 import Reservation from './pages/Reservation'
 import CustomerService from './pages/CustomerService';
 import LocationPage from './pages/Location';
-import Mypage from './pages/Mypage'
-import MypageDetail from './pages/MypageDetail'
-import MypageInquiry from './pages/MypageInquiry'
-import MypageMyinfo from './pages/MypageMyinfo'
-import MypageBooked from './pages/MypageBooked'
+import Mypage from './pages/Mypage';
+import MypageDetail from './pages/MypageDetail';
+import MypageInquiry from './pages/MypageInquiry';
+import MypageMyinfo from './pages/MypageMyinfo';
+import MypageBooked from './pages/MypageBooked';
+// 해연
+import AllCarPage from './pages/Manager/AllCarPage';
+import AllReservationPage from './pages/Manager/AllReservationPage';
+import CarRegPage from './pages/Manager/CarRegPage';
 
 import AuthProvider from './contexts/Authcontext';
 import CalendarProvider from './contexts/Calendarcontext';
@@ -47,6 +51,10 @@ function App() {
                     <Route path="inquiry" element={<MypageInquiry />} />
                     <Route path="myinfo" element={<MypageMyinfo />} />
                 </Route>
+                {/* 해연 */}
+                <Route path="/manager/carlist" element={<AllCarPage/>}/>
+                <Route path="/manager/reservationlist" element={<AllReservationPage/>}/>
+                <Route path="/manager/carregister" element={<CarRegPage/>}/>
               </Routes>
               <Footer />
             </BrowserRouter>
